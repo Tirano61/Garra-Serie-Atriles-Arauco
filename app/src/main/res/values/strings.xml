@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Garrras Puerto Serie</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="TITULO">ST 455 GARRAS</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: dialogo datos de la carga -->
+    <string name="dialogo_titulo">Ingrese los datos de la carga ...</string>
+    <string name="dialgo_cliente">Cliente :</string>
+    <string name="dialgo_volumen">Volumen :</string>
+    <string name="dialgo_producto">Producto :</string>
+    <string name="dialgo_patente">Patente :</string>
+    <string name="dialgo_codigo">Código :</string>
+    <string name="dialgo_tara">Tara :</string>
+    <string name="dialgo_aceptar">Aceptar</string>
+    <string name="dialgo_cancelar">Cancelar</string>
+
+    <!-- Todo: Dialogo Edicion Productos -->
+    <string name="dialogo_productos_titulo">Edición de Productos</string>
+    <string name="dialogo_productos_producto1">Prod. nº 1:</string>
+    <string name="dialogo_productos_producto2">Prod. nº 2:</string>
+    <string name="dialogo_productos_producto3">Prod. nº 3:</string>
+    <string name="dialogo_productos_producto4">Prod. nº 4:</string>
+    <string name="dialogo_productos_producto5">Prod. nº 5:</string>
+    <string name="dialogo_productos_producto6">Prod. nº 6:</string>
+    <string name="dialogo_productos_producto7">Prod. nº 7:</string>
+    <string name="dialogo_productos_producto8">Prod. nº 8:</string>
+    <string name="dialogo_productos_producto9">Prod. nº 9:</string>
+    <string name="dialogo_productos_producto10">Prod. nº 10:</string>
+    <string name="dialogo_productos_producto11">Prod. nº 11:</string>
+    <string name="dialogo_productos_producto12">Prod. nº 12:</string>
+    <string name="Tiempo_de_carga">Tiempo de carga :</string>
+    <string name="datos_de_la_descarga">Datos de la descarga</string>
+    <string name="patente">Patente :</string>
+    <string name="codigo">Codigo :</string>
+    <string name="producto">Producto :</string>
+    <string name="datos_cliente">Cliente :</string>
+    <string name="datos_volumen">Volumen :</string>
+    <string name="datos_tara">Tara :</string>
+    <string name="titulo_calibracion">Calibración de la balanza</string>
+    <string name="calibracion_peso_maximo">Capacidad máxima :</string>
+    <string name="calibracion_celdas">Total de Celdas :</string>
+    <string name="calibracion_sensibilidad">Sensibilidad :</string>
+    <string name="calibracion_division">División mínima :</string>
+    <string name="calibracion_ventana">Ventana movil :</string>
+    <string name="calibracion_kg_filtro">Kg de filtro :</string>
+    <string name="calibracion_conversiones">Conversiones :</string>
+    <string name="calibracion_recortes">Recortes :</string>
+
+
+    <!-- Todo:     Mensajes en pantalla     -->
+
+    <string name="mensaje_guardado_calibracion">La calibración se guardó correctamente</string>
+    <string name="mensaje_guardado_calibracion_error">Error al guardar la calibración</string>
+    <string name="dialogo_cliente">Cliente :</string>
+    <string name="calibracion_logica">Lógica :</string>
+
+</resources>

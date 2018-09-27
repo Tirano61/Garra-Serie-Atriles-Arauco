@@ -1,0 +1,80 @@
+
+<resources>
+
+    <style name="MaterialTema" parent="Material.Base">
+
+    </style>
+    <!-- Base application theme. -->
+    <style name="Material.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primaryDark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:icon">@color/icons</item>
+        <item name="android:divider">@color/divider</item>
+    </style>
+
+    <!-- Todo: Titulos dialogos -->
+    <style name="titulo">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">@color/icons</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:gravity">center</item>
+
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+
+    <style name="stylePesaje">
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:textSize">100sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="botones">
+        <item name="android:textSize">18sp</item>
+        <item name="android:height">60dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="contenedorBotones">
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="textoDialogo">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="DialogoProductosTextView">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="DialogoProductosEditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLength">14</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <style name="textView_DatosDescarga">
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingLeft">30dp</item>
+    </style>
+
+
+</resources>

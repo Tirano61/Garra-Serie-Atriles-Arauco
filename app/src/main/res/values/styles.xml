@@ -1,0 +1,31 @@
+
+<resources>
+
+    <style name="MaterialTema" parent="Material.Base">
+
+    </style>
+    <!-- Base application theme. -->
+    <style name="Material.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="android:colorPrimary">#607D8B</item>
+        <item name="android:colorPrimaryDark">#455A64</item>
+        <item name="android:colorAccent">#9E9E9E</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:icon">@color/icons</item>
+        <item name="android:divider">@color/divider</item>
+
+    </style>
+
+    <style name="textView_DatosDescarga">
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+
+</resources>

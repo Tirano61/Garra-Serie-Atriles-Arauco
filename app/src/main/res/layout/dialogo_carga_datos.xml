@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MaterialTema"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/textoDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialgo_producto"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintTop_toTopOf="@+id/sp_producto"
+        tools:layout_editor_absoluteX="291dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/textoDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialgo_patente"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edt_dialogo_patente"
+        app:layout_constraintStart_toStartOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/textoDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialgo_tara"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edt_dialogo_tara"
+        app:layout_constraintStart_toStartOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/textoDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialgo_volumen"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edt_dialogo_volumen"
+        app:layout_constraintStart_toStartOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/textoDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialgo_codigo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edt_dialogo_codigo"
+        app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView29"
+        style="@style/textoDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialogo_cliente"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edt_dialogo_cliente"
+        app:layout_constraintStart_toStartOf="@+id/textView5" />
+
+    <Spinner
+        android:id="@+id/sp_producto"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/edt_dialogo_tara"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_patente"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_patente" />
+
+    <EditText
+        android:id="@+id/edt_dialogo_patente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/sp_producto"
+        app:layout_constraintTop_toBottomOf="@+id/sp_producto" />
+
+    <EditText
+        android:id="@+id/edt_dialogo_volumen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_tara"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_tara" />
+
+    <EditText
+        android:id="@+id/edt_dialogo_codigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_volumen"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_volumen" />
+
+    <EditText
+        android:id="@+id/edt_dialogo_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_codigo"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_codigo" />
+
+    <LinearLayout
+        style="@style/contenedorBotones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_acrptar"
+            style="@style/botones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/dialgo_aceptar"
+            app:layout_constraintHorizontal_weight="1"
+            tools:layout_editor_absoluteX="91dp"
+            tools:layout_editor_absoluteY="322dp" />
+
+        <Button
+            android:id="@+id/btn_Cancelar"
+            style="@style/botones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialgo_cancelar"
+            tools:layout_editor_absoluteX="451dp"
+            tools:layout_editor_absoluteY="322dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/titulo"
+        android:layout_width="0dp"
+        android:text="@string/dialogo_titulo"
+        android:textColor="@color/icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
