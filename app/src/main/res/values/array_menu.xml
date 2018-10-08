@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dialogo_menu" >
+        <item>@string/menu_calibracion</item>
+        <item>@string/menu_productos</item>
+        <item>@string/menu_Pesadas</item>
+        <item>@string/menu_exportar</item>
+    </string-array>
+    <string-array name="FiltrosPesadas">
+        <item>"Por Lote"</item>
+        <item>"Por Patente"</item>
+        <item>"Por Producto"</item>
+        <item>"Entre Fechas"</item>
+    </string-array>
+
+</resources>

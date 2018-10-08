@@ -8,12 +8,13 @@ public class DBpesadas {
     public static final  String FPES_ID = "_id";
     public static final  String FPES_FECHA = "fecha";
     public static final  String FPES_HORA = "hora";
-    public static final  String FPES_CARGIO = "cargio";
     public static final  String FPES_PRODUCTO = "producto";
+    public static final  String FPES_CARGIO = "cargio";
     public static final  String FPES_PATENTE = "patente";
     public static final  String FPES_TARA = "tara";
     public static final  String FPES_VOLUMEN = "volumen";
     public static final  String FPES_CODIGO = "codigo";
+    public static final  String FPES_PESO = "peso";
 
 
     //************ CREAR TABLA PESADAS ***************//
@@ -21,37 +22,47 @@ public class DBpesadas {
             FPES_ID + " integer primary key autoincrement, " +
             FPES_FECHA + " DATETIME," +
             FPES_HORA + " text," +
-            FPES_CARGIO + " text," +
             FPES_PRODUCTO + " text," +
+            FPES_CARGIO + " text," +
             FPES_PATENTE + " text," +
             FPES_TARA + " text," +
             FPES_VOLUMEN + " text," +
-            FPES_CODIGO + " text"+");";
+            FPES_CODIGO + " text," +
+            FPES_PESO + " text"+");";
 
     private int idPesada;
     private String fecha;
     private String hora;
-    private String cargio;
     private String producto;
+    private String cargio;
     private String patente;
     private String tara;
     private String volumen;
     private String codigo;
+    private String peso;
 
-
-    public DBpesadas(String fecha, String hora, String cargio,String producto, String patente, String tara, String volumen,String codigo)
+    public DBpesadas(String fecha, String hora, String producto, String cargio, String patente,
+                     String tara, String volumen,String codigo,String peso)
     {
         this.fecha = fecha;
         this.hora = hora;
-        this.cargio = cargio;
         this.producto = producto;
+        this.cargio = cargio;
         this.patente = patente;
         this.tara = tara;
         this.volumen = volumen;
         this.codigo = codigo;
-
+        this.peso = peso;
     }
 
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
+    }
 
     public int getIdPesada() {
         return idPesada;

@@ -47,16 +47,15 @@ public class BaseDeDatos extends SQLiteOpenHelper
     private ContentValues generarPesadas(DBpesadas pesadas)
     {
         ContentValues valores = new ContentValues();
-        valores.put(DBpesadas.FPES_ID,pesadas.getIdPesada());
         valores.put(DBpesadas.FPES_FECHA, pesadas.getFecha());
         valores.put(DBpesadas.FPES_HORA, pesadas.getHora());
-        valores.put(DBpesadas.FPES_CARGIO, pesadas.getCargio());
         valores.put(DBpesadas.FPES_PRODUCTO, pesadas.getProducto());
+        valores.put(DBpesadas.FPES_CARGIO, pesadas.getCargio());
         valores.put(DBpesadas.FPES_PATENTE, pesadas.getPatente());
         valores.put(DBpesadas.FPES_TARA, pesadas.getTara());
         valores.put(DBpesadas.FPES_VOLUMEN, pesadas.getVolumen());
         valores.put(DBpesadas.FPES_CODIGO, pesadas.getCodigo());
-
+        valores.put(DBpesadas.FPES_PESO, pesadas.getPeso());
         return valores;
     }
     public void InsertarPesadas(DBpesadas pesadas)
@@ -126,7 +125,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBcalibracion.FCAL_KGFILTRO, calibracion.getKgfiltro());
         valores.put(DBcalibracion.FCAL_CONVERSIONES, calibracion.getConversiones());
         valores.put(DBcalibracion.FCAL_RECORTES, calibracion.getRecortes());
-
+        valores.put(DBcalibracion.FCAL_LOGICA, calibracion.getLogica());
         return valores;
     }
     public void actualizarCalibracion(DBcalibracion calibracion, String id)
@@ -145,7 +144,6 @@ public class BaseDeDatos extends SQLiteOpenHelper
     private ContentValues generarCero(DBcero cero)
     {
         ContentValues valores = new ContentValues();
-        valores.put(DBcero.FCERO_ID, cero.getIdCero());
         valores.put(DBcero.FCERO_CERO, cero.getCero());
 
         return valores;

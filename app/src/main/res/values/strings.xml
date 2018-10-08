@@ -16,7 +16,7 @@
     <string name="dialgo_codigo">Código :</string>
     <string name="dialgo_tara">Tara :</string>
     <string name="dialgo_aceptar">Aceptar</string>
-    <string name="dialgo_cancelar">Cancelar</string>
+    <string name="dialgo_cancelar">Salir</string>
 
     <!-- Todo: Dialogo Edicion Productos -->
     <string name="dialogo_productos_titulo">Edición de Productos</string>
@@ -57,5 +57,14 @@
     <string name="mensaje_guardado_calibracion_error">Error al guardar la calibración</string>
     <string name="dialogo_cliente">Cliente :</string>
     <string name="calibracion_logica">Lógica :</string>
+
+    <!-- todo:       Dialogo de menu        -->
+    <string name="menu_calibracion">Calibración</string>
+    <string name="menu_productos">Productos</string>
+    <string name="menu_Pesadas">Pesadas</string>
+    <string name="menu_exportar">Exportar Excel</string>
+
+    <string name="menu_titulo">Seleccione una opción ...</string>
+    <string name="tiitulo_dialogo_guardar_pesada">Desea guardar la pesada ...</string>
 
 </resources>

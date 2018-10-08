@@ -17,6 +17,15 @@
         <item name="android:divider">@color/divider</item>
     </style>
 
+    <style name="TemaGeneral">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primaryDark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:icon">@color/icons</item>
+        <item name="android:divider">@color/divider</item>
+    </style>
     <!-- Todo: Titulos dialogos -->
     <style name="titulo">
         <item name="android:background">@color/primary</item>
@@ -76,5 +85,10 @@
         <item name="android:paddingLeft">30dp</item>
     </style>
 
-
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">#00FF00</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:buttonBarStyle">@color/accent</item>
+    </style>
 </resources>

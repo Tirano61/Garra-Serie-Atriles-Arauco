@@ -10,6 +10,7 @@
     android:orientation="vertical"
     tools:context=".Principal">
 
+
     <RelativeLayout
         android:layout_width="442dp"
         android:layout_height="407dp"
@@ -61,11 +62,11 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.15"
                         android:gravity="center_vertical"
-                        android:paddingRight="10dp"
+                        android:paddingRight="20dp"
                         android:text="2650"
                         android:textAlignment="textEnd"
                         android:textColor="@color/icons"
-                        android:textSize="100sp"
+                        android:textSize="90sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -76,11 +77,11 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView6"
+                            android:id="@+id/imgEstable"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginBottom="20dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="20dp"
                             android:background="@drawable/circulo_pesando" />
 
                         <ImageView
@@ -140,7 +141,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="12540"
+                        android:text="0"
                         android:textColor="@color/primary_light"
                         android:textSize="60sp"
                         android:typeface="serif" />
@@ -164,12 +165,12 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/textView24"
+                        android:id="@+id/txtCargio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="1:30"
+                        android:text="0:0"
                         android:textColor="@color/primary_light"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -217,10 +218,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:focusable="true"
                 android:defaultFocusHighlightEnabled="true"
+                android:focusable="true"
                 android:orientation="horizontal"
-                android:paddingStart="60dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:id="@+id/textView27"
@@ -238,6 +240,7 @@
                     android:layout_weight="1.2"
                     android:gravity="center_vertical"
 
+                    android:textColor="@color/primary_light"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -246,7 +249,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="60dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:id="@+id/textView23"
@@ -263,6 +267,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.2"
                     android:gravity="center_vertical"
+                    android:textColor="@color/primary_light"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -271,7 +276,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="60dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:id="@+id/textView25"
@@ -288,6 +294,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.2"
                     android:gravity="center_vertical"
+                    android:textColor="@color/primary_light"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -296,7 +303,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="60dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:id="@+id/textView32"
@@ -310,6 +318,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.2"
                     android:gravity="center_vertical"
+                    android:textColor="@color/primary_light"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -318,7 +327,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="60dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:id="@+id/textView34"
@@ -332,6 +342,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.2"
                     android:gravity="center_vertical"
+                    android:textColor="@color/primary_light"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -340,7 +351,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="60dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:id="@+id/textView36"
@@ -354,6 +366,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.2"
                     android:gravity="center_vertical"
+                    android:textColor="@color/primary_light"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -373,72 +386,106 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_contenedor_titulo"
         android:layout_width="match_parent"
 
-        android:layout_height="63dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true">
 
-        <FrameLayout
-            android:id="@+id/contenedortitulo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/TITULO"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </FrameLayout>
+        <TextView
+            android:id="@+id/txtHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="76dp"
+            android:text="TextView"
+            android:textColor="@color/primary_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textColor="@color/primary_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtHora" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:paddingEnd="10dp"
-        android:paddingStart="150dp">
+        android:paddingStart="40dp">
 
         <ImageButton
-            android:id="@+id/btn_productos"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/boton_guardar_naranja"
+            android:id="@+id/btnMenu"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_menu"
             android:elevation="8dp"
             android:onClick="onClicK" />
 
         <ImageButton
-            android:id="@+id/btn_datos"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/boton_guardar_naranja2"
+            android:id="@+id/btnCargar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_cragar"
             android:onClick="onClicK" />
 
         <ImageButton
-            android:id="@+id/btn_Cargar"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/botn_cargar_naranja"
+            android:id="@+id/sdf"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_vacio"
             android:onClick="onClicK" />
 
         <ImageButton
-            android:id="@+id/btnCalibracion"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/boton_naranja"
+            android:id="@+id/btnGuardar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_guardar"
             android:onClick="onClicK" />
+
+        <ImageButton
+            android:id="@+id/dfdf"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/boton_vacio" />
 
         <ImageButton
             android:id="@+id/btnCero"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/boton_guardar" />
+            android:background="@drawable/boton_cero" />
     </LinearLayout>
 
 </RelativeLayout>

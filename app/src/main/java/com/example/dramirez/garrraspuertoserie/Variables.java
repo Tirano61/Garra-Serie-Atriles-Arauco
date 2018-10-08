@@ -2,7 +2,26 @@ package com.example.dramirez.garrraspuertoserie;
 
 public class Variables {
 
-    private static String  CAPACIDAD,CELDAS,DIVISION, SENSIBILIDAD,VENTANA, KGFILTRO, CONVERSIONES,RECORTES;
+    private static String  CAPACIDAD,CELDAS,DIVISION, SENSIBILIDAD, CONVERSIONES,RECORTES, LOGICA;
+
+    private static int VENTANA, KGFILTRO;
+    private static boolean RELOJ = false;
+
+    public static boolean isRELOJ() {
+        return RELOJ;
+    }
+
+    public static void setRELOJ(boolean RELOJ) {
+        Variables.RELOJ = RELOJ;
+    }
+
+    public static String getLOGICA() {
+        return LOGICA;
+    }
+
+    public static void setLOGICA(String LOGICA) {
+        Variables.LOGICA = LOGICA;
+    }
 
     public static String getCAPACIDAD() {
         return CAPACIDAD;
@@ -36,20 +55,20 @@ public class Variables {
         Variables.SENSIBILIDAD = SENSIBILIDAD;
     }
 
-    public static String getVENTANA() {
+    public int getVENTANA() {
         return VENTANA;
     }
 
-    public static void setVENTANA(String VENTANA) {
-        Variables.VENTANA = VENTANA;
+    public void setVENTANA(int VENTANA) {
+        this.VENTANA = VENTANA;
     }
 
-    public static String getKGFILTRO() {
+    public int getKGFILTRO() {
         return KGFILTRO;
     }
 
-    public static void setKGFILTRO(String KGFILTRO) {
-        Variables.KGFILTRO = KGFILTRO;
+    public void setKGFILTRO(int KGFILTRO) {
+        this.KGFILTRO = KGFILTRO;
     }
 
     public static String getCONVERSIONES() {

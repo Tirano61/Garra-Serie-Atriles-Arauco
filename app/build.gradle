@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    publishNonDefault true
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.dramirez.garrraspuertoserie"
@@ -17,8 +18,16 @@ android {
     }
     buildTypes {
         release {
+            debuggable = true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                debuggable = true
+            }
+        }
+        debug {
+            debuggable = true
+            jniDebuggable = true
         }
     }
     externalNativeBuild {
@@ -38,4 +47,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation files('libs/mpandroidchartlibrary-2-2-4.jar')
 }

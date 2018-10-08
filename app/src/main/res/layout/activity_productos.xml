@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Productos">
+    <!--   Todo: Barra de titulo       -->
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/titulo"
+        android:layout_width="0dp"
+        android:text="@string/dialogo_productos_titulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    <!--   Todo: Botones inicio        -->
+    <LinearLayout
+        style="@style/contenedorBotones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_dialogo_productos_aceptar"
+            style="@style/botones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickProductos"
+            android:text="@string/dialgo_aceptar" />
+
+        <Button
+            android:id="@+id/btn_dialogo_productos_cancelar"
+            style="@style/botones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickProductos"
+            android:text="@string/dialgo_cancelar" />
+    </LinearLayout>
+    <!--   Todo: Botones Final         -->
+
+    <!--   Todo: cuadros de Texto      -->
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto1"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos1"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos1"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos2"
+        android:nextFocusRight="@id/edt_productos2"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView11"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto2"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos2"
+        app:layout_constraintStart_toEndOf="@+id/edt_productos1"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos2"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos3"
+        android:nextFocusRight="@id/edt_productos3"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto3"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos3"
+        app:layout_constraintStart_toEndOf="@+id/edt_productos2"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos3"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <EditText
+        android:id="@+id/edt_productos3"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos4"
+        android:nextFocusRight="@id/edt_productos4"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <View
+        android:id="@+id/divider"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_productos2" />
+
+    <TextView
+        android:id="@+id/textView13"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto4"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos4"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos4"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos4"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos5"
+        android:nextFocusRight="@id/edt_productos5"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/textView14"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto5"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos5"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos5"
+        app:layout_constraintVertical_bias="0.96" />
+
+    <EditText
+        android:id="@+id/edt_productos5"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos6"
+        android:nextFocusRight="@id/edt_productos6"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/textView15"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto6"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos6"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos6"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos6"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos7"
+        android:nextFocusRight="@id/edt_productos7"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_productos5" />
+
+    <TextView
+        android:id="@+id/textView16"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto7"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos7"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos7"
+        app:layout_constraintVertical_bias="0.96" />
+
+    <EditText
+        android:id="@+id/edt_productos7"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos8"
+        android:nextFocusRight="@id/edt_productos8"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <TextView
+        android:id="@+id/textView17"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto8"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos8"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos8"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos8"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos9"
+        android:nextFocusRight="@id/edt_productos9"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <TextView
+        android:id="@+id/textView18"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto9"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos9"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos9"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos9"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos10"
+        android:nextFocusRight="@id/edt_productos10"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_productos8" />
+
+    <TextView
+        android:id="@+id/textView19"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto10"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos10"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos10"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos10"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos11"
+        android:nextFocusRight="@id/edt_productos11"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <TextView
+        android:id="@+id/textView20"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto11"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos11"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos11"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos11"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:nextFocusDown="@id/edt_productos12"
+        android:nextFocusRight="@id/edt_productos12"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <TextView
+        android:id="@+id/textView21"
+        style="@style/DialogoProductosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialogo_productos_producto12"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_productos12"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/edt_productos12"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edt_productos12"
+        style="@style/DialogoProductosEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+</android.support.constraint.ConstraintLayout>

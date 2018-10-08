@@ -13,6 +13,7 @@ public class DBcalibracion
     public static final  String FCAL_KGFILTRO = "kgfiltro";
     public static final  String FCAL_CONVERSIONES = "conversiones";
     public static final  String FCAL_RECORTES = "recortes";
+    public static final  String FCAL_LOGICA = "logica";
 
     public static final String TAB_CALIBRACION  = "CREATE TABLE " + TABLE_NAME_CALIBRACION + "(" +
             FCAL_ID + " integer primary key autoincrement, " +
@@ -23,7 +24,8 @@ public class DBcalibracion
             FCAL_VENTANA + " text," +
             FCAL_KGFILTRO + " text," +
             FCAL_CONVERSIONES + " text," +
-            FCAL_RECORTES  + " text"+");";
+            FCAL_RECORTES + " text," +
+            FCAL_LOGICA  + " text"+");";
 
     private int idCalibracion;
     private String capacidad;
@@ -34,9 +36,9 @@ public class DBcalibracion
     private String kgfiltro;
     private String conversiones;
     private String recortes;
-
+    private String logica;
     public DBcalibracion(String capacidad, String celdas,String division, String sensibilidad, String ventana,
-                         String kgfiltro, String conversiones, String recortes)
+                         String kgfiltro, String conversiones, String recortes,String logica)
     {
         this.capacidad = capacidad;
         this.celdas = celdas;
@@ -46,8 +48,17 @@ public class DBcalibracion
         this.kgfiltro = kgfiltro;
         this.conversiones = conversiones;
         this.recortes = recortes;
+        this.logica = logica;
     }
 
+
+    public String getLogica() {
+        return logica;
+    }
+
+    public void setLogica(String logica) {
+        this.logica = logica;
+    }
 
     public int getIdCalibracion() {
         return idCalibracion;
