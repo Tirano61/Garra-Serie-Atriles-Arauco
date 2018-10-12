@@ -30,6 +30,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL(DBproductos.TAB_PRODUCTOS);
         db.execSQL(DBcero.TAB_CERO);
         db.execSQL(DBcalibracion.TAB_CALIBRACION);
+        db.execSQL(DBcabecera.TAB_CABECERA);
     }
 
     @Override
@@ -41,9 +42,29 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXIXTS" + DBproductos.TABLE_NAME_PRODUCTOS);
         db.execSQL("DROP TABLE IF EXIXTS" + DBcero.TABLE_NAME_CERO);
         db.execSQL("DROP TABLE IF EXIXTS" + DBcalibracion.TABLE_NAME_CALIBRACION);
+        db.execSQL("DROP TABLE IF EXIXTS" + DBcabecera.TABLE_NAME_CABECERA);
         onCreate(db);
     }
 
+    private ContentValues generarCabecera(DBcabecera cabecera)
+    {
+        //falta el cliente
+        ContentValues valores = new ContentValues();
+        valores.put(DBcabecera.FCAB_UNO, cabecera.getUno());
+        valores.put(DBcabecera.FCAB_DOS, cabecera.getDos());
+        valores.put(DBcabecera.FCAB_TRES, cabecera.getTres());
+        valores.put(DBcabecera.FCAB_CUATRO, cabecera.getCuatro());
+
+        return valores;
+    }
+    public void InsertarCabecera(DBcabecera cabecera)
+    {
+        db.insert(DBcabecera.TABLE_NAME_CABECERA, null, generarCabecera(cabecera));
+    }
+    public void actualizarCabecera(DBcabecera cabecera, String id)
+    {
+        db.update(DBcabecera.TABLE_NAME_CABECERA, generarCabecera(cabecera), DBcabecera.FCAB_ID+ "=?", new String[]{id});
+    }
     private ContentValues generarPesadas(DBpesadas pesadas)
     {
         ContentValues valores = new ContentValues();
@@ -52,30 +73,42 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBpesadas.FPES_PRODUCTO, pesadas.getProducto());
         valores.put(DBpesadas.FPES_CARGIO, pesadas.getCargio());
         valores.put(DBpesadas.FPES_PATENTE, pesadas.getPatente());
-        valores.put(DBpesadas.FPES_TARA, pesadas.getTara());
         valores.put(DBpesadas.FPES_VOLUMEN, pesadas.getVolumen());
         valores.put(DBpesadas.FPES_CODIGO, pesadas.getCodigo());
-        valores.put(DBpesadas.FPES_PESO, pesadas.getPeso());
+        valores.put(DBpesadas.FPES_CLIENTE, pesadas.getCliente());
+        valores.put(DBpesadas.FPES_BRUTO, pesadas.getBruto());
+        valores.put(DBpesadas.FPES_TARA, pesadas.getTara());
+        valores.put(DBpesadas.FPES_NETO, pesadas.getNeto());
         return valores;
     }
     public void InsertarPesadas(DBpesadas pesadas)
     {
         db.insert(DBpesadas.TABLE_NAME_PESADAS, null, generarPesadas(pesadas));
     }
+    public void borrarPesadas()
+    {
+        db.execSQL("DELETE FROM " + DBpesadas.TABLE_NAME_PESADAS);
+    }
+
     private ContentValues generarDatos(DBdatos datos)
     {
+        //falta el cliente
         ContentValues valores = new ContentValues();
         valores.put(DBdatos.FDAT_PRODUCTO, datos.getProducto());
         valores.put(DBdatos.FDAT_PATENTE, datos.getPatente());
         valores.put(DBdatos.FDAT_TARA, datos.getTara());
         valores.put(DBdatos.FDAT_VOLUMEN, datos.getVolumen());
         valores.put(DBdatos.FDAT_CODIGO, datos.getCodigo());
+        valores.put(DBdatos.FDAT_CLIENTE, datos.getCliente());
         return valores;
     }
     private void InsetarDatos(DBdatos datos){
         db.insert(DBdatos.TABLE_NAME_DATOS,null, generarDatos(datos));
     }
-
+    public void actualizarDatos(DBdatos datos, String id)
+    {
+        db.update(DBdatos.TABLE_NAME_DATOS, generarDatos(datos), DBdatos.FDAT_ID+ "=?", new String[]{id});
+    }
 
     private ContentValues generarProductos(DBproductos productos)
     {

@@ -60,6 +60,7 @@ public class Calibracion extends AppCompatActivity {
             edtKgFiltro.setText(cursor.getString(6));
             edtConversiones.setText(cursor.getString(7));
             edtRecortes.setText(cursor.getString(8));
+            edtlogica.setText(cursor.getString(9));
 
         }else{
 
@@ -94,40 +95,64 @@ public class Calibracion extends AppCompatActivity {
             kgF = edtKgFiltro.getText().toString();
             conv = edtConversiones.getText().toString();
             recort =edtRecortes.getText().toString();
-            logica = edtlogica.getText().toString();;
-            ArrayList<DBcalibracion> arrayCalibracion = new ArrayList<DBcalibracion>(Arrays.asList(new DBcalibracion(capac,celdas,
-                    division,sensib,vent,kgF,conv,recort,logica)));
-
-            var.setCAPACIDAD(capac);
-            var.setCELDAS(celdas);
-            var.setDIVISION(division);
-            var.setSENSIBILIDAD(sensib);
-            var.setVENTANA(Integer.valueOf(vent));
-            var.setKGFILTRO(Integer.valueOf(kgF));
-            var.setCONVERSIONES(conv);
-            var.setRECORTES(recort);
-            var.setLOGICA(logica);
-
-            DBcalibracion CALI = arrayCalibracion.get(0);
-
-            db.actualizarCalibracion(CALI,"1");
-            String envio = "AT+PARAM=" + conv +","+ recort + "," + logica + '\r'+'\n';
-            Balanza.getInstance().getOK();
-            Balanza.getInstance().EnviarCalibracion(envio);
-
+            logica = edtlogica.getText().toString();
             /**
-             * Para verificar la calibracion
+             * Verifica que el tamaño de recortes y converciones
              */
-            if (Balanza.getInstance().getOK() == 1){
-                Toast.makeText(getBaseContext(),R.string.mensaje_guardado_calibracion,Toast.LENGTH_LONG).show();
-            }else if (Balanza.getInstance().getOK() == 0){
-                Toast.makeText(getBaseContext(),"La balanza devovlvió FAIL",Toast.LENGTH_LONG).show();
-            }else if (Balanza.getInstance().getOK() == -1){
-                Toast.makeText(getBaseContext(),"Devolvio -1 la puta",Toast.LENGTH_LONG).show();
+            if (!capac.equals("") || !celdas.equals("") || !division.equals("") || !sensib.equals("") || !vent.equals("") || !kgF.equals("") || !conv.equals("") || !recort.equals("") || !logica.equals(""))
+            {
+                if(!(Integer.valueOf(conv) > 90))
+                {
+                    if ((Integer.valueOf(recort) * 2) < (Integer.valueOf(conv)))
+                    {
+                        if (!(Integer.valueOf(logica) > 2))
+                        {
+                            ArrayList<DBcalibracion> arrayCalibracion = new ArrayList<DBcalibracion>(Arrays.asList(new DBcalibracion(capac,celdas,
+                                    division,sensib,vent,kgF,conv,recort,logica)));
+
+                            var.setCAPACIDAD(capac);
+                            var.setCELDAS(celdas);
+                            var.setDIVISION(division);
+                            var.setSENSIBILIDAD(sensib);
+                            var.setVENTANA(Integer.valueOf(vent));
+                            var.setKGFILTRO(Integer.valueOf(kgF));
+                            var.setCONVERSIONES(conv);
+                            var.setRECORTES(recort);
+                            var.setLOGICA(logica);
+
+                            DBcalibracion CALI = arrayCalibracion.get(0);
+
+                            db.actualizarCalibracion(CALI,"1");
+                            String envio = "AT+PARAM=" + conv +","+ recort + "," + logica + '\r'+'\n';
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().EnviarCalibracion(envio);
+
+                            /**
+                             * Para verificar la calibracion
+                             */
+                            if (Balanza.getInstance().getOK() == 1){
+                                Toast.makeText(getBaseContext(),R.string.mensaje_guardado_calibracion,Toast.LENGTH_LONG).show();
+                            }else if (Balanza.getInstance().getOK() == 0){
+                                Toast.makeText(getBaseContext(),"La balanza devovlvió FAIL",Toast.LENGTH_LONG).show();
+                            }else if (Balanza.getInstance().getOK() == -1){
+                                Toast.makeText(getBaseContext(),"Devolvio -1 la puta",Toast.LENGTH_LONG).show();
+                            }
+                        }else
+                        {
+                            Toast.makeText(getBaseContext(),R.string.calibracion_mensaje_logica,Toast.LENGTH_LONG).show();
+                        }
+                    }else
+                    {
+                        Toast.makeText(getBaseContext(),R.string.calibracion_mensaje_recortes,Toast.LENGTH_LONG).show();
+                    }
+                }else
+                {
+                    Toast.makeText(getBaseContext(),R.string.calibracion_mensaje_conversiones,Toast.LENGTH_LONG).show();
+                }
+            }else
+            {
+                Toast.makeText(getBaseContext(),R.string.calibracion_mensaje_campos_vacios,Toast.LENGTH_LONG).show();
             }
-
-            //* todo: cerrar dialogo espera
-
         }catch (Exception e){
             Toast.makeText(getBaseContext(),R.string.mensaje_guardado_calibracion_error,Toast.LENGTH_LONG).show();
         }

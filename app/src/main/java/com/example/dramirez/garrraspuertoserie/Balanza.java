@@ -11,7 +11,7 @@ class Balanza {
 
     private int pesoEstabilidad = 0,tiempoEstabilidad = 2000;
     Variables variables;
-    private int cuentas;
+    private int cuentas, bateria;
     private int PesoAcumulado =0;
     private DriverCelda celda = null;
     private static final Balanza ourInstance = new Balanza();
@@ -28,12 +28,13 @@ class Balanza {
     private double peso;
     private double correccion = 0;
     private int corregido = 0, redondeo, arriba, abajo, A, B;
-    private boolean cominzoPesaje, flagPeso;
+    private boolean cominzoPesaje, flagPeso, conexionSerie;
     private int acumularPeso;
     private boolean semiAutomatico = true;
     private int ventanaMovilActual,indiceVentana;
     private double pesoFiltrado, pesoFisicoAnterior;
     private double[] vectorFiltro = new double[100];
+    int tara;
 
 
 
@@ -48,6 +49,18 @@ class Balanza {
     private Balanza() {
     }
 
+    public int getBateria() {
+        return celda.getBateria();
+    }
+
+    public void setBateria(int bateria) {
+        this.bateria = bateria;
+    }
+
+    public boolean isConexionSerie() {
+        return  celda.getConexionSerie();
+    }
+
     public boolean isFlagPeso() {
         return flagPeso;
     }
@@ -56,8 +69,8 @@ class Balanza {
         return fueAcumulado;
     }
 
-    public void setPesoAcumulado (){
-        PesoAcumulado = 0;
+    public void setPesoAcumulado (int tara){
+        PesoAcumulado = tara;
     }
     public void setFlagPeso(boolean flagPeso) {
         this.flagPeso = flagPeso;
@@ -257,10 +270,9 @@ class Balanza {
     {
         celda.pararPedido();
     }
-
-    public String mensajeBalanza()
+    public void ImprimirTicket(String linea)
     {
-        return celda.getMensajeBalanza();
+        celda.setImprimir(linea);
     }
     public void pedirCuentas()
     {
@@ -270,6 +282,10 @@ class Balanza {
     public void EnviarCalibracion(String envio) throws IOException
     {
         celda.setCalibracion(envio);
+    }
+
+    public void EnviarTipoCelda(String envio) throws IOException {
+        celda.setTipoCelda(envio);
     }
     public void Loop()
     {
@@ -285,12 +301,13 @@ class Balanza {
                             celda.getDato();
                             cuentas = celda.getCuentas();
                             filtroVentanaMovil(cuentas);
+                            bateria = celda.getBateria();
 
                             /**
                              * Se llama cuando el gruero presiona el jostick
                              */
 
-                            Thread.sleep(1);
+                            Thread.sleep(10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -373,7 +390,6 @@ class Balanza {
         }
     }
 
-
     public boolean buscarEstabilidad(int PesoFisico){
         estable = false;
 
@@ -391,11 +407,13 @@ class Balanza {
         return estable;
     }
 
-    public  int getCERO() {
+    public  int getCERO()
+    {
         return CERO;
     }
 
-    public void setCERO(int cero) {
+    public void setCERO(int cero)
+    {
 
         CERO = cero;
     }

@@ -29,7 +29,7 @@ public class DriverCeldaSerie implements DriverCelda {
 
     int ok = -1;
     protected String mensajeBalanza;
-    protected int cuentas, guardado;
+    protected int cuentas, guardado, bateria;
     protected managerPort mSerialPort;
     protected OutputStream mOutputStream;
     private InputStream mInputStream;
@@ -38,6 +38,7 @@ public class DriverCeldaSerie implements DriverCelda {
     int indexrx = 0;
     int indexTotal = 0;
     boolean datoRecibido = false;
+    boolean dato = false, recibido = false;
     int contadorDatoRecibido = 0;
 
     ESTADO_PEDIDO estado_pedido;
@@ -66,6 +67,7 @@ public class DriverCeldaSerie implements DriverCelda {
             size = mInputStream.read(buffer);
             contadorDatoRecibido = 0;
             datoRecibido = true;
+            dato = true;
            // Log.d("TEST", "!!!!!!!!!!!! " + size);
 
 
@@ -118,9 +120,7 @@ public class DriverCeldaSerie implements DriverCelda {
                 indexrx = 0;
 
                 String cadena = str1;
-                //cadena = Recibido[0];
-                //Log.d("TEST","<<<<<<<< La cadena :<<<<<<<< " + cadena);
-                //Log.d("TEST","<<<<<<<< La cadena :<<<<<<<< " + cadena.length());
+
                 if (cadena.equals("OK"))
                 {
                      ok = 1;
@@ -141,7 +141,8 @@ public class DriverCeldaSerie implements DriverCelda {
                                 recortado = recortado[1].split(",");
                                 cuentas = Integer.valueOf(recortado[0]);
                                 guardado = Integer.valueOf(recortado[1]);
-                                Log.d("GUARDADO", ">>>>>>>>>>>> " + guardado  +" <<<<<<<<<<<<<<<<<"  );
+                                bateria = Integer.valueOf(recortado[2]);
+
                             break;
                         case "AT+PARAM":
                                 miOperacion = PARAM;
@@ -167,6 +168,38 @@ public class DriverCeldaSerie implements DriverCelda {
         return 0;
     }
 
+    public int getBateria() {
+        return bateria;
+    }
+
+    public void ComprobacionDatoRecibido()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true)
+                {
+                    try {
+
+                        Thread.sleep(3000);
+                        comprobarDato();
+                    }catch (Exception e){
+
+                    }
+                }
+            }
+        }).start();
+    }
+    public  void comprobarDato()
+    {
+        if (dato)
+        {
+            recibido = true;
+            dato = false;
+        }else {
+            recibido = false;
+        }
+    }
     public void TimerDatoRecibido()
     {
         new Thread(new Runnable() {
@@ -186,6 +219,7 @@ public class DriverCeldaSerie implements DriverCelda {
         }).start();
 
     }
+
     public  void doWork()
     {
         if (datoRecibido){
@@ -208,7 +242,7 @@ public class DriverCeldaSerie implements DriverCelda {
     @Override
     public int getOK() {
         int i = 0;
-        while (i <= 30)
+        while (i <= 10)
         {
             if (ok == 1)
             {
@@ -223,6 +257,11 @@ public class DriverCeldaSerie implements DriverCelda {
             }
         }
         return ok;
+    }
+
+    @Override
+    public boolean getConexionSerie() {
+        return recibido;
     }
 
     @Override
@@ -254,6 +293,17 @@ public class DriverCeldaSerie implements DriverCelda {
             mOutputStream.write(bites);
 
 
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void setTipoCelda(String envio) throws IOException {
+        try {
+            ok = -1;
+            byte[]bites = envio.getBytes();
+            mOutputStream.write(bites);
         }catch (Exception e){
 
         }
@@ -294,6 +344,19 @@ public class DriverCeldaSerie implements DriverCelda {
         }
     }
 
+    @Override
+    public void setImprimir(String linea)
+    {
+        try
+        {
+            ok = -1;
+            String envio = "AT+PRINT=" + linea + "\r\n";
+            byte[] bites = envio.getBytes();
+            mOutputStream.write(bites);
+        }catch (Exception e){
+
+        }
+    }
 
     public void SetPort(managerPort port)
     {
@@ -304,6 +367,7 @@ public class DriverCeldaSerie implements DriverCelda {
          * Inicializa el timer para comprobar que se reciben datos
          */
         TimerDatoRecibido();
+        ComprobacionDatoRecibido();
 
     }
 }

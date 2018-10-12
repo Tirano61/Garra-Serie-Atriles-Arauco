@@ -9,7 +9,7 @@ public class DBdatos {
     public static final  String FDAT_TARA = "tara";
     public static final  String FDAT_VOLUMEN = "volumen";
     public static final  String FDAT_CODIGO = "codigo";
-
+    public static final  String FDAT_CLIENTE = "cliente";
 
     //************ CREAR TABLA PESADAS ***************//
     public  static final  String TAB_DATOS = "CREATE TABLE " + TABLE_NAME_DATOS + "(" +
@@ -18,7 +18,8 @@ public class DBdatos {
             FDAT_PATENTE + " text," +
             FDAT_TARA + " text," +
             FDAT_VOLUMEN + " text," +
-            FDAT_CODIGO  + " text"+");";
+            FDAT_CODIGO + " text," +
+            FDAT_CLIENTE  + " text"+");";
 
     private int idConexion;
     private String producto;
@@ -26,16 +27,25 @@ public class DBdatos {
     private String tara;
     private String volumen;
     private String codigo;
+    private String cliente;
 
-
-    public DBdatos(String producto,String patente, String tara,String volumen,String codigo)
+    public DBdatos(String producto,String patente, String tara,String volumen,String codigo,String cliente)
     {
         this.producto = producto;
         this.patente = patente;
         this.tara = tara;
         this.volumen = volumen;
         this.codigo = codigo;
+        this.cliente = cliente;
 
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public int getIdConexion() {

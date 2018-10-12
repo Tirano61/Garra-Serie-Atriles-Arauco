@@ -49,6 +49,10 @@
     <string name="calibracion_kg_filtro">Kg de filtro :</string>
     <string name="calibracion_conversiones">Conversiones :</string>
     <string name="calibracion_recortes">Recortes :</string>
+    <string name="calibracion_mensaje_recortes">Debe aumentar el valor de Conversiones</string>
+    <string name="calibracion_mensaje_logica">Logica no puede ser mayor a 2</string>
+    <string name="calibracion_mensaje_conversiones">El número de conversiones NO puede ser mayor a 90</string>
+    <string name="calibracion_mensaje_campos_vacios">Debe completar todos los campos</string>
 
 
     <!-- Todo:     Mensajes en pantalla     -->
@@ -60,11 +64,40 @@
 
     <!-- todo:       Dialogo de menu        -->
     <string name="menu_calibracion">Calibración</string>
+    <string name="menu_tipo_celda">Tipo de celda</string>
     <string name="menu_productos">Productos</string>
     <string name="menu_Pesadas">Pesadas</string>
     <string name="menu_exportar">Exportar Excel</string>
+    <string name="menu_cabecera">Cabecera de impresión</string>
 
     <string name="menu_titulo">Seleccione una opción ...</string>
     <string name="tiitulo_dialogo_guardar_pesada">Desea guardar la pesada ...</string>
+    <string name="titulo_dialogo_tipo_celda">Seleccione el tipo de celda ...</string>
+    <string name="tipo_de_celda">Tipo de celda :</string>
+
+    <string name="tipo_celda_1">Cableada</string>
+    <string name="tipo_celda_2">Inalámbrica Flexar</string>
+    <string name="tipo_celda_3">Inalámbrica Hook</string>
+
+    <string name="tipo_celda_numero_celda">Nº de celda :</string>
+    <string name="tipo_celda_ssd">SSD :</string>
+    <string name="tipo_celda_pass">Pass :</string>
+    <string name="tipo_celda_puerto">Puerto :</string>
+    <string name="tipo_celda_mensaje">Faltan datos para calibrar la celda</string>
+    <string name="dialogo_cabecera_titulo">Introduzca la cabecera para el ticket</string>
+    <string name="pesadas_fecha">Fecha</string>
+    <string name="pesadas_hora">Hora</string>
+    <string name="pesadas_producto">Producto</string>
+    <string name="pesadas_cargio">Cargio</string>
+    <string name="pesadas_petente">Patente</string>
+    <string name="pesadas_volumen">Volumen</string>
+    <string name="pesadas_codigo">Código</string>
+    <string name="pesadas_cliente">Cliente</string>
+    <string name="pesadas_bruto">Bruto</string>
+    <string name="pesadas_tara" >Tara</string>
+    <string name="pesadas_neto">Neto</string>
+    <string name="pesadas_desde">Desde :</string>
+    <string name="pesadas_hasta">Hasta :</string>
+    <string name="pesadas_total">Total :</string>
 
 </resources>

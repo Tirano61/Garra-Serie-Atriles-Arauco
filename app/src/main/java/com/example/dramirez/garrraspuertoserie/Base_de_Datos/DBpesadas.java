@@ -11,10 +11,12 @@ public class DBpesadas {
     public static final  String FPES_PRODUCTO = "producto";
     public static final  String FPES_CARGIO = "cargio";
     public static final  String FPES_PATENTE = "patente";
-    public static final  String FPES_TARA = "tara";
     public static final  String FPES_VOLUMEN = "volumen";
     public static final  String FPES_CODIGO = "codigo";
-    public static final  String FPES_PESO = "peso";
+    public static final  String FPES_CLIENTE = "cliente";
+    public static final  String FPES_BRUTO = "bruto";
+    public static final  String FPES_TARA = "tara";
+    public static final  String FPES_NETO = "neto";
 
 
     //************ CREAR TABLA PESADAS ***************//
@@ -25,10 +27,12 @@ public class DBpesadas {
             FPES_PRODUCTO + " text," +
             FPES_CARGIO + " text," +
             FPES_PATENTE + " text," +
-            FPES_TARA + " text," +
             FPES_VOLUMEN + " text," +
             FPES_CODIGO + " text," +
-            FPES_PESO + " text"+");";
+            FPES_CLIENTE + " text," +
+            FPES_BRUTO + " text," +
+            FPES_TARA + " text," +
+            FPES_NETO + " text"+");";
 
     private int idPesada;
     private String fecha;
@@ -36,13 +40,15 @@ public class DBpesadas {
     private String producto;
     private String cargio;
     private String patente;
-    private String tara;
     private String volumen;
     private String codigo;
-    private String peso;
+    private String cliente;
+    private String bruto;
+    private String tara;
+    private String neto;
 
     public DBpesadas(String fecha, String hora, String producto, String cargio, String patente,
-                     String tara, String volumen,String codigo,String peso)
+                      String volumen,String codigo,String cliente, String bruto, String tara,String neto)
     {
         this.fecha = fecha;
         this.hora = hora;
@@ -52,16 +58,34 @@ public class DBpesadas {
         this.tara = tara;
         this.volumen = volumen;
         this.codigo = codigo;
-        this.peso = peso;
+        this.cliente = cliente;
+        this.bruto = bruto;
+        this.tara = tara;
+        this.neto = neto;
     }
 
-
-    public String getPeso() {
-        return peso;
+    public String getBruto() {
+        return bruto;
     }
 
-    public void setPeso(String peso) {
-        this.peso = peso;
+    public void setBruto(String bruto) {
+        this.bruto = bruto;
+    }
+
+    public String getNeto() {
+        return neto;
+    }
+
+    public void setNeto(String neto) {
+        this.neto = neto;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public int getIdPesada() {

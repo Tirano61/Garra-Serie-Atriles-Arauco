@@ -4,6 +4,12 @@
     <style name="MaterialTema" parent="Material.Base">
 
     </style>
+    <style name="CampoTexto1" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#98bcbcbc</item>
+        <item name="colorControlActivated">#baddfa</item>
+        <item name="android:textColorHighlight">#fdfdfe</item>
+        <item name="android:gravity">center</item>
+    </style>
     <!-- Base application theme. -->
     <style name="Material.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -90,5 +96,12 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:textSize">15dp</item>
         <item name="android:buttonBarStyle">@color/accent</item>
+    </style>
+    <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="progressBarTheme">
+        <item name="colorAccent">@color/primary</item>
     </style>
 </resources>

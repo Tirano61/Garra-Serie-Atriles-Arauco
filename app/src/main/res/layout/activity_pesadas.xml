@@ -30,7 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:paddingLeft="20dp"
-                android:text="Desde :" />
+                android:text="@string/pesadas_desde"
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtPesadasFecha1"
@@ -39,7 +41,8 @@
                 android:layout_weight="1"
                 android:text="TextView"
 
-                android:textSize="14sp" />
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,7 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:text="Hasta :" />
+                android:text="@string/pesadas_hasta"
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtPesadasFecha2"
@@ -62,7 +67,8 @@
                 android:layout_weight="1"
                 android:text="TextView"
 
-                android:textSize="14sp" />
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +82,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:text="Total :" />
+                android:text="@string/pesadas_total"
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtPesadasTotal"
@@ -85,7 +93,8 @@
                 android:layout_weight="1"
                 android:text="TextView"
 
-                android:textSize="14sp" />
+                android:textColor="@color/primaryDark"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -105,7 +114,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.21"
+            android:layout_weight="1.04"
             android:orientation="horizontal">
 
             <TextView
@@ -113,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:text="Id"
 
                 android:textAlignment="center"
@@ -121,13 +130,12 @@
                 android:textColor="#151515"
                 android:textSize="14sp"
                 android:textStyle="italic" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1.02"
             android:orientation="horizontal">
 
             <TextView
@@ -136,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.4"
-                android:text="Fecha "
+                android:text="@string/pesadas_fecha"
 
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -149,7 +157,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1.02"
             android:orientation="horizontal">
 
             <TextView
@@ -159,7 +167,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="0.5"
-                android:text="Hora"
+                android:text="@string/pesadas_hora"
 
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -172,7 +180,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -180,8 +188,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
-                android:text="Producto"
+                android:layout_weight="1"
+                android:text="@string/pesadas_producto"
                 android:textAlignment="center"
 
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -194,7 +202,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1.03"
             android:orientation="horizontal">
 
             <TextView
@@ -202,8 +210,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
-                android:text="Cargio"
+                android:layout_weight="1"
+                android:text="@string/pesadas_cargio"
                 android:textAlignment="center"
 
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -216,7 +224,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -225,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.5"
-                android:text="Patente"
+                android:text="@string/pesadas_petente"
 
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -238,29 +246,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.21"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView1186"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
-                android:text="Tara"
-
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#151515"
-                android:textSize="14sp"
-                android:textStyle="italic" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.21"
+            android:layout_weight="1.03"
             android:orientation="horizontal">
 
             <TextView
@@ -269,7 +255,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.5"
-                android:text="Volumen"
+                android:text="@string/pesadas_volumen"
 
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -282,7 +268,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -291,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.5"
-                android:text="Cödigo"
+                android:text="@string/pesadas_codigo"
 
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -300,10 +286,31 @@
                 android:textStyle="italic" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1008dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.04"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/pesadas_cliente"
+                android:textColor="#151515"
+                android:textStyle="italic" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -312,7 +319,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.5"
-                android:text="Kg Descargados"
+                android:text="@string/pesadas_bruto"
 
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -320,6 +327,42 @@
                 android:textSize="14sp"
                 android:textStyle="italic" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/pesadas_tara"
+                android:textColor="#151515"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/pesadas_neto"
+                android:textColor="#151515"
+                android:textStyle="italic" />
         </LinearLayout>
     </LinearLayout>
 

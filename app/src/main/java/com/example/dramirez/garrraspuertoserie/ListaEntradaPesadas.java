@@ -12,12 +12,15 @@ public class ListaEntradaPesadas {
     private String producto;
     private String cargio;
     private String patente;
-    private String tara;
     private String volumen;
     private String codigo;
-    private String kg;
+    private String cliente;
+    private String bruto;
+    private String tara;
+    private String neto;
+
     public ListaEntradaPesadas(String idPesada, String fecha, String hora, String producto, String cargio,
-                               String patente, String tara, String volumen, String codigo, String kg)
+                               String patente, String volumen, String codigo,String cliente, String bruto, String tara, String neto)
     {
         this.idPesada = idPesada;
         this.fecha = fecha;
@@ -28,8 +31,35 @@ public class ListaEntradaPesadas {
         this.tara = tara;
         this.volumen = volumen;
         this.codigo = codigo;
-        this.kg = kg;
+        this.cliente = cliente;
+        this.bruto = bruto;
+        this.tara = tara;
+        this.neto = neto;
+    }
 
+
+    public String getBruto() {
+        return bruto;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setBruto(String bruto) {
+        this.bruto = bruto;
+    }
+
+    public String getNeto() {
+        return neto;
+    }
+
+    public void setNeto(String neto) {
+        this.neto = neto;
     }
 
     public String getIdPesada() {
@@ -104,11 +134,4 @@ public class ListaEntradaPesadas {
         this.codigo = codigo;
     }
 
-    public String getKg() {
-        return kg;
-    }
-
-    public void setKg(String kg) {
-        this.kg = kg;
-    }
 }

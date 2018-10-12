@@ -16,6 +16,7 @@ import com.example.dramirez.garrraspuertoserie.Base_de_Datos.BaseDeDatos;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Pesadas extends AppCompatActivity {
 
@@ -36,6 +37,7 @@ public class Pesadas extends AppCompatActivity {
 
     String IdPesada;
     ArrayList<ListaEntradaPesadas> datos;
+    String fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,7 +51,7 @@ public class Pesadas extends AppCompatActivity {
         txtPesadasFecha2 = (TextView)findViewById(R.id.txtPesadasFecha2);
         txtPesadasTotal = (TextView)findViewById(R.id.txtPesadasTotal);
         lvPesadas= (ListView)findViewById(R.id.lvPesadas);
-
+        fecha = new SimpleDateFormat("dd/MM/yyyy").format (new Date());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
@@ -64,6 +66,9 @@ public class Pesadas extends AppCompatActivity {
             fecha1= String.valueOf( fechaC1.getTime());
             fecha2= String.valueOf( fechaC2.getTime());
             mostrarPesadas();
+            txtPesadasTotal.setText(String.valueOf(Total_descarga()));
+            txtPesadasFecha1.setText(String.valueOf(desde));
+            txtPesadasFecha2.setText(String.valueOf(hasta));
         } catch(Exception e) {
             System.out.println("Error occurred"+ e.getMessage());
         }
@@ -81,11 +86,7 @@ public class Pesadas extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
-
 
     public void dialogoBorrarPesadas() throws InterruptedException
     {
@@ -121,6 +122,7 @@ public class Pesadas extends AppCompatActivity {
             txtPesadasTotal.setText(String.valueOf(Total_descarga()));
 
             mostrarPesadas();
+
         }catch (Exception e){}
     }
 
@@ -136,7 +138,7 @@ public class Pesadas extends AppCompatActivity {
     public int Total_descarga()
     {
         int serving =0;
-        Cursor cursor = db.db.rawQuery("SELECT SUM(kg) FROM tpesadas WHERE fecha BETWEEN '"+ fecha1 +"' AND '" + fecha2 + "'", null);
+        Cursor cursor = db.db.rawQuery("SELECT SUM(neto) FROM tpesadas WHERE fecha BETWEEN '"+ fecha1 +"' AND '" + fecha2 + "'", null);
         if(cursor.moveToFirst()) {
             serving = cursor.getInt(0);
         }
@@ -153,7 +155,7 @@ public class Pesadas extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                           // db.borrarPesadas();
+                            db.borrarPesadas();
                             txtPesadasTotal.setText(String.valueOf(Total_descarga()));
                             //mensajeGuardado("La pesadas se eliminaron correcetamente");
                             mostrarPesadas();
@@ -179,7 +181,8 @@ public class Pesadas extends AppCompatActivity {
             {
                 Cursor c = db.db.rawQuery("SELECT * FROM tpesadas WHERE fecha BETWEEN '"+ fecha1 +"' AND '" + fecha2 + "'", null);
                 datos = new ArrayList<ListaEntradaPesadas>();
-                String id = "", fecha = "",hora="",  producto="", cargio ="", patente="",  tara="", volumen="",codigo = "", kg="";
+                String id = "", fecha = "",hora="",  producto="", cargio ="", patente="",
+                        volumen="",codigo = "", cliente = "", bruto="", tara ="", neto = "";
                 if (c.moveToFirst()) {
                     do {
                         id = c.getString(0);
@@ -190,11 +193,14 @@ public class Pesadas extends AppCompatActivity {
                         producto = c.getString(3);
                         cargio =  c.getString(4);
                         patente = c.getString(5);
-                        tara = c.getString(6);
-                        volumen = c.getString(7);
-                        codigo = c.getString(8);
-                        kg = c.getString(9);
-                        datos.add(new ListaEntradaPesadas( id , fecha ,  hora, producto, cargio, patente,  tara, volumen, codigo,  kg));
+                        volumen = c.getString(6);
+                        codigo = c.getString(7);
+                        cliente = c.getString(8);
+                        bruto = c.getString(9);
+                        tara = c.getString(10);
+                        neto = c.getString(11);
+
+                        datos.add(new ListaEntradaPesadas( id , fecha ,  hora, producto, cargio, patente, volumen, codigo, cliente, bruto, tara, neto));
                     } while (c.moveToNext());
                 }
                 runOnUiThread(new Runnable()
@@ -218,19 +224,25 @@ public class Pesadas extends AppCompatActivity {
                                 txtPesadasCargio.setText(((ListaEntradaPesadas) entrada).getCargio());
                                 TextView txtPesadasPatente = (TextView) view.findViewById(R.id.txtPesadasPatente);
                                 txtPesadasPatente.setText(((ListaEntradaPesadas) entrada).getPatente());
-                                TextView txtPesadasTara = (TextView) view.findViewById(R.id.txtPesadasTara);
-                                txtPesadasTara.setText(((ListaEntradaPesadas) entrada).getTara());
                                 TextView txtPesadasVolumen = (TextView) view.findViewById(R.id.txtPesadasVolumen);
                                 txtPesadasVolumen.setText(((ListaEntradaPesadas) entrada).getVolumen());
                                 TextView txtPesadasCodigo = (TextView) view.findViewById(R.id.txtPesadasCodigo);
                                 txtPesadasCodigo.setText(((ListaEntradaPesadas) entrada).getCodigo());
-                                TextView txtPesadasKg = (TextView) view.findViewById(R.id.txtPesadasKg);
-                                txtPesadasKg.setText(((ListaEntradaPesadas) entrada).getKg());
+                                TextView txtPesadasCliente = (TextView) view.findViewById(R.id.txtPesadasCliente);
+                                txtPesadasCliente.setText(((ListaEntradaPesadas) entrada).getCliente());
+                                TextView txtPesadasBruto = (TextView) view.findViewById(R.id.txtPesadasBruto);
+                                txtPesadasBruto.setText(((ListaEntradaPesadas) entrada).getBruto());
+                                TextView txtPesadasTara = (TextView) view.findViewById(R.id.txtPesadasTara);
+                                txtPesadasTara.setText(((ListaEntradaPesadas) entrada).getTara());
+                                TextView txtPesadasNeto = (TextView) view.findViewById(R.id.txtPesadasNeto);
+                                txtPesadasNeto.setText(((ListaEntradaPesadas) entrada).getNeto());
                             }
                         });
                     }
                 });
             }
+
         }).start();
+
     }
 }
