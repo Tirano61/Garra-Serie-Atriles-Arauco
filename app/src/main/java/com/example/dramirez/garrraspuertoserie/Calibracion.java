@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Calibracion extends AppCompatActivity {
 
     EditText edtPesoMaximo, edtTotalCeldas,edtDivision,edtSensibilidad,edtVentana,edtKgFiltro,
-            edtConversiones, edtRecortes, edtlogica;
+            edtConversiones, edtRecortes, edtlogica,edtTickets;
 
     BaseDeDatos db;
     Integer counter = 1;
@@ -37,6 +37,7 @@ public class Calibracion extends AppCompatActivity {
           edtConversiones = (EditText)findViewById(R.id.edtConversiones);
           edtRecortes = (EditText)findViewById(R.id.edtRecortes);
           edtlogica = (EditText)findViewById(R.id.edt_dialogo_logica);
+          edtTickets = (EditText)findViewById(R.id.edtTickets);
 
           db =  new BaseDeDatos(getBaseContext());
           var = Balanza.getInstance().getVariables();
@@ -61,7 +62,7 @@ public class Calibracion extends AppCompatActivity {
             edtConversiones.setText(cursor.getString(7));
             edtRecortes.setText(cursor.getString(8));
             edtlogica.setText(cursor.getString(9));
-
+            edtTickets.setText(cursor.getString(10));
         }else{
 
         }
@@ -86,7 +87,7 @@ public class Calibracion extends AppCompatActivity {
         counter = 1;
 
         try {
-            String capac ="",celdas ="", division ="", sensib ="", vent ="", kgF ="",conv ="", recort ="",logica ="";
+            String capac ="",celdas ="", division ="", sensib ="", vent ="", kgF ="",conv ="", recort ="",logica ="",tickets = "";
             capac = edtPesoMaximo.getText().toString();
             celdas = edtTotalCeldas.getText().toString();
             division = edtDivision.getText().toString();
@@ -96,6 +97,7 @@ public class Calibracion extends AppCompatActivity {
             conv = edtConversiones.getText().toString();
             recort =edtRecortes.getText().toString();
             logica = edtlogica.getText().toString();
+            tickets = edtTickets.getText().toString();
             /**
              * Verifica que el tamaño de recortes y converciones
              */
@@ -108,7 +110,7 @@ public class Calibracion extends AppCompatActivity {
                         if (!(Integer.valueOf(logica) > 2))
                         {
                             ArrayList<DBcalibracion> arrayCalibracion = new ArrayList<DBcalibracion>(Arrays.asList(new DBcalibracion(capac,celdas,
-                                    division,sensib,vent,kgF,conv,recort,logica)));
+                                    division,sensib,vent,kgF,conv,recort,logica,tickets)));
 
                             var.setCAPACIDAD(capac);
                             var.setCELDAS(celdas);
@@ -119,7 +121,7 @@ public class Calibracion extends AppCompatActivity {
                             var.setCONVERSIONES(conv);
                             var.setRECORTES(recort);
                             var.setLOGICA(logica);
-
+                            var.setTICKETS(Integer.valueOf(tickets));
                             DBcalibracion CALI = arrayCalibracion.get(0);
 
                             db.actualizarCalibracion(CALI,"1");

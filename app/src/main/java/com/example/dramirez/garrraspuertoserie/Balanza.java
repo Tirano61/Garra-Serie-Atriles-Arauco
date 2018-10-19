@@ -35,6 +35,7 @@ class Balanza {
     private double pesoFiltrado, pesoFisicoAnterior;
     private double[] vectorFiltro = new double[100];
     int tara;
+    boolean guardado;
 
 
 
@@ -49,8 +50,24 @@ class Balanza {
     private Balanza() {
     }
 
+    public boolean isGuardado() {
+        return guardado;
+    }
+
+    public void setGuardado(boolean guardado) {
+        this.guardado = guardado;
+    }
+
     public int getBateria() {
         return celda.getBateria();
+    }
+
+    public  float getCORRECCION() {
+        return CORRECCION;
+    }
+
+    public  void setCORRECCION(float CORRECCION) {
+        Balanza.CORRECCION = CORRECCION;
     }
 
     public void setBateria(int bateria) {
@@ -107,15 +124,15 @@ class Balanza {
     public void setCominzoPesaje(boolean cominzoPesaje)
     {
         this.cominzoPesaje = cominzoPesaje;
-
     }
 
-    public int getPesoAcumulado() {
+    public int getPesoAcumulado()
+    {
         return PesoAcumulado;
     }
 
-    public int setAcumularPeso(){
-
+    public int setAcumularPeso()
+    {
         if (semiAutomatico)
         {
             if (isCominzoPesaje() && isFlagPeso() && (corregido > 50))
@@ -123,6 +140,7 @@ class Balanza {
                 PesoAcumulado += (int)waitForPesoEstable();
                 fueAcumulado = true;
                 flagPeso = false;
+                guardado = true;
             }
         }
         else
@@ -132,16 +150,21 @@ class Balanza {
                 PesoAcumulado += corregido;
                 fueAcumulado = true;
                 flagPeso = false;
+                guardado = true;
             }
         }
         return PesoAcumulado;
     }
 
-    private void buscarFlagPeso(int peso) {
-        if (isCominzoPesaje()){
-            if (!isFueAcumulado() && (peso < 50)) {
+    private void buscarFlagPeso(int peso)
+    {
+        if (isCominzoPesaje())
+        {
+            if (!isFueAcumulado() && (peso < 50))
+            {
                 flagPeso = true;
-            }else if (isFueAcumulado() && (peso < 50) && !flagPeso){
+            }else if (isFueAcumulado() && (peso < 50) && !flagPeso)
+            {
                 flagPeso = true;
             }
         }
@@ -326,7 +349,8 @@ class Balanza {
                 while (true)
                 {
                     try {
-                        if (celda.getGuardado() == 1){
+                        if (celda.getGuardado() == 1)
+                        {
                             guardarPeso();
                         }
                         Thread.sleep(100);

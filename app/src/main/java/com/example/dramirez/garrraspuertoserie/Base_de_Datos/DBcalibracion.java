@@ -14,6 +14,7 @@ public class DBcalibracion
     public static final  String FCAL_CONVERSIONES = "conversiones";
     public static final  String FCAL_RECORTES = "recortes";
     public static final  String FCAL_LOGICA = "logica";
+    public static final  String FCAL_TICKET = "ticket";
 
     public static final String TAB_CALIBRACION  = "CREATE TABLE " + TABLE_NAME_CALIBRACION + "(" +
             FCAL_ID + " integer primary key autoincrement, " +
@@ -25,7 +26,9 @@ public class DBcalibracion
             FCAL_KGFILTRO + " text," +
             FCAL_CONVERSIONES + " text," +
             FCAL_RECORTES + " text," +
-            FCAL_LOGICA  + " text"+");";
+            FCAL_LOGICA + " text," +
+            FCAL_TICKET  + " text"+");";
+
 
     private int idCalibracion;
     private String capacidad;
@@ -37,8 +40,9 @@ public class DBcalibracion
     private String conversiones;
     private String recortes;
     private String logica;
+    private String ticket;
     public DBcalibracion(String capacidad, String celdas,String division, String sensibilidad, String ventana,
-                         String kgfiltro, String conversiones, String recortes,String logica)
+                         String kgfiltro, String conversiones, String recortes,String logica, String ticket)
     {
         this.capacidad = capacidad;
         this.celdas = celdas;
@@ -49,8 +53,17 @@ public class DBcalibracion
         this.conversiones = conversiones;
         this.recortes = recortes;
         this.logica = logica;
+        this.ticket = ticket;
     }
 
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
 
     public String getLogica() {
         return logica;

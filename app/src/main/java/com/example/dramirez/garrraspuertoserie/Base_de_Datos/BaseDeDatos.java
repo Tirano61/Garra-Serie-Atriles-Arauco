@@ -45,6 +45,17 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXIXTS" + DBcabecera.TABLE_NAME_CABECERA);
         onCreate(db);
     }
+    private ContentValues generarCorreccion(DBcorreccion correccion)
+    {
+        ContentValues values  = new ContentValues();
+        values.put(DBcorreccion.FCO_PORC, correccion.getPorcentaje());
+        return values;
+    }
+
+    public void actualizarCorreccion(DBcorreccion correccion, String id)
+    {
+        db.update(DBcorreccion.TABLE_NAME_CORRECCION, generarCorreccion(correccion), DBcorreccion.FCO_ID+ "=?", new String[]{id});
+    }
 
     private ContentValues generarCabecera(DBcabecera cabecera)
     {
@@ -159,6 +170,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBcalibracion.FCAL_CONVERSIONES, calibracion.getConversiones());
         valores.put(DBcalibracion.FCAL_RECORTES, calibracion.getRecortes());
         valores.put(DBcalibracion.FCAL_LOGICA, calibracion.getLogica());
+        valores.put(DBcalibracion.FCAL_TICKET, calibracion.getTicket());
         return valores;
     }
     public void actualizarCalibracion(DBcalibracion calibracion, String id)

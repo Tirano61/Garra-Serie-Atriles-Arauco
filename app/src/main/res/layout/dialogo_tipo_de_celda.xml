@@ -28,6 +28,7 @@
         android:background="@drawable/spinner_selector"
         android:backgroundTintMode="src_over"
         android:entries="@array/tipo_celda"
+        android:lineSpacingExtra="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toEndOf="@+id/textView28"

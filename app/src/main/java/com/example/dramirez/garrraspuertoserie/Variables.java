@@ -4,12 +4,20 @@ public class Variables {
 
     private static String  CAPACIDAD,CELDAS,DIVISION, SENSIBILIDAD, CONVERSIONES,RECORTES, LOGICA;
     private static String PATENTE, CODIGO,PRODUCTO, CLIENTE, TARA, VOLUMEN;
-    private static int VENTANA, KGFILTRO;
+    private static int VENTANA, KGFILTRO, TICKETS;
     private static boolean RELOJ = false;
     private static boolean BATERIA = false;
     private static boolean TIEMPOCARGA = false;
     private  static String CABECERA_1,CABECERA_2,CABECERA_3,CABECERA_4;
 
+
+    public static int getTICKETS() {
+        return TICKETS;
+    }
+
+    public static void setTICKETS(int TICKETS) {
+        Variables.TICKETS = TICKETS;
+    }
 
     public static String getCabecera1() {
         return CABECERA_1;

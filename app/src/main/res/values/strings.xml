@@ -62,6 +62,9 @@
     <string name="dialogo_cliente">Cliente :</string>
     <string name="calibracion_logica">Lógica :</string>
 
+    <string name="mensaje_tipo_celda">La conexión a sido exitosa</string>
+    <string name="mensaje__tipo_celda_error">Error al conectar celda</string>
+    <string name="mensaje__tipo_celda_fail">La balanza contestó FAIL</string>
     <!-- todo:       Dialogo de menu        -->
     <string name="menu_calibracion">Calibración</string>
     <string name="menu_tipo_celda">Tipo de celda</string>
@@ -69,6 +72,7 @@
     <string name="menu_Pesadas">Pesadas</string>
     <string name="menu_exportar">Exportar Excel</string>
     <string name="menu_cabecera">Cabecera de impresión</string>
+    <string name="menu_correccion">Corrección</string>
 
     <string name="menu_titulo">Seleccione una opción ...</string>
     <string name="tiitulo_dialogo_guardar_pesada">Desea guardar la pesada ...</string>
@@ -99,5 +103,8 @@
     <string name="pesadas_desde">Desde :</string>
     <string name="pesadas_hasta">Hasta :</string>
     <string name="pesadas_total">Total :</string>
+    <string name="correccion">Corrección :</string>
+    <string name="correccion_titulo">Introduzca la corrección</string>
+    <string name="calibracion_ticket">Tickets impresión :</string>
 
 </resources>

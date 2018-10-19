@@ -23,7 +23,8 @@
         android:theme="@style/MaterialTema">
         <activity
             android:name=".Principal"
-            android:theme="@style/MaterialTema">
+            android:theme="@style/MaterialTema"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -63,7 +63,7 @@ public class DriverCeldaSerie implements DriverCelda {
             int size;
             boolean mayor = false;
 
-           //Log.d("TEST", "!!!!!!!!!!!!!!  ENTRA ");
+
             size = mInputStream.read(buffer);
             contadorDatoRecibido = 0;
             datoRecibido = true;
@@ -242,7 +242,7 @@ public class DriverCeldaSerie implements DriverCelda {
     @Override
     public int getOK() {
         int i = 0;
-        while (i <= 10)
+        while (i <= 20)
         {
             if (ok == 1)
             {

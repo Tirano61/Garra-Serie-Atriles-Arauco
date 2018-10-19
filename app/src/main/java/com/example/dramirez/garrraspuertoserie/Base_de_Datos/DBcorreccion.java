@@ -19,6 +19,7 @@ public class DBcorreccion {
 
     public DBcorreccion(String porcentaje)
     {
+
         this.porcentaje = porcentaje;
     }
 

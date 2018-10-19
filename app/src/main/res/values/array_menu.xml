@@ -7,10 +7,11 @@
         <item>@string/menu_Pesadas</item>
         <item>@string/menu_exportar</item>
         <item>@string/menu_cabecera</item>
+        <item>@string/menu_correccion</item>
     </string-array>
     <string-array name="FiltrosPesadas">
         <item>"Por Lote"</item>
-        <item>"Por Patente"</item>
+        <item>"Por Patente"</item>menu_cabecera
         <item>"Por Producto"</item>
         <item>"Entre Fechas"</item>
     </string-array>

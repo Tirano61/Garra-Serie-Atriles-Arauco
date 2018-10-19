@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.content.ContentValues;
 import android.content.Context;
@@ -40,6 +41,7 @@ import com.example.dramirez.garrraspuertoserie.Base_de_Datos.BaseDeDatos;
 
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcabecera;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcero;
+import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcorreccion;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBdatos;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBpesadas;
 
@@ -80,18 +82,19 @@ public class Principal extends AppCompatActivity {
     String TAG = "PRUEBA DE CARAGA CALIBRACION";
     ImageButton btnCero;
     LinearLayout Layout_Total_Cargado;
-    ImageView imgEstable, imgBateria, imgConexionSerie;
+    ImageView imgEstable, imgBateria, imgConexionSerie,imgDescargando;
     String desde, hasta;
     String[] arrayMenu;
     String Fecha_Peso;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    ImageButton btnGuardar;
+    ImageButton btnGuardar, btnCargar;
     String fecha;
     Calendar calendar = Calendar.getInstance();
     ArrayList<String> datos;
     Runnable _Runnable = new Exportar_Excel();
     Thread excel = new Thread(_Runnable);
     int netoDescargado;
+    boolean cuentaLeedEmpezada = false;
 
     // Used to load the 'native-lib' library oon application startup.
     static {
@@ -100,7 +103,8 @@ public class Principal extends AppCompatActivity {
 
     @Override
 
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -121,8 +125,10 @@ public class Principal extends AppCompatActivity {
         Layout_Total_Cargado = (LinearLayout)findViewById(R.id.Layout_Total_Cargado);
         imgEstable = (ImageView)findViewById(R.id.imgEstable);
         imgBateria = (ImageView)findViewById(R.id.imgBateria);
+        imgDescargando = (ImageView)findViewById(R.id.imgDescargando);
         imgConexionSerie = (ImageView)findViewById(R.id.imgConexionSerie);
         btnGuardar = (ImageButton)findViewById(R.id.btnGuardar);
+        btnCargar = (ImageButton) findViewById(R.id.btnCargar);
         btnGuardar.setEnabled(false);
         arrayMenu = getResources().getStringArray(R.array.dialogo_menu);
         progressBar = (ProgressBar)findViewById(R.id.progressBarImpresion);
@@ -200,9 +206,17 @@ public class Principal extends AppCompatActivity {
         switch (v.getId())
         {
             case R.id.btnCargar:
-                Balanza.getInstance().setCominzoPesaje(true);
-                new dialogoCargaDatos(this);
-                Layout_Total_Cargado.setVisibility(View.INVISIBLE);
+                if (Balanza.getInstance().isConexionSerie())
+                {
+                    Balanza.getInstance().setCominzoPesaje(true);
+                    new dialogoCargaDatos(this);
+                    Layout_Total_Cargado.setVisibility(View.INVISIBLE);
+
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"No se puede comenzar el pesaje, Balanza desconectada!!!",Toast.LENGTH_LONG).show();
+                }
             break;
             case R.id.btnMenu:
                 dialogoMenu();
@@ -228,6 +242,7 @@ public class Principal extends AppCompatActivity {
                         GuardarPesada();
                         dialog.cancel();
                         btnGuardar.setEnabled(false);
+                        btnCargar.setEnabled(true);
                     }
                 })
                 .setNegativeButton(R.string.dialgo_cancelar, new DialogInterface.OnClickListener()
@@ -295,127 +310,132 @@ public class Principal extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            if (!var.getCabecera1().equals(null))
+            for (int i =1; i <= var.getTICKETS(); i++)
             {
-                if (!var.getCabecera1().equals("")) {
-                    Balanza.getInstance().ImprimirTicket("  " + var.getCabecera1());
-                    Balanza.getInstance().getOK();
-                    progreso++;
-                    publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                if (!var.getCabecera1().equals(null))
+                {
+                    if (!var.getCabecera1().equals("")) {
+                        Balanza.getInstance().ImprimirTicket("  " + var.getCabecera1());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
                 }
-            }
-            if (!var.getCabecera4().equals(null))
-            {
-                if (!var.getCabecera2().equals("")){
-                    Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera2());
-                    Balanza.getInstance().getOK();
-                    progreso++;
-                    publishProgress(progreso);
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera2().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera2());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
                 }
-            }
 
-            if (!var.getCabecera4().equals(null)){
-                if (!var.getCabecera3().equals("")){
-                    Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
-                    Balanza.getInstance().getOK();
-                    progreso++;
-                    publishProgress(progreso);
+                if (!var.getCabecera4().equals(null)){
+                    if (!var.getCabecera3().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
                 }
-            }
 
-            if (!var.getCabecera4().equals(null))
-            {
-                if (!var.getCabecera4().equals("")){
-                    Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
-                    Balanza.getInstance().getOK();
-                    progreso++;
-                    publishProgress(progreso);
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera4().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
                 }
-            }
-            Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  " + fecha + "      " +txtHora.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Tiempo de Carga : " + txtCargio.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Patente  : " + edt_patente.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Codigo   : " + edt_codigo.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Producto : " + edt_producto.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Cliente  : " + edt_cliente.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Volumen  : " + edt_volumen.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Bruto : " + txt_Peso_Acumulado.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " +txtHora.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Tiempo de Carga : " + txtCargio.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Patente  : " + edt_patente.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Codigo   : " + edt_codigo.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Producto : " + edt_producto.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cliente  : " + edt_cliente.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Volumen  : " + edt_volumen.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Bruto : " + txt_Peso_Acumulado.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
 
-            Balanza.getInstance().ImprimirTicket("  Tara  : " + edt_tara.getText().toString());
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("  Neto  : " + String.valueOf(netoDescargado));
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
-            Balanza.getInstance().getOK();
-            progreso++;
-            publishProgress(progreso);
-            Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().ImprimirTicket("  Tara  : " + edt_tara.getText().toString());
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Neto  : " + String.valueOf(netoDescargado));
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+
+            }
             progreso = 100;
             publishProgress(progreso);
+
             return null;
         }
 
@@ -438,6 +458,8 @@ public class Principal extends AppCompatActivity {
             @Override
             public void run() {
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().getPesoAcumulado()));
+
+
             }
         });
 
@@ -461,6 +483,10 @@ public class Principal extends AppCompatActivity {
             contentCabecera.put("dos","");
             contentCabecera.put("tres","");
             contentCabecera.put("cuatro","");
+            var.setCabecera1("");
+            var.setCabecera2("");
+            var.setCabecera3("");
+            var.setCabecera4("");
             db.db.insert("tcabecera",null,contentCabecera);
         }
 
@@ -512,6 +538,9 @@ public class Principal extends AppCompatActivity {
             contentCalibracion.put("kgfiltro","1000");
             contentCalibracion.put("conversiones","10");
             contentCalibracion.put("recortes","1");
+            contentCalibracion.put("logica","0");
+            contentCalibracion.put("ticket","1");
+
             var.setCAPACIDAD("10000");
             var.setCELDAS("40000");
             var.setDIVISION("20");
@@ -521,6 +550,7 @@ public class Principal extends AppCompatActivity {
             var.setCONVERSIONES("10");
             var.setRECORTES("1");
             var.setLOGICA("0");
+            var.setTICKETS(1);
             db.db.insert("tcalibracion",null,contentCalibracion);
         }else{
             var.setCAPACIDAD(cursorCalibracion.getString(1));
@@ -531,6 +561,8 @@ public class Principal extends AppCompatActivity {
             var.setKGFILTRO(cursorCalibracion.getInt(6));
             var.setCONVERSIONES(cursorCalibracion.getString(7));
             var.setRECORTES(cursorCalibracion.getString(8));
+            var.setLOGICA(cursorCalibracion.getString(9));
+            var.setTICKETS(cursorCalibracion.getInt(10));
         }
         // Buscar Cero //
         ContentValues contentCero = new ContentValues();
@@ -544,6 +576,20 @@ public class Principal extends AppCompatActivity {
         {
             contentCero.put("cero", "0");
             db.db.insert("tcero",null,contentCero);
+        }
+
+        ContentValues contentCorreccion = new ContentValues();
+        Cursor cursorCorreccion = db.db.rawQuery("SELECT * FROM tcorreccion",null);
+        if (cursorCorreccion.moveToFirst())
+        {
+            float correccion = Float.valueOf(cursorCorreccion.getString(1));
+            Balanza.getInstance().setCORRECCION(correccion);
+        }
+        else
+        {
+            contentCorreccion.put("porcentaje", "0");
+            db.db.insert("tcorreccion",null,contentCorreccion);
+            Balanza.getInstance().setCORRECCION(0);
         }
     }
 
@@ -605,7 +651,7 @@ public class Principal extends AppCompatActivity {
                     edt_cliente.setText(cliente);
                     edt_tara.setText(tara);
                     edt_volumen.setText(volumen);
-
+                    btnCargar.setEnabled(false);
                     dialog.dismiss();
                     Layout_Total_Cargado.setVisibility(View.VISIBLE);
                     Balanza.getInstance().setCominzoPesaje(true);
@@ -627,7 +673,6 @@ public class Principal extends AppCompatActivity {
             dialog.show();
         }
     }
-
     private void activarCuentaCarga()
     {
         new Thread(new Runnable() {
@@ -696,6 +741,7 @@ public class Principal extends AppCompatActivity {
                             startActivity(i);
                         break;
                     case 1:
+                            Balanza.getInstance().paraPedido();
                             dialogoTipoDeCelda();
                         break;
                     case 2:
@@ -711,8 +757,9 @@ public class Principal extends AppCompatActivity {
                     case 5:
                             dialogoCabeceraImpresion();
                         break;
-
-
+                    case 6:
+                        dialogoCorreccion();
+                        break;
                 }
                 dialog.cancel();
             }
@@ -836,6 +883,56 @@ public class Principal extends AppCompatActivity {
         alert.show();
     }
 
+    public void dialogoCorreccion()
+    {
+        final EditText edtCorreccion;
+        final AlertDialog dialog;
+        final Button btnCorreccionAceptar;
+        final Button btnCorreccionCancelar;
+
+
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.Material_Base));
+        LayoutInflater inflater = LayoutInflater.from(Principal.this);
+        View view = inflater.inflate(R.layout.dialogo_correccion, null);
+        btnCorreccionAceptar = (Button)view.findViewById(R.id.btnCorreccionAceptar);
+        btnCorreccionCancelar = (Button)view.findViewById(R.id.btnCorreccionCancelar);
+        edtCorreccion = (EditText)view.findViewById(R.id.edtCorreccion) ;
+
+        ContentValues contentCorreccion = new ContentValues();
+        Cursor cursorCorreccion = db.db.rawQuery("SELECT * FROM tcorreccion",null);
+        if (cursorCorreccion.moveToFirst())
+        {
+            float correccion = Float.valueOf(cursorCorreccion.getString(1));
+            edtCorreccion.setText(String.valueOf(correccion));
+            Balanza.getInstance().setCORRECCION(correccion);
+        }
+
+        builder.setView(view);
+        dialog =   builder.create();
+        btnCorreccionAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<DBcorreccion> arrayCorreccion = new ArrayList<DBcorreccion>(Arrays.asList(new DBcorreccion(edtCorreccion.getText().toString())));
+                DBcorreccion dBcorreccion = arrayCorreccion.get(0);
+                db.actualizarCorreccion(dBcorreccion,"1");
+
+                Balanza.getInstance().setCORRECCION(Float.valueOf(edtCorreccion.getText().toString()));
+                Toast.makeText(getBaseContext(), "La corrección se guardo correctamente",Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+
+       btnCorreccionCancelar.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               dialog.dismiss();
+           }
+       });
+        dialog.show();
+
+    }
+
     int tipoCeldaAEnviar;
     String numero, ssd, pass, puerto , envio;
     public void dialogoTipoDeCelda()
@@ -846,7 +943,7 @@ public class Principal extends AppCompatActivity {
         final AlertDialog dialog;
 
         Spinner spTipo;
-        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.TemaGeneral));
+        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.Material_Base));
         LayoutInflater inflater = LayoutInflater.from(Principal.this);
         View view = inflater.inflate(R.layout.dialogo_tipo_de_celda, null);
 
@@ -925,7 +1022,15 @@ public class Principal extends AppCompatActivity {
                     case 0:
                         try {
                             envio = "AT+CELDA=" + envio + '\r'+'\n';
-                                    Balanza.getInstance().EnviarTipoCelda(envio);
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().EnviarTipoCelda(envio);
+                            if (Balanza.getInstance().getOK() == 1){
+                                Toast.makeText(getBaseContext(),R.string.mensaje_tipo_celda,Toast.LENGTH_LONG).show();
+                            }else if (Balanza.getInstance().getOK() == 0){
+                                Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_fail,Toast.LENGTH_LONG).show();
+                            }else if (Balanza.getInstance().getOK() == -1){
+                                Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_error,Toast.LENGTH_LONG).show();
+                            }
                         }catch (Exception e){
 
                         }
@@ -936,13 +1041,21 @@ public class Principal extends AppCompatActivity {
                             if (!numero.equals(""))
                             {
                                 envio = "AT+CELDA=" + envio + "," + numero+ '\r'+'\n';
+
                                 Balanza.getInstance().EnviarTipoCelda(envio);
+                                Balanza.getInstance().getOK();
                             }else {
                                 Toast.makeText(getBaseContext(),R.string.tipo_celda_mensaje,Toast.LENGTH_LONG).show();
                             }
-
+                            if (Balanza.getInstance().getOK() == 1){
+                                Toast.makeText(getBaseContext(),R.string.mensaje_tipo_celda,Toast.LENGTH_LONG).show();
+                            }else if (Balanza.getInstance().getOK() == 0){
+                                Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_fail,Toast.LENGTH_LONG).show();
+                            }else if (Balanza.getInstance().getOK() == -1){
+                                Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_error,Toast.LENGTH_LONG).show();
+                            }
                         }catch (Exception e){
-
+                            Toast.makeText(getBaseContext(),"Devolvio -1 la puta",Toast.LENGTH_LONG).show();
                         }
                         break;
                     case  2:
@@ -966,13 +1079,11 @@ public class Principal extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Balanza.getInstance().pedirCuentas();
                 dialog.dismiss();
             }
         });
-
-                dialog.show();
-
-
+        dialog.show();
     }
 
     public void pesaje ()
@@ -1001,6 +1112,17 @@ public class Principal extends AppCompatActivity {
                                 }else{
                                     imgEstable.setBackgroundResource(R.drawable.circulo_inestable);
                                 }
+                                if (Balanza.getInstance().isGuardado())
+                                {
+                                    imgDescargando.setVisibility(View.VISIBLE);
+                                    if (!cuentaLeedEmpezada)
+                                    {
+                                        cuentaLeedAzul();
+                                        cuentaLeedEmpezada = true;
+                                    }
+                                }else {
+                                    imgDescargando.setVisibility(View.INVISIBLE);
+                                }
                                 actualizarAcumilaror();
                             }
                         });
@@ -1013,12 +1135,41 @@ public class Principal extends AppCompatActivity {
         }).start();
     }
 
+    private void cuentaLeedAzul()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int cuenta = 0;
+                        while (cuenta > 100){
+                            try {
+                            imgDescargando.setVisibility(View.VISIBLE);
+                            cuenta++;
+
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        cuentaLeedEmpezada = false;
+                        Balanza.getInstance().setGuardado(false);
+                    }
+                });
+
+            }
+        }).start();
+    }
+
     class CountDownRunner implements Runnable
     {
         @Override
         public void run()
         {
-            while (!Thread.currentThread().isInterrupted()) {
+            while (!Thread.currentThread().isInterrupted())
+            {
                 if (!var.isRELOJ())
                 {
                     var.setRELOJ(true);
@@ -1081,33 +1232,45 @@ public class Principal extends AppCompatActivity {
                     {
                         if (Balanza.getInstance().isConexionSerie())
                         {
-                            if (Balanza.getInstance().getBateria() == 0)
+                            if (tipoCeldaAEnviar == 0)
                             {
-                                imgBateria.setBackgroundResource(R.drawable.celda_desconectada);
+                                imgBateria.setBackgroundResource(R.drawable.cableada);
+
+                                txtBateria.setText("");
                             }
                             else
                             {
-                                contador = Balanza.getInstance().getBateria();
-                                txtBateria.setText(String.valueOf(Balanza.getInstance().getBateria())+"%");
-                                if (contador <= 25){
-                                    imgBateria.setBackgroundResource(R.drawable.celda_25);
-                                }
-                                else if (contador > 25 && contador <= 50){
-                                    imgBateria.setBackgroundResource(R.drawable.celda_50);
-                                }
-                                else if (contador > 50 && contador <= 75)
+                                if (Balanza.getInstance().getBateria() == 0)
                                 {
-                                   imgBateria.setBackgroundResource(R.drawable.celda_75);
+                                    imgBateria.setBackgroundResource(R.drawable.celda_desconectada);
+                                    txtBateria.setText("0%");
                                 }
-                                else if (contador > 75 )
+                                else
                                 {
-                                    imgBateria.setBackgroundResource(R.drawable.celda_100);
+                                    contador = Balanza.getInstance().getBateria();
+                                    txtBateria.setText(String.valueOf(Balanza.getInstance().getBateria())+"%");
+                                    if (contador <= 25){
+                                        imgBateria.setBackgroundResource(R.drawable.celda_25);
+                                    }
+                                    else if (contador > 25 && contador <= 50){
+                                        imgBateria.setBackgroundResource(R.drawable.celda_50);
+                                    }
+                                    else if (contador > 50 && contador <= 75)
+                                    {
+                                        imgBateria.setBackgroundResource(R.drawable.celda_75);
+                                    }
+                                    else if (contador > 75 )
+                                    {
+                                        imgBateria.setBackgroundResource(R.drawable.celda_100);
+                                    }
                                 }
-
                             }
-                        }else {
 
+                        }
+                        else
+                        {
                             imgBateria.setBackgroundResource(R.drawable.celda_desconectada);
+                            txtBateria.setText("0%");
                         }
                     } catch (Exception e) {
                     }
