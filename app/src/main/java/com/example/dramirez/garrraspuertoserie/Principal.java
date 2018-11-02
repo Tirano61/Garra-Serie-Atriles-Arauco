@@ -224,6 +224,9 @@ public class Principal extends AppCompatActivity {
             case  R.id.btnGuardar:
                 dialogoGuardarPesada();
                 break;
+            case R.id.btnAcumular:
+                txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().setAcumularPeso()));
+                break;
         }
     }
 
@@ -736,9 +739,8 @@ public class Principal extends AppCompatActivity {
                 switch (which)
                 {
                     case 0:
-                            Balanza.getInstance().paraPedido();
-                            Intent i = new Intent(getBaseContext(),Calibracion.class);
-                            startActivity(i);
+                            showInputDialog_Contrasena();
+
                         break;
                     case 1:
                             Balanza.getInstance().paraPedido();
@@ -890,8 +892,6 @@ public class Principal extends AppCompatActivity {
         final Button btnCorreccionAceptar;
         final Button btnCorreccionCancelar;
 
-
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.Material_Base));
         LayoutInflater inflater = LayoutInflater.from(Principal.this);
         View view = inflater.inflate(R.layout.dialogo_correccion, null);
@@ -913,6 +913,11 @@ public class Principal extends AppCompatActivity {
         btnCorreccionAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (edtCorreccion.getText().toString().equals(""))
+                {
+                    edtCorreccion.setText("0");
+                }
+
                 ArrayList<DBcorreccion> arrayCorreccion = new ArrayList<DBcorreccion>(Arrays.asList(new DBcorreccion(edtCorreccion.getText().toString())));
                 DBcorreccion dBcorreccion = arrayCorreccion.get(0);
                 db.actualizarCorreccion(dBcorreccion,"1");
@@ -920,6 +925,7 @@ public class Principal extends AppCompatActivity {
                 Balanza.getInstance().setCORRECCION(Float.valueOf(edtCorreccion.getText().toString()));
                 Toast.makeText(getBaseContext(), "La corrección se guardo correctamente",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
+
             }
         });
 
@@ -932,6 +938,45 @@ public class Principal extends AppCompatActivity {
         dialog.show();
 
     }
+
+    protected void showInputDialog_Contrasena()
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
+        View  promptView = layoutInflater.inflate(R.layout.dialogo_contrasena, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
+        alertDialogBuilder.setView(promptView);
+        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+
+        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        })
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!txtContrasena.getText().toString().equals("")){
+                            if (txtContrasena.getText().toString().equals("1910"))
+                            {
+                                Balanza.getInstance().paraPedido();
+                                Intent intent = new Intent(getBaseContext(),Calibracion.class);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(getBaseContext(),"La Contraseña es incorrecta",Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            Toast.makeText(getBaseContext(),"La Contraseña es incorrecta",Toast.LENGTH_LONG).show();
+                        }
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
 
     int tipoCeldaAEnviar;
     String numero, ssd, pass, puerto , envio;
@@ -1055,7 +1100,7 @@ public class Principal extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_error,Toast.LENGTH_LONG).show();
                             }
                         }catch (Exception e){
-                            Toast.makeText(getBaseContext(),"Devolvio -1 la puta",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_error,Toast.LENGTH_LONG).show();
                         }
                         break;
                     case  2:
@@ -1106,7 +1151,12 @@ public class Principal extends AppCompatActivity {
                                 }else{
                                     imgConexionSerie.setBackgroundResource(R.drawable.serie_desconectado);
                                 }
-                                txtPesoGarra.setText(String.format ("% .0f", Balanza.getInstance().getPesoFisico()));
+                                if (Integer.valueOf(var.getCAPACIDAD()) > Balanza.getInstance().getPesoFisico()){
+                                    txtPesoGarra.setText(String.format ("% .0f", Balanza.getInstance().getPesoFisico()));
+                                }else{
+                                    txtPesoGarra.setText("MAX");
+                                }
+
                                 if (Balanza.getInstance().isEstable()){
                                     imgEstable.setBackgroundResource(R.drawable.circulo_estable);
                                 }else{

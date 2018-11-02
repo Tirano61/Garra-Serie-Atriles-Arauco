@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Garrras Puerto Serie</string>
+    <string name="app_name">Garras Puerto Serie</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="TITULO">ST 455 GARRAS</string>
@@ -33,7 +33,7 @@
     <string name="dialogo_productos_producto11">Prod. nº 11:</string>
     <string name="dialogo_productos_producto12">Prod. nº 12:</string>
     <string name="Tiempo_de_carga">Tiempo de carga :</string>
-    <string name="datos_de_la_descarga">Datos de la descarga</string>
+    <string name="datos_de_la_descarga">Datos de la carga</string>
     <string name="patente">Patente :</string>
     <string name="codigo">Codigo :</string>
     <string name="producto">Producto :</string>
@@ -106,5 +106,6 @@
     <string name="correccion">Corrección :</string>
     <string name="correccion_titulo">Introduzca la corrección</string>
     <string name="calibracion_ticket">Tickets impresión :</string>
+    <string name="calibracion_semiautomatico">Semiautomático</string>
 
 </resources>

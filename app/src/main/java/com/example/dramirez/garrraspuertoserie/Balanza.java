@@ -50,6 +50,14 @@ class Balanza {
     private Balanza() {
     }
 
+    public boolean isSemiAutomatico() {
+        return semiAutomatico;
+    }
+
+    public void setSemiAutomatico(boolean semiAutomatico) {
+        this.semiAutomatico = semiAutomatico;
+    }
+
     public boolean isGuardado() {
         return guardado;
     }

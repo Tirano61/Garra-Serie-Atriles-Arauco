@@ -309,8 +309,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:digits="01"
                 android:ems="10"
                 android:inputType="number"
+                android:maxLength="1"
                 android:paddingLeft="20dp"
                 android:textColor="@color/primary_text"
                 app:layout_constraintStart_toStartOf="@+id/edtRecortes"
@@ -332,16 +334,35 @@
                 android:id="@+id/edtTickets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginTop="24dp"
                 android:digits="12345"
                 android:ems="10"
                 android:inputType="number"
                 android:maxLength="1"
                 android:paddingLeft="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/edt_dialogo_logica"
                 app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_logica" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="398dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="24dp"
+                android:checked="true"
+                android:showText="true"
+                android:splitTrack="true"
+                android:switchPadding="10dp"
+                android:text="@string/calibracion_semiautomatico"
+                android:textAllCaps="false"
+                android:textColor="@color/secondary_text"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView45"
+                app:layout_constraintTop_toBottomOf="@+id/edtTickets"
+                app:layout_constraintVertical_bias="0.0" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

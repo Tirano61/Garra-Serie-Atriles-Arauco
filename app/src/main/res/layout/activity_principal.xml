@@ -554,11 +554,12 @@
             android:onClick="onClicK" />
 
         <ImageButton
-            android:id="@+id/dfdf"
+            android:id="@+id/btnAcumular"
             android:layout_width="90dp"
             android:layout_height="87dp"
             android:layout_marginRight="80dp"
-            android:background="@drawable/boton_vacio_azul" />
+            android:background="@drawable/boton_acum_compuesto"
+            android:onClick="onClicK" />
 
         <ImageButton
             android:id="@+id/btnCero"
