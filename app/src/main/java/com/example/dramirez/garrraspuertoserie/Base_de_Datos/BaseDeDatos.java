@@ -31,6 +31,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL(DBcero.TAB_CERO);
         db.execSQL(DBcalibracion.TAB_CALIBRACION);
         db.execSQL(DBcabecera.TAB_CABECERA);
+        db.execSQL(DBcelda.TAB_CELDA);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXIXTS" + DBcero.TABLE_NAME_CERO);
         db.execSQL("DROP TABLE IF EXIXTS" + DBcalibracion.TABLE_NAME_CALIBRACION);
         db.execSQL("DROP TABLE IF EXIXTS" + DBcabecera.TABLE_NAME_CABECERA);
+        db.execSQL("DROP TABLE IF EXIXTS" + DBcelda.TABLE_NAME_CELDA);
         onCreate(db);
     }
     private ContentValues generarCorreccion(DBcorreccion correccion)
@@ -201,6 +203,20 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.insert(DBcero.TABLE_NAME_CERO,null, generarCero(cero));
     }
 
+    private ContentValues generarCelda(DBcelda celda)
+    {
+        ContentValues valores = new ContentValues();
+        valores.put(DBcelda.FCELDA_CELDA, celda.getCelda());
+
+        return valores;
+    }
+    public void actualizarCelda(DBcelda celda, String id)
+    {
+        db.update(DBcelda.TABLE_NAME_CELDA, generarCelda(celda), DBcelda.FCELDA_ID+ "=?", new String[]{id});
+    }
+    private void InsetarCelda(DBcelda celda){
+        db.insert(DBcelda.TABLE_NAME_CELDA,null, generarCelda(celda));
+    }
 }
 
 

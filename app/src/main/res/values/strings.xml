@@ -80,7 +80,7 @@
     <string name="tipo_de_celda">Tipo de celda :</string>
 
     <string name="tipo_celda_1">Cableada</string>
-    <string name="tipo_celda_2">Inalámbrica Flexar</string>
+    <string name="tipo_celda_2">Inalámbrica XBee</string>
     <string name="tipo_celda_3">Inalámbrica Hook</string>
 
     <string name="tipo_celda_numero_celda">Nº de celda :</string>

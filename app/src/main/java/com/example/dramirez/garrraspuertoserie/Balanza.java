@@ -111,7 +111,6 @@ class Balanza {
 
     public void setDriverCelda(DriverCelda driverCelda, Variables var, Principal pantallaPrincipal)
     {
-
         variables = var;
         celda = driverCelda;
         MULTIPLICADOR = obtenerMultiplicador();
@@ -145,17 +144,31 @@ class Balanza {
         {
             if (isCominzoPesaje() && isFlagPeso() && (corregido > 50))
             {
-                PesoAcumulado += (int)waitForPesoEstable();
+                if (variables.isRESTAR())
+                {
+                    PesoAcumulado -= (int)waitForPesoEstable();
+                    variables.setRESTAR(false);
+                }else{
+                    PesoAcumulado += (int)waitForPesoEstable();
+                }
+
                 fueAcumulado = true;
                 flagPeso = false;
                 guardado = true;
+
             }
         }
         else
         {
             if (isCominzoPesaje() && isEstable() && isFlagPeso() && (corregido > 50))
             {
-                PesoAcumulado += corregido;
+                if (variables.isRESTAR())
+                {
+                    PesoAcumulado -= (int)waitForPesoEstable();
+                    variables.setRESTAR(false);
+                }else{
+                    PesoAcumulado += (int)waitForPesoEstable();
+                }
                 fueAcumulado = true;
                 flagPeso = false;
                 guardado = true;

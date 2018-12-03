@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.BaseDeDatos;
 
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcabecera;
+import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcelda;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcero;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcorreccion;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBdatos;
@@ -80,7 +81,7 @@ public class Principal extends AppCompatActivity {
     EditText edt_patente, edt_codigo, edt_producto, edt_cliente, edt_tara, edt_volumen;
 
     String TAG = "PRUEBA DE CARAGA CALIBRACION";
-    ImageButton btnCero;
+    ImageButton btnCero,btnRestar;
     LinearLayout Layout_Total_Cargado;
     ImageView imgEstable, imgBateria, imgConexionSerie,imgDescargando;
     String desde, hasta;
@@ -95,6 +96,9 @@ public class Principal extends AppCompatActivity {
     Thread excel = new Thread(_Runnable);
     int netoDescargado;
     boolean cuentaLeedEmpezada = false;
+    int TipoCelda,tipoCeldaAEnviar;
+    String numero, ssd, pass, puerto , envio;
+
 
     // Used to load the 'native-lib' library oon application startup.
     static {
@@ -129,6 +133,7 @@ public class Principal extends AppCompatActivity {
         imgConexionSerie = (ImageView)findViewById(R.id.imgConexionSerie);
         btnGuardar = (ImageButton)findViewById(R.id.btnGuardar);
         btnCargar = (ImageButton) findViewById(R.id.btnCargar);
+        btnRestar =(ImageButton) findViewById(R.id.btnRestar);
         btnGuardar.setEnabled(false);
         arrayMenu = getResources().getStringArray(R.array.dialogo_menu);
         progressBar = (ProgressBar)findViewById(R.id.progressBarImpresion);
@@ -169,7 +174,6 @@ public class Principal extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v)
             {
-
                 Balanza.getInstance().setearCero();
                 ActualizarCero();
                 return false;
@@ -211,7 +215,6 @@ public class Principal extends AppCompatActivity {
                     Balanza.getInstance().setCominzoPesaje(true);
                     new dialogoCargaDatos(this);
                     Layout_Total_Cargado.setVisibility(View.INVISIBLE);
-
                 }
                 else
                 {
@@ -226,6 +229,15 @@ public class Principal extends AppCompatActivity {
                 break;
             case R.id.btnAcumular:
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().setAcumularPeso()));
+                break;
+            case  R.id.btnRestar:
+                if (var.isRESTAR())
+                {
+                    var.setRESTAR(false);
+                }else{
+                    var.setRESTAR(true);
+                }
+
                 break;
         }
     }
@@ -272,7 +284,6 @@ public class Principal extends AppCompatActivity {
                     edt_patente.getText().toString(),edt_volumen.getText().toString(),
                     edt_codigo.getText().toString(),edt_cliente.getText().toString(),
                     txt_Peso_Acumulado.getText().toString(),edt_tara.getText().toString(),String.valueOf(netoDescargado))));
-
 
             DBpesadas dBpesadas;
             dBpesadas = arrayPesadas.get(0);
@@ -342,8 +353,10 @@ public class Principal extends AppCompatActivity {
                     }
                 }
 
-                if (!var.getCabecera4().equals(null)){
-                    if (!var.getCabecera3().equals("")){
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera3().equals(""))
+                    {
                         Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
                         Balanza.getInstance().getOK();
                         progreso++;
@@ -353,7 +366,8 @@ public class Principal extends AppCompatActivity {
 
                 if (!var.getCabecera4().equals(null))
                 {
-                    if (!var.getCabecera4().equals("")){
+                    if (!var.getCabecera4().equals(""))
+                    {
                         Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
                         Balanza.getInstance().getOK();
                         progreso++;
@@ -443,7 +457,8 @@ public class Principal extends AppCompatActivity {
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values) {
+        protected void onProgressUpdate(Integer... values)
+        {
             if (progreso < 100)
             {
                 progressBar.setProgress(values[0]);
@@ -461,11 +476,8 @@ public class Principal extends AppCompatActivity {
             @Override
             public void run() {
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().getPesoAcumulado()));
-
-
             }
         });
-
     }
 
     public void comprobarBaseDeDatos()
@@ -594,6 +606,22 @@ public class Principal extends AppCompatActivity {
             db.db.insert("tcorreccion",null,contentCorreccion);
             Balanza.getInstance().setCORRECCION(0);
         }
+
+        ContentValues contentCelda = new ContentValues();
+        Cursor cursorCelda = db.db.rawQuery("SELECT * FROM tcelda",null);
+
+        if (cursorCelda.moveToFirst())
+        {
+            int celda =Integer.valueOf(cursorCelda.getString(1));
+            TipoCelda = celda;
+        }else
+        {
+            contentCelda.put("celda", "0");
+            db.db.insert("tcelda",null,contentCelda);
+        }
+
+
+
     }
 
     @SuppressLint("ValidFragment")
@@ -743,8 +771,8 @@ public class Principal extends AppCompatActivity {
 
                         break;
                     case 1:
-                            Balanza.getInstance().paraPedido();
-                            dialogoTipoDeCelda();
+                            showInputDialog_ContrasenaTipoCelda();
+
                         break;
                     case 2:
                             Intent p = new Intent(getBaseContext(),Productos.class);
@@ -939,6 +967,44 @@ public class Principal extends AppCompatActivity {
 
     }
 
+
+    protected void showInputDialog_ContrasenaTipoCelda()
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
+        View  promptView = layoutInflater.inflate(R.layout.dialogo_contrasena, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
+        alertDialogBuilder.setView(promptView);
+        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+
+        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        })
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!txtContrasena.getText().toString().equals("")){
+                            if (txtContrasena.getText().toString().equals("1910"))
+                            {
+                                Balanza.getInstance().paraPedido();
+                                dialogoTipoDeCelda();
+                            }else{
+                                Toast.makeText(getBaseContext(),"La Contraseña es incorrecta",Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            Toast.makeText(getBaseContext(),"La Contraseña es incorrecta",Toast.LENGTH_LONG).show();
+                        }
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
     protected void showInputDialog_Contrasena()
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -978,8 +1044,7 @@ public class Principal extends AppCompatActivity {
     }
 
 
-    int tipoCeldaAEnviar;
-    String numero, ssd, pass, puerto , envio;
+
     public void dialogoTipoDeCelda()
     {
         final TextView txt1, txt2, txt3;
@@ -1016,8 +1081,10 @@ public class Principal extends AppCompatActivity {
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 switch (position)
                 {
+
                     case 0:
                         tipoCeldaAEnviar = 0;
                         txt1.setVisibility(View.INVISIBLE);
@@ -1050,6 +1117,7 @@ public class Principal extends AppCompatActivity {
                         edt3.setVisibility(View.VISIBLE);
                         break;
                 }
+
              }
 
              @Override
@@ -1119,6 +1187,15 @@ public class Principal extends AppCompatActivity {
                         }
                         break;
                 }
+
+                TipoCelda = tipoCeldaAEnviar;
+                try {
+                    ArrayList<DBcelda> arrayCelda = new ArrayList<DBcelda>(Arrays.asList(new DBcelda(String.valueOf(TipoCelda))));
+                    DBcelda dBcelda = arrayCelda.get(0);
+                    db.actualizarCelda(dBcelda,"1");
+                }catch (Exception e){
+
+                }
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {
@@ -1172,6 +1249,13 @@ public class Principal extends AppCompatActivity {
                                     }
                                 }else {
                                     imgDescargando.setVisibility(View.INVISIBLE);
+                                }
+                                if (var.isRESTAR())
+                                {
+                                    btnRestar.setBackgroundResource(R.drawable.boton_restar_azul_pres);
+                                }
+                                else{
+                                    btnRestar.setBackgroundResource(R.drawable.boton_restar_azul);
                                 }
                                 actualizarAcumilaror();
                             }
@@ -1282,7 +1366,7 @@ public class Principal extends AppCompatActivity {
                     {
                         if (Balanza.getInstance().isConexionSerie())
                         {
-                            if (tipoCeldaAEnviar == 0)
+                            if (TipoCelda == 0)
                             {
                                 imgBateria.setBackgroundResource(R.drawable.cableada);
 

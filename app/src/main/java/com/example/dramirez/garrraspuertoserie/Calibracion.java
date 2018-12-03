@@ -13,7 +13,7 @@ import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcalibracion;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Calibracion extends AppCompatActivity {
+public class     Calibracion extends AppCompatActivity {
 
     EditText edtPesoMaximo, edtTotalCeldas,edtDivision,edtSensibilidad,edtVentana,edtKgFiltro,
             edtConversiones, edtRecortes, edtlogica,edtTickets;

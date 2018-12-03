@@ -538,11 +538,11 @@
             android:onClick="onClicK" />
 
         <ImageButton
-            android:id="@+id/sdf"
+            android:id="@+id/btnRestar"
             android:layout_width="90dp"
             android:layout_height="87dp"
             android:layout_marginRight="50dp"
-            android:background="@drawable/boton_vacio_azul"
+            android:background="@drawable/boton_restar_azul"
             android:onClick="onClicK" />
 
         <ImageButton

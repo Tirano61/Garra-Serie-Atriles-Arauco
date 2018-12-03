@@ -9,7 +9,16 @@ public class Variables {
     private static boolean BATERIA = false;
     private static boolean TIEMPOCARGA = false;
     private  static String CABECERA_1,CABECERA_2,CABECERA_3,CABECERA_4;
+    private  static boolean RESTAR;
 
+
+    public static boolean isRESTAR() {
+        return RESTAR;
+    }
+
+    public static void setRESTAR(boolean RESTAR) {
+        Variables.RESTAR = RESTAR;
+    }
 
     public static int getTICKETS() {
         return TICKETS;
