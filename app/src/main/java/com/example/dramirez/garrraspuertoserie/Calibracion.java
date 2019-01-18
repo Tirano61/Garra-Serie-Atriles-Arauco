@@ -122,6 +122,7 @@ public class     Calibracion extends AppCompatActivity {
                             var.setRECORTES(recort);
                             var.setLOGICA(logica);
                             var.setTICKETS(Integer.valueOf(tickets));
+                            Balanza.getInstance().setMULTIPLICADOR();
                             DBcalibracion CALI = arrayCalibracion.get(0);
 
                             db.actualizarCalibracion(CALI,"1");

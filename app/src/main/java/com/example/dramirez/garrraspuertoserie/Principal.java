@@ -140,6 +140,7 @@ public class Principal extends AppCompatActivity {
 
 
         db = new BaseDeDatos(getApplicationContext());
+        comprobarBaseDeDatos();
         /**
          * Para mostrar la fecha en pantalla y guardar la fecha en elka pesada
          */
@@ -165,7 +166,7 @@ public class Principal extends AppCompatActivity {
         Balanza.getInstance().LoopAcumulador();
 
         Layout_Total_Cargado.setVisibility(View.INVISIBLE);
-        comprobarBaseDeDatos();
+
         pesaje();
         goFullScreen();
 
@@ -174,8 +175,11 @@ public class Principal extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v)
             {
-                Balanza.getInstance().setearCero();
-                ActualizarCero();
+                if (!Balanza.getInstance().isCominzoPesaje()){
+                    Balanza.getInstance().setearCero();
+                    ActualizarCero();
+                }
+
                 return false;
             }
         });
@@ -226,6 +230,7 @@ public class Principal extends AppCompatActivity {
                 break;
             case  R.id.btnGuardar:
                 dialogoGuardarPesada();
+                Balanza.getInstance().setCominzoPesaje(false);
                 break;
             case R.id.btnAcumular:
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().setAcumularPeso()));
@@ -967,7 +972,6 @@ public class Principal extends AppCompatActivity {
 
     }
 
-
     protected void showInputDialog_ContrasenaTipoCelda()
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -1012,6 +1016,7 @@ public class Principal extends AppCompatActivity {
         LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
         View  promptView = layoutInflater.inflate(R.layout.dialogo_contrasena, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
+
         alertDialogBuilder.setView(promptView);
         final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
 
@@ -1038,12 +1043,11 @@ public class Principal extends AppCompatActivity {
                         }
                         dialogInterface.cancel();
                     }
-                });
+                })
+                .setCancelable(false);
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
-
-
 
     public void dialogoTipoDeCelda()
     {
@@ -1076,6 +1080,7 @@ public class Principal extends AppCompatActivity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
                 R.array.tipo_celda, R.layout.spinner_item);
         spTipo.setAdapter(adapter);
+        builder.setCancelable(false);
         builder.setView(view);
         dialog =   builder.create();
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1137,8 +1142,12 @@ public class Principal extends AppCompatActivity {
                             envio = "AT+CELDA=" + envio + '\r'+'\n';
                             Balanza.getInstance().getOK();
                             Balanza.getInstance().EnviarTipoCelda(envio);
+                            TipoCelda = tipoCeldaAEnviar;
                             if (Balanza.getInstance().getOK() == 1){
                                 Toast.makeText(getBaseContext(),R.string.mensaje_tipo_celda,Toast.LENGTH_LONG).show();
+                                Balanza.getInstance().pedirCuentas();
+                                dialog.dismiss();
+
                             }else if (Balanza.getInstance().getOK() == 0){
                                 Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_fail,Toast.LENGTH_LONG).show();
                             }else if (Balanza.getInstance().getOK() == -1){
@@ -1157,11 +1166,15 @@ public class Principal extends AppCompatActivity {
 
                                 Balanza.getInstance().EnviarTipoCelda(envio);
                                 Balanza.getInstance().getOK();
+                                TipoCelda = tipoCeldaAEnviar;
                             }else {
                                 Toast.makeText(getBaseContext(),R.string.tipo_celda_mensaje,Toast.LENGTH_LONG).show();
                             }
                             if (Balanza.getInstance().getOK() == 1){
                                 Toast.makeText(getBaseContext(),R.string.mensaje_tipo_celda,Toast.LENGTH_LONG).show();
+                                Balanza.getInstance().pedirCuentas();
+                                dialog.dismiss();
+
                             }else if (Balanza.getInstance().getOK() == 0){
                                 Toast.makeText(getBaseContext(),R.string.mensaje__tipo_celda_fail,Toast.LENGTH_LONG).show();
                             }else if (Balanza.getInstance().getOK() == -1){
@@ -1179,6 +1192,7 @@ public class Principal extends AppCompatActivity {
                             if (ssd.equals("") || pass.equals("") || puerto.equals("")){
                                 envio = "AT+CELDA=" + envio + "," + ssd + "," + pass + "," + puerto+ '\r'+'\n';
                                 Balanza.getInstance().EnviarTipoCelda(envio);
+                                TipoCelda = tipoCeldaAEnviar;
                             }else {
                                 Toast.makeText(getBaseContext(),R.string.tipo_celda_mensaje,Toast.LENGTH_LONG).show();
                             }
@@ -1267,6 +1281,11 @@ public class Principal extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     private void cuentaLeedAzul()
@@ -1382,6 +1401,9 @@ public class Principal extends AppCompatActivity {
                                 else
                                 {
                                     contador = Balanza.getInstance().getBateria();
+                                    if (contador>100){
+                                        contador = 100;
+                                    }
                                     txtBateria.setText(String.valueOf(Balanza.getInstance().getBateria())+"%");
                                     if (contador <= 25){
                                         imgBateria.setBackgroundResource(R.drawable.celda_25);
@@ -1403,8 +1425,8 @@ public class Principal extends AppCompatActivity {
                         }
                         else
                         {
-                            imgBateria.setBackgroundResource(R.drawable.celda_desconectada);
-                            txtBateria.setText("0%");
+                            imgConexionSerie.setBackgroundResource(R.drawable.serie_desconectado);
+                            //txtBateria.setText("0%");
                         }
                     } catch (Exception e) {
                     }

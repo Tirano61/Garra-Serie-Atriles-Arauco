@@ -17,11 +17,11 @@ class Balanza {
     private static final Balanza ourInstance = new Balanza();
     private  static  float CONSTANTE = 0.000001f;
     private static float VxBITS = 0.000000014901218f;
-    private static int CAPACIDAD=40000;
-    private static int SENSIBILIDAD=2000;
-    private static int TOTALCELDAS=80000;
+   // private static int CAPACIDAD=40000;
+   // private static int SENSIBILIDAD=2000;
+   // private static int TOTALCELDAS=80000;
     private static int CERO=0;
-    private static int DIVISION=20;
+   // private static int DIVISION=20;
     private  static  float MULTIPLICADOR;
     private  static  float CORRECCION = 0;
     private double pesoConCero;
@@ -113,6 +113,11 @@ class Balanza {
     {
         variables = var;
         celda = driverCelda;
+        MULTIPLICADOR = obtenerMultiplicador();
+    }
+
+
+    public  void setMULTIPLICADOR() {
         MULTIPLICADOR = obtenerMultiplicador();
     }
 
@@ -210,9 +215,9 @@ class Balanza {
         //Log.d("CERO","************** " + getCERO());
         correccion = CORRECCION * (pesoConCero / 100);
         corregido = (int)pesoConCero + (int) correccion;
-        redondeo = corregido / DIVISION;
-        A = redondeo * DIVISION;
-        B = (redondeo + 1) * DIVISION;
+        redondeo = corregido / Integer.valueOf(variables.getDIVISION());
+        A = redondeo * Integer.valueOf(variables.getDIVISION());
+        B = (redondeo + 1) * Integer.valueOf(variables.getDIVISION());
         abajo = corregido - A;
         arriba = B - corregido;
         if (abajo < arriba) {
@@ -220,7 +225,7 @@ class Balanza {
         } else if (arriba < abajo) {
             corregido = B;
         } else {
-            corregido = redondeo * DIVISION;
+            corregido = redondeo * Integer.valueOf(variables.getDIVISION());
         }
         buscarEstabilidad(corregido);
         buscarFlagPeso(corregido);
@@ -238,10 +243,10 @@ class Balanza {
         double correccion = CORRECCION * (pesoConCero / 100);
         int corregido = (int)pesoConCero + (int) correccion;
 
-        int redondeo = corregido / DIVISION;
-        redondeo = corregido / DIVISION;
-        int A = redondeo * DIVISION;
-        int B = (redondeo + 1) * DIVISION;
+        int redondeo = corregido / Integer.valueOf(variables.getDIVISION());
+        redondeo = corregido / Integer.valueOf(variables.getDIVISION());
+        int A = redondeo * Integer.valueOf(variables.getDIVISION());
+        int B = (redondeo + 1) * Integer.valueOf(variables.getDIVISION());
         int abajo = corregido - A;
         int arriba = B - corregido;
         if (abajo < arriba) {
@@ -249,7 +254,7 @@ class Balanza {
         } else if (arriba < abajo) {
             corregido = B;
         } else {
-            corregido = redondeo * DIVISION;
+            corregido = redondeo * Integer.valueOf(variables.getDIVISION());
         }
 
 
@@ -299,7 +304,7 @@ class Balanza {
     {
         float multiplicador=0;
 
-        multiplicador = (TOTALCELDAS * VxBITS)/(SENSIBILIDAD* CONSTANTE);
+        multiplicador = (Integer.valueOf(variables.getCELDAS()) * VxBITS)/(Integer.valueOf(variables.getSENSIBILIDAD())* CONSTANTE);
 
         return multiplicador;
 

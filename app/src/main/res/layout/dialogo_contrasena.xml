@@ -75,16 +75,17 @@
                     android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/txtContrasena"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:ems="10"
-                        android:id="@+id/txtContrasena"
                         android:layout_weight="1"
-                        android:paddingLeft="20dp"
-                        android:singleLine="true"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword"
                         android:maxLength="4"
-                        android:hint="Password" />
+                        android:paddingLeft="20dp"
+                        android:singleLine="true" />
                 </LinearLayout>
 
             </LinearLayout>
