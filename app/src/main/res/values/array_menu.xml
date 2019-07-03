@@ -20,5 +20,16 @@
         <item>@string/tipo_celda_2</item>
         <item>@string/tipo_celda_3</item>
     </string-array>
-
+    <string-array name="tipo_equipo">
+        <item>@string/tipo_equipo_1</item>
+        <item>@string/tipo_equipo_2</item>
+        <item>@string/tipo_equipo_3</item>
+    </string-array>
+    <string-array name="tipo_carga">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 </resources>

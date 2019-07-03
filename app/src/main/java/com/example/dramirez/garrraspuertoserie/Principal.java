@@ -1,12 +1,15 @@
 package com.example.dramirez.garrraspuertoserie;
 
 
-import android.app.ActionBar;
-import android.app.Fragment;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.graphics.Color;
 import android.net.Uri;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,14 +18,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.ParcelUuid;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,8 +51,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.PublicKey;
-import java.sql.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,7 +60,9 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Principal extends AppCompatActivity {
+public class Principal extends AppCompatActivity implements Fragment_tre_bancos.OnFragmentInteractionListener,
+Fragment_cuatro_bancos.OnFragmentInteractionListener, Fragment_dos_bancos.OnFragmentInteractionListener,
+Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFragmentInteractionListener{
 
     managerPort Port = null;
     ProgressBar progressBar;
@@ -98,6 +98,22 @@ public class Principal extends AppCompatActivity {
     boolean cuentaLeedEmpezada = false;
     int TipoCelda,tipoCeldaAEnviar;
     String numero, ssd, pass, puerto , envio;
+    Spinner spTipo_equio, spTipo_carga;
+
+    Fragment_tre_bancos fragment_tres_bancos;
+    Fragment_dos_bancos fragment_dos_banco;
+    Fragment_cuatro_bancos fragment_cuatro_bancos;
+    Fragment_cinco_bancos fragment_cinco_bancos;
+    Fragment_seis_bancos fragment_seis_bancos;
+
+    LinearLayout SelectorChasis2_1,SelectorChasis2_2,SelectorChasis2_3,SelectorChasis2_4;
+    LinearLayout SelectorChasis3_1,SelectorChasis3_2,SelectorChasis3_3,SelectorChasis3_4,SelectorChasis3_5,SelectorChasis3_6;
+    TextView txtChasis2_1, txtChasis2_2,txtChasis2_3,txtChasis2_4;
+    TextView txtChasis3_1, txtChasis3_2,txtChasis3_3,txtChasis3_4,txtChasis3_5,txtChasis3_6;
+    TextView txtChasis1_1,txtChasis1_2;
+    String tipoDeCarga = "", equipo = "";
+    int bancoSeleccionado =0;
+    Handler handler;
 
 
     // Used to load the 'native-lib' library oon application startup.
@@ -137,6 +153,8 @@ public class Principal extends AppCompatActivity {
         btnGuardar.setEnabled(false);
         arrayMenu = getResources().getStringArray(R.array.dialogo_menu);
         progressBar = (ProgressBar)findViewById(R.id.progressBarImpresion);
+        spTipo_carga = (Spinner)findViewById(R.id.spTipo_carga);
+        spTipo_equio = (Spinner)findViewById(R.id.spTipo_equipo);
 
 
         db = new BaseDeDatos(getApplicationContext());
@@ -195,6 +213,49 @@ public class Principal extends AppCompatActivity {
             Thread myThread = new Thread(runnable);
             myThread.start();
         }
+        fragment_tres_bancos = new Fragment_tre_bancos();
+        fragment_dos_banco = new Fragment_dos_bancos();
+        fragment_cuatro_bancos = new Fragment_cuatro_bancos();
+        fragment_cinco_bancos = new Fragment_cinco_bancos();
+        fragment_seis_bancos = new Fragment_seis_bancos();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.pirulo,fragment_dos_banco);
+        fragmentTransaction.commit();
+
+
+    }
+
+
+
+
+    public void actualizarAcumilaror()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                switch (tipoDeCarga){
+
+                    case "2":
+                        fragment_dos_banco.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                    case "3":
+                        fragment_tres_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                    case "4":
+                        fragment_cuatro_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                    case "5":
+                        fragment_cinco_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                    case "6":
+                        fragment_seis_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                }
+                txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().getPesoAcumulado()));
+            }
+        });
     }
 
     private void ActualizarCero()
@@ -316,13 +377,28 @@ public class Principal extends AppCompatActivity {
         db.actualizarDatos(datos,"1");
     }
 
+    @Override
+    public void onFragmentInteraction() {
+        Balanza.getInstance().setPesoAcumuladoBancos(0);
+    }
+
+
     public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
     {
         int progreso;
+        String hora = "", cargio = "",patente ="",codigo="",producto="",cliente="",volumen = "", peso_acumulado="", tara = "";
         @Override
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
-
+            hora = txtHora.getText().toString();
+            cargio = txtCargio.getText().toString();
+            patente = edt_patente.getText().toString();
+            codigo = edt_codigo.getText().toString();
+            producto = edt_producto.getText().toString();
+            cliente = edt_cliente.getText().toString();
+            volumen = edt_volumen.getText().toString();
+            peso_acumulado = txt_Peso_Acumulado.getText().toString();
+            tara = edt_tara.getText().toString();
             progreso = 0;
         }
 
@@ -383,7 +459,7 @@ public class Principal extends AppCompatActivity {
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " +txtHora.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " + hora);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
@@ -395,27 +471,27 @@ public class Principal extends AppCompatActivity {
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Tiempo de Carga : " + txtCargio.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Tiempo de Carga : " + cargio);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Patente  : " + edt_patente.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Patente  : " + patente);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Codigo   : " + edt_codigo.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Codigo   : " + codigo);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Producto : " + edt_producto.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Producto : " + producto);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Cliente  : " + edt_cliente.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Cliente  : " + cliente);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Volumen  : " + edt_volumen.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Volumen  : " + volumen);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
@@ -427,12 +503,12 @@ public class Principal extends AppCompatActivity {
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Bruto : " + txt_Peso_Acumulado.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Bruto : " + peso_acumulado);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
 
-                Balanza.getInstance().ImprimirTicket("  Tara  : " + edt_tara.getText().toString());
+                Balanza.getInstance().ImprimirTicket("  Tara  : " + tara);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
@@ -475,14 +551,13 @@ public class Principal extends AppCompatActivity {
         }
     }
 
-    public void actualizarAcumilaror()
-    {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().getPesoAcumulado()));
-            }
-        });
+
+
+    private int sumarTotal(int peso){
+        int suma =0;
+
+
+        return suma;
     }
 
     public void comprobarBaseDeDatos()
@@ -634,7 +709,11 @@ public class Principal extends AppCompatActivity {
     {
         String productoSeleccionado;
 
+
         public dialogoCargaDatos(Context context){
+            tipoDeCarga = "";
+            equipo ="";
+
             final Dialog dialog = new Dialog(context,R.style.Material_Base);
 
             dialog.setCancelable(false);
@@ -644,11 +723,15 @@ public class Principal extends AppCompatActivity {
             List<String> productos = db.getAllProductos();
 
             final Spinner sp_producto = (Spinner) dialog.findViewById(R.id.sp_producto);
+            final Spinner spTipo_carga = (Spinner) dialog.findViewById(R.id.spTipoCarga);
+            final Spinner spEquipo = (Spinner) dialog.findViewById(R.id.spEquipo);
+
             final EditText edt_dialogo_patente = (EditText)dialog.findViewById(R.id.edt_dialogo_patente);
             final EditText edt_dialogo_cliente = (EditText)dialog.findViewById(R.id.edt_dialogo_cliente);
             final EditText edt_dialogo_tara = (EditText)dialog.findViewById(R.id.edt_dialogo_tara);
             final EditText edt_dialogo_codigo = (EditText)dialog.findViewById(R.id.edt_dialogo_codigo);
             final EditText edt_dialogo_volumen = (EditText)dialog.findViewById(R.id.edt_dialogo_volumen);
+
             Button aceptar = (Button)dialog.findViewById(R.id.btn_acrptar);
             Button cancelar = (Button)dialog.findViewById(R.id.btn_Cancelar);
 
@@ -657,7 +740,6 @@ public class Principal extends AppCompatActivity {
             edt_dialogo_tara.setText(edt_tara.getText().toString());
             edt_dialogo_codigo.setText(edt_codigo.getText().toString());
             edt_dialogo_volumen.setText(edt_volumen.getText().toString());
-
 
             ArrayAdapter<String> dataAdapter =  new ArrayAdapter<String>(getBaseContext(),R.layout.support_simple_spinner_dropdown_item, productos);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -673,6 +755,39 @@ public class Principal extends AppCompatActivity {
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
+
+            ArrayAdapter<CharSequence> adapterCarga = ArrayAdapter.createFromResource(getBaseContext(),
+                    R.array.tipo_carga,android.R.layout.simple_spinner_item);
+            spTipo_carga.setAdapter(adapterCarga);
+
+            ArrayAdapter<CharSequence> adapterEquipo = ArrayAdapter.createFromResource(getBaseContext(),
+                    R.array.tipo_equipo,android.R.layout.simple_spinner_item);
+            spEquipo.setAdapter(adapterEquipo);
+
+            spTipo_carga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    tipoDeCarga = parent.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spEquipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
 
             aceptar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -698,6 +813,27 @@ public class Principal extends AppCompatActivity {
                     btnGuardar.setEnabled(true);
                     var.setTIEMPOCARGA(true);
                     activarCuentaCarga();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    switch (tipoDeCarga){
+                          case "2":
+                            fragmentTransaction.replace(R.id.pirulo,fragment_dos_banco);
+                            break;
+                        case "3":
+                            fragmentTransaction.replace(R.id.pirulo,fragment_tres_bancos);
+                            break;
+                        case "4":
+                            fragmentTransaction.replace(R.id.pirulo,fragment_cuatro_bancos);
+                            break;
+                        case "5":
+                            fragmentTransaction.replace(R.id.pirulo,fragment_cinco_bancos);
+                            break;
+                        case "6":
+                            fragmentTransaction.replace(R.id.pirulo,fragment_seis_bancos);
+                            break;
+                    }
+
+                    fragmentTransaction.commit();
+
                 }
             });
             cancelar.setOnClickListener(new View.OnClickListener() {
@@ -709,6 +845,90 @@ public class Principal extends AppCompatActivity {
             dialog.show();
         }
     }
+
+    private class seleccionarTipoDeCarga
+    {
+        String tipoDeCarga = "", equipo = "";
+
+        public seleccionarTipoDeCarga(Context context)
+        {
+            final Dialog dialog = new Dialog(context,R.style.Material_Base);
+
+            dialog.setCancelable(false);
+            dialog.setTitle(R.string.dialogo_titulo);
+            dialog.setContentView(R.layout.dialogo_seleccion_carga);
+
+            final Spinner spEquipo = (Spinner) dialog.findViewById(R.id.spTipo_equipo);
+            final Spinner spCarga = (Spinner) dialog.findViewById(R.id.spTipo_carga);
+
+            Button aceptar = (Button)dialog.findViewById(R.id.btnTipoCargaAceptar);
+            Button cancelar = (Button)dialog.findViewById(R.id.btnTipoCargaCancelar);
+
+            ArrayAdapter<CharSequence> adapterCarga = ArrayAdapter.createFromResource(getBaseContext(),
+                                            R.array.tipo_carga,android.R.layout.simple_spinner_item);
+            spCarga.setAdapter(adapterCarga);
+
+            ArrayAdapter<CharSequence> adapterEquipo = ArrayAdapter.createFromResource(getBaseContext(),
+                    R.array.tipo_equipo,android.R.layout.simple_spinner_item);
+            spEquipo.setAdapter(adapterEquipo);
+
+            spCarga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    tipoDeCarga = parent.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spEquipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    equipo = parent.getItemAtPosition(position).toString();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    switch (tipoDeCarga){
+                        case "2":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_dos_banco);
+                            break;
+                        case "3":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_tres_bancos);
+                            break;
+                        case "4":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_cuatro_bancos);
+                            break;
+                        case "5":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_cinco_bancos);
+                            break;
+                        case "6":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_seis_bancos);
+                            break;
+                    }
+
+                    fragmentTransaction.commit();
+                }
+            });
+            cancelar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+    }
+
     private void activarCuentaCarga()
     {
         new Thread(new Runnable() {

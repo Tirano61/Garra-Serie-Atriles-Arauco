@@ -83,6 +83,11 @@
     <string name="tipo_celda_2">Inalámbrica XBee</string>
     <string name="tipo_celda_3">Inalámbrica Hook</string>
 
+    <string name="tipo_equipo_1">Chasis y acoplado</string>
+    <string name="tipo_equipo_2">Bitren</string>
+    <string name="tipo_equipo_3">Tritren</string>
+
+
     <string name="tipo_celda_numero_celda">Nº de celda :</string>
     <string name="tipo_celda_ssd">SSD :</string>
     <string name="tipo_celda_pass">Pass :</string>
@@ -98,7 +103,7 @@
     <string name="pesadas_codigo">Código</string>
     <string name="pesadas_cliente">Cliente</string>
     <string name="pesadas_bruto">Bruto</string>
-    <string name="pesadas_tara" >Tara</string>
+    <string name="pesadas_tara">Tara</string>
     <string name="pesadas_neto">Neto</string>
     <string name="pesadas_desde">Desde :</string>
     <string name="pesadas_hasta">Hasta :</string>
@@ -107,5 +112,7 @@
     <string name="correccion_titulo">Introduzca la corrección</string>
     <string name="calibracion_ticket">Tickets impresión :</string>
     <string name="calibracion_semiautomatico">Semiautomático</string>
+    <string name="chasis">Chasis</string>
+    <string name="acoplado">Acoplado</string>
 
 </resources>

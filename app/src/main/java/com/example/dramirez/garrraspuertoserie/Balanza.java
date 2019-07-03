@@ -13,6 +13,7 @@ class Balanza {
     Variables variables;
     private int cuentas, bateria;
     private int PesoAcumulado =0;
+    private int PesoAcumuladoBancos =0;
     private DriverCelda celda = null;
     private static final Balanza ourInstance = new Balanza();
     private  static  float CONSTANTE = 0.000001f;
@@ -36,6 +37,7 @@ class Balanza {
     private double[] vectorFiltro = new double[100];
     int tara;
     boolean guardado;
+
 
 
 
@@ -142,6 +144,12 @@ class Balanza {
     {
         return PesoAcumulado;
     }
+    public int getPesoAcumuladoBancos(){
+        return PesoAcumuladoBancos;
+    }
+    public void setPesoAcumuladoBancos(int peso){
+        PesoAcumuladoBancos = peso;
+    }
 
     public int setAcumularPeso()
     {
@@ -152,15 +160,15 @@ class Balanza {
                 if (variables.isRESTAR())
                 {
                     PesoAcumulado -= (int)waitForPesoEstable();
+                    PesoAcumuladoBancos -= (int)waitForPesoEstable();
                     variables.setRESTAR(false);
                 }else{
                     PesoAcumulado += (int)waitForPesoEstable();
+                    PesoAcumuladoBancos += (int)waitForPesoEstable();
                 }
-
                 fueAcumulado = true;
                 flagPeso = false;
                 guardado = true;
-
             }
         }
         else
@@ -170,9 +178,11 @@ class Balanza {
                 if (variables.isRESTAR())
                 {
                     PesoAcumulado -= (int)waitForPesoEstable();
+                    PesoAcumuladoBancos -= (int)waitForPesoEstable();
                     variables.setRESTAR(false);
                 }else{
                     PesoAcumulado += (int)waitForPesoEstable();
+                    PesoAcumuladoBancos += (int)waitForPesoEstable();
                 }
                 fueAcumulado = true;
                 flagPeso = false;
@@ -390,7 +400,7 @@ class Balanza {
     }
 
 
-    private double waitForPesoEstable()
+    public double waitForPesoEstable()
     {
         double[] peso = new double[20];
         double pesoAux;
