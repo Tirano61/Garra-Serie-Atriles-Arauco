@@ -14,6 +14,11 @@ class Balanza {
     private int cuentas, bateria;
     private int PesoAcumulado =0;
     private int PesoAcumuladoBancos =0;
+    private int CantidadGarradas = 0;
+
+
+
+    private int PesoAcumuladoCasis = 0;
     private DriverCelda celda = null;
     private static final Balanza ourInstance = new Balanza();
     private  static  float CONSTANTE = 0.000001f;
@@ -42,6 +47,8 @@ class Balanza {
 
 
     int contador = 0;
+
+
     private boolean estable = false, fueAcumulado = false;
 
     static Balanza getInstance()
@@ -50,6 +57,14 @@ class Balanza {
     }
 
     private Balanza() {
+    }
+
+    public int getCantidadGarradas() {
+        return CantidadGarradas;
+    }
+
+    public void setCantidadGarradas(int cantidadGarradas) {
+        CantidadGarradas = cantidadGarradas;
     }
 
     public boolean isSemiAutomatico() {
@@ -150,6 +165,13 @@ class Balanza {
     public void setPesoAcumuladoBancos(int peso){
         PesoAcumuladoBancos = peso;
     }
+    public int getPesoAcumuladoCasis() {
+        return PesoAcumuladoCasis;
+    }
+
+    public void setPesoAcumuladoCasis(int pesoAcumuladoCasis) {
+        PesoAcumuladoCasis = pesoAcumuladoCasis;
+    }
 
     public int setAcumularPeso()
     {
@@ -161,10 +183,13 @@ class Balanza {
                 {
                     PesoAcumulado -= (int)waitForPesoEstable();
                     PesoAcumuladoBancos -= (int)waitForPesoEstable();
+                    PesoAcumuladoCasis -= (int)waitForPesoEstable();
                     variables.setRESTAR(false);
                 }else{
                     PesoAcumulado += (int)waitForPesoEstable();
                     PesoAcumuladoBancos += (int)waitForPesoEstable();
+                    PesoAcumuladoCasis += (int)waitForPesoEstable();
+                    CantidadGarradas ++;
                 }
                 fueAcumulado = true;
                 flagPeso = false;
@@ -179,10 +204,13 @@ class Balanza {
                 {
                     PesoAcumulado -= (int)waitForPesoEstable();
                     PesoAcumuladoBancos -= (int)waitForPesoEstable();
+                    PesoAcumuladoCasis -= (int)waitForPesoEstable();
                     variables.setRESTAR(false);
                 }else{
                     PesoAcumulado += (int)waitForPesoEstable();
                     PesoAcumuladoBancos += (int)waitForPesoEstable();
+                    PesoAcumuladoCasis += (int)waitForPesoEstable();
+                    CantidadGarradas ++;
                 }
                 fueAcumulado = true;
                 flagPeso = false;

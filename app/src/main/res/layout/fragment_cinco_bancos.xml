@@ -13,13 +13,46 @@
 
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/bancos_de_carga"
+                android:textColor="@color/icons"
+                app:layout_constraintBottom_toTopOf="@+id/divider5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/icons"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,6 +65,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -39,73 +73,64 @@
                         android:id="@+id/txtChasis5_1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:gravity="bottom"
                         android:paddingStart="20dp"
                         android:text="0"
                         android:textAlignment="center"
-                        android:textColor="#0217FF"
-                        android:textSize="24sp" />
+                        android:textColor="@color/icons"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
 
                         android:gravity="bottom"
                         android:text="0"
                         android:textAlignment="center"
-                        android:textColor="#0217FF"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp">
+                        android:textColor="@color/icons"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:gravity="bottom"
                         android:text="0"
                         android:textAlignment="center"
-                        android:textColor="#0217FF"
-                        android:textSize="24sp" />
+                        android:textColor="@color/icons"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:gravity="bottom"
                         android:text="0"
                         android:textAlignment="center"
-                        android:textColor="#0217FF"
-                        android:textSize="24sp" />
+                        android:textColor="@color/icons"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:gravity="bottom"
                         android:text="0"
                         android:textAlignment="center"
-                        android:textColor="#0217FF"
-                        android:textSize="24sp" />
+                        android:textColor="@color/icons"
+                        android:textSize="20sp" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -114,7 +139,6 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/camion"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -125,8 +149,6 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginBottom="29dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,64 +158,212 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/SelectorChasis5_1"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:background="@color/secondary_text"
-                        android:orientation="vertical"></ImageButton>
+                        android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/SelectorChasis5_2"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis5_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal5_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
-                        android:background="@color/secondary_text"
-                        android:orientation="vertical"></ImageButton>
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis5_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal5_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis5_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal5_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis5_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal5_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis5_5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal5_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/SelectorChasis5_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/secondary_text"
-                        android:orientation="vertical"></ImageButton>
-
-                    <ImageButton
-                        android:id="@+id/SelectorChasis5_4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-
-                        android:background="@color/secondary_text"
-                        android:orientation="vertical"></ImageButton>
-
-                    <ImageButton
-                        android:id="@+id/SelectorChasis5_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/secondary_text"
-                        android:orientation="vertical"></ImageButton>
-                </LinearLayout>
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 

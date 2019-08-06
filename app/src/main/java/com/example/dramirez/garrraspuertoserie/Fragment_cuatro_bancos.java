@@ -11,15 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.dramirez.garrraspuertoserie.FragmentInterfaces.EnvioDatos;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_cuatro_bancos.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_cuatro_bancos#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_cuatro_bancos extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,9 +23,9 @@ public class Fragment_cuatro_bancos extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-    TextView txtChasis4_1, txtChasis4_2, txtChasis4_3, txtChasis4_4;
+    int CargaXBancos = 0;
+    private EnvioDatos mListener;
+    TextView txtChasis4_1, txtChasis4_2, txtChasis4_3, txtChasis4_4,txtTotal4_1,txtTotal4_2,txtTotal4_3,txtTotal4_4;
     ImageButton SelectorChasis4_1,SelectorChasis4_2,SelectorChasis4_3,SelectorChasis4_4;
     int BancoSeleccionado = 0;
     public Fragment_cuatro_bancos() {
@@ -81,7 +75,10 @@ public class Fragment_cuatro_bancos extends Fragment {
                 break;
         }
     }
-
+    public void TotalXBancos(int totalXbancos)
+    {
+        CargaXBancos = totalXbancos;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,63 +91,93 @@ public class Fragment_cuatro_bancos extends Fragment {
         txtChasis4_2 = (TextView) mView.findViewById(R.id.txtChasis4_2);
         txtChasis4_3 = (TextView) mView.findViewById(R.id.txtChasis4_3);
         txtChasis4_4 = (TextView) mView.findViewById(R.id.txtChasis4_4);
-
-
+        txtTotal4_1 = (TextView) mView.findViewById(R.id.txtTotal4_1);
+        txtTotal4_2 = (TextView) mView.findViewById(R.id.txtTotal4_2);
+        txtTotal4_3 = (TextView) mView.findViewById(R.id.txtTotal4_3);
+        txtTotal4_4 = (TextView) mView.findViewById(R.id.txtTotal4_4);
+        SelectorChasis4_1.setBackgroundColor(Color.YELLOW);
+        SelectorChasis4_2.setBackgroundColor(Color.GRAY);
+        SelectorChasis4_3.setBackgroundColor(Color.GRAY);
+        SelectorChasis4_4.setBackgroundColor(Color.GRAY);
+        BancoSeleccionado = 1;
+        mListener.lugarDeCarga(1);
+        txtTotal4_1.setText(String.valueOf(CargaXBancos));
+        txtTotal4_2.setText(String.valueOf(CargaXBancos));
+        txtTotal4_3.setText(String.valueOf(CargaXBancos));
+        txtTotal4_4.setText(String.valueOf(CargaXBancos));
         SelectorChasis4_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectorChasis4_1.setBackgroundColor(Color.RED);
-                SelectorChasis4_2.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_3.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_4.setBackgroundColor(Color.BLUE);
+                SelectorChasis4_1.setBackgroundColor(Color.YELLOW);
+                SelectorChasis4_2.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_3.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_4.setBackgroundColor(Color.GRAY);
                 BancoSeleccionado = 1;
-                mListener.onFragmentInteraction();
+                mListener.lugarDeCarga(1);
+                if (!mListener.comprobarCero(txtChasis4_1)){
+                    mListener.enviarCero(0);
+                }else{
+                    mListener.enviarCero(mListener.recabarPeso(txtChasis4_1));
+                }
             }
         });
         SelectorChasis4_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectorChasis4_1.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_2.setBackgroundColor(Color.RED);
-                SelectorChasis4_3.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_4.setBackgroundColor(Color.BLUE);
+                SelectorChasis4_1.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_2.setBackgroundColor(Color.YELLOW);
+                SelectorChasis4_3.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_4.setBackgroundColor(Color.GRAY);
                 BancoSeleccionado = 2;
-                mListener.onFragmentInteraction();
+                mListener.lugarDeCarga(1);
+                if (!mListener.comprobarCero(txtChasis4_2)){
+                    mListener.enviarCero(0);
+                }else{
+                    mListener.enviarCero(mListener.recabarPeso(txtChasis4_2));
+                }
             }
         });
         SelectorChasis4_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectorChasis4_1.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_2.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_3.setBackgroundColor(Color.RED);
-                SelectorChasis4_4.setBackgroundColor(Color.BLUE);
+                SelectorChasis4_1.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_2.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_3.setBackgroundColor(Color.YELLOW);
+                SelectorChasis4_4.setBackgroundColor(Color.GRAY);
                 BancoSeleccionado = 3;
-                mListener.onFragmentInteraction();
+                mListener.lugarDeCarga(2);
+                if (!mListener.comprobarCero(txtChasis4_3)){
+                    mListener.enviarCero(0);
+                }else{
+                    mListener.enviarCero(mListener.recabarPeso(txtChasis4_3));
+                }
             }
         });
         SelectorChasis4_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectorChasis4_1.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_2.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_3.setBackgroundColor(Color.BLUE);
-                SelectorChasis4_4.setBackgroundColor(Color.RED);
+                SelectorChasis4_1.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_2.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_3.setBackgroundColor(Color.GRAY);
+                SelectorChasis4_4.setBackgroundColor(Color.YELLOW);
                 BancoSeleccionado = 4;
-                mListener.onFragmentInteraction();
+                mListener.lugarDeCarga(2);
+                if (!mListener.comprobarCero(txtChasis4_4)){
+                    mListener.enviarCero(0);
+                }else{
+                    mListener.enviarCero(mListener.recabarPeso(txtChasis4_4));
+                }
             }
         });
 
         return mView;
     }
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof EnvioDatos) {
+            mListener = (EnvioDatos) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -163,18 +190,5 @@ public class Fragment_cuatro_bancos extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
-    }
+
 }

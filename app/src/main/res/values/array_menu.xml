@@ -8,6 +8,7 @@
         <item>@string/menu_exportar</item>
         <item>@string/menu_cabecera</item>
         <item>@string/menu_correccion</item>
+        <item>@string/menu_actualizar</item>
     </string-array>
     <string-array name="FiltrosPesadas">
         <item>"Por Lote"</item>
@@ -31,5 +32,9 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+
     </string-array>
 </resources>

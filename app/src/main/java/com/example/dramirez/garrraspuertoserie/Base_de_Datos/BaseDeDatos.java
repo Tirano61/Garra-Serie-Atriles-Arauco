@@ -89,6 +89,17 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBpesadas.FPES_VOLUMEN, pesadas.getVolumen());
         valores.put(DBpesadas.FPES_CODIGO, pesadas.getCodigo());
         valores.put(DBpesadas.FPES_CLIENTE, pesadas.getCliente());
+        valores.put(DBpesadas.FPES_BANCOS, pesadas.getBancos());
+        valores.put(DBpesadas.FPES_BANCO1, pesadas.getBanco1());
+        valores.put(DBpesadas.FPES_BANCO2, pesadas.getBanco2());
+        valores.put(DBpesadas.FPES_BANCO3, pesadas.getBanco3());
+        valores.put(DBpesadas.FPES_BANCO4, pesadas.getBanco4());
+        valores.put(DBpesadas.FPES_BANCO5, pesadas.getBanco5());
+        valores.put(DBpesadas.FPES_BANCO6, pesadas.getBanco6());
+        valores.put(DBpesadas.FPES_BANCO7, pesadas.getBanco7());
+        valores.put(DBpesadas.FPES_BANCO8, pesadas.getBanco8());
+        valores.put(DBpesadas.FPES_BANCO9, pesadas.getBanco9());
+        valores.put(DBpesadas.FPES_CARGAS, pesadas.getBanco9());
         valores.put(DBpesadas.FPES_BRUTO, pesadas.getBruto());
         valores.put(DBpesadas.FPES_TARA, pesadas.getTara());
         valores.put(DBpesadas.FPES_NETO, pesadas.getNeto());

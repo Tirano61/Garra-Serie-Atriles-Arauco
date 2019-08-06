@@ -92,7 +92,7 @@ public class Pesadas extends AppCompatActivity {
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Desea borrar la pesada número : " + IdPesada + " o borrar todas las pesadas" )
+        builder.setMessage("Desea borrar o reimprimir la pesada número : " + IdPesada + " o borrar todas las pesadas" )
                 .setTitle("Borrar pesada.")
                 .setPositiveButton("Una Pesada", new DialogInterface.OnClickListener() {
                     @Override
@@ -100,21 +100,26 @@ public class Pesadas extends AppCompatActivity {
                         borrarPesada();
                     }
                 })
+
                 .setNeutralButton("Borrar Todas", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         borrarTodas();
                     }
                 })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Reimprimir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //Crear dialogo para reimprimir el tocket
+
                     }
                 });
         Dialog dialogo = builder.create();
         Thread.sleep(1500);
         dialogo.show();
     }
+
+
     public void borrarPesada()
     {
         try {
@@ -196,9 +201,9 @@ public class Pesadas extends AppCompatActivity {
                         volumen = c.getString(6);
                         codigo = c.getString(7);
                         cliente = c.getString(8);
-                        bruto = c.getString(9);
-                        tara = c.getString(10);
-                        neto = c.getString(11);
+                        bruto = c.getString(20);
+                        tara = c.getString(21);
+                        neto = c.getString(22);
 
                         datos.add(new ListaEntradaPesadas( id , fecha ,  hora, producto, cargio, patente, volumen, codigo, cliente, bruto, tara, neto));
                     } while (c.moveToNext());

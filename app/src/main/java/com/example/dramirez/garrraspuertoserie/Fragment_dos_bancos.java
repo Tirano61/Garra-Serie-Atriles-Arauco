@@ -2,25 +2,17 @@ package com.example.dramirez.garrraspuertoserie;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dramirez.garrraspuertoserie.FragmentInterfaces.EnvioDatos;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_dos_bancos.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_dos_bancos#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_dos_bancos extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,9 +22,9 @@ public class Fragment_dos_bancos extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private enviarBancoSeleccionado enviarBancoSeleccionado;
-    private OnFragmentInteractionListener mListener;
-    TextView txtChasis2_1, txtChasis2_2;
+    int CargaXBancos = 0;
+    private EnvioDatos mListener;
+    TextView txtChasis2_1, txtChasis2_2,txtTotal2_1,txtTotal2_2;
     ImageButton SelectorChasis2_1,SelectorChasis2_2;
     int BancoSeleccionado =0;
     public Fragment_dos_bancos() {
@@ -49,8 +41,10 @@ public class Fragment_dos_bancos extends Fragment {
                 break;
         }
     }
-
-
+    public void TotalXBancos(int totalXbancos)
+    {
+        CargaXBancos = totalXbancos;
+    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -89,40 +83,54 @@ public class Fragment_dos_bancos extends Fragment {
 
         txtChasis2_1 = (TextView) mView.findViewById(R.id.txtChasis2_1);
         txtChasis2_2 = (TextView) mView.findViewById(R.id.txtChasis2_2);
-
-
+        txtTotal2_1 = (TextView) mView.findViewById(R.id.txtTotal2_1);
+        txtTotal2_2 = (TextView) mView.findViewById(R.id.txtTotal2_2);
+        SelectorChasis2_1.setBackgroundColor(Color.YELLOW);
+        SelectorChasis2_2.setBackgroundColor(Color.GRAY);
+        mListener.lugarDeCarga(1);
+        BancoSeleccionado = 1;
+        txtTotal2_1.setText(String.valueOf(CargaXBancos));
+        txtTotal2_2.setText(String.valueOf(CargaXBancos));
         SelectorChasis2_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectorChasis2_1.setBackgroundColor(Color.RED);
-                SelectorChasis2_2.setBackgroundColor(Color.BLUE);
-
+                SelectorChasis2_1.setBackgroundColor(Color.YELLOW);
+                SelectorChasis2_2.setBackgroundColor(Color.GRAY);
+                mListener.lugarDeCarga(1);
                 BancoSeleccionado = 1;
-                mListener.onFragmentInteraction();
+                if (!mListener.comprobarCero(txtChasis2_1)){
+                    mListener.enviarCero(0);
+                }else{
+
+                    mListener.enviarCero(mListener.recabarPeso(txtChasis2_1));
+                }
             }
         });
         SelectorChasis2_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectorChasis2_1.setBackgroundColor(Color.BLUE);
-                SelectorChasis2_2.setBackgroundColor(Color.RED);
-
-                mListener.onFragmentInteraction();
+                SelectorChasis2_1.setBackgroundColor(Color.GRAY);
+                SelectorChasis2_2.setBackgroundColor(Color.YELLOW);
                 BancoSeleccionado = 2;
-
+                mListener.lugarDeCarga(2);
+                if (!mListener.comprobarCero(txtChasis2_2)){
+                    mListener.enviarCero(0);
+                }else{
+                    mListener.enviarCero(mListener.recabarPeso(txtChasis2_2));
+                }
             }
         });
-
         return mView;
     }
+
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof EnvioDatos) {
+            mListener = (EnvioDatos) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -135,18 +143,5 @@ public class Fragment_dos_bancos extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
-    }
+
 }

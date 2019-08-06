@@ -2,7 +2,7 @@
     <string name="app_name">Garras Puerto Serie</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="TITULO">ST 455 GARRAS</string>
+    <string name="TITULO">ST 455 FORESTAL</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -73,6 +73,7 @@
     <string name="menu_exportar">Exportar Excel</string>
     <string name="menu_cabecera">Cabecera de impresión</string>
     <string name="menu_correccion">Corrección</string>
+    <string name="menu_actualizar">Actualizar</string>
 
     <string name="menu_titulo">Seleccione una opción ...</string>
     <string name="tiitulo_dialogo_guardar_pesada">Desea guardar la pesada ...</string>
@@ -114,5 +115,13 @@
     <string name="calibracion_semiautomatico">Semiautomático</string>
     <string name="chasis">Chasis</string>
     <string name="acoplado">Acoplado</string>
-
+    <string name="total">Total :</string>
+    <string name="grua">Grua</string>
+    <string name="carro">Carro :</string>
+    <string name="principal_chasis">Chasis :</string>
+    <string name="carro2">Carro 2 :</string>
+    <string name="bancos_de_carga">BANCOS DE CARGA</string>
+    <string name="tara_vacia">La tara no puede iniciarce vacia</string>
+    <string name="bancos">Bancos :</string>
+    <string name="a_cargar">Total a Cargar :</string>
 </resources>

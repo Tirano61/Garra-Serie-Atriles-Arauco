@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment_cuatro_bancos">
+    tools:context=".Fragment_siete_bancos">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
-            android:layout_height="31dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -62,7 +62,7 @@
                 tools:layout_editor_absoluteY="20dp">
 
                 <TextView
-                    android:id="@+id/txtChasis4_1"
+                    android:id="@+id/txtChasis7_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -74,7 +74,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/txtChasis4_2"
+                    android:id="@+id/txtChasis7_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -86,7 +86,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/txtChasis4_3"
+                    android:id="@+id/txtChasis7_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -98,7 +98,43 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/txtChasis4_4"
+                    android:id="@+id/txtChasis7_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/icons"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtChasis7_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/icons"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtChasis7_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/icons"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtChasis7_7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -140,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -148,7 +184,7 @@
                             android:layout_weight="1">
 
                             <ImageButton
-                                android:id="@+id/SelectorChasis4_1"
+                                android:id="@+id/SelectorChasis7_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="5dp"
@@ -157,7 +193,7 @@
                                 android:orientation="vertical"></ImageButton>
 
                             <TextView
-                                android:id="@+id/txtTotal4_1"
+                                android:id="@+id/txtTotal7_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
@@ -178,7 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -186,7 +222,7 @@
                             android:layout_weight="1">
 
                             <ImageButton
-                                android:id="@+id/SelectorChasis4_2"
+                                android:id="@+id/SelectorChasis7_2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="5dp"
@@ -195,46 +231,7 @@
                                 android:orientation="vertical"></ImageButton>
 
                             <TextView
-                                android:id="@+id/txtTotal4_2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="60dp"
-                                android:layout_marginEnd="5dp"
-                                android:gravity="center"
-                                android:text="0"
-                                android:textColor="#000000"
-                                android:textSize="18sp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <ImageButton
-                                android:id="@+id/SelectorChasis4_3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:layout_weight="1"
-                                android:background="@color/secondary_text"
-                                android:orientation="vertical"></ImageButton>
-
-                            <TextView
-                                android:id="@+id/txtTotal4_3"
+                                android:id="@+id/txtTotal7_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
@@ -255,7 +252,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -263,7 +260,7 @@
                             android:layout_weight="1">
 
                             <ImageButton
-                                android:id="@+id/SelectorChasis4_4"
+                                android:id="@+id/SelectorChasis7_3"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="5dp"
@@ -272,7 +269,161 @@
                                 android:orientation="vertical"></ImageButton>
 
                             <TextView
-                                android:id="@+id/txtTotal4_4"
+                                android:id="@+id/txtTotal7_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis7_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical"></ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal7_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis7_5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical"></ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal7_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis7_6"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal7_6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageButton
+                                android:id="@+id/SelectorChasis7_7"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:background="@color/secondary_text"
+                                android:orientation="vertical">
+
+                            </ImageButton>
+
+                            <TextView
+                                android:id="@+id/txtTotal7_7"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"

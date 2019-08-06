@@ -5,6 +5,9 @@ package com.example.dramirez.garrraspuertoserie;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.SweepGradient;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
@@ -45,6 +48,7 @@ import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcero;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcorreccion;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBdatos;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBpesadas;
+import com.example.dramirez.garrraspuertoserie.FragmentInterfaces.EnvioDatos;
 
 
 import java.io.BufferedWriter;
@@ -60,9 +64,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Principal extends AppCompatActivity implements Fragment_tre_bancos.OnFragmentInteractionListener,
-Fragment_cuatro_bancos.OnFragmentInteractionListener, Fragment_dos_bancos.OnFragmentInteractionListener,
-Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFragmentInteractionListener{
+public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     managerPort Port = null;
     ProgressBar progressBar;
@@ -76,7 +78,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
     int UI_OPTIONS = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN |
             View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
 
-    TextView txtPesoGarra,txt_Peso_Acumulado, txtFecha, txtHora, txtBateria;
+    TextView txtPesoGarra,txt_Peso_Acumulado, txtFecha, txtHora, txtBateria,txtGarradas,txtVersion;
     Variables var = new Variables();
     EditText edt_patente, edt_codigo, edt_producto, edt_cliente, edt_tara, edt_volumen;
 
@@ -105,17 +107,19 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
     Fragment_cuatro_bancos fragment_cuatro_bancos;
     Fragment_cinco_bancos fragment_cinco_bancos;
     Fragment_seis_bancos fragment_seis_bancos;
+    Fragment_siete_bancos fragment_siete_bancos;
+    Fragment_ocho_bancos fragment_ocho_bancos;
+    Fragment_nueve_bancos fragment_nueve_bancos;
+    FragmentInicio fragmentInicio;
 
-    LinearLayout SelectorChasis2_1,SelectorChasis2_2,SelectorChasis2_3,SelectorChasis2_4;
-    LinearLayout SelectorChasis3_1,SelectorChasis3_2,SelectorChasis3_3,SelectorChasis3_4,SelectorChasis3_5,SelectorChasis3_6;
-    TextView txtChasis2_1, txtChasis2_2,txtChasis2_3,txtChasis2_4;
-    TextView txtChasis3_1, txtChasis3_2,txtChasis3_3,txtChasis3_4,txtChasis3_5,txtChasis3_6;
-    TextView txtChasis1_1,txtChasis1_2;
-    String tipoDeCarga = "", equipo = "";
-    int bancoSeleccionado =0;
-    Handler handler;
+    String bancos,banco1,banco2,banco3,banco4,banco5,banco6,banco7,banco8,banco9;
 
+    String tipoDeCarga = "";
+    int  lugar = 0;
 
+    int chasis= 0, acoplado = 0, acoplado2 = 0;
+
+    Calculadora calculadora;
     // Used to load the 'native-lib' library oon application startup.
     static {
         System.loadLibrary("native-lib");
@@ -129,33 +133,8 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
         setContentView(R.layout.activity_principal);
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
 
-        txtPesoGarra = (TextView)findViewById(R.id.txtPesoGarra);
-        btnCero = (ImageButton) findViewById(R.id.btnCero);
-        txtFecha =(TextView)findViewById(R.id.txtFecha);
-        txtHora =(TextView)findViewById(R.id.txtHora);
-        txtCargio = (TextView)findViewById(R.id.txtCargio);
-        txt_Peso_Acumulado = (TextView)findViewById(R.id.txt_Peso_Acumulado);
-        txtBateria = (TextView)findViewById(R.id.txtBateria);
-        edt_patente = (EditText)findViewById(R.id.edt_patente);
-        edt_codigo = (EditText)findViewById(R.id.edt_codigo);
-        edt_producto = ( EditText)findViewById(R.id.edt_producto);
-        edt_cliente = (EditText) findViewById(R.id.edt_cliente);
-        edt_tara = (EditText) findViewById(R.id.edt_tara);
-        edt_volumen = (EditText)findViewById(R.id.edt_volumen);
-        Layout_Total_Cargado = (LinearLayout)findViewById(R.id.Layout_Total_Cargado);
-        imgEstable = (ImageView)findViewById(R.id.imgEstable);
-        imgBateria = (ImageView)findViewById(R.id.imgBateria);
-        imgDescargando = (ImageView)findViewById(R.id.imgDescargando);
-        imgConexionSerie = (ImageView)findViewById(R.id.imgConexionSerie);
-        btnGuardar = (ImageButton)findViewById(R.id.btnGuardar);
-        btnCargar = (ImageButton) findViewById(R.id.btnCargar);
-        btnRestar =(ImageButton) findViewById(R.id.btnRestar);
-        btnGuardar.setEnabled(false);
-        arrayMenu = getResources().getStringArray(R.array.dialogo_menu);
-        progressBar = (ProgressBar)findViewById(R.id.progressBarImpresion);
-        spTipo_carga = (Spinner)findViewById(R.id.spTipo_carga);
-        spTipo_equio = (Spinner)findViewById(R.id.spTipo_equipo);
 
+        InicializarComponentesGraficos();
 
         db = new BaseDeDatos(getApplicationContext());
         comprobarBaseDeDatos();
@@ -218,25 +197,88 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
         fragment_cuatro_bancos = new Fragment_cuatro_bancos();
         fragment_cinco_bancos = new Fragment_cinco_bancos();
         fragment_seis_bancos = new Fragment_seis_bancos();
+        fragment_siete_bancos = new Fragment_siete_bancos();
+        fragment_ocho_bancos = new Fragment_ocho_bancos();
+        fragment_nueve_bancos = new Fragment_nueve_bancos();
+        fragmentInicio = new FragmentInicio();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.pirulo,fragment_dos_banco);
+        fragmentTransaction.add(R.id.pirulo,fragmentInicio);
         fragmentTransaction.commit();
-
+        txtVersion.setText("ver " + getVersionName());
+    }
+    public void InicializarComponentesGraficos()
+    {
+        txtVersion = (TextView)findViewById(R.id.txtVersion);
+        txtPesoGarra = (TextView)findViewById(R.id.txtPesoGarra);
+        btnCero = (ImageButton) findViewById(R.id.btnCero);
+        txtFecha =(TextView)findViewById(R.id.txtFecha);
+        txtHora =(TextView)findViewById(R.id.txtHora);
+        txtCargio = (TextView)findViewById(R.id.txtCargio);
+        txt_Peso_Acumulado = (TextView)findViewById(R.id.txt_Peso_Acumulado);
+        txtBateria = (TextView)findViewById(R.id.txtBateria);
+        txtGarradas = (TextView)findViewById(R.id.txtGarradas);
+        edt_patente = (EditText)findViewById(R.id.edt_patente);
+        edt_codigo = (EditText)findViewById(R.id.edt_codigo);
+        edt_producto = ( EditText)findViewById(R.id.edt_producto);
+        edt_cliente = (EditText) findViewById(R.id.edt_cliente);
+        edt_tara = (EditText) findViewById(R.id.edt_tara);
+        edt_volumen = (EditText)findViewById(R.id.edt_volumen);
+        Layout_Total_Cargado = (LinearLayout)findViewById(R.id.Layout_Total_Cargado);
+        imgEstable = (ImageView)findViewById(R.id.imgEstable);
+        imgBateria = (ImageView)findViewById(R.id.imgBateria);
+        imgDescargando = (ImageView)findViewById(R.id.imgDescargando);
+        imgConexionSerie = (ImageView)findViewById(R.id.imgConexionSerie);
+        btnGuardar = (ImageButton)findViewById(R.id.btnGuardar);
+        btnCargar = (ImageButton) findViewById(R.id.btnCargar);
+        btnRestar =(ImageButton) findViewById(R.id.btnRestar);
+        btnGuardar.setEnabled(false);
+        arrayMenu = getResources().getStringArray(R.array.dialogo_menu);
+        progressBar = (ProgressBar)findViewById(R.id.progressBarImpresion);
+        spTipo_carga = (Spinner)findViewById(R.id.spTipo_carga);
+        spTipo_equio = (Spinner)findViewById(R.id.spTipo_equipo);
 
     }
 
+    public void Actualizar2(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String url = "https://www.balanzashook.com.ar/app/download/st455garra_atriles.apk";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }catch (Exception e)
+                {
 
+                }
+            }
+        }).start();
+    }
 
+    public String getVersionName()
+    {
+        String version = "";
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            version = pInfo.versionName;
+            return version;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return version;
+    }
 
     public void actualizarAcumilaror()
     {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                switch (tipoDeCarga){
 
+                switch (tipoDeCarga){
                     case "2":
                         fragment_dos_banco.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
                         break;
@@ -252,8 +294,19 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                     case "6":
                         fragment_seis_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
                         break;
+                    case "7":
+                        fragment_siete_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                    case "8":
+                        fragment_ocho_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
+                    case "9":
+                        fragment_nueve_bancos.recibirPeso(String.valueOf(Balanza.getInstance().getPesoAcumuladoBancos()));
+                        break;
                 }
+
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().getPesoAcumulado()));
+                txtGarradas.setText(String.valueOf(Balanza.getInstance().getCantidadGarradas()));
             }
         });
     }
@@ -291,7 +344,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 break;
             case  R.id.btnGuardar:
                 dialogoGuardarPesada();
-                Balanza.getInstance().setCominzoPesaje(false);
+
                 break;
             case R.id.btnAcumular:
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().setAcumularPeso()));
@@ -318,12 +371,166 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
+
+                        switch (tipoDeCarga){
+                            case "2":
+                                TextView txtChasis2_1 = (TextView)findViewById(R.id.txtChasis2_1);
+                                TextView txtChasis2_2 = (TextView)findViewById(R.id.txtChasis2_2);
+                                bancos = "2";
+                                banco1 = txtChasis2_1.getText().toString();
+                                banco2 = txtChasis2_2.getText().toString();
+                                banco3 = "";
+                                banco4 = "";
+                                banco5 = "";
+                                banco6 = "";
+                                banco7 = "";
+                                banco8 = "";
+                                banco9 = "";
+                                break;
+                            case "3":
+                                TextView txtChasis3_1 = (TextView)findViewById(R.id.txtChasis3_1);
+                                TextView txtChasis3_2 = (TextView)findViewById(R.id.txtChasis3_2);
+                                TextView txtChasis3_3 = (TextView)findViewById(R.id.txtChasis3_3);
+                                bancos = "3";
+                                banco1 = txtChasis3_1.getText().toString();
+                                banco2 = txtChasis3_2.getText().toString();
+                                banco3 = txtChasis3_3.getText().toString();
+                                banco4 = "";
+                                banco5 = "";
+                                banco6 = "";
+                                banco7 = "";
+                                banco8 = "";
+                                banco9 = "";
+                                break;
+                            case "4":
+                                TextView txtChasis4_1 = (TextView)findViewById(R.id.txtChasis4_1);
+                                TextView txtChasis4_2 = (TextView)findViewById(R.id.txtChasis4_2);
+                                TextView txtChasis4_3 = (TextView)findViewById(R.id.txtChasis4_3);
+                                TextView txtChasis4_4 = (TextView)findViewById(R.id.txtChasis4_4);
+                                bancos = "4";
+                                banco1 = txtChasis4_1.getText().toString();
+                                banco2 = txtChasis4_2.getText().toString();
+                                banco3 = txtChasis4_3.getText().toString();
+                                banco4 = txtChasis4_4.getText().toString();
+                                banco5 = "";
+                                banco6 = "";
+                                banco7 = "";
+                                banco8 = "";
+                                banco9 = "";
+                                break;
+                            case "5":
+                                TextView txtChasis5_1 = (TextView)findViewById(R.id.txtChasis5_1);
+                                TextView txtChasis5_2 = (TextView)findViewById(R.id.txtChasis5_2);
+                                TextView txtChasis5_3 = (TextView)findViewById(R.id.txtChasis5_3);
+                                TextView txtChasis5_4 = (TextView)findViewById(R.id.txtChasis5_4);
+                                TextView txtChasis5_5 = (TextView)findViewById(R.id.txtChasis5_5);
+                                bancos = "5";
+                                banco1 = txtChasis5_1.getText().toString();
+                                banco2 = txtChasis5_2.getText().toString();
+                                banco3 = txtChasis5_3.getText().toString();
+                                banco4 = txtChasis5_4.getText().toString();
+                                banco5 = txtChasis5_5.getText().toString();
+                                banco6 = "";
+                                banco7 = "";
+                                banco8 = "";
+                                banco9 = "";
+                                break;
+                            case "6":
+                                TextView txtChasis6_1 = (TextView)findViewById(R.id.txtChasis6_1);
+                                TextView txtChasis6_2 = (TextView)findViewById(R.id.txtChasis6_2);
+                                TextView txtChasis6_3 = (TextView)findViewById(R.id.txtChasis6_3);
+                                TextView txtChasis6_4 = (TextView)findViewById(R.id.txtChasis6_4);
+                                TextView txtChasis6_5 = (TextView)findViewById(R.id.txtChasis6_5);
+                                TextView txtChasis6_6 = (TextView)findViewById(R.id.txtChasis6_6);
+                                bancos = "6";
+                                banco1 = txtChasis6_1.getText().toString();
+                                banco2 = txtChasis6_2.getText().toString();
+                                banco3 = txtChasis6_3.getText().toString();
+                                banco4 = txtChasis6_4.getText().toString();
+                                banco5 = txtChasis6_5.getText().toString();
+                                banco6 = txtChasis6_6.getText().toString();
+                                banco7 = "";
+                                banco8 = "";
+                                banco9 = "";
+                                break;
+                            case "7":
+                                TextView txtChasis7_1 = (TextView)findViewById(R.id.txtChasis7_1);
+                                TextView txtChasis7_2 = (TextView)findViewById(R.id.txtChasis7_2);
+                                TextView txtChasis7_3 = (TextView)findViewById(R.id.txtChasis7_3);
+                                TextView txtChasis7_4 = (TextView)findViewById(R.id.txtChasis7_4);
+                                TextView txtChasis7_5 = (TextView)findViewById(R.id.txtChasis7_5);
+                                TextView txtChasis7_6 = (TextView)findViewById(R.id.txtChasis7_6);
+                                TextView txtChasis7_7 = (TextView)findViewById(R.id.txtChasis7_7);
+                                bancos = "7";
+                                banco1 = txtChasis7_1.getText().toString();
+                                banco2 = txtChasis7_2.getText().toString();
+                                banco3 = txtChasis7_3.getText().toString();
+                                banco4 = txtChasis7_4.getText().toString();
+                                banco5 = txtChasis7_5.getText().toString();
+                                banco6 = txtChasis7_6.getText().toString();
+                                banco7 = txtChasis7_7.getText().toString();
+                                banco8 = "";
+                                banco9 = "";
+                                break;
+                            case "8":
+                                TextView txtChasis8_1 = (TextView)findViewById(R.id.txtChasis8_1);
+                                TextView txtChasis8_2 = (TextView)findViewById(R.id.txtChasis8_2);
+                                TextView txtChasis8_3 = (TextView)findViewById(R.id.txtChasis8_3);
+                                TextView txtChasis8_4 = (TextView)findViewById(R.id.txtChasis8_4);
+                                TextView txtChasis8_5 = (TextView)findViewById(R.id.txtChasis8_5);
+                                TextView txtChasis8_6 = (TextView)findViewById(R.id.txtChasis8_6);
+                                TextView txtChasis8_7 = (TextView)findViewById(R.id.txtChasis8_7);
+                                TextView txtChasis8_8 = (TextView)findViewById(R.id.txtChasis8_8);
+                                bancos = "8";
+                                banco1 = txtChasis8_1.getText().toString();
+                                banco2 = txtChasis8_2.getText().toString();
+                                banco3 = txtChasis8_3.getText().toString();
+                                banco4 = txtChasis8_4.getText().toString();
+                                banco5 = txtChasis8_5.getText().toString();
+                                banco6 = txtChasis8_6.getText().toString();
+                                banco7 = txtChasis8_7.getText().toString();
+                                banco8 = txtChasis8_8.getText().toString();
+                                banco9 = "";
+                                break;
+                            case "9":
+                                TextView txtChasis9_1 = (TextView)findViewById(R.id.txtChasis9_1);
+                                TextView txtChasis9_2 = (TextView)findViewById(R.id.txtChasis9_2);
+                                TextView txtChasis9_3 = (TextView)findViewById(R.id.txtChasis9_3);
+                                TextView txtChasis9_4 = (TextView)findViewById(R.id.txtChasis9_4);
+                                TextView txtChasis9_5 = (TextView)findViewById(R.id.txtChasis9_5);
+                                TextView txtChasis9_6 = (TextView)findViewById(R.id.txtChasis9_6);
+                                TextView txtChasis9_7 = (TextView)findViewById(R.id.txtChasis9_7);
+                                TextView txtChasis9_8 = (TextView)findViewById(R.id.txtChasis9_8);
+                                TextView txtChasis9_9 = (TextView)findViewById(R.id.txtChasis9_9);
+                                bancos = "9";
+                                banco1 = txtChasis9_1.getText().toString();
+                                banco2 = txtChasis9_2.getText().toString();
+                                banco3 = txtChasis9_3.getText().toString();
+                                banco4 = txtChasis9_4.getText().toString();
+                                banco5 = txtChasis9_5.getText().toString();
+                                banco6 = txtChasis9_6.getText().toString();
+                                banco7 = txtChasis9_7.getText().toString();
+                                banco8 = txtChasis9_8.getText().toString();
+                                banco9 = txtChasis9_9.getText().toString();
+                                break;
+                        }
                         var.setTIEMPOCARGA(false);
                         GuardarUltimosDatos();
                         GuardarPesada();
                         dialog.cancel();
+
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.pirulo,fragmentInicio);
+                        fragmentTransaction.commit();
+
                         btnGuardar.setEnabled(false);
                         btnCargar.setEnabled(true);
+                        tipoDeCarga = "0";
+                        chasis = 0;
+                        acoplado = 0;
+                        acoplado2 = 0;
+                        lugar = 0;
+                        Balanza.getInstance().setCominzoPesaje(false);
                     }
                 })
                 .setNegativeButton(R.string.dialgo_cancelar, new DialogInterface.OnClickListener()
@@ -348,8 +555,9 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
             final ArrayList<DBpesadas> arrayPesadas = new ArrayList<>(Arrays.asList(new DBpesadas(Fecha_Peso,
                     txtHora.getText().toString(),edt_producto.getText().toString(),txtCargio.getText().toString(),
                     edt_patente.getText().toString(),edt_volumen.getText().toString(),
-                    edt_codigo.getText().toString(),edt_cliente.getText().toString(),
-                    txt_Peso_Acumulado.getText().toString(),edt_tara.getText().toString(),String.valueOf(netoDescargado))));
+                    edt_codigo.getText().toString(),edt_cliente.getText().toString(),bancos,banco1,banco2,
+                    banco3,banco4,banco5,banco6,banco7,banco8,banco9,txtGarradas.getText().toString(),txt_Peso_Acumulado.getText().toString(),
+                    edt_tara.getText().toString(),String.valueOf(netoDescargado))));
 
             DBpesadas dBpesadas;
             dBpesadas = arrayPesadas.get(0);
@@ -358,6 +566,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 Toast.makeText(getBaseContext(),"No se pudo guardar la pesada",Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getBaseContext(),"La pesada se guardo correctamente",Toast.LENGTH_LONG).show();
+
                 Layout_Total_Cargado.setVisibility(View.INVISIBLE);
                 new impresionAsyncTask().execute();
             }
@@ -367,7 +576,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
         }
     }
 
-    private void GuardarUltimosDatos()
+   private void GuardarUltimosDatos()
     {
         ArrayList<DBdatos> arrayDatos = new ArrayList<DBdatos>(Arrays.asList(new DBdatos(edt_producto.getText().toString(),
                 edt_patente.getText().toString(),edt_tara.getText().toString(), edt_volumen.getText().toString(),
@@ -378,15 +587,45 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
     }
 
     @Override
-    public void onFragmentInteraction() {
-        Balanza.getInstance().setPesoAcumuladoBancos(0);
+    public boolean comprobarCero(TextView textView)
+    {
+        boolean comprobar = false;
+        int valor = Integer.valueOf(textView.getText().toString());
+        if (valor != 0){
+            comprobar = true;
+        }else{
+            comprobar = false;
+        }
+        return comprobar;
     }
 
+    @Override
+    public int recabarPeso(TextView textView) {
+        int peso =0;
+        try {
+            peso = Integer.valueOf(textView.getText().toString());
+        }catch (Exception e){
+            peso = 0;
+        }
+        return peso;
+    }
+
+    @Override
+    public int lugarDeCarga(int lugarCarga) {
+        lugar = lugarCarga;
+        return 0;
+    }
+
+    @Override
+    public void enviarCero(int peso) {
+        Balanza.getInstance().setPesoAcumuladoBancos(peso);
+    }
 
     public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
     {
         int progreso;
-        String hora = "", cargio = "",patente ="",codigo="",producto="",cliente="",volumen = "", peso_acumulado="", tara = "";
+        String hora = "", cargio = "",patente ="",codigo="",producto="",cliente="",volumen = "", peso_acumulado="", tara = "",cargas = "";
+        //String banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",banco7 ="",banco8 ="",banco9 ="",cargas ="";
         @Override
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
@@ -398,6 +637,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
             cliente = edt_cliente.getText().toString();
             volumen = edt_volumen.getText().toString();
             peso_acumulado = txt_Peso_Acumulado.getText().toString();
+            cargas = txtGarradas.getText().toString();
             tara = edt_tara.getText().toString();
             progreso = 0;
         }
@@ -503,16 +743,60 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Bruto : " + peso_acumulado);
+                Balanza.getInstance().ImprimirTicket("  Banco-1  : " + banco1);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-2  : " + banco2);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-3  : " + banco3);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-4  : " + banco4);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-5  : " + banco5);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-6  : " + banco6);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-7  : " + banco7);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-8  : " + banco8);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-9  : " + banco9);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cargas   : " + cargas);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Bruto    : " + peso_acumulado);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
 
-                Balanza.getInstance().ImprimirTicket("  Tara  : " + tara);
+                Balanza.getInstance().ImprimirTicket("  Tara     : " + tara);
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Neto  : " + String.valueOf(netoDescargado));
+                Balanza.getInstance().ImprimirTicket("  Neto     : " + String.valueOf(netoDescargado));
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
@@ -546,12 +830,23 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
             }else {
                 progressBar.setVisibility(View.INVISIBLE);
             }
+        }
 
-
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            bancos ="0";
+            banco1 = "";
+            banco2 = "";
+            banco3 = "";
+            banco4 = "";
+            banco5 = "";
+            banco6 = "";
+            banco7 = "";
+            banco8 = "";
+            banco9 = "";
         }
     }
-
-
 
     private int sumarTotal(int peso){
         int suma =0;
@@ -712,7 +1007,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
 
         public dialogoCargaDatos(Context context){
             tipoDeCarga = "";
-            equipo ="";
+
 
             final Dialog dialog = new Dialog(context,R.style.Material_Base);
 
@@ -724,13 +1019,14 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
 
             final Spinner sp_producto = (Spinner) dialog.findViewById(R.id.sp_producto);
             final Spinner spTipo_carga = (Spinner) dialog.findViewById(R.id.spTipoCarga);
-            final Spinner spEquipo = (Spinner) dialog.findViewById(R.id.spEquipo);
 
             final EditText edt_dialogo_patente = (EditText)dialog.findViewById(R.id.edt_dialogo_patente);
             final EditText edt_dialogo_cliente = (EditText)dialog.findViewById(R.id.edt_dialogo_cliente);
             final EditText edt_dialogo_tara = (EditText)dialog.findViewById(R.id.edt_dialogo_tara);
             final EditText edt_dialogo_codigo = (EditText)dialog.findViewById(R.id.edt_dialogo_codigo);
             final EditText edt_dialogo_volumen = (EditText)dialog.findViewById(R.id.edt_dialogo_volumen);
+            final EditText txtTotalACargar = (EditText)dialog.findViewById(R.id.txtTotalACargar);
+
 
             Button aceptar = (Button)dialog.findViewById(R.id.btn_acrptar);
             Button cancelar = (Button)dialog.findViewById(R.id.btn_Cancelar);
@@ -741,8 +1037,8 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
             edt_dialogo_codigo.setText(edt_codigo.getText().toString());
             edt_dialogo_volumen.setText(edt_volumen.getText().toString());
 
-            ArrayAdapter<String> dataAdapter =  new ArrayAdapter<String>(getBaseContext(),R.layout.support_simple_spinner_dropdown_item, productos);
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+            ArrayAdapter<String> dataAdapter =  new ArrayAdapter<String>(getBaseContext(),R.layout.spinner_item, productos);
+            dataAdapter.setDropDownViewResource(R.layout.spinner_item);
             sp_producto.setAdapter(dataAdapter);
 
             sp_producto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -757,12 +1053,10 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
             });
 
             ArrayAdapter<CharSequence> adapterCarga = ArrayAdapter.createFromResource(getBaseContext(),
-                    R.array.tipo_carga,android.R.layout.simple_spinner_item);
+                    R.array.tipo_carga,R.layout.spiner_modificado);
             spTipo_carga.setAdapter(adapterCarga);
 
-            ArrayAdapter<CharSequence> adapterEquipo = ArrayAdapter.createFromResource(getBaseContext(),
-                    R.array.tipo_equipo,android.R.layout.simple_spinner_item);
-            spEquipo.setAdapter(adapterEquipo);
+
 
             spTipo_carga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -776,147 +1070,119 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 }
             });
 
-            spEquipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-
             aceptar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     String producto= productoSeleccionado , patente= edt_dialogo_patente.getText().toString(),
                             tara= edt_dialogo_tara.getText().toString() ,volumen = edt_dialogo_volumen.getText().toString()
-                            ,codigo= edt_dialogo_codigo.getText().toString(), cliente = edt_dialogo_cliente.getText().toString();
+                            ,codigo= edt_dialogo_codigo.getText().toString(), cliente = edt_dialogo_cliente.getText().toString(),
+                            total = txtTotalACargar.getText().toString();
+                    if (!tara.equals("")){
+                        edt_patente.setText(patente);
+                        edt_codigo.setText(codigo);
+                        edt_producto.setText(producto);
+                        edt_cliente.setText(cliente);
+                        edt_tara.setText(tara);
+                        edt_volumen.setText(volumen);
+                        btnCargar.setEnabled(false);
 
-                    edt_patente.setText(patente);
-                    edt_codigo.setText(codigo);
-                    edt_producto.setText(producto);
-                    edt_cliente.setText(cliente);
-                    edt_tara.setText(tara);
-                    edt_volumen.setText(volumen);
-                    btnCargar.setEnabled(false);
-                    dialog.dismiss();
-                    Layout_Total_Cargado.setVisibility(View.VISIBLE);
-                    Balanza.getInstance().setCominzoPesaje(true);
-                    /**
-                     * Pone el acumulador en 0
-                     */
-                    Balanza.getInstance().setPesoAcumulado(Integer.valueOf(tara));
-                    btnGuardar.setEnabled(true);
-                    var.setTIEMPOCARGA(true);
-                    activarCuentaCarga();
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    switch (tipoDeCarga){
-                          case "2":
-                            fragmentTransaction.replace(R.id.pirulo,fragment_dos_banco);
-                            break;
-                        case "3":
-                            fragmentTransaction.replace(R.id.pirulo,fragment_tres_bancos);
-                            break;
-                        case "4":
-                            fragmentTransaction.replace(R.id.pirulo,fragment_cuatro_bancos);
-                            break;
-                        case "5":
-                            fragmentTransaction.replace(R.id.pirulo,fragment_cinco_bancos);
-                            break;
-                        case "6":
-                            fragmentTransaction.replace(R.id.pirulo,fragment_seis_bancos);
-                            break;
-                    }
+                        dialog.dismiss();
+                        Layout_Total_Cargado.setVisibility(View.VISIBLE);
+                        Balanza.getInstance().setCominzoPesaje(true);
+                        /**
+                         * Pone el acumulador en 0
+                         */
 
-                    fragmentTransaction.commit();
+                        Balanza.getInstance().setPesoAcumulado(Integer.valueOf(tara));
 
-                }
-            });
-            cancelar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
-        }
-    }
+                        Balanza.getInstance().setPesoAcumuladoBancos(0);
+                        Balanza.getInstance().setPesoAcumuladoCasis(0);
+                        Balanza.getInstance().setCantidadGarradas(0);
 
-    private class seleccionarTipoDeCarga
-    {
-        String tipoDeCarga = "", equipo = "";
+                        btnGuardar.setEnabled(true);
+                        var.setTIEMPOCARGA(true);
+                        activarCuentaCarga();
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        public seleccionarTipoDeCarga(Context context)
-        {
-            final Dialog dialog = new Dialog(context,R.style.Material_Base);
-
-            dialog.setCancelable(false);
-            dialog.setTitle(R.string.dialogo_titulo);
-            dialog.setContentView(R.layout.dialogo_seleccion_carga);
-
-            final Spinner spEquipo = (Spinner) dialog.findViewById(R.id.spTipo_equipo);
-            final Spinner spCarga = (Spinner) dialog.findViewById(R.id.spTipo_carga);
-
-            Button aceptar = (Button)dialog.findViewById(R.id.btnTipoCargaAceptar);
-            Button cancelar = (Button)dialog.findViewById(R.id.btnTipoCargaCancelar);
-
-            ArrayAdapter<CharSequence> adapterCarga = ArrayAdapter.createFromResource(getBaseContext(),
-                                            R.array.tipo_carga,android.R.layout.simple_spinner_item);
-            spCarga.setAdapter(adapterCarga);
-
-            ArrayAdapter<CharSequence> adapterEquipo = ArrayAdapter.createFromResource(getBaseContext(),
-                    R.array.tipo_equipo,android.R.layout.simple_spinner_item);
-            spEquipo.setAdapter(adapterEquipo);
-
-            spCarga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    tipoDeCarga = parent.getItemAtPosition(position).toString();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-            spEquipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    equipo = parent.getItemAtPosition(position).toString();
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-
-            aceptar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    switch (tipoDeCarga){
-                        case "2":
+                        switch (tipoDeCarga){
+                            case "2":
                                 fragmentTransaction.replace(R.id.pirulo,fragment_dos_banco);
-                            break;
-                        case "3":
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_dos_banco.TotalXBancos(calculadora.Calcular(2));
+                                }else{
+                                    fragment_dos_banco.TotalXBancos(0);
+                                }
+                                break;
+                            case "3":
                                 fragmentTransaction.replace(R.id.pirulo,fragment_tres_bancos);
-                            break;
-                        case "4":
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_tres_bancos.TotalXBancos(calculadora.Calcular(3));
+                                }else{
+                                    fragment_tres_bancos.TotalXBancos(0);
+                                }
+                                break;
+                            case "4":
                                 fragmentTransaction.replace(R.id.pirulo,fragment_cuatro_bancos);
-                            break;
-                        case "5":
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_cuatro_bancos.TotalXBancos(calculadora.Calcular(4));
+                                }else{
+                                    fragment_cuatro_bancos.TotalXBancos(0);
+                                }
+                                break;
+                            case "5":
                                 fragmentTransaction.replace(R.id.pirulo,fragment_cinco_bancos);
-                            break;
-                        case "6":
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_cinco_bancos.TotalXBancos(calculadora.Calcular(5));
+                                }else{
+                                    fragment_cinco_bancos.TotalXBancos(0);
+                                }
+                                break;
+                            case "6":
                                 fragmentTransaction.replace(R.id.pirulo,fragment_seis_bancos);
-                            break;
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_seis_bancos.TotalXBancos(calculadora.Calcular(6));
+                                }else{
+                                    fragment_seis_bancos.TotalXBancos(0);
+                                }
+                                break;
+                            case "7":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_siete_bancos);
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_siete_bancos.TotalXBancos(calculadora.Calcular(7));
+                                }else{
+                                    fragment_siete_bancos.TotalXBancos(0);
+                                }
+                                break;
+                            case "8":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_ocho_bancos);
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_ocho_bancos.TotalXBancos(calculadora.Calcular(8));
+                                }else{
+                                    fragment_ocho_bancos.TotalXBancos(0);
+                                }
+                                break;
+                            case "9":
+                                fragmentTransaction.replace(R.id.pirulo,fragment_nueve_bancos);
+                                if(!total.equals("")){
+                                    calculadora = new Calculadora(total,tara);
+                                    fragment_nueve_bancos.TotalXBancos(calculadora.Calcular(9));
+                                }else{
+                                    fragment_nueve_bancos.TotalXBancos(0);
+                                }
+                                break;
+                        }
+                        fragmentTransaction.commit();
+                    }else {
+                        Toast.makeText(getBaseContext(),R.string.tara_vacia,Toast.LENGTH_LONG).show();
                     }
-
-                    fragmentTransaction.commit();
                 }
             });
             cancelar.setOnClickListener(new View.OnClickListener() {
@@ -1013,7 +1279,10 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                             dialogoCabeceraImpresion();
                         break;
                     case 6:
-                        dialogoCorreccion();
+                            dialogoCorreccion();
+                        break;
+                    case 7:
+                            Actualizar2();
                         break;
                 }
                 dialog.cancel();
@@ -1026,7 +1295,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
     protected void dialogoCabeceraImpresion()
     {
 
-        final EditText edtCabeceraUno, edtCabeceraDos, edtCabeceraTres, edtCabeceraCuatro;
+        final EditText edtCabeceraUno, edtCabeceraDos, edtCabeceraTres, edtCabeceraCuatro,edtCantidad;
         LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
         View promptView = layoutInflater.inflate(R.layout.dialogo_cabecera_impresion, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TemaGeneral));
@@ -1037,6 +1306,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
         edtCabeceraDos = (EditText)promptView.findViewById(R.id.edtCabeceraDos);
         edtCabeceraTres = (EditText)promptView.findViewById(R.id.edtCabeceraTres);
         edtCabeceraCuatro = (EditText)promptView.findViewById(R.id.edtCabeceraCuatro);
+        edtCantidad = (EditText)promptView.findViewById(R.id.edtCantidad);
 
         edtCabeceraUno.setText(var.getCabecera1());
         edtCabeceraDos.setText(var.getCabecera2());
@@ -1058,6 +1328,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 var.setCabecera2(edtCabeceraDos.getText().toString());
                 var.setCabecera3(edtCabeceraTres.getText().toString());
                 var.setCabecera4(edtCabeceraCuatro.getText().toString());
+
                 Toast.makeText(getBaseContext(), "La cabecera se guardo correctamente",Toast.LENGTH_LONG).show();
                 alert.dismiss();
             }
@@ -1065,6 +1336,8 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
 
         alert.show();
     }
+
+
 
     protected void showInputDialog_EntreFecha()
     {
@@ -1342,7 +1615,6 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                         edt3.setVisibility(View.VISIBLE);
                         break;
                 }
-
              }
 
              @Override
@@ -1737,8 +2009,8 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                     "  </Style>" +
                     " </Styles>\n";
             //.............. Hojas de calculo ........................
-            final String Hoja_Cargas = "<Worksheet ss:Name=\"DESCARGAS\">\n" +
-                    "<Names><NamedRange ss:Name=\"_FilterDatabase\" ss:RefersTo=\"=DESCARGAS!R5C1:R5C7\" ss:Hidden=\"1\"/></Names>\n";
+            final String Hoja_Cargas = "<Worksheet ss:Name=\"CARGAS\">\n" +
+                    "<Names><NamedRange ss:Name=\"_FilterDatabase\" ss:RefersTo=\"=CARGAS!R5C1:R5C7\" ss:Hidden=\"1\"/></Names>\n";
 
 
             final String Encabezado_Carga = "<Row ss:AutoFitHeight=\"0\">\n" +
@@ -1756,6 +2028,17 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">VOLUMEN</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CODIGO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CLIENTE</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCOS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-1</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-2</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-3</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-4</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-5</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-6</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-7</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-8</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-9</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CARGAS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BRUTO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TARA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">NETO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
@@ -1790,7 +2073,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 if (h.moveToFirst()) {
                     descargas = h.getInt(0);
                 }
-                final String Abrir_Tabla_Cargas = "<Table ss:ExpandedColumnCount=\"12\" ss:ExpandedRowCount=\"" + (descargas + 7) + "\" x:FullColumns=\"1\"\n" +
+                final String Abrir_Tabla_Cargas = "<Table ss:ExpandedColumnCount=\"23\" ss:ExpandedRowCount=\"" + (descargas + 7) + "\" x:FullColumns=\"1\"\n" +
                         "   x:FullRows=\"1\" ss:DefaultColumnWidth=\"81.75\" ss:DefaultRowHeight=\"15\">\n";
 
                 br.append(Abrir_Tabla_Cargas);
@@ -1802,7 +2085,8 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 int celdas = 0;
                 String fechaCarga = "";
                 String ids = "", fecha = "", hora = "", prod = "", cargio = "", patente = "",  volumen = "";
-                String codigo = "", cliente = "", bruto = "", tara = "", neto = "";
+                String codigo = "", cliente = "",nbancos= "", banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",
+                        banco7 ="",banco8 ="",banco9 ="",cargas ="",bruto = "", tara = "", neto = "";
                 if (c.moveToFirst()) {
                     for (int i = 0; i <= c.getCount() - 1; i++) {
                         ids = c.getString(0);
@@ -1819,9 +2103,20 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                         volumen = c.getString(6);
                         codigo = c.getString(7);
                         cliente = c.getString(8);
-                        bruto = c.getString(9);
-                        tara = c.getString(10);
-                        neto = c.getString(11);
+                        nbancos = c.getString(9);
+                        banco1 = c.getString(10);
+                        banco2 = c.getString(11);
+                        banco3 = c.getString(12);
+                        banco4 = c.getString(13);
+                        banco5 = c.getString(14);
+                        banco6 = c.getString(15);
+                        banco7 = c.getString(16);
+                        banco8 = c.getString(17);
+                        banco9 = c.getString(18);
+                        cargas = c.getString(19);
+                        bruto = c.getString(20);
+                        tara = c.getString(21);
+                        neto = c.getString(22);
 
                         try {
                             br.append("<Row>\n");
@@ -1834,6 +2129,17 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                             br.append("<Cell><Data ss:Type=\"String\">" + volumen + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + codigo + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + cliente + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + nbancos + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco1 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco2 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco3 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco4 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco5 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco6 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco7 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco8 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + banco9 + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + cargas + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + bruto + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + tara + "</Data></Cell>\n");
                             br.append("<Cell ss:StyleID=\"s63\"><Data ss:Type=\"Number\">" + neto + "</Data></Cell>\n");
@@ -1850,6 +2156,17 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                 final String Calculo_Carga = "<Row>\n" +
                         "</Row>\n" +
                         "<Row>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
+                        "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
                         "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
                         "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
                         "<Cell><Data ss:Type=\"String\"></Data></Cell>\n" +
@@ -1877,7 +2194,7 @@ Fragment_cinco_bancos.OnFragmentInteractionListener, Fragment_seis_bancos.OnFrag
                         "   <ProtectObjects>False</ProtectObjects>\n" +
                         "   <ProtectScenarios>False</ProtectScenarios>\n" +
                         "  </WorksheetOptions>\n" +
-                        "  <AutoFilter x:Range=\"R5C1:R5C10\"\n" +
+                        "  <AutoFilter x:Range=\"R5C1:R5C23\"\n" +
                         "   xmlns=\"urn:schemas-microsoft-com:office:excel\">\n" +
                         "  </AutoFilter>\n" +
                         "  <ss:WorksheetOptions/>\n" +
