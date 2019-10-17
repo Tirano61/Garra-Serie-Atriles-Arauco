@@ -87,14 +87,16 @@ public class Fragment_cuatro_bancos extends Fragment {
         SelectorChasis4_2 = (ImageButton) mView.findViewById(R.id.SelectorChasis4_2);
         SelectorChasis4_3 = (ImageButton) mView.findViewById(R.id.SelectorChasis4_3);
         SelectorChasis4_4 = (ImageButton) mView.findViewById(R.id.SelectorChasis4_4);
-        txtChasis4_1 = (TextView) mView.findViewById(R.id.txtChasis4_1);
-        txtChasis4_2 = (TextView) mView.findViewById(R.id.txtChasis4_2);
-        txtChasis4_3 = (TextView) mView.findViewById(R.id.txtChasis4_3);
-        txtChasis4_4 = (TextView) mView.findViewById(R.id.txtChasis4_4);
-        txtTotal4_1 = (TextView) mView.findViewById(R.id.txtTotal4_1);
-        txtTotal4_2 = (TextView) mView.findViewById(R.id.txtTotal4_2);
-        txtTotal4_3 = (TextView) mView.findViewById(R.id.txtTotal4_3);
-        txtTotal4_4 = (TextView) mView.findViewById(R.id.txtTotal4_4);
+
+        txtChasis4_1 = (TextView) mView.findViewById(R.id.txtTotal4_1);
+        txtChasis4_2 = (TextView) mView.findViewById(R.id.txtTotal4_2);
+        txtChasis4_3 = (TextView) mView.findViewById(R.id.txtTotal4_3);
+        txtChasis4_4 = (TextView) mView.findViewById(R.id.txtTotal4_4);
+        txtTotal4_1 = (TextView) mView.findViewById(R.id.txtChasis4_1);
+        txtTotal4_2 = (TextView) mView.findViewById(R.id.txtChasis4_2);
+        txtTotal4_3 = (TextView) mView.findViewById(R.id.txtChasis4_3);
+        txtTotal4_4 = (TextView) mView.findViewById(R.id.txtChasis4_4);
+
         SelectorChasis4_1.setBackgroundColor(Color.YELLOW);
         SelectorChasis4_2.setBackgroundColor(Color.GRAY);
         SelectorChasis4_3.setBackgroundColor(Color.GRAY);

@@ -106,16 +106,18 @@ public class Fragment_cinco_bancos extends Fragment {
         SelectorChasis5_3 = (ImageButton) mView.findViewById(R.id.SelectorChasis5_3);
         SelectorChasis5_4 = (ImageButton) mView.findViewById(R.id.SelectorChasis5_4);
         SelectorChasis5_5 = (ImageButton) mView.findViewById(R.id.SelectorChasis5_5);
-        txtChasis5_1 = (TextView) mView.findViewById(R.id.txtChasis5_1);
-        txtChasis5_2 = (TextView) mView.findViewById(R.id.txtChasis5_2);
-        txtChasis5_3 = (TextView) mView.findViewById(R.id.txtChasis5_3);
-        txtChasis5_4 = (TextView) mView.findViewById(R.id.txtChasis5_4);
-        txtChasis5_5 = (TextView) mView.findViewById(R.id.txtChasis5_5);
-        txtTotal5_1 = (TextView) mView.findViewById(R.id.txtTotal5_1);
-        txtTotal5_2 = (TextView) mView.findViewById(R.id.txtTotal5_2);
-        txtTotal5_3 = (TextView) mView.findViewById(R.id.txtTotal5_3);
-        txtTotal5_4 = (TextView) mView.findViewById(R.id.txtTotal5_4);
-        txtTotal5_5 = (TextView) mView.findViewById(R.id.txtTotal5_5);
+
+        txtChasis5_1 = (TextView) mView.findViewById(R.id.txtTotal5_1);
+        txtChasis5_2 = (TextView) mView.findViewById(R.id.txtTotal5_2);
+        txtChasis5_3 = (TextView) mView.findViewById(R.id.txtTotal5_3);
+        txtChasis5_4 = (TextView) mView.findViewById(R.id.txtTotal5_4);
+        txtChasis5_5 = (TextView) mView.findViewById(R.id.txtTotal5_5);
+        txtTotal5_1 = (TextView) mView.findViewById(R.id.txtChasis5_1);
+        txtTotal5_2 = (TextView) mView.findViewById(R.id.txtChasis5_2);
+        txtTotal5_3 = (TextView) mView.findViewById(R.id.txtChasis5_3);
+        txtTotal5_4 = (TextView) mView.findViewById(R.id.txtChasis5_4);
+        txtTotal5_5 = (TextView) mView.findViewById(R.id.txtChasis5_5);
+
         SelectorChasis5_1.setBackgroundColor(Color.YELLOW);
         SelectorChasis5_2.setBackgroundColor(Color.GRAY);
         SelectorChasis5_3.setBackgroundColor(Color.GRAY);

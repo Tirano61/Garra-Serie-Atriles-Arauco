@@ -79,25 +79,26 @@ public class Fragment_nueve_bancos extends Fragment {
         SelectorChasis9_7 = (ImageButton) mView.findViewById(R.id.SelectorChasis9_7);
         SelectorChasis9_8 = (ImageButton) mView.findViewById(R.id.SelectorChasis9_8);
         SelectorChasis9_9 = (ImageButton) mView.findViewById(R.id.SelectorChasis9_9);
-        txtChasis9_1 = (TextView) mView.findViewById(R.id.txtChasis9_1);
-        txtChasis9_2 = (TextView) mView.findViewById(R.id.txtChasis9_2);
-        txtChasis9_3 = (TextView) mView.findViewById(R.id.txtChasis9_3);
-        txtChasis9_4 = (TextView) mView.findViewById(R.id.txtChasis9_4);
-        txtChasis9_5 = (TextView) mView.findViewById(R.id.txtChasis9_5);
-        txtChasis9_6 = (TextView) mView.findViewById(R.id.txtChasis9_6);
-        txtChasis9_7 = (TextView) mView.findViewById(R.id.txtChasis9_7);
-        txtChasis9_8 = (TextView) mView.findViewById(R.id.txtChasis9_8);
-        txtChasis9_9 = (TextView) mView.findViewById(R.id.txtChasis9_9);
 
-        txtTotal9_1 = (TextView) mView.findViewById(R.id.txtTotal9_1);
-        txtTotal9_2 = (TextView) mView.findViewById(R.id.txtTotal9_2);
-        txtTotal9_3 = (TextView) mView.findViewById(R.id.txtTotal9_3);
-        txtTotal9_4 = (TextView) mView.findViewById(R.id.txtTotal9_4);
-        txtTotal9_5 = (TextView) mView.findViewById(R.id.txtTotal9_5);
-        txtTotal9_6 = (TextView) mView.findViewById(R.id.txtTotal9_6);
-        txtTotal9_7 = (TextView) mView.findViewById(R.id.txtTotal9_7);
-        txtTotal9_8 = (TextView) mView.findViewById(R.id.txtTotal9_8);
-        txtTotal9_9 = (TextView) mView.findViewById(R.id.txtTotal9_9);
+        txtChasis9_1 = (TextView) mView.findViewById(R.id.txtTotal9_1);
+        txtChasis9_2 = (TextView) mView.findViewById(R.id.txtTotal9_2);
+        txtChasis9_3 = (TextView) mView.findViewById(R.id.txtTotal9_3);
+        txtChasis9_4 = (TextView) mView.findViewById(R.id.txtTotal9_4);
+        txtChasis9_5 = (TextView) mView.findViewById(R.id.txtTotal9_5);
+        txtChasis9_6 = (TextView) mView.findViewById(R.id.txtTotal9_6);
+        txtChasis9_7 = (TextView) mView.findViewById(R.id.txtTotal9_7);
+        txtChasis9_8 = (TextView) mView.findViewById(R.id.txtTotal9_8);
+        txtChasis9_9 = (TextView) mView.findViewById(R.id.txtTotal9_9);
+
+        txtTotal9_1 = (TextView) mView.findViewById(R.id.txtChasis9_1);
+        txtTotal9_2 = (TextView) mView.findViewById(R.id.txtChasis9_2);
+        txtTotal9_3 = (TextView) mView.findViewById(R.id.txtChasis9_3);
+        txtTotal9_4 = (TextView) mView.findViewById(R.id.txtChasis9_4);
+        txtTotal9_5 = (TextView) mView.findViewById(R.id.txtChasis9_5);
+        txtTotal9_6 = (TextView) mView.findViewById(R.id.txtChasis9_6);
+        txtTotal9_7 = (TextView) mView.findViewById(R.id.txtChasis9_7);
+        txtTotal9_8 = (TextView) mView.findViewById(R.id.txtChasis9_8);
+        txtTotal9_9 = (TextView) mView.findViewById(R.id.txtChasis9_9);
 
         txtTotal9_1.setText(String.valueOf(CargaXBancos));
         txtTotal9_2.setText(String.valueOf(CargaXBancos));

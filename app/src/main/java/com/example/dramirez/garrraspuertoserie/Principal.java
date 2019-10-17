@@ -410,8 +410,22 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
                         switch (tipoDeCarga){
                             case "2":
+                                /*estaba asi
                                 TextView txtChasis2_1 = (TextView)findViewById(R.id.txtChasis2_1);
                                 TextView txtChasis2_2 = (TextView)findViewById(R.id.txtChasis2_2);
+                                bancos = "2";
+                                banco1 = txtChasis2_1.getText().toString();
+                                banco2 = txtChasis2_2.getText().toString();
+                                banco3 = "";
+                                banco4 = "";
+                                banco5 = "";
+                                banco6 = "";
+                                banco7 = "";
+                                banco8 = "";
+                                banco9 = "";*/
+
+                                TextView txtChasis2_1 = (TextView)findViewById(R.id.txtTotal2_1);
+                                TextView txtChasis2_2 = (TextView)findViewById(R.id.txtTotal2_2);
                                 bancos = "2";
                                 banco1 = txtChasis2_1.getText().toString();
                                 banco2 = txtChasis2_2.getText().toString();
@@ -424,9 +438,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "3":
-                                TextView txtChasis3_1 = (TextView)findViewById(R.id.txtChasis3_1);
-                                TextView txtChasis3_2 = (TextView)findViewById(R.id.txtChasis3_2);
-                                TextView txtChasis3_3 = (TextView)findViewById(R.id.txtChasis3_3);
+                                TextView txtChasis3_1 = (TextView)findViewById(R.id.txtTotal3_1);
+                                TextView txtChasis3_2 = (TextView)findViewById(R.id.txtTotal3_2);
+                                TextView txtChasis3_3 = (TextView)findViewById(R.id.txtTotal3_3);
                                 bancos = "3";
                                 banco1 = txtChasis3_1.getText().toString();
                                 banco2 = txtChasis3_2.getText().toString();
@@ -439,10 +453,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "4":
-                                TextView txtChasis4_1 = (TextView)findViewById(R.id.txtChasis4_1);
-                                TextView txtChasis4_2 = (TextView)findViewById(R.id.txtChasis4_2);
-                                TextView txtChasis4_3 = (TextView)findViewById(R.id.txtChasis4_3);
-                                TextView txtChasis4_4 = (TextView)findViewById(R.id.txtChasis4_4);
+                                TextView txtChasis4_1 = (TextView)findViewById(R.id.txtTotal4_1);
+                                TextView txtChasis4_2 = (TextView)findViewById(R.id.txtTotal4_2);
+                                TextView txtChasis4_3 = (TextView)findViewById(R.id.txtTotal4_3);
+                                TextView txtChasis4_4 = (TextView)findViewById(R.id.txtTotal4_4);
                                 bancos = "4";
                                 banco1 = txtChasis4_1.getText().toString();
                                 banco2 = txtChasis4_2.getText().toString();
@@ -455,11 +469,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "5":
-                                TextView txtChasis5_1 = (TextView)findViewById(R.id.txtChasis5_1);
-                                TextView txtChasis5_2 = (TextView)findViewById(R.id.txtChasis5_2);
-                                TextView txtChasis5_3 = (TextView)findViewById(R.id.txtChasis5_3);
-                                TextView txtChasis5_4 = (TextView)findViewById(R.id.txtChasis5_4);
-                                TextView txtChasis5_5 = (TextView)findViewById(R.id.txtChasis5_5);
+                                TextView txtChasis5_1 = (TextView)findViewById(R.id.txtTotal5_1);
+                                TextView txtChasis5_2 = (TextView)findViewById(R.id.txtTotal5_2);
+                                TextView txtChasis5_3 = (TextView)findViewById(R.id.txtTotal5_3);
+                                TextView txtChasis5_4 = (TextView)findViewById(R.id.txtTotal5_4);
+                                TextView txtChasis5_5 = (TextView)findViewById(R.id.txtTotal5_5);
                                 bancos = "5";
                                 banco1 = txtChasis5_1.getText().toString();
                                 banco2 = txtChasis5_2.getText().toString();
@@ -472,12 +486,12 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "6":
-                                TextView txtChasis6_1 = (TextView)findViewById(R.id.txtChasis6_1);
-                                TextView txtChasis6_2 = (TextView)findViewById(R.id.txtChasis6_2);
-                                TextView txtChasis6_3 = (TextView)findViewById(R.id.txtChasis6_3);
-                                TextView txtChasis6_4 = (TextView)findViewById(R.id.txtChasis6_4);
-                                TextView txtChasis6_5 = (TextView)findViewById(R.id.txtChasis6_5);
-                                TextView txtChasis6_6 = (TextView)findViewById(R.id.txtChasis6_6);
+                                TextView txtChasis6_1 = (TextView)findViewById(R.id.txtTotal6_1);
+                                TextView txtChasis6_2 = (TextView)findViewById(R.id.txtTotal6_2);
+                                TextView txtChasis6_3 = (TextView)findViewById(R.id.txtTotal6_3);
+                                TextView txtChasis6_4 = (TextView)findViewById(R.id.txtTotal6_4);
+                                TextView txtChasis6_5 = (TextView)findViewById(R.id.txtTotal6_5);
+                                TextView txtChasis6_6 = (TextView)findViewById(R.id.txtTotal6_6);
                                 bancos = "6";
                                 banco1 = txtChasis6_1.getText().toString();
                                 banco2 = txtChasis6_2.getText().toString();
@@ -490,13 +504,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "7":
-                                TextView txtChasis7_1 = (TextView)findViewById(R.id.txtChasis7_1);
-                                TextView txtChasis7_2 = (TextView)findViewById(R.id.txtChasis7_2);
-                                TextView txtChasis7_3 = (TextView)findViewById(R.id.txtChasis7_3);
-                                TextView txtChasis7_4 = (TextView)findViewById(R.id.txtChasis7_4);
-                                TextView txtChasis7_5 = (TextView)findViewById(R.id.txtChasis7_5);
-                                TextView txtChasis7_6 = (TextView)findViewById(R.id.txtChasis7_6);
-                                TextView txtChasis7_7 = (TextView)findViewById(R.id.txtChasis7_7);
+                                TextView txtChasis7_1 = (TextView)findViewById(R.id.txtTotal7_1);
+                                TextView txtChasis7_2 = (TextView)findViewById(R.id.txtTotal7_2);
+                                TextView txtChasis7_3 = (TextView)findViewById(R.id.txtTotal7_3);
+                                TextView txtChasis7_4 = (TextView)findViewById(R.id.txtTotal7_4);
+                                TextView txtChasis7_5 = (TextView)findViewById(R.id.txtTotal7_5);
+                                TextView txtChasis7_6 = (TextView)findViewById(R.id.txtTotal7_6);
+                                TextView txtChasis7_7 = (TextView)findViewById(R.id.txtTotal7_7);
                                 bancos = "7";
                                 banco1 = txtChasis7_1.getText().toString();
                                 banco2 = txtChasis7_2.getText().toString();
@@ -509,14 +523,14 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "8":
-                                TextView txtChasis8_1 = (TextView)findViewById(R.id.txtChasis8_1);
-                                TextView txtChasis8_2 = (TextView)findViewById(R.id.txtChasis8_2);
-                                TextView txtChasis8_3 = (TextView)findViewById(R.id.txtChasis8_3);
-                                TextView txtChasis8_4 = (TextView)findViewById(R.id.txtChasis8_4);
-                                TextView txtChasis8_5 = (TextView)findViewById(R.id.txtChasis8_5);
-                                TextView txtChasis8_6 = (TextView)findViewById(R.id.txtChasis8_6);
-                                TextView txtChasis8_7 = (TextView)findViewById(R.id.txtChasis8_7);
-                                TextView txtChasis8_8 = (TextView)findViewById(R.id.txtChasis8_8);
+                                TextView txtChasis8_1 = (TextView)findViewById(R.id.txtTotal8_1);
+                                TextView txtChasis8_2 = (TextView)findViewById(R.id.txtTotal8_2);
+                                TextView txtChasis8_3 = (TextView)findViewById(R.id.txtTotal8_3);
+                                TextView txtChasis8_4 = (TextView)findViewById(R.id.txtTotal8_4);
+                                TextView txtChasis8_5 = (TextView)findViewById(R.id.txtTotal8_5);
+                                TextView txtChasis8_6 = (TextView)findViewById(R.id.txtTotal8_6);
+                                TextView txtChasis8_7 = (TextView)findViewById(R.id.txtTotal8_7);
+                                TextView txtChasis8_8 = (TextView)findViewById(R.id.txtTotal8_8);
                                 bancos = "8";
                                 banco1 = txtChasis8_1.getText().toString();
                                 banco2 = txtChasis8_2.getText().toString();
@@ -529,15 +543,15 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = "";
                                 break;
                             case "9":
-                                TextView txtChasis9_1 = (TextView)findViewById(R.id.txtChasis9_1);
-                                TextView txtChasis9_2 = (TextView)findViewById(R.id.txtChasis9_2);
-                                TextView txtChasis9_3 = (TextView)findViewById(R.id.txtChasis9_3);
-                                TextView txtChasis9_4 = (TextView)findViewById(R.id.txtChasis9_4);
-                                TextView txtChasis9_5 = (TextView)findViewById(R.id.txtChasis9_5);
-                                TextView txtChasis9_6 = (TextView)findViewById(R.id.txtChasis9_6);
-                                TextView txtChasis9_7 = (TextView)findViewById(R.id.txtChasis9_7);
-                                TextView txtChasis9_8 = (TextView)findViewById(R.id.txtChasis9_8);
-                                TextView txtChasis9_9 = (TextView)findViewById(R.id.txtChasis9_9);
+                                TextView txtChasis9_1 = (TextView)findViewById(R.id.txtTotal9_1);
+                                TextView txtChasis9_2 = (TextView)findViewById(R.id.txtTotal9_2);
+                                TextView txtChasis9_3 = (TextView)findViewById(R.id.txtTotal9_3);
+                                TextView txtChasis9_4 = (TextView)findViewById(R.id.txtTotal9_4);
+                                TextView txtChasis9_5 = (TextView)findViewById(R.id.txtTotal9_5);
+                                TextView txtChasis9_6 = (TextView)findViewById(R.id.txtTotal9_6);
+                                TextView txtChasis9_7 = (TextView)findViewById(R.id.txtTotal9_7);
+                                TextView txtChasis9_8 = (TextView)findViewById(R.id.txtTotal9_8);
+                                TextView txtChasis9_9 = (TextView)findViewById(R.id.txtTotal9_9);
                                 bancos = "9";
                                 banco1 = txtChasis9_1.getText().toString();
                                 banco2 = txtChasis9_2.getText().toString();

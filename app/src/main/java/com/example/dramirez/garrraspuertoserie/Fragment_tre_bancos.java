@@ -90,12 +90,14 @@ public class Fragment_tre_bancos extends Fragment {
         SelectorChasis3_1 = (ImageButton) mView.findViewById(R.id.SelectorChasis3_1);
         SelectorChasis3_2 = (ImageButton) mView.findViewById(R.id.SelectorChasis3_2);
         SelectorChasis3_3 = (ImageButton) mView.findViewById(R.id.SelectorChasis3_3);
-        txtChasis3_1 = (TextView) mView.findViewById(R.id.txtChasis3_1);
-        txtChasis3_2 = (TextView) mView.findViewById(R.id.txtChasis3_2);
-        txtChasis3_3 = (TextView) mView.findViewById(R.id.txtChasis3_3);
-        txtTotal3_1 = (TextView) mView.findViewById(R.id.txtTotal3_1);
-        txtTotal3_2 = (TextView) mView.findViewById(R.id.txtTotal3_2);
-        txtTotal3_3 = (TextView) mView.findViewById(R.id.txtTotal3_3);
+
+        txtChasis3_1 = (TextView) mView.findViewById(R.id.txtTotal3_1);
+        txtChasis3_2 = (TextView) mView.findViewById(R.id.txtTotal3_2);
+        txtChasis3_3 = (TextView) mView.findViewById(R.id.txtTotal3_3);
+        txtTotal3_1 = (TextView) mView.findViewById(R.id.txtChasis3_1);
+        txtTotal3_2 = (TextView) mView.findViewById(R.id.txtChasis3_2);
+        txtTotal3_3 = (TextView) mView.findViewById(R.id.txtChasis3_3);
+
         SelectorChasis3_1.setBackgroundColor(Color.YELLOW);
         SelectorChasis3_2.setBackgroundColor(Color.GRAY);
         SelectorChasis3_3.setBackgroundColor(Color.GRAY);

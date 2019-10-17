@@ -98,18 +98,21 @@ public class Fragment_seis_bancos extends Fragment {
         SelectorChasis6_4 = (ImageButton) mView.findViewById(R.id.SelectorChasis6_4);
         SelectorChasis6_5 = (ImageButton) mView.findViewById(R.id.SelectorChasis6_5);
         SelectorChasis6_6 = (ImageButton) mView.findViewById(R.id.SelectorChasis6_6);
-        txtChasis6_1 = (TextView) mView.findViewById(R.id.txtChasis6_1);
-        txtChasis6_2 = (TextView) mView.findViewById(R.id.txtChasis6_2);
-        txtChasis6_3 = (TextView) mView.findViewById(R.id.txtChasis6_3);
-        txtChasis6_4 = (TextView) mView.findViewById(R.id.txtChasis6_4);
-        txtChasis6_5 = (TextView) mView.findViewById(R.id.txtChasis6_5);
-        txtChasis6_6 = (TextView) mView.findViewById(R.id.txtChasis6_6);
-        txtTotal6_1 = (TextView) mView.findViewById(R.id.txtTotal6_1);
-        txtTotal6_2 = (TextView) mView.findViewById(R.id.txtTotal6_2);
-        txtTotal6_3 = (TextView) mView.findViewById(R.id.txtTotal6_3);
-        txtTotal6_4 = (TextView) mView.findViewById(R.id.txtTotal6_4);
-        txtTotal6_5 = (TextView) mView.findViewById(R.id.txtTotal6_5);
-        txtTotal6_6 = (TextView) mView.findViewById(R.id.txtTotal6_6);
+
+        txtChasis6_1 = (TextView) mView.findViewById(R.id.txtTotal6_1);
+        txtChasis6_2 = (TextView) mView.findViewById(R.id.txtTotal6_2);
+        txtChasis6_3 = (TextView) mView.findViewById(R.id.txtTotal6_3);
+        txtChasis6_4 = (TextView) mView.findViewById(R.id.txtTotal6_4);
+        txtChasis6_5 = (TextView) mView.findViewById(R.id.txtTotal6_5);
+        txtChasis6_6 = (TextView) mView.findViewById(R.id.txtTotal6_6);
+
+        txtTotal6_1 = (TextView) mView.findViewById(R.id.txtChasis6_1);
+        txtTotal6_2 = (TextView) mView.findViewById(R.id.txtChasis6_2);
+        txtTotal6_3 = (TextView) mView.findViewById(R.id.txtChasis6_3);
+        txtTotal6_4 = (TextView) mView.findViewById(R.id.txtChasis6_4);
+        txtTotal6_5 = (TextView) mView.findViewById(R.id.txtChasis6_5);
+        txtTotal6_6 = (TextView) mView.findViewById(R.id.txtChasis6_6);
+
         SelectorChasis6_1.setBackgroundColor(Color.YELLOW);
         SelectorChasis6_2.setBackgroundColor(Color.GRAY);
         SelectorChasis6_3.setBackgroundColor(Color.GRAY);
