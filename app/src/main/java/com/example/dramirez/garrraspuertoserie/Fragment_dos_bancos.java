@@ -81,10 +81,17 @@ public class Fragment_dos_bancos extends Fragment {
         SelectorChasis2_1 = (ImageButton) mView.findViewById(R.id.SelectorChasis2_1);
         SelectorChasis2_2 = (ImageButton) mView.findViewById(R.id.SelectorChasis2_2);
 
+       /* Este es el original
+        txtChasis2_1 = (TextView) mView.findViewById(R.id.txtChasis2_1);
+        txtChasis2_2 = (TextView) mView.findViewById(R.id.txtChasis2_2);
+        txtTotal2_1 = (TextView) mView.findViewById(R.id.txtTotal2_1);
+        txtTotal2_2 = (TextView) mView.findViewById(R.id.txtTotal2_2);*/
+
         txtChasis2_1 = (TextView) mView.findViewById(R.id.txtChasis2_1);
         txtChasis2_2 = (TextView) mView.findViewById(R.id.txtChasis2_2);
         txtTotal2_1 = (TextView) mView.findViewById(R.id.txtTotal2_1);
         txtTotal2_2 = (TextView) mView.findViewById(R.id.txtTotal2_2);
+
         SelectorChasis2_1.setBackgroundColor(Color.YELLOW);
         SelectorChasis2_2.setBackgroundColor(Color.GRAY);
         mListener.lugarDeCarga(1);

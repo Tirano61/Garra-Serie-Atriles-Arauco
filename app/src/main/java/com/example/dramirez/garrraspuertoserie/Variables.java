@@ -10,7 +10,16 @@ public class Variables {
     private static boolean TIEMPOCARGA = false;
     private  static String CABECERA_1,CABECERA_2,CABECERA_3,CABECERA_4;
     private  static boolean RESTAR;
+    private  static String SEMIAUT;
 
+
+    public static String getSEMIAUT() {
+        return SEMIAUT;
+    }
+
+    public static void setSEMIAUT(String SEMIAUT) {
+        Variables.SEMIAUT = SEMIAUT;
+    }
 
     public static boolean isRESTAR() {
         return RESTAR;

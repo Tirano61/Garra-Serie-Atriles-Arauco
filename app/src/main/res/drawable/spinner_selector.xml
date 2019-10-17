@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_window_focused="true" android:state_enabled="true" android:drawable="@drawable/spinner" />
-    <item android:state_pressed="true"  android:drawable="@drawable/pinner_pres" />
+    <item android:state_pressed="true" android:drawable="@drawable/pinner_pres" />
     <item android:state_focused="true" android:state_enabled="true" android:drawable="@drawable/pinner_pres" />
     <item android:state_enabled="true" android:drawable="@drawable/spinner" />
     <item android:state_focused="true" android:drawable="@drawable/pinner_pres" />

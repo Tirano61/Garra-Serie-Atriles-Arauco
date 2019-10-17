@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/accent"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/titulo_dialogo_nuevo_operador"
+        android:textSize="24sp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/nombre_dialogo_nuevo_operador"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/edtNuevoOperadorNombre"
+            app:layout_constraintEnd_toStartOf="@+id/edtNuevoOperadorNombre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edtNuevoOperadorNombre" />
+
+        <EditText
+            android:id="@+id/edtNuevoOperadorNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código :"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/edtNuevoOPeradorCodigo"
+            app:layout_constraintStart_toStartOf="@+id/textView61"
+            app:layout_constraintTop_toTopOf="@+id/edtNuevoOPeradorCodigo" />
+
+        <EditText
+            android:id="@+id/edtNuevoOPeradorCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="3"
+            app:layout_constraintStart_toStartOf="@+id/edtNuevoOperadorNombre"
+            app:layout_constraintTop_toBottomOf="@+id/edtNuevoOperadorNombre" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtNuevoOPeradorCodigo">
+
+            <Button
+                android:id="@+id/btnNuevoOperadorGuardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Guardar"
+                tools:layout_editor_absoluteX="51dp"
+                tools:layout_editor_absoluteY="182dp" />
+
+            <Button
+                android:id="@+id/btnNuevoOperadorSalir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dialgo_cancelar"
+                tools:layout_editor_absoluteX="190dp"
+                tools:layout_editor_absoluteY="182dp" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>

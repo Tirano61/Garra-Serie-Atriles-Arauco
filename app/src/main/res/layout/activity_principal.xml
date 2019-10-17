@@ -64,7 +64,6 @@
         android:layout_alignBottom="@+id/layout_logo"
         android:layout_marginEnd="76dp"
         android:layout_marginBottom="-284dp"
-        android:text="TextView"
         android:textColor="@color/primary_light"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -159,11 +158,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="0.8"
-                android:orientation="vertical">
-
-
-
-            </LinearLayout>
+                android:orientation="vertical"/>
 <!-- Hasta aca va el fragment -->
             <LinearLayout
 
@@ -189,7 +184,7 @@
                             android:id="@+id/textView9"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="2.7"
+                            android:layout_weight="2.2"
                             android:gravity="bottom"
                             android:paddingStart="10dp"
                             android:text="@string/total"
@@ -206,6 +201,7 @@
                             android:paddingStart="20dp"
                             android:text="0"
 
+                            android:textAlignment="textStart"
                             android:textColor="@color/icons"
                             android:textSize="18sp"
                             android:typeface="serif" />
@@ -230,7 +226,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.2"
+                            android:layout_weight="0.8"
                             android:gravity="center_vertical"
                             android:paddingStart="10dp"
                             android:text="@string/Tiempo_de_carga"
@@ -324,7 +320,102 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.95"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    style="@style/textView_DatosDescarga"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.9"
+                    android:gravity="bottom|center_vertical"
+                    android:paddingBottom="5dp"
+                    android:text="@string/producto"
+                    android:textColor="@color/primary_light"
+                    android:typeface="serif" />
+
+                <EditText
+                    android:id="@+id/edt_producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.6"
+                    android:enabled="false"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/icons"
+                    android:textSize="18sp"
+                    android:theme="@style/CampoTexto1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView36"
+                    style="@style/textView_DatosDescarga"
+                    android:layout_weight="1.9"
+                    android:gravity="bottom|center_vertical"
+                    android:paddingBottom="5dp"
+                    android:text="@string/datos_volumen"
+                    android:textColor="@color/primary_light"
+                    android:typeface="serif" />
+
+                <EditText
+                    android:id="@+id/edt_grua"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.6"
+                    android:enabled="false"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/icons"
+                    android:textSize="18sp"
+                    android:theme="@style/CampoTexto1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView32"
+                    style="@style/textView_DatosDescarga"
+                    android:layout_weight="1.9"
+                    android:gravity="bottom|center_vertical"
+                    android:paddingBottom="5dp"
+                    android:text="@string/datos_cliente"
+                    android:textColor="@color/primary_light"
+                    android:typeface="serif" />
+
+                <EditText
+                    android:id="@+id/edt_operador"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.6"
+                    android:enabled="false"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/icons"
+                    android:textSize="18sp"
+                    android:theme="@style/CampoTexto1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:defaultFocusHighlightEnabled="true"
                 android:focusable="true"
                 android:orientation="horizontal">
@@ -342,16 +433,19 @@
                     android:typeface="serif" />
 
                 <EditText
-                    android:id="@+id/edt_patente"
+                    android:id="@+id/edt_vehiculo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
 
                     android:layout_alignParentTop="true"
                     android:layout_weight="1.6"
+                    android:enabled="false"
                     android:gravity="center_vertical"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:paddingLeft="20dp"
-                    android:paddingTop="25dp"
+                    android:singleLine="true"
                     android:textColor="@color/icons"
                     android:textSize="18sp"
                     android:theme="@style/CampoTexto1" />
@@ -380,66 +474,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.6"
+                    android:enabled="false"
                     android:gravity="center_vertical"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:paddingLeft="20dp"
-                    android:textColor="@color/icons"
-                    android:textSize="18sp"
-                    android:theme="@style/CampoTexto1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView25"
-                    style="@style/textView_DatosDescarga"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.9"
-                    android:gravity="bottom|center_vertical"
-                    android:paddingBottom="5dp"
-                    android:text="@string/producto"
-                    android:textColor="@color/primary_light"
-                    android:typeface="serif" />
-
-                <EditText
-                    android:id="@+id/edt_producto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:textColor="@color/icons"
-                    android:textSize="18sp"
-                    android:theme="@style/CampoTexto1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView32"
-                    style="@style/textView_DatosDescarga"
-                    android:layout_weight="1.9"
-                    android:gravity="bottom|center_vertical"
-                    android:paddingBottom="5dp"
-                    android:text="@string/datos_cliente"
-                    android:textColor="@color/primary_light"
-                    android:typeface="serif" />
-
-                <EditText
-                    android:id="@+id/edt_cliente"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
+                    android:singleLine="true"
                     android:textColor="@color/icons"
                     android:textSize="18sp"
                     android:theme="@style/CampoTexto1" />
@@ -466,36 +506,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.6"
+                    android:enabled="false"
                     android:gravity="center_vertical"
+                    android:lines="1"
+                    android:maxLength="5"
+                    android:maxLines="1"
                     android:paddingLeft="20dp"
-                    android:textColor="@color/icons"
-                    android:textSize="18sp"
-                    android:theme="@style/CampoTexto1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView36"
-                    style="@style/textView_DatosDescarga"
-                    android:layout_weight="1.9"
-                    android:gravity="bottom|center_vertical"
-                    android:paddingBottom="5dp"
-                    android:text="@string/datos_volumen"
-                    android:textColor="@color/primary_light"
-                    android:typeface="serif" />
-
-                <EditText
-                    android:id="@+id/edt_volumen"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.6"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
+                    android:singleLine="true"
                     android:textColor="@color/icons"
                     android:textSize="18sp"
                     android:theme="@style/CampoTexto1" />

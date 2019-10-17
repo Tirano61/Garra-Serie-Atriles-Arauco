@@ -5,29 +5,29 @@ public class DBpesadas {
     public static final String TABLE_NAME_PESADAS = "tpesadas";
 
     //********* CAMPOS TABLA PESADAS ***********//
-    public static final  String FPES_ID = "_id";
-    public static final  String FPES_FECHA = "fecha";
-    public static final  String FPES_HORA = "hora";
-    public static final  String FPES_PRODUCTO = "producto";
-    public static final  String FPES_CARGIO = "cargio";
-    public static final  String FPES_PATENTE = "patente";
-    public static final  String FPES_VOLUMEN = "volumen";
-    public static final  String FPES_CODIGO = "codigo";
-    public static final  String FPES_CLIENTE = "cliente";
-    public static final  String FPES_BANCOS = "bancos";
-    public static final  String FPES_BANCO1 = "banco1";
-    public static final  String FPES_BANCO2 = "banco2";
-    public static final  String FPES_BANCO3 = "banco3";
-    public static final  String FPES_BANCO4 = "banco4";
-    public static final  String FPES_BANCO5 = "banco5";
-    public static final  String FPES_BANCO6 = "banco6";
-    public static final  String FPES_BANCO7 = "banco7";
-    public static final  String FPES_BANCO8 = "banco8";
-    public static final  String FPES_BANCO9 = "banco9";
-    public static final  String FPES_CARGAS = "cargas";
-    public static final  String FPES_BRUTO = "bruto";
-    public static final  String FPES_TARA = "tara";
-    public static final  String FPES_NETO = "neto";
+    public static final  String FPES_ID = "_id"; //0
+    public static final  String FPES_FECHA = "fecha"; //1
+    public static final  String FPES_HORA = "hora";  //2
+    public static final  String FPES_CARGIO = "cargio"; //3
+    public static final  String FPES_PRODUCTO = "producto"; //4
+    public static final  String FPES_GRUA = "grua"; //5
+    public static final  String FPES_OPERADOR = "operador"; //6
+    public static final  String FPES_VEHICULO = "vehiculo"; //7
+    public static final  String FPES_CODIGO = "codigo"; //8
+    public static final  String FPES_BANCOS = "bancos"; //9
+    public static final  String FPES_BANCO1 = "banco1"; //10
+    public static final  String FPES_BANCO2 = "banco2"; //11
+    public static final  String FPES_BANCO3 = "banco3"; //12
+    public static final  String FPES_BANCO4 = "banco4"; //13
+    public static final  String FPES_BANCO5 = "banco5"; //14
+    public static final  String FPES_BANCO6 = "banco6"; //15
+    public static final  String FPES_BANCO7 = "banco7"; //16
+    public static final  String FPES_BANCO8 = "banco8"; //17
+    public static final  String FPES_BANCO9 = "banco9"; //18
+    public static final  String FPES_CARGAS = "cargas"; //19
+    public static final  String FPES_BRUTO = "bruto";   //20
+    public static final  String FPES_TARA = "tara";     //21
+    public static final  String FPES_NETO = "neto";     //22
 
 
     //************ CREAR TABLA PESADAS ***************//
@@ -35,12 +35,12 @@ public class DBpesadas {
             FPES_ID + " integer primary key autoincrement, " +
             FPES_FECHA + " DATETIME," +
             FPES_HORA + " text," +
-            FPES_PRODUCTO + " text," +
             FPES_CARGIO + " text," +
-            FPES_PATENTE + " text," +
-            FPES_VOLUMEN + " text," +
+            FPES_PRODUCTO + " text," +
+            FPES_GRUA + " text," +
+            FPES_OPERADOR + " text," +
+            FPES_VEHICULO + " text," +
             FPES_CODIGO + " text," +
-            FPES_CLIENTE + " text," +
             FPES_BANCOS + " text," +
             FPES_BANCO1 + " text," +
             FPES_BANCO2 + " text," +
@@ -59,12 +59,13 @@ public class DBpesadas {
     private int idPesada;
     private String fecha;
     private String hora;
-    private String producto;
     private String cargio;
-    private String patente;
-    private String volumen;
+    private String producto;
+
+    private String grua;
+    private String operador;
+    private String vehiculo;
     private String codigo;
-    private String cliente;
     private String bancos;
     private String banco1;
     private String banco2;
@@ -80,20 +81,22 @@ public class DBpesadas {
     private String tara;
     private String neto;
 
-    public DBpesadas(String fecha, String hora, String producto, String cargio, String patente,
-                      String volumen,String codigo,String cliente,String bancos,String banco1,String banco2,
+    public DBpesadas(String fecha, String hora,String cargio,String producto,String grua,
+                      String operador,String vehiculo,String codigo,String bancos,String banco1,String banco2,
                      String banco3,String banco4,String banco5,String banco6,String banco7,String banco8,
                      String banco9,String cargas, String bruto, String tara,String neto)
     {
         this.fecha = fecha;
         this.hora = hora;
-        this.producto = producto;
         this.cargio = cargio;
-        this.patente = patente;
+        this.producto = producto;
+
+        this.grua = grua;
+
         this.tara = tara;
-        this.volumen = volumen;
+        this.operador = operador;
         this.codigo = codigo;
-        this.cliente = cliente;
+        this.vehiculo = vehiculo;
         this.bancos = bancos;
         this.banco1 = banco1;
         this.banco2 = banco2;
@@ -215,14 +218,6 @@ public class DBpesadas {
         this.neto = neto;
     }
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
     public int getIdPesada() {
         return idPesada;
     }
@@ -263,14 +258,6 @@ public class DBpesadas {
         this.producto = producto;
     }
 
-    public String getPatente() {
-        return patente;
-    }
-
-    public void setPatente(String patente) {
-        this.patente = patente;
-    }
-
     public String getTara() {
         return tara;
     }
@@ -279,19 +266,35 @@ public class DBpesadas {
         this.tara = tara;
     }
 
-    public String getVolumen() {
-        return volumen;
-    }
-
-    public void setVolumen(String volumen) {
-        this.volumen = volumen;
-    }
-
     public String getCodigo() {
         return codigo;
     }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getGrua() {
+        return grua;
+    }
+
+    public void setGrua(String grua) {
+        this.grua = grua;
+    }
+
+    public String getOperador() {
+        return operador;
+    }
+
+    public void setOperador(String operador) {
+        this.operador = operador;
+    }
+
+    public String getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(String vehiculo) {
+        this.vehiculo = vehiculo;
     }
 }

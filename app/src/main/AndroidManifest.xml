@@ -3,6 +3,7 @@
     package="com.example.dramirez.garrraspuertoserie">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -13,23 +14,30 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:launchMode="singleTask"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="landscape"
         android:stateNotNeeded="true"
+        android:supportsRtl="true"
         android:theme="@style/MaterialTema">
         <activity
+            android:name=".ListaOperadores"
+            android:label="@string/title_activity_lista_operadores"
+            android:theme="@style/MaterialTema.NoActionBar"></activity>
+        <activity android:name=".Operadores" />
+        <activity
             android:name=".Principal"
-            android:theme="@style/MaterialTema"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/MaterialTema">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -37,7 +45,7 @@
         </activity>
         <activity android:name=".Calibracion" />
         <activity android:name=".Productos" />
-        <activity android:name=".Pesadas"></activity>
+        <activity android:name=".Pesadas" />
     </application>
 
 </manifest>

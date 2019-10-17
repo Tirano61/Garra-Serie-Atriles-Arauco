@@ -68,7 +68,15 @@ class Balanza {
     }
 
     public boolean isSemiAutomatico() {
-        return semiAutomatico;
+        boolean valor;
+        if (variables.getSEMIAUT().equals("1"))
+        {
+            valor = true;
+        }else{
+            valor = false;
+        }
+
+        return valor;
     }
 
     public void setSemiAutomatico(boolean semiAutomatico) {
@@ -175,7 +183,8 @@ class Balanza {
 
     public int setAcumularPeso()
     {
-        if (semiAutomatico)
+        Log.d("ENVIO Acumular = ",String.valueOf(celda.getGuardado()));
+        if (isSemiAutomatico())
         {
             if (isCominzoPesaje() && isFlagPeso() && (corregido > 50))
             {
@@ -186,6 +195,7 @@ class Balanza {
                     PesoAcumuladoCasis -= (int)waitForPesoEstable();
                     variables.setRESTAR(false);
                 }else{
+                    Log.d("ENVIO Semiauto = ",String.valueOf(celda.getGuardado()));
                     PesoAcumulado += (int)waitForPesoEstable();
                     PesoAcumuladoBancos += (int)waitForPesoEstable();
                     PesoAcumuladoCasis += (int)waitForPesoEstable();
@@ -207,6 +217,7 @@ class Balanza {
                     PesoAcumuladoCasis -= (int)waitForPesoEstable();
                     variables.setRESTAR(false);
                 }else{
+                    Log.d("ENVIO entro = ",String.valueOf(celda.getGuardado()));
                     PesoAcumulado += (int)waitForPesoEstable();
                     PesoAcumuladoBancos += (int)waitForPesoEstable();
                     PesoAcumuladoCasis += (int)waitForPesoEstable();
@@ -217,6 +228,7 @@ class Balanza {
                 guardado = true;
             }
         }
+
         return PesoAcumulado;
     }
 
@@ -416,6 +428,7 @@ class Balanza {
                         if (celda.getGuardado() == 1)
                         {
                             guardarPeso();
+                            Log.d("ENVIO getGuardado = ",String.valueOf(celda.getGuardado()));
                         }
                         Thread.sleep(100);
                     }catch (Exception e)

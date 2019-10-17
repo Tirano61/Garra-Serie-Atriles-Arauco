@@ -15,6 +15,7 @@ public class DBcalibracion
     public static final  String FCAL_RECORTES = "recortes";
     public static final  String FCAL_LOGICA = "logica";
     public static final  String FCAL_TICKET = "ticket";
+    public static final  String FCAL_SEMI = "semiaut";
 
     public static final String TAB_CALIBRACION  = "CREATE TABLE " + TABLE_NAME_CALIBRACION + "(" +
             FCAL_ID + " integer primary key autoincrement, " +
@@ -27,7 +28,8 @@ public class DBcalibracion
             FCAL_CONVERSIONES + " text," +
             FCAL_RECORTES + " text," +
             FCAL_LOGICA + " text," +
-            FCAL_TICKET  + " text"+");";
+            FCAL_TICKET + " text," +
+            FCAL_SEMI  + " text"+");";
 
 
     private int idCalibracion;
@@ -41,8 +43,9 @@ public class DBcalibracion
     private String recortes;
     private String logica;
     private String ticket;
+    private String semiaut;
     public DBcalibracion(String capacidad, String celdas,String division, String sensibilidad, String ventana,
-                         String kgfiltro, String conversiones, String recortes,String logica, String ticket)
+                         String kgfiltro, String conversiones, String recortes,String logica, String ticket,String semiaut)
     {
         this.capacidad = capacidad;
         this.celdas = celdas;
@@ -54,8 +57,16 @@ public class DBcalibracion
         this.recortes = recortes;
         this.logica = logica;
         this.ticket = ticket;
+        this.semiaut = semiaut;
     }
 
+    public String getSemiaut() {
+        return semiaut;
+    }
+
+    public void setSemiaut(String semiaut) {
+        this.semiaut = semiaut;
+    }
 
     public String getTicket() {
         return ticket;

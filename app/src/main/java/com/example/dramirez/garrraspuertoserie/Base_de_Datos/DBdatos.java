@@ -5,48 +5,45 @@ public class DBdatos {
 
     public static final  String FDAT_ID = "_id";
     public static final  String FDAT_PRODUCTO = "producto";
-    public static final  String FDAT_PATENTE = "patente";
-    public static final  String FDAT_TARA = "tara";
-    public static final  String FDAT_VOLUMEN = "volumen";
+    public static final  String FDAT_GRUA = "grua";
+    public static final  String FDAT_OPERADOR = "operador";
+    public static final  String FDAT_VEHICULO = "vehiculo";
     public static final  String FDAT_CODIGO = "codigo";
-    public static final  String FDAT_CLIENTE = "cliente";
+    public static final  String FDAT_TARA = "tara";
+
+
+
 
     //************ CREAR TABLA PESADAS ***************//
     public  static final  String TAB_DATOS = "CREATE TABLE " + TABLE_NAME_DATOS + "(" +
             FDAT_ID + " integer primary key autoincrement, " +
             FDAT_PRODUCTO + " text," +
-            FDAT_PATENTE + " text," +
-            FDAT_TARA + " text," +
-            FDAT_VOLUMEN + " text," +
+            FDAT_GRUA + " text," +
+            FDAT_OPERADOR + " text," +
+            FDAT_VEHICULO + " text," +
             FDAT_CODIGO + " text," +
-            FDAT_CLIENTE  + " text"+");";
+            FDAT_TARA  + " text"+");";
 
     private int idConexion;
     private String producto;
-    private String patente;
-    private String tara;
-    private String volumen;
+    private String grua;
+    private String operador;
+    private String vehiculo;
     private String codigo;
-    private String cliente;
+    private String tara;
 
-    public DBdatos(String producto,String patente, String tara,String volumen,String codigo,String cliente)
+    public DBdatos(String producto,String grua, String operador,String vehiculo,
+                   String codigo,String tara)
     {
         this.producto = producto;
-        this.patente = patente;
-        this.tara = tara;
-        this.volumen = volumen;
+        this.grua = grua;
+        this.operador = operador;
+        this.vehiculo = vehiculo;
         this.codigo = codigo;
-        this.cliente = cliente;
+        this.tara = tara;
 
     }
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
 
     public int getIdConexion() {
         return idConexion;
@@ -64,28 +61,12 @@ public class DBdatos {
         this.producto = producto;
     }
 
-    public String getPatente() {
-        return patente;
-    }
-
-    public void setPatente(String patente) {
-        this.patente = patente;
-    }
-
     public String getTara() {
         return tara;
     }
 
     public void setTara(String tara) {
         this.tara = tara;
-    }
-
-    public String getVolumen() {
-        return volumen;
-    }
-
-    public void setVolumen(String volumen) {
-        this.volumen = volumen;
     }
 
     public String getCodigo() {
@@ -95,4 +76,29 @@ public class DBdatos {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    public String getGrua() {
+        return grua;
+    }
+
+    public void setGrua(String grua) {
+        this.grua = grua;
+    }
+
+    public String getOperador() {
+        return operador;
+    }
+
+    public void setOperador(String operador) {
+        this.operador = operador;
+    }
+
+    public String getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(String vehiculo) {
+        this.vehiculo = vehiculo;
+    }
 }
+

@@ -4,11 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.BaseDeDatos;
@@ -37,20 +42,26 @@ public class Pesadas extends AppCompatActivity {
 
     String IdPesada;
     ArrayList<ListaEntradaPesadas> datos;
-    String fecha;
 
+    String fecha;
+    String fechaImpresion ="", hora = "", cargio = "",grua ="",operador="",producto="",vehiculo="",codigo = "", peso_acumulado="", tara = "",cargas = "";
+    String bancos,banco1,banco2,banco3,banco4,banco5,banco6,banco7,banco8,banco9;
+    ProgressBar progressBar;
+    int netoDescargado;
+    Variables var ;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesadas);
-
+        var = new Variables();
         db = new BaseDeDatos(getBaseContext());
 
         txtPesadasFecha1 = (TextView)findViewById(R.id.txtPesadasFecha1);
         txtPesadasFecha2 = (TextView)findViewById(R.id.txtPesadasFecha2);
         txtPesadasTotal = (TextView)findViewById(R.id.txtPesadasTotal);
         lvPesadas= (ListView)findViewById(R.id.lvPesadas);
+        progressBar = (ProgressBar)findViewById(R.id.progressBarReimpresion);
         fecha = new SimpleDateFormat("dd/MM/yyyy").format (new Date());
 
         Bundle bundle = getIntent().getExtras();
@@ -90,35 +101,81 @@ public class Pesadas extends AppCompatActivity {
 
     public void dialogoBorrarPesadas() throws InterruptedException
     {
-        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Desea borrar o reimprimir la pesada número : " + IdPesada + " o borrar todas las pesadas" )
-                .setTitle("Borrar pesada.")
-                .setPositiveButton("Una Pesada", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        borrarPesada();
-                    }
-                })
+        final AlertDialog dialog;
+        LayoutInflater layoutInflater = LayoutInflater.from(Pesadas.this);
+        View promptView = layoutInflater.inflate(R.layout.dialogo_borrado_reimpresion, null);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TemaGeneral));
+        alertDialogBuilder.setView(promptView);
 
-                .setNeutralButton("Borrar Todas", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        borrarTodas();
-                    }
-                })
-                .setNegativeButton("Reimprimir", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Crear dialogo para reimprimir el tocket
+        Button btnBorrar = (Button) promptView.findViewById(R.id.btnBorrar);
+        Button btnBorrarTodas = (Button) promptView.findViewById(R.id.btnBorrarTodas);
+        Button btnImprimir = (Button) promptView.findViewById(R.id.btnImprimir);
+        Button btnSalr = (Button) promptView.findViewById(R.id.btnNuevoOperadorSalir);
 
-                    }
-                });
-        Dialog dialogo = builder.create();
-        Thread.sleep(1500);
-        dialogo.show();
+        alertDialogBuilder.setCancelable(true);
+        dialog =   alertDialogBuilder.create();
+
+
+        btnBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                borrarPesada();
+                dialog.dismiss();
+            }
+        });
+        btnBorrarTodas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                borrarTodas();
+            }
+        });
+        btnImprimir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Cursor c = db.db.rawQuery("SELECT * FROM tpesadas WHERE _id ='"+IdPesada+"'",null);
+                if (c.moveToFirst()){
+
+                    fechaImpresion = c.getString(1);
+                    hora = c.getString(2);
+                    cargio = c.getString(3);
+                    producto = c.getString(4);
+                    grua = c.getString(5);//grua
+                    operador = c.getString(6);//operador
+                    vehiculo = c.getString(7);//vehiculo
+                    codigo = c.getString(8);//codigo
+                    bancos = c.getString(9);
+                    banco1 = c.getString(10);
+                    banco2 = c.getString(11);
+                    banco3 = c.getString(12);
+                    banco4 = c.getString(13);
+                    banco5 = c.getString(14);
+                    banco6 = c.getString(15);
+                    banco7 = c.getString(16);
+                    banco8 = c.getString(17);
+                    banco9 = c.getString(18);
+                    peso_acumulado = c.getString(20);
+                    tara = c.getString(21);
+                    cargas = c.getString(19);
+
+                    netoDescargado = Integer.valueOf(peso_acumulado) - Integer.valueOf(tara);
+
+                    new impresionAsyncTask().execute();
+                    dialog.dismiss();
+                }
+            }
+        });
+        btnSalr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
     }
-
 
     public void borrarPesada()
     {
@@ -250,4 +307,447 @@ public class Pesadas extends AppCompatActivity {
         }).start();
 
     }
+
+
+
+
+
+    public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
+    {
+        int progreso;
+        //String hora = "", cargio = "",vehiculo ="",codigo="",producto="",operador="",grua = "", peso_acumulado="", tara = "",cargas = "";
+        //String banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",banco7 ="",banco8 ="",banco9 ="",cargas ="";
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+
+            progreso = 0;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            for (int i =1; i <= var.getTICKETS(); i++)
+            {
+                Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                if (!var.getCabecera1().equals(null))
+                {
+                    if (!var.getCabecera1().equals("")) {
+                        Balanza.getInstance().ImprimirTicket("  " + var.getCabecera1());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera2().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera2());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera3().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera4().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " + hora);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+getString(R.string.Tiempo_de_carga) + cargio);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.patente)   + vehiculo);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Codigo    : " + codigo);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.producto) + producto);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cod.      : " + operador);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Grua      : " + grua);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-1  : " + banco1);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-2  : " + banco2);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-3  : " + banco3);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-4  : " + banco4);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-5  : " + banco5);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-6  : " + banco6);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-7  : " + banco7);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-8  : " + banco8);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-9  : " + banco9);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cargas   : " + cargas);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Bruto    : " + peso_acumulado);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+
+                Balanza.getInstance().ImprimirTicket("  Tara     : " + tara);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.neto) + String.valueOf(netoDescargado));
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+
+            }
+            progreso = 100;
+            publishProgress(progreso);
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values)
+        {
+            if (progreso < 100)
+            {
+                progressBar.setProgress(values[0]);
+            }else {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            bancos ="0";
+            banco1 = "";
+            banco2 = "";
+            banco3 = "";
+            banco4 = "";
+            banco5 = "";
+            banco6 = "";
+            banco7 = "";
+            banco8 = "";
+            banco9 = "";
+        }
+    }
+
+   /* public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
+    {
+        int progreso;
+
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+
+            progreso = 0;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            for (int i =1; i <= var.getTICKETS(); i++)
+            {
+                Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                if (!var.getCabecera1().equals(null))
+                {
+                    if (!var.getCabecera1().equals("")) {
+                        Balanza.getInstance().ImprimirTicket("  " + var.getCabecera1());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera2().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera2());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera3().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+
+                if (!var.getCabecera4().equals(null))
+                {
+                    if (!var.getCabecera4().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " + hora);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Tiempo de Carga : " + cargio);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Vehículo : " + vehiculo);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Codigo    : " + codigo);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Producto  : " + producto);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cod.      : " + operador);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Grua      : " + grua);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-1  : " + banco1);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-2  : " + banco2);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-3  : " + banco3);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-4  : " + banco4);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-5  : " + banco5);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-6  : " + banco6);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-7  : " + banco7);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-8  : " + banco8);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-9  : " + banco9);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cargas   : " + cargas);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Bruto    : " + peso_acumulado);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+
+                Balanza.getInstance().ImprimirTicket("  Tara     : " + tara);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Neto     : " + String.valueOf(netoDescargado));
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+
+            }
+            progreso = 100;
+            publishProgress(progreso);
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values)
+        {
+            if (progreso < 100)
+            {
+                progressBar.setProgress(values[0]);
+            }else {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            bancos ="0";
+            banco1 = "";
+            banco2 = "";
+            banco3 = "";
+            banco4 = "";
+            banco5 = "";
+            banco6 = "";
+            banco7 = "";
+            banco8 = "";
+            banco9 = "";
+        }
+    }*/
+
+
+
+
 }

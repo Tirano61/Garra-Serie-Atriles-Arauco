@@ -32,6 +32,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL(DBcalibracion.TAB_CALIBRACION);
         db.execSQL(DBcabecera.TAB_CABECERA);
         db.execSQL(DBcelda.TAB_CELDA);
+        db.execSQL(DBoperadores.TAB_OPERADORES);
     }
 
     @Override
@@ -45,7 +46,19 @@ public class BaseDeDatos extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXIXTS" + DBcalibracion.TABLE_NAME_CALIBRACION);
         db.execSQL("DROP TABLE IF EXIXTS" + DBcabecera.TABLE_NAME_CABECERA);
         db.execSQL("DROP TABLE IF EXIXTS" + DBcelda.TABLE_NAME_CELDA);
+        db.execSQL("DROP TABLE IF EXIXTS" + DBoperadores.TABLE_NAME_OPERADORES);
         onCreate(db);
+    }
+
+    private ContentValues generarOperadores(DBoperadores operadores){
+        ContentValues values  = new ContentValues();
+        values.put(DBoperadores.FOP_CODIGO, operadores.getCod_operador());
+        values.put(DBoperadores.FOP_NOMBRE, operadores.getNombre());
+        return values;
+    }
+    public void InsertarOperadores(DBoperadores operadores)
+    {
+        db.insert(DBoperadores.TABLE_NAME_OPERADORES, null, generarOperadores(operadores));
     }
     private ContentValues generarCorreccion(DBcorreccion correccion)
     {
@@ -56,6 +69,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
 
     public void actualizarCorreccion(DBcorreccion correccion, String id)
     {
+
         db.update(DBcorreccion.TABLE_NAME_CORRECCION, generarCorreccion(correccion), DBcorreccion.FCO_ID+ "=?", new String[]{id});
     }
 
@@ -83,12 +97,12 @@ public class BaseDeDatos extends SQLiteOpenHelper
         ContentValues valores = new ContentValues();
         valores.put(DBpesadas.FPES_FECHA, pesadas.getFecha());
         valores.put(DBpesadas.FPES_HORA, pesadas.getHora());
-        valores.put(DBpesadas.FPES_PRODUCTO, pesadas.getProducto());
         valores.put(DBpesadas.FPES_CARGIO, pesadas.getCargio());
-        valores.put(DBpesadas.FPES_PATENTE, pesadas.getPatente());
-        valores.put(DBpesadas.FPES_VOLUMEN, pesadas.getVolumen());
+        valores.put(DBpesadas.FPES_PRODUCTO, pesadas.getProducto());
+        valores.put(DBpesadas.FPES_GRUA, pesadas.getGrua());
+        valores.put(DBpesadas.FPES_OPERADOR, pesadas.getOperador());
+        valores.put(DBpesadas.FPES_VEHICULO, pesadas.getVehiculo());
         valores.put(DBpesadas.FPES_CODIGO, pesadas.getCodigo());
-        valores.put(DBpesadas.FPES_CLIENTE, pesadas.getCliente());
         valores.put(DBpesadas.FPES_BANCOS, pesadas.getBancos());
         valores.put(DBpesadas.FPES_BANCO1, pesadas.getBanco1());
         valores.put(DBpesadas.FPES_BANCO2, pesadas.getBanco2());
@@ -99,7 +113,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBpesadas.FPES_BANCO7, pesadas.getBanco7());
         valores.put(DBpesadas.FPES_BANCO8, pesadas.getBanco8());
         valores.put(DBpesadas.FPES_BANCO9, pesadas.getBanco9());
-        valores.put(DBpesadas.FPES_CARGAS, pesadas.getBanco9());
+        valores.put(DBpesadas.FPES_CARGAS, pesadas.getCargas());
         valores.put(DBpesadas.FPES_BRUTO, pesadas.getBruto());
         valores.put(DBpesadas.FPES_TARA, pesadas.getTara());
         valores.put(DBpesadas.FPES_NETO, pesadas.getNeto());
@@ -119,11 +133,11 @@ public class BaseDeDatos extends SQLiteOpenHelper
         //falta el cliente
         ContentValues valores = new ContentValues();
         valores.put(DBdatos.FDAT_PRODUCTO, datos.getProducto());
-        valores.put(DBdatos.FDAT_PATENTE, datos.getPatente());
-        valores.put(DBdatos.FDAT_TARA, datos.getTara());
-        valores.put(DBdatos.FDAT_VOLUMEN, datos.getVolumen());
+        valores.put(DBdatos.FDAT_GRUA, datos.getGrua());
+        valores.put(DBdatos.FDAT_OPERADOR, datos.getOperador());
+        valores.put(DBdatos.FDAT_VEHICULO, datos.getVehiculo());
         valores.put(DBdatos.FDAT_CODIGO, datos.getCodigo());
-        valores.put(DBdatos.FDAT_CLIENTE, datos.getCliente());
+        valores.put(DBdatos.FDAT_TARA, datos.getTara());
         return valores;
     }
     private void InsetarDatos(DBdatos datos){
@@ -155,14 +169,39 @@ public class BaseDeDatos extends SQLiteOpenHelper
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst())
         {
+            productos.add("");
             do
             {
                 productos.add(cursor.getString(1));
             }
             while (cursor.moveToNext());
         }
+
         cursor.close();
         return  productos;
+    }
+    public List<String> getAllOperadores()
+    {
+        List<String> operadores = new ArrayList<String>();
+
+        String selectQuery = "SELECT cod_operador, nombre FROM " + DBoperadores.TABLE_NAME_OPERADORES +" ";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst())
+        {
+            operadores.add("");
+            operadores.add("");
+            do
+            {
+                operadores.add(cursor.getString(1));
+            }
+            while (cursor.moveToNext());
+        }else{
+            operadores.add("");
+            operadores.add("");
+        }
+        cursor.close();
+        return  operadores;
     }
 
 
@@ -184,6 +223,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBcalibracion.FCAL_RECORTES, calibracion.getRecortes());
         valores.put(DBcalibracion.FCAL_LOGICA, calibracion.getLogica());
         valores.put(DBcalibracion.FCAL_TICKET, calibracion.getTicket());
+        valores.put(DBcalibracion.FCAL_SEMI, calibracion.getSemiaut());
         return valores;
     }
     public void actualizarCalibracion(DBcalibracion calibracion, String id)

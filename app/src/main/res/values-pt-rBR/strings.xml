@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Garras Porta Serial</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="TITULO">ST 455 FOREST</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: dialogo datos de la carga -->
+    <string name="dialogo_titulo">Digite os dados da carga ...</string>
+    <string name="dialgo_cliente">Cod. :</string>
+    <string name="dialgo_volumen">Grua :</string>
+    <string name="dialgo_producto">Produto :</string>
+    <string name="dialgo_patente">Veículo :</string>
+    <string name="dialgo_codigo">Código :</string>
+    <string name="dialgo_tara">Tara :</string>
+    <string name="dialgo_aceptar">Aceitar</string>
+    <string name="dialgo_cancelar">Sair</string>
+
+    <!-- Todo: Dialogo Edicion Productos -->
+    <string name="dialogo_productos_titulo">Edição de Produtos</string>
+    <string name="dialogo_productos_producto1">Prod. nº 1:</string>
+    <string name="dialogo_productos_producto2">Prod. nº 2:</string>
+    <string name="dialogo_productos_producto3">Prod. nº 3:</string>
+    <string name="dialogo_productos_producto4">Prod. nº 4:</string>
+    <string name="dialogo_productos_producto5">Prod. nº 5:</string>
+    <string name="dialogo_productos_producto6">Prod. nº 6:</string>
+    <string name="dialogo_productos_producto7">Prod. nº 7:</string>
+    <string name="dialogo_productos_producto8">Prod. nº 8:</string>
+    <string name="dialogo_productos_producto9">Prod. nº 9:</string>
+    <string name="dialogo_productos_producto10">Prod. nº 10:</string>
+    <string name="dialogo_productos_producto11">Prod. nº 11:</string>
+    <string name="dialogo_productos_producto12">Prod. nº 12:</string>
+    <string name="Tiempo_de_carga">Tempo da carga :</string>
+    <string name="datos_de_la_descarga">Dados da carga</string>
+    <string name="patente">Veiculo :</string>
+    <string name="codigo">Código :</string>
+    <string name="producto">Produto :</string>
+    <string name="datos_cliente">Cod. :</string>
+    <string name="datos_volumen">Grua :</string>
+    <string name="datos_tara">Tara :</string>
+    <string name="titulo_calibracion">Calibração da balança</string>
+    <string name="calibracion_peso_maximo">Capacidade máxima :</string>
+    <string name="calibracion_celdas">Total de Céludas :</string>
+    <string name="calibracion_sensibilidad">Sensibilidade :</string>
+    <string name="calibracion_division">Divisão mínima :</string>
+    <string name="calibracion_ventana">Mobile jan :</string>
+    <string name="calibracion_kg_filtro">Kg de filtro :</string>
+    <string name="calibracion_conversiones">Conversões :</string>
+    <string name="calibracion_recortes">Recortes :</string>
+    <string name="calibracion_mensaje_recortes">Aumentar o valor de Conversões</string>
+    <string name="calibracion_mensaje_logica">Logica não pode ser maior que 2</string>
+    <string name="calibracion_mensaje_conversiones"> Número de conversões NÃO pode ser maior que 90</string>
+    <string name="calibracion_mensaje_campos_vacios">Complete todos os campos</string>
+
+
+    <!-- Todo:     Mensajes en pantalla     -->
+
+    <string name="mensaje_guardado_calibracion">A calibração gravou corretamente</string>
+    <string name="mensaje_guardado_calibracion_error">Erro ao guavar a calibração</string>
+    <string name="dialogo_cliente">Cliente :</string>
+    <string name="calibracion_logica">Lógica :</string>
+
+    <string name="mensaje_tipo_celda">Conexão estabelecida</string>
+    <string name="mensaje__tipo_celda_error">Erro ao conectar celula</string>
+    <string name="mensaje__tipo_celda_fail">A balança acusou FALHA</string>
+    <!-- todo:       Dialogo de menu        -->
+    <string name="menu_calibracion">Calibração</string>
+    <string name="menu_tipo_celda">Tipo de célula</string>
+    <string name="menu_productos">Produtos</string>
+    <string name="menu_Pesadas">Pesagens</string>
+    <string name="menu_exportar">Exportar Excel</string>
+    <string name="menu_cabecera">Cabeçalho de impressão</string>
+    <string name="menu_operadores">Operadores</string>
+    <string name="menu_correccion">Correção</string>
+
+    <string name="menu_titulo">Selecione uma opção ...</string>
+    <string name="tiitulo_dialogo_guardar_pesada">Deseja salvar a pesagem ...</string>
+    <string name="titulo_dialogo_tipo_celda">Selecione o tipo de célula ...</string>
+    <string name="tipo_de_celda">Tipo de célula :</string>
+
+    <string name="tipo_celda_1">Cabeada</string>
+    <string name="tipo_celda_2">Wireless XBee</string>
+    <string name="tipo_celda_3">Wireless Hook</string>
+
+    <string name="tipo_equipo_1">Chassis e acoplado</string>
+    <string name="tipo_equipo_2">Bitrem</string>
+    <string name="tipo_equipo_3">Tritrem</string>
+
+
+    <string name="tipo_celda_numero_celda">Nº da célula :</string>
+    <string name="tipo_celda_ssd">SSD :</string>
+    <string name="tipo_celda_pass">Senha :</string>
+    <string name="tipo_celda_puerto">Porta :</string>
+    <string name="tipo_celda_mensaje">Faltam dados para calibrar a célula</string>
+    <string name="dialogo_cabecera_titulo">Introduza o cabeçalho para o tiquete</string>
+    <string name="pesadas_fecha">Data</string>
+    <string name="pesadas_hora">Hora</string>
+    <string name="pesadas_producto">Produto</string>
+    <string name="pesadas_cargio">Carga</string>
+    <string name="pesadas_petente">Veículo</string>
+    <string name="pesadas_volumen">Volumme</string>
+    <string name="pesadas_codigo">Código</string>
+    <string name="pesadas_cliente">Cliente</string>
+    <string name="pesadas_bruto">Bruto</string>
+    <string name="pesadas_tara">Tara</string>
+    <string name="pesadas_neto">Líquido</string>
+    <string name="pesadas_desde">Desde :</string>
+    <string name="pesadas_hasta">Até   :</string>
+    <string name="pesadas_total">Total :</string>
+    <string name="correccion">Correção :</string>
+    <string name="correccion_titulo">Introduza a correção</string>
+    <string name="calibracion_ticket">Tiquetes impressão :</string>
+    <string name="calibracion_semiautomatico">Semi automático</string>
+    <string name="chasis">Chassis</string>
+    <string name="acoplado">Acoplado</string>
+    <string name="total">Total :</string>
+    <string name="grua">Grua</string>
+    <string name="carro">Carro :</string>
+    <string name="principal_chasis">Chassis :</string>
+    <string name="carro2">Carro 2 :</string>
+    <string name="bancos_de_carga">BANCOS DA CARGA</string>
+    <string name="tara_vacia">Você não pode deixar campos vazios</string>
+    <string name="bancos">Bancos :</string>
+    <string name="accion_borrado_impresion">Selecione a ação a ser executada, com a pesagem que foi marcada.</string>
+    <string name="menu_actualizar">Atualização</string>
+    <string name="a_cargar">Total para carregar :</string>
+    <string name="titulo_borrado_reimpresion">Excluir e reimprimir</string>
+    <string name="boton_borrar">Excluir pesado</string>
+    <string name="boton_borrar_todas">Excluir tudo</string>
+    <string name="titulo_dialogo_operador">Selecione o operador</string>
+    <string name="mensaje_exportacion">O arquivo foi exportado com sucesso</string>
+    <string name="mensaje_exportacion_error">Não foi possível exportar o arquivo</string>
+
+    <string name="mensaje_operador_guardado_error">Não foi possível salvar o operador</string>
+    <string name="mensaje_operador_guardado">O operador foi salvo corretamente</string>
+    <string name="titulo_borrar_operadores">Excluir operadores</string>
+    <string name="texto_borrar_operadores">Selecione a ação a ser executada</string>
+    <string name="boton_borrar_operadores">Excluir seleção</string>
+    <string name="title_activity_lista_operadores">Lista Operadores</string>
+    <string name="titulo_dialogo_contraseña">Inserir a senha</string>
+    <string name="texto_dialogo_contraseña">Senha :</string>
+    <string name="pesadas_vhiculo">Veículo</string>
+
+    <string name="titulo_dialogo_entrfechas">Seleccione as Datas</string>
+    <string name="texto1_dialogo_entrfechas">Data inicio</string>
+    <string name="texto2_dialogo_entrfechas">Data final</string>
+
+    <string name="titulo_dialogo_nuevo_operador">Insira novo operador</string>
+    <string name="nombre_dialogo_nuevo_operador">Nome :</string>
+    <string name="codigo_dialogo_nuevo_operador">Código :</string>
+
+    <string name="neto">Liq :</string>
+
+    <string name="excel_producto">PRODUTO</string>
+    <string name="nuevo">NOVO</string>
+
+
+
+</resources>

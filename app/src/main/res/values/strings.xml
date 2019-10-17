@@ -2,17 +2,17 @@
     <string name="app_name">Garras Puerto Serie</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="TITULO">ST 455 FORESTAL</string>
+    <string name="TITULO">ST 455 FOREST</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- TODO: dialogo datos de la carga -->
     <string name="dialogo_titulo">Ingrese los datos de la carga ...</string>
-    <string name="dialgo_cliente">Cliente :</string>
-    <string name="dialgo_volumen">Volumen :</string>
+    <string name="dialgo_cliente">Cod. :</string>
+    <string name="dialgo_volumen">Grua :</string>
     <string name="dialgo_producto">Producto :</string>
-    <string name="dialgo_patente">Patente :</string>
+    <string name="dialgo_patente">Vehículo :</string>
     <string name="dialgo_codigo">Código :</string>
     <string name="dialgo_tara">Tara :</string>
     <string name="dialgo_aceptar">Aceptar</string>
@@ -34,11 +34,11 @@
     <string name="dialogo_productos_producto12">Prod. nº 12:</string>
     <string name="Tiempo_de_carga">Transcurrido :</string>
     <string name="datos_de_la_descarga">Datos de la carga</string>
-    <string name="patente">Patente :</string>
+    <string name="patente">Vehículo :</string>
     <string name="codigo">Codigo :</string>
     <string name="producto">Producto :</string>
-    <string name="datos_cliente">Cliente :</string>
-    <string name="datos_volumen">Volumen :</string>
+    <string name="datos_cliente">Cod. :</string>
+    <string name="datos_volumen">Grua :</string>
     <string name="datos_tara">Tara :</string>
     <string name="titulo_calibracion">Calibración de la balanza</string>
     <string name="calibracion_peso_maximo">Capacidad máxima :</string>
@@ -73,6 +73,7 @@
     <string name="menu_exportar">Exportar Excel</string>
     <string name="menu_cabecera">Cabecera de impresión</string>
     <string name="menu_correccion">Corrección</string>
+    <string name="menu_operadores">Operadores</string>
     <string name="menu_actualizar">Actualizar</string>
 
     <string name="menu_titulo">Seleccione una opción ...</string>
@@ -121,7 +122,39 @@
     <string name="principal_chasis">Chasis :</string>
     <string name="carro2">Carro 2 :</string>
     <string name="bancos_de_carga">BANCOS DE CARGA</string>
-    <string name="tara_vacia">La tara no puede iniciarce vacia</string>
+    <string name="tara_vacia">No se pueden dejar campos vacios</string>
     <string name="bancos">Bancos :</string>
     <string name="a_cargar">Total a Cargar :</string>
+    <string name="accion_borrado_impresion">Seleccione la acción a realizar, con la pesada que se ha marcado.</string>
+    <string name="titulo_borrado_reimpresion">Borrado y reimpresión</string>
+    <string name="boton_borrar">Borrar Pesada</string>
+    <string name="boton_borrar_todas">Borrar Todas</string>
+    <string name="titulo_dialogo_operador">Seleccione operador</string>
+
+    <string name="mensaje_exportacion">El archivo se exportó correctamente</string>
+    <string name="mensaje_exportacion_error">No se pudo exportar el archivo</string>
+
+    <string name="mensaje_operador_guardado_error">No se pudo guardar el operador</string>
+    <string name="mensaje_operador_guardado">El operador se guardo correctamente</string>
+    <string name="pesadas_vhiculo">Vehiculo</string>
+    <string name="pesadas_cod">Cod.</string>
+    <string name="titulo_borrar_operadores">Borrar operadores</string>
+    <string name="texto_borrar_operadores">Seleccione la acción a realizar</string>
+    <string name="boton_borrar_operadores">Borrar Selección</string>
+    <string name="title_activity_lista_operadores">Lista Operadores</string>
+    <string name="titulo_dialogo_contraseña">Introduzca la contraseña</string>
+    <string name="texto_dialogo_contraseña">Contraseña :</string>
+
+
+    <string name="titulo_dialogo_entrfechas">Seleccione las Fechas</string>
+    <string name="texto1_dialogo_entrfechas">Fecha inicio</string>
+    <string name="texto2_dialogo_entrfechas">Fecha final</string>
+
+    <string name="titulo_dialogo_nuevo_operador">Ingrese Nuevo Operador</string>
+    <string name="nombre_dialogo_nuevo_operador">Nombre :</string>
+    <string name="codigo_dialogo_nuevo_operador">Codigo :</string>
+    <string name="neto">Neto :</string>
+
+    <string name="excel_producto">PRODUCTO</string>
+    <string name="nuevo">NUEVO</string>
 </resources>
