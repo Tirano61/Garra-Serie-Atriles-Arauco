@@ -71,7 +71,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtChasis7_2"
@@ -83,7 +83,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtChasis7_3"
@@ -95,7 +95,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtChasis7_4"
@@ -107,7 +107,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtChasis7_5"
@@ -119,7 +119,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtChasis7_6"
@@ -131,7 +131,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtChasis7_7"
@@ -143,7 +143,7 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/icons"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 
@@ -205,7 +205,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -243,7 +243,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -281,7 +281,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -319,7 +319,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -356,7 +356,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -396,7 +396,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -435,7 +435,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>

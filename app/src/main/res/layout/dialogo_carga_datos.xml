@@ -179,11 +179,11 @@
 
     <Spinner
         android:id="@+id/spTipoCarga"
-        android:layout_width="213dp"
-        android:layout_height="46dp"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/spinner_selector"
-        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_tara"
+        app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_tara"
         app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_tara" />
 
     <TextView
@@ -194,9 +194,9 @@
         android:text="@string/bancos"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spTipoCarga"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_bancos"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/spTipoCarga" />
+        app:layout_constraintTop_toTopOf="@+id/edt_dialogo_bancos" />
 
     <TextView
         android:id="@+id/textView48"
@@ -218,7 +218,7 @@
         android:ems="10"
         android:inputType="number"
         android:maxLength="6"
-        app:layout_constraintStart_toStartOf="@+id/spTipoCarga"
+        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_bancos"
         app:layout_constraintTop_toBottomOf="@+id/spTipoCarga" />
 
     <EditText
@@ -226,8 +226,9 @@
         android:layout_width="84dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
+        android:background="#ACE2E1E1"
         android:ems="10"
-        android:enabled="true"
+        android:enabled="false"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/edt_dialogo_grua"
         app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_grua" />
@@ -269,14 +270,28 @@
     <EditText
         android:id="@+id/edtDatosProducto"
         android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:background="#ACE2E1E1"
         android:ems="10"
+        android:enabled="false"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/sp_producto"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/sp_producto"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edt_dialogo_bancos"
+        android:layout_width="84dp"
+        android:layout_height="40dp"
+        android:background="#ACE2E1E1"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/spTipoCarga"
+        app:layout_constraintStart_toStartOf="@+id/edt_dialogo_tara"
+        app:layout_constraintTop_toTopOf="@+id/spTipoCarga" />
 
 
 </android.support.constraint.ConstraintLayout>

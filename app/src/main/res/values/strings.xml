@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="TITULO">ST 455 FOREST</string>
-
+    <string name="titulo_excel">Blanzas Hook Forestal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -97,6 +97,7 @@
     <string name="tipo_celda_mensaje">Faltan datos para calibrar la celda</string>
     <string name="dialogo_cabecera_titulo">Introduzca la cabecera para el ticket</string>
     <string name="pesadas_fecha">Fecha</string>
+    <string name="excel_fecha">FECHA</string>
     <string name="pesadas_hora">Hora</string>
     <string name="pesadas_producto">Producto</string>
     <string name="pesadas_cargio">Cargio</string>
@@ -157,4 +158,9 @@
 
     <string name="excel_producto">PRODUCTO</string>
     <string name="nuevo">NUEVO</string>
+
+    <string name="linea1">Linea 1 :</string>
+    <string name="linea2">Linea 2 :</string>
+    <string name="linea3">Linea 3 :</string>
+    <string name="linea4">Linea 4 :</string>
 </resources>

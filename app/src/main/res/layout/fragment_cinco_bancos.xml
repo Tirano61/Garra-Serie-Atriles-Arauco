@@ -80,7 +80,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/icons"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_2"
@@ -93,7 +93,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/icons"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_3"
@@ -105,7 +105,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/icons"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_4"
@@ -117,7 +117,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/icons"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtChasis5_5"
@@ -129,7 +129,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/icons"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -196,7 +196,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -236,7 +236,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -276,7 +276,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -317,7 +317,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -357,7 +357,7 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="18sp" />
+                                android:textSize="20sp" />
                         </RelativeLayout>
 
                     </LinearLayout>

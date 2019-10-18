@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Garras Porta Serial</string>
-
+    <string name="titulo_excel">HOOK sistema de pesagem</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="TITULO">ST 455 FOREST</string>
 
@@ -18,7 +18,7 @@
     <string name="dialgo_tara">Tara :</string>
     <string name="dialgo_aceptar">Aceitar</string>
     <string name="dialgo_cancelar">Sair</string>
-
+    <string name="excel_fecha">DATA</string>
     <!-- Todo: Dialogo Edicion Productos -->
     <string name="dialogo_productos_titulo">Edição de Produtos</string>
     <string name="dialogo_productos_producto1">Prod. nº 1:</string>
@@ -72,7 +72,7 @@
     <string name="menu_productos">Produtos</string>
     <string name="menu_Pesadas">Pesagens</string>
     <string name="menu_exportar">Exportar Excel</string>
-    <string name="menu_cabecera">Cabeçalho de impressão</string>
+    <string name="menu_cabecera">Insira o cabeçalho para o tiquete</string>
     <string name="menu_operadores">Operadores</string>
     <string name="menu_correccion">Correção</string>
 
@@ -157,6 +157,9 @@
     <string name="excel_producto">PRODUTO</string>
     <string name="nuevo">NOVO</string>
 
-
+    <string name="linea1">Linha 1 :</string>
+    <string name="linea2">Linha 2 :</string>
+    <string name="linea3">Linha 3 :</string>
+    <string name="linea4">Linha 4 :</string>
 
 </resources>

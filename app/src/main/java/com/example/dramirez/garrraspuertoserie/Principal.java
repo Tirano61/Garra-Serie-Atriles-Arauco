@@ -54,6 +54,7 @@ import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBdatos;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBoperadores;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBpesadas;
 import com.example.dramirez.garrraspuertoserie.FragmentInterfaces.EnvioDatos;
+import com.github.mikephil.charting.utils.FileUtils;
 
 
 import java.io.BufferedWriter;
@@ -130,7 +131,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     String bancos,banco1,banco2,banco3,banco4,banco5,banco6,banco7,banco8,banco9;
 
-    String tipoDeCarga = "";
+    String tipoDeCarga = "",bancosSeleccionados = "";
     int  lugar = 0;
 
     int chasis= 0, acoplado = 0, acoplado2 = 0;
@@ -142,6 +143,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     ListView lvOperadores;
     String IdOperadores;
     String TotalACargar;
+    String GRUA = "";
 
     ArrayList<ListaEntradaOperadores> datosOperadores;
     // Used to load the 'native-lib' library oon application startup.
@@ -191,6 +193,12 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         pesaje();
         goFullScreen();
 
+       /* btnCero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFolder();
+            }
+        });*/
         btnCero.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -241,6 +249,18 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
     }
+
+
+
+    public void openFolder(){
+        Uri selectedUri = Uri.parse("file://" + Environment.getExternalStorageDirectory() );
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setDataAndType(selectedUri, "application/*");
+        startActivity(Intent.createChooser(intent, "Open folder"));
+    }
+
+
+
     public void InicializarComponentesGraficos()
     {
 
@@ -575,7 +595,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
                         btnGuardar.setEnabled(false);
                         btnCargar.setEnabled(true);
-                        tipoDeCarga = "0";
+                        //tipoDeCarga = "0";
                         chasis = 0;
                         acoplado = 0;
                         acoplado2 = 0;
@@ -938,6 +958,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         {
             edt_producto.setText(cursorDatos.getString(1));
             edt_grua.setText(cursorDatos.getString(2));
+            GRUA = cursorDatos.getString(2);
             edt_operador.setText(cursorDatos.getString(3));
             edt_vehiculo.setText(cursorDatos.getString(4));
             edt_codigo.setText(cursorDatos.getString(5));
@@ -1060,7 +1081,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
         public dialogoCargaDatos(Context context){
-            tipoDeCarga = "";
+            //tipoDeCarga = "";
             comprobarSpinerProducto = false;
 
             final Dialog dialog = new Dialog(context,R.style.Material_Base);
@@ -1083,6 +1104,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             final EditText txtTotalACargar = (EditText)dialog.findViewById(R.id.txtTotalACargar);
             final EditText edt_diaogo_Producto = (EditText)dialog.findViewById(R.id.edtDatosProducto);
             final Spinner spBuscarOperador = (Spinner) dialog.findViewById(R.id.spBuscarOperador);
+            final EditText edt_diaogo_banco = (EditText)dialog.findViewById(R.id.edt_dialogo_bancos);
+
+            edt_diaogo_banco.setText(tipoDeCarga);
 
             Button aceptar = (Button)dialog.findViewById(R.id.btn_acrptar);
             Button cancelar = (Button)dialog.findViewById(R.id.btn_Cancelar);
@@ -1155,7 +1179,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             spTipo_carga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    tipoDeCarga = parent.getItemAtPosition(position).toString();
+                    if (!(position == 0)){
+                        edt_diaogo_banco.setText(parent.getItemAtPosition(position).toString());
+                        //tipoDeCarga = parent.getItemAtPosition(position).toString();
+                    }
+
                 }
 
                 @Override
@@ -1172,6 +1200,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             tara= edt_dialogo_tara.getText().toString() ,grua = edt_dialogo_grua.getText().toString()
                             ,operador= edt_dialogo_operador.getText().toString(), codigo = edt_dialogo_codigo.getText().toString(),
                             total = txtTotalACargar.getText().toString();
+                    //asigno la cantidad de bancos
+                    tipoDeCarga = edt_diaogo_banco.getText().toString();
+                    GRUA = grua;
                     if (!(tara.equals("")  || vehiculo.equals("") || grua.equals("") || codigo.equals("") || operador.equals("") || total.equals(""))){
                         edt_vehiculo.setText(vehiculo);
                         edt_codigo.setText(codigo);
@@ -2170,12 +2201,12 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
             final String Encabezado_Carga = "<Row ss:AutoFitHeight=\"0\">\n" +
                     "    <Cell ss:MergeAcross=\"11\" ss:MergeDown=\"3\" ss:StyleID=\"s100\"><Data\n" +
-                    "      ss:Type=\"String\">Balanzas Hook ST-455</Data></Cell>\n" +
+                    "      ss:Type=\"String\">"+getString(R.string.titulo_excel)+"</Data></Cell>\n" +
                     "   </Row>\n" +
                     "   <Row ss:AutoFitHeight=\"0\" ss:Span=\"2\"/>\n" +
                     "<Row ss:Index=\"5\">\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">DESC. ID</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
-                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">FECHA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
+                    "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">"+getString(R.string.excel_fecha)+ "</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">HORA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TEMPO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
                     "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">"+getString(R.string.menu_productos)+"</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>\n" +
@@ -2209,12 +2240,22 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             //Escribir en el USB con BufferWriter
             BufferedWriter br = null;
             File file;
-            if (check()){
+            File[] external_AND_removable_storage_m1 = getExternalFilesDirs(null);
+           /* if (external_AND_removable_storage_m1.length > 1){
+                 file = new File(external_AND_removable_storage_m1[1],fecha +"-ST455.xml");
+            }else{
+                 file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fecha +"-ST455.xml");
+            }*/
+            file = new File(external_AND_removable_storage_m1[1],  GRUA+"-"+fecha+".xml");
+           /* if (check()){
+                //Por las dudas no me acuerdo si esta ruta anda
+                // String sdcard = "storage/usbotg/usbotg-sda1";
                 file = new File("/mnt/extsd/"+ fecha +"-ST455.xml");
             }else {
                 File sdcard = Environment.getExternalStorageDirectory();
                 file = new File(sdcard.getAbsolutePath(),  fecha +"-ST455.xml");
-            }
+            }*/
+
 
             //file = new File("/mnt/extsd/"+ fecha +"-ST455.xml");
            // String sdcard = "storage/usbotg/usbotg-sda1";
