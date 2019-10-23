@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,10 +68,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 
 public class Principal extends AppCompatActivity implements  EnvioDatos {
@@ -193,12 +198,12 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         pesaje();
         goFullScreen();
 
-       /* btnCero.setOnClickListener(new View.OnClickListener() {
+       btnCero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFolder();
+                startActivityForResult(new Intent(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS), 0);
             }
-        });*/
+        });
         btnCero.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -244,7 +249,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         txtVersion.setText("ver " + getVersionName());
 
 
-        checkInfo();
+       // checkInfo();
 
 
 
@@ -1399,7 +1404,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             showInputDialog_EntreFecha();
                         break;
                     case 4:
-                        excel.run();
+                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
+                            excel.run();
+                        }else{
+                            dialogoExcel();
+                        }
+
+                        //
                         break;
                     case 5:
                             dialogoCabeceraImpresion();
@@ -2121,6 +2132,108 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
     }
 
+
+   public void dialogoExcel() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //external_AND_removable_storage_m1 = null;
+
+
+                        File[] external_AND_removable_storage_m1 = ContextCompat.getExternalFilesDirs(getApplicationContext(),null);
+                        Environment.isExternalStorageRemovable();
+           /* if (external_AND_removable_storage_m1.length > 1){
+                 file = new File(external_AND_removable_storage_m1[1],fecha +"-ST455.xml");
+            }else{
+                 file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fecha +"-ST455.xml");
+            }*/
+                        //String nombre = external_AND_removable_storage_m1[1].getPath();
+                        //String[] parceo = nombre.split("/");
+
+
+                        String[] parceado = new String[external_AND_removable_storage_m1.length];
+                        for (int i = 0; i <= external_AND_removable_storage_m1.length-1;i++){
+                            if (external_AND_removable_storage_m1[i] != null){
+                                String nombre = external_AND_removable_storage_m1[i].getPath();
+                                String[] parceo = nombre.split("/");
+                                parceado[i] = parceo[2];
+                            }else{
+                                parceado[i]= "No Mounted";
+                            }
+
+                        }
+       /* checkInfo();
+        if (deviceList.size()==2){
+            parceado[parceado.length-1] = device.getDeviceName();
+        }*/
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
+                        builder.setTitle("Selecciona el lugar de guardado")
+                                .setItems(parceado, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        seleccion = which;
+                                        dialog.dismiss();
+                                        excel.run();
+
+                                    }
+                                });
+                        builder.create().show();
+                    }
+                });
+
+            }
+        }).start();
+
+
+    }
+
+
+    public  String[] getStorageDirectories() {
+
+        String[] storageDirectories;
+        String rawSecondaryStoragesStr = System.getenv("SECONDARY_STORAGE");
+        Context contexto = getApplicationContext();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            List<String> results = new ArrayList<String>();
+            File[] externalDirs = contexto.getExternalFilesDirs(null);
+
+            for (File file : externalDirs) {
+                String path = null;
+                try {
+                    path = file.getPath().split("/Android")[0];
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    path = null;
+                }
+                if (path != null) {
+                    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Environment.isExternalStorageRemovable(file))
+                            || rawSecondaryStoragesStr != null && rawSecondaryStoragesStr.contains(path)) {
+                        results.add(path);
+                    }
+                }
+            }
+            storageDirectories = results.toArray(new String[0]);
+        } else {
+            final Set<String> rv = new HashSet<String>();
+
+            //if (!TextUtils.isEmpty(rawSecondaryStoragesStr)) {
+                final String[] rawSecondaryStorages = rawSecondaryStoragesStr.split(File.pathSeparator);
+                Collections.addAll(rv, rawSecondaryStorages);
+           // }
+            storageDirectories = rv.toArray(new String[rv.size()]);
+        }
+        return storageDirectories;
+    }
+
+
+
+
+    int seleccion = 0;
     public class Exportar_Excel extends Thread
     {
         @Override
@@ -2239,14 +2352,52 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             final String Cerrar_Libro = "</Workbook>\n";
             //Escribir en el USB con BufferWriter
             BufferedWriter br = null;
-            File file;
+            File file = null;
             File[] external_AND_removable_storage_m1 = getExternalFilesDirs(null);
            /* if (external_AND_removable_storage_m1.length > 1){
                  file = new File(external_AND_removable_storage_m1[1],fecha +"-ST455.xml");
             }else{
                  file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fecha +"-ST455.xml");
             }*/
-            file = new File(external_AND_removable_storage_m1[1],  GRUA+"-"+fecha+".xml");
+           //String nombre = external_AND_removable_storage_m1[1].getPath();
+           //String[] parceo = nombre.split("/");
+            /*String[] parceado = new String[external_AND_removable_storage_m1.length];
+            for (int i = 0; i <= external_AND_removable_storage_m1.length-1;i++){
+                String nombre = external_AND_removable_storage_m1[i].getPath();
+                String[] parceo = nombre.split("/");
+
+                parceado[i] = parceo[2];
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
+            builder.setTitle("Selección de guardado")
+                    .setItems(parceado, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            seleccion = which;
+                        }
+                    }).create();*/
+
+
+
+
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
+                String sdcard = "storage/usbhost/";
+                file = new File(sdcard,  fecha +"-ST455.xml");
+            }else{
+                if (seleccion== 0){
+                    file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),GRUA+"-"+fecha+".xml");
+                }else{
+                    //file = new File("dev/usb/",  GRUA+"-"+fecha+".xml");
+                    file = new File(external_AND_removable_storage_m1[seleccion],  GRUA+"-"+fecha+".xml");
+                }
+            }
+
+
+
+
+
+
            /* if (check()){
                 //Por las dudas no me acuerdo si esta ruta anda
                 // String sdcard = "storage/usbotg/usbotg-sda1";
@@ -2411,6 +2562,14 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 br.close();
                 Toast.makeText(getBaseContext(),getString(R.string.mensaje_exportacion), Toast.LENGTH_LONG).show();
 
+                /*if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
+                    desmostarDispositivos();
+                }else{
+                    if(seleccion > 0){
+                        desmostarDispositivos();
+                    }
+                }*/
+
             } catch (IOException e) {
                 Toast.makeText(getBaseContext(),getString(R.string.mensaje_exportacion_error), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
@@ -2420,6 +2579,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
     }
+    public void desmostarDispositivos(){
+        startActivityForResult(new Intent(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS), 0);
+    }
+
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
@@ -2525,6 +2688,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             }
         }
     };
+
+
 
 
 }

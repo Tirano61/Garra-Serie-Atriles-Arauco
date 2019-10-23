@@ -29,7 +29,9 @@
         <activity
             android:name=".ListaOperadores"
             android:label="@string/title_activity_lista_operadores"
-            android:theme="@style/MaterialTema.NoActionBar"></activity>
+            android:theme="@style/MaterialTema.NoActionBar">
+
+        </activity>
         <activity android:name=".Operadores" />
         <activity
             android:name=".Principal"
