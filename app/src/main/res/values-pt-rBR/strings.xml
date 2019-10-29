@@ -162,4 +162,13 @@
     <string name="linea3">Linha 3 :</string>
     <string name="linea4">Linha 4 :</string>
 
+    <string name="titulo_usb">Salvo USB</string>
+    <string name="mensaje_usb">Você deseja salvar os pesos na memória interna</string>
+
+    <string name="toast1_usb">USB não está montado na caixa</string>
+    <string name="toast2_usb">  O BALANÇO ESTÁ DESCONECTADO  </string>
+    <string name="toast3_usb">Desea guardar las pesadas en la memoria inerna?</string>
+
+    <string name="toast_operadpres">Todos os campos devem ser preenchidos</string>
+
 </resources>

@@ -16,6 +16,10 @@ public interface DriverCelda {
     int getGuardado();
     int getBateria();
     void setImprimir(String linea);
+    void setUSB(String linea);
+    void setUSB_Open(String nombreArchivo);
+    void setUSB_Close();
+    void setUSBMounted();
     boolean  getConexionSerie();
     String getMensajeBalanza();
     int getOK();

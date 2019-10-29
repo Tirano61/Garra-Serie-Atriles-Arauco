@@ -69,7 +69,7 @@ class Balanza {
 
     public boolean isSemiAutomatico() {
         boolean valor;
-        if (variables.getSEMIAUT().equals("1"))
+        if (Variables.getSEMIAUT().equals("1"))
         {
             valor = true;
         }else{
@@ -183,19 +183,19 @@ class Balanza {
 
     public int setAcumularPeso()
     {
-        Log.d("ENVIO Acumular = ",String.valueOf(celda.getGuardado()));
+        //Log.d("ENVIO Acumular = ",String.valueOf(celda.getGuardado()));
         if (isSemiAutomatico())
         {
             if (isCominzoPesaje() && isFlagPeso() && (corregido > 50))
             {
-                if (variables.isRESTAR())
+                if (Variables.isRESTAR())
                 {
                     PesoAcumulado -= (int)waitForPesoEstable();
                     PesoAcumuladoBancos -= (int)waitForPesoEstable();
                     PesoAcumuladoCasis -= (int)waitForPesoEstable();
-                    variables.setRESTAR(false);
+                    Variables.setRESTAR(false);
                 }else{
-                    Log.d("ENVIO Semiauto = ",String.valueOf(celda.getGuardado()));
+                    //Log.d("ENVIO Semiauto = ",String.valueOf(celda.getGuardado()));
                     PesoAcumulado += (int)waitForPesoEstable();
                     PesoAcumuladoBancos += (int)waitForPesoEstable();
                     PesoAcumuladoCasis += (int)waitForPesoEstable();
@@ -210,14 +210,14 @@ class Balanza {
         {
             if (isCominzoPesaje() && isEstable() && isFlagPeso() && (corregido > 50))
             {
-                if (variables.isRESTAR())
+                if (Variables.isRESTAR())
                 {
                     PesoAcumulado -= (int)waitForPesoEstable();
                     PesoAcumuladoBancos -= (int)waitForPesoEstable();
                     PesoAcumuladoCasis -= (int)waitForPesoEstable();
-                    variables.setRESTAR(false);
+                    Variables.setRESTAR(false);
                 }else{
-                    Log.d("ENVIO entro = ",String.valueOf(celda.getGuardado()));
+                    //Log.d("ENVIO entro = ",String.valueOf(celda.getGuardado()));
                     PesoAcumulado += (int)waitForPesoEstable();
                     PesoAcumuladoBancos += (int)waitForPesoEstable();
                     PesoAcumuladoCasis += (int)waitForPesoEstable();
@@ -265,9 +265,9 @@ class Balanza {
         //Log.d("CERO","************** " + getCERO());
         correccion = CORRECCION * (pesoConCero / 100);
         corregido = (int)pesoConCero + (int) correccion;
-        redondeo = corregido / Integer.valueOf(variables.getDIVISION());
-        A = redondeo * Integer.valueOf(variables.getDIVISION());
-        B = (redondeo + 1) * Integer.valueOf(variables.getDIVISION());
+        redondeo = corregido / Integer.valueOf(Variables.getDIVISION());
+        A = redondeo * Integer.valueOf(Variables.getDIVISION());
+        B = (redondeo + 1) * Integer.valueOf(Variables.getDIVISION());
         abajo = corregido - A;
         arriba = B - corregido;
         if (abajo < arriba) {
@@ -275,7 +275,7 @@ class Balanza {
         } else if (arriba < abajo) {
             corregido = B;
         } else {
-            corregido = redondeo * Integer.valueOf(variables.getDIVISION());
+            corregido = redondeo * Integer.valueOf(Variables.getDIVISION());
         }
         buscarEstabilidad(corregido);
         buscarFlagPeso(corregido);
@@ -293,10 +293,10 @@ class Balanza {
         double correccion = CORRECCION * (pesoConCero / 100);
         int corregido = (int)pesoConCero + (int) correccion;
 
-        int redondeo = corregido / Integer.valueOf(variables.getDIVISION());
-        redondeo = corregido / Integer.valueOf(variables.getDIVISION());
-        int A = redondeo * Integer.valueOf(variables.getDIVISION());
-        int B = (redondeo + 1) * Integer.valueOf(variables.getDIVISION());
+        int redondeo = corregido / Integer.valueOf(Variables.getDIVISION());
+        redondeo = corregido / Integer.valueOf(Variables.getDIVISION());
+        int A = redondeo * Integer.valueOf(Variables.getDIVISION());
+        int B = (redondeo + 1) * Integer.valueOf(Variables.getDIVISION());
         int abajo = corregido - A;
         int arriba = B - corregido;
         if (abajo < arriba) {
@@ -304,7 +304,7 @@ class Balanza {
         } else if (arriba < abajo) {
             corregido = B;
         } else {
-            corregido = redondeo * Integer.valueOf(variables.getDIVISION());
+            corregido = redondeo * Integer.valueOf(Variables.getDIVISION());
         }
 
 
@@ -315,14 +315,14 @@ class Balanza {
     {
         double  salidaFiltro = 0;
         ventanaMovilActual ++;
-        if (ventanaMovilActual > variables.getVENTANA())
+        if (ventanaMovilActual > Variables.getVENTANA())
         {
-            ventanaMovilActual = variables.getVENTANA();
+            ventanaMovilActual = Variables.getVENTANA();
         }
-        if (variables.getKGFILTRO() > 0)
+        if (Variables.getKGFILTRO() > 0)
         {
             salidaFiltro = Math.abs(cuentas - pesoFiltrado);
-            if (convertToKg(salidaFiltro) > variables.getKGFILTRO())
+            if (convertToKg(salidaFiltro) > Variables.getKGFILTRO())
             {
                 ventanaMovilActual = 1;
                 indiceVentana = 0;
@@ -331,7 +331,7 @@ class Balanza {
         }
         vectorFiltro[indiceVentana] = cuentas;
         indiceVentana++;
-        if (indiceVentana >= variables.getVENTANA())
+        if (indiceVentana >= Variables.getVENTANA())
         {
             indiceVentana = 0;
         }
@@ -354,7 +354,7 @@ class Balanza {
     {
         float multiplicador=0;
 
-        multiplicador = (Integer.valueOf(variables.getCELDAS()) * VxBITS)/(Integer.valueOf(variables.getSENSIBILIDAD())* CONSTANTE);
+        multiplicador = (Integer.valueOf(Variables.getCELDAS()) * VxBITS)/(Integer.valueOf(Variables.getSENSIBILIDAD())* CONSTANTE);
 
         return multiplicador;
 
@@ -372,6 +372,21 @@ class Balanza {
     public void ImprimirTicket(String linea)
     {
         celda.setImprimir(linea);
+    }
+    public  void USBWrite(String linea){
+        celda.setUSB(linea);
+    }
+
+    public void USBMounted()
+    {
+        celda.setUSBMounted();
+    }
+    public  void USBOpen(String nombreArchivo)
+    {
+        celda.setUSB_Open(nombreArchivo);
+    }
+    public  void USBClose(){
+        celda.setUSB_Close();
     }
     public void pedirCuentas()
     {

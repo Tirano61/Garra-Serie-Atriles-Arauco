@@ -163,4 +163,16 @@
     <string name="linea2">Linea 2 :</string>
     <string name="linea3">Linea 3 :</string>
     <string name="linea4">Linea 4 :</string>
+
+    <string name="titulo_usb">Guardado USB</string>
+    <string name="mensaje_usb">Desea guardar las pesadas en la memoria inerna?</string>
+
+    <string name="toast1_usb">El USB no está montado en la caja</string>
+    <string name="toast2_usb">  LA BALANZA ESTA DESCONECTADA  </string>
+    <string name="toast3_usb">Desea guardar las pesadas en la memoria inerna?</string>
+
+
+    <string name="toast_operadpres">Se deben completar todos los campos</string>
+
+
 </resources>

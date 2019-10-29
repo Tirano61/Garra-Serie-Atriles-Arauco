@@ -97,20 +97,26 @@ public class Operadores extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<DBoperadores> arrayPesadas = new ArrayList<>(Arrays.asList(new DBoperadores(edtNuevoOperadorCodigo.getText().toString()
-                        ,edtNuevoOperadorNombre.getText().toString())));
+                if (!(edtNuevoOperadorCodigo.getText().toString().equals("")) && !(edtNuevoOperadorNombre.getText().toString().equals("")))
+                {
+                    final ArrayList<DBoperadores> arrayPesadas = new ArrayList<>(Arrays.asList(new DBoperadores(edtNuevoOperadorCodigo.getText().toString()
+                            ,edtNuevoOperadorNombre.getText().toString())));
 
-                DBoperadores dBoperadores;
-                dBoperadores = arrayPesadas.get(0);
-                db.InsertarOperadores(dBoperadores);
-                if (arrayPesadas.isEmpty()){
-                    Toast.makeText(getBaseContext(),getString(R.string.mensaje_operador_guardado_error),Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(getBaseContext(),getString(R.string.mensaje_operador_guardado),Toast.LENGTH_LONG).show();
+                    DBoperadores dBoperadores;
+                    dBoperadores = arrayPesadas.get(0);
+                    db.InsertarOperadores(dBoperadores);
+                    if (arrayPesadas.isEmpty()){
+                        Toast.makeText(getBaseContext(),getString(R.string.mensaje_operador_guardado_error),Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getBaseContext(),getString(R.string.mensaje_operador_guardado),Toast.LENGTH_LONG).show();
 
-                    alert.dismiss();
-                    CargarOperadores();
+                        alert.dismiss();
+                        CargarOperadores();
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_operadpres),Toast.LENGTH_LONG).show();
                 }
+
             }
         });
         btnSalir.setOnClickListener(new View.OnClickListener() {

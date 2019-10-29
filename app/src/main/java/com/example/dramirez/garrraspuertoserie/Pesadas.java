@@ -327,7 +327,7 @@ public class Pesadas extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            for (int i =1; i <= var.getTICKETS(); i++)
+            for (int i =1; i <= Variables.getTICKETS(); i++)
             {
                 Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
                 Balanza.getInstance().getOK();
@@ -337,41 +337,41 @@ public class Pesadas extends AppCompatActivity {
                 Balanza.getInstance().getOK();
                 progreso++;
                 publishProgress(progreso);
-                if (!var.getCabecera1().equals(null))
+                if (!Variables.getCabecera1().equals(null))
                 {
-                    if (!var.getCabecera1().equals("")) {
-                        Balanza.getInstance().ImprimirTicket("  " + var.getCabecera1());
+                    if (!Variables.getCabecera1().equals("")) {
+                        Balanza.getInstance().ImprimirTicket("  " + Variables.getCabecera1());
                         Balanza.getInstance().getOK();
                         progreso++;
                         publishProgress(progreso);
                     }
                 }
-                if (!var.getCabecera4().equals(null))
+                if (!Variables.getCabecera4().equals(null))
                 {
-                    if (!var.getCabecera2().equals("")){
-                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera2());
-                        Balanza.getInstance().getOK();
-                        progreso++;
-                        publishProgress(progreso);
-                    }
-                }
-
-                if (!var.getCabecera4().equals(null))
-                {
-                    if (!var.getCabecera3().equals(""))
-                    {
-                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
+                    if (!Variables.getCabecera2().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ Variables.getCabecera2());
                         Balanza.getInstance().getOK();
                         progreso++;
                         publishProgress(progreso);
                     }
                 }
 
-                if (!var.getCabecera4().equals(null))
+                if (!Variables.getCabecera4().equals(null))
                 {
-                    if (!var.getCabecera4().equals(""))
+                    if (!Variables.getCabecera3().equals(""))
                     {
-                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
+                        Balanza.getInstance().ImprimirTicket("  "+ Variables.getCabecera3());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+
+                if (!Variables.getCabecera4().equals(null))
+                {
+                    if (!Variables.getCabecera4().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ Variables.getCabecera4());
                         Balanza.getInstance().getOK();
                         progreso++;
                         publishProgress(progreso);

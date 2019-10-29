@@ -118,6 +118,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     ArrayList<String> datos;
     Runnable _Runnable = new Exportar_Excel();
     Thread excel = new Thread(_Runnable);
+
+
     int netoDescargado;
     boolean cuentaLeedEmpezada = false;
     int TipoCelda,tipoCeldaAEnviar;
@@ -198,12 +200,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         pesaje();
         goFullScreen();
 
-       btnCero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS), 0);
-            }
-        });
         btnCero.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -219,13 +215,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 return false;
             }
         });
-        if (!var.isBATERIA())
+        if (!Variables.isBATERIA())
         {
             Runnable runnableBateria = new MostrarEstaadoBateria();
             Thread threadBateria = new Thread(runnableBateria);
             threadBateria.start();
         }
-        if (!var.isRELOJ())
+        if (!Variables.isRELOJ())
         {
             Runnable runnable = new CountDownRunner();
             Thread myThread = new Thread(runnable);
@@ -254,17 +250,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
     }
-
-
-
-    public void openFolder(){
-        Uri selectedUri = Uri.parse("file://" + Environment.getExternalStorageDirectory() );
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setDataAndType(selectedUri, "application/*");
-        startActivity(Intent.createChooser(intent, "Open folder"));
-    }
-
-
 
     public void InicializarComponentesGraficos()
     {
@@ -411,11 +396,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 txt_Peso_Acumulado.setText(String.valueOf(Balanza.getInstance().setAcumularPeso()));
                 break;
             case  R.id.btnRestar:
-                if (var.isRESTAR())
+                if (Variables.isRESTAR())
                 {
-                    var.setRESTAR(false);
+                    Variables.setRESTAR(false);
                 }else{
-                    var.setRESTAR(true);
+                    Variables.setRESTAR(true);
                 }
 
                 break;
@@ -589,7 +574,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 banco9 = txtChasis9_9.getText().toString();
                                 break;
                         }
-                        var.setTIEMPOCARGA(false);
+                        Variables.setTIEMPOCARGA(false);
                         GuardarUltimosDatos();
                         GuardarPesada();
                         dialog.cancel();
@@ -677,7 +662,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     }
 
     @Override
-    public int recabarPeso(TextView textView) {
+    public int recabarPeso(TextView textView)
+    {
         int peso =0;
         try {
             peso = Integer.valueOf(textView.getText().toString());
@@ -694,235 +680,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     }
 
     @Override
-    public void enviarCero(int peso) {
-        Balanza.getInstance().setPesoAcumuladoBancos(peso);
-    }
-
-    public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
+    public void enviarCero(int peso)
     {
-        int progreso;
-        String hora = "", cargio = "",vehiculo ="",codigo="",producto="",operador="",grua = "", peso_acumulado="", tara = "",cargas = "";
-        //String banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",banco7 ="",banco8 ="",banco9 ="",cargas ="";
-        @Override
-        protected void onPreExecute() {
-            progressBar.setVisibility(View.VISIBLE);
-            hora = txtHora.getText().toString();
-            cargio = txtCargio.getText().toString();
-            vehiculo = edt_vehiculo.getText().toString();
-            codigo = edt_codigo.getText().toString();
-            producto = edt_producto.getText().toString();
-            operador = edt_operador.getText().toString();
-            grua = edt_grua.getText().toString();
-            peso_acumulado = txt_Peso_Acumulado.getText().toString();
-            cargas = txtGarradas.getText().toString();
-            tara = edt_tara.getText().toString();
-            progreso = 0;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            for (int i =1; i <= var.getTICKETS(); i++)
-            {
-                Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                if (!var.getCabecera1().equals(null))
-                {
-                    if (!var.getCabecera1().equals("")) {
-                        Balanza.getInstance().ImprimirTicket("  " + var.getCabecera1());
-                        Balanza.getInstance().getOK();
-                        progreso++;
-                        publishProgress(progreso);
-                    }
-                }
-                if (!var.getCabecera4().equals(null))
-                {
-                    if (!var.getCabecera2().equals("")){
-                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera2());
-                        Balanza.getInstance().getOK();
-                        progreso++;
-                        publishProgress(progreso);
-                    }
-                }
-
-                if (!var.getCabecera4().equals(null))
-                {
-                    if (!var.getCabecera3().equals(""))
-                    {
-                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera3());
-                        Balanza.getInstance().getOK();
-                        progreso++;
-                        publishProgress(progreso);
-                    }
-                }
-
-                if (!var.getCabecera4().equals(null))
-                {
-                    if (!var.getCabecera4().equals(""))
-                    {
-                        Balanza.getInstance().ImprimirTicket("  "+ var.getCabecera4());
-                        Balanza.getInstance().getOK();
-                        progreso++;
-                        publishProgress(progreso);
-                    }
-                }
-                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " + hora);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  "+getString(R.string.Tiempo_de_carga) + cargio);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.patente)   + vehiculo);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Codigo    : " + codigo);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.producto) + producto);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Cod.      : " + operador);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Grua      : " + grua);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-1  : " + banco1);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-2  : " + banco2);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-3  : " + banco3);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-4  : " + banco4);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-5  : " + banco5);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-6  : " + banco6);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-7  : " + banco7);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-8  : " + banco8);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Banco-9  : " + banco9);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Cargas   : " + cargas);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  Bruto    : " + peso_acumulado);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-
-                Balanza.getInstance().ImprimirTicket("  Tara     : " + tara);
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.neto) + String.valueOf(netoDescargado));
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-                Balanza.getInstance().getOK();
-                progreso++;
-                publishProgress(progreso);
-                Balanza.getInstance().ImprimirTicket("");
-
-            }
-            progreso = 100;
-            publishProgress(progreso);
-
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values)
-        {
-            if (progreso < 100)
-            {
-                progressBar.setProgress(values[0]);
-            }else {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            bancos ="0";
-            banco1 = "";
-            banco2 = "";
-            banco3 = "";
-            banco4 = "";
-            banco5 = "";
-            banco6 = "";
-            banco7 = "";
-            banco8 = "";
-            banco9 = "";
-        }
+        Balanza.getInstance().setPesoAcumuladoBancos(peso);
     }
 
     private int sumarTotal(int peso){
@@ -940,20 +700,20 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         Cursor cursorCabecera = db.db.rawQuery("SELECT * FROM tcabecera", null);
         if (cursorCabecera.moveToNext())
         {
-            var.setCabecera1(cursorCabecera.getString(1));
-            var.setCabecera2(cursorCabecera.getString(2));
-            var.setCabecera3(cursorCabecera.getString(3));
-            var.setCabecera4(cursorCabecera.getString(4));
+            Variables.setCabecera1(cursorCabecera.getString(1));
+            Variables.setCabecera2(cursorCabecera.getString(2));
+            Variables.setCabecera3(cursorCabecera.getString(3));
+            Variables.setCabecera4(cursorCabecera.getString(4));
         }else
         {
             contentCabecera.put("uno","");
             contentCabecera.put("dos","");
             contentCabecera.put("tres","");
             contentCabecera.put("cuatro","");
-            var.setCabecera1("");
-            var.setCabecera2("");
-            var.setCabecera3("");
-            var.setCabecera4("");
+            Variables.setCabecera1("");
+            Variables.setCabecera2("");
+            Variables.setCabecera3("");
+            Variables.setCabecera4("");
             db.db.insert("tcabecera",null,contentCabecera);
         }
 
@@ -1009,30 +769,30 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             contentCalibracion.put("ticket","1");
             contentCalibracion.put("semiaut","1");
 
-            var.setCAPACIDAD("10000");
-            var.setCELDAS("40000");
-            var.setDIVISION("20");
-            var.setSENSIBILIDAD("2000");
-            var.setVENTANA(Integer.valueOf("3"));
-            var.setKGFILTRO(Integer.valueOf("1000"));
-            var.setCONVERSIONES("10");
-            var.setRECORTES("1");
-            var.setLOGICA("0");
-            var.setTICKETS(1);
-            var.setSEMIAUT("1");
+            Variables.setCAPACIDAD("10000");
+            Variables.setCELDAS("40000");
+            Variables.setDIVISION("20");
+            Variables.setSENSIBILIDAD("2000");
+            Variables.setVENTANA(Integer.valueOf("3"));
+            Variables.setKGFILTRO(Integer.valueOf("1000"));
+            Variables.setCONVERSIONES("10");
+            Variables.setRECORTES("1");
+            Variables.setLOGICA("0");
+            Variables.setTICKETS(1);
+            Variables.setSEMIAUT("1");
             db.db.insert("tcalibracion",null,contentCalibracion);
         }else{
-            var.setCAPACIDAD(cursorCalibracion.getString(1));
-            var.setCELDAS(cursorCalibracion.getString(2));
-            var.setDIVISION(cursorCalibracion.getString(3));
-            var.setSENSIBILIDAD(cursorCalibracion.getString(4));
-            var.setVENTANA(cursorCalibracion.getInt(5));
-            var.setKGFILTRO(cursorCalibracion.getInt(6));
-            var.setCONVERSIONES(cursorCalibracion.getString(7));
-            var.setRECORTES(cursorCalibracion.getString(8));
-            var.setLOGICA(cursorCalibracion.getString(9));
-            var.setTICKETS(cursorCalibracion.getInt(10));
-            var.setSEMIAUT(cursorCalibracion.getString(11));
+            Variables.setCAPACIDAD(cursorCalibracion.getString(1));
+            Variables.setCELDAS(cursorCalibracion.getString(2));
+            Variables.setDIVISION(cursorCalibracion.getString(3));
+            Variables.setSENSIBILIDAD(cursorCalibracion.getString(4));
+            Variables.setVENTANA(cursorCalibracion.getInt(5));
+            Variables.setKGFILTRO(cursorCalibracion.getInt(6));
+            Variables.setCONVERSIONES(cursorCalibracion.getString(7));
+            Variables.setRECORTES(cursorCalibracion.getString(8));
+            Variables.setLOGICA(cursorCalibracion.getString(9));
+            Variables.setTICKETS(cursorCalibracion.getInt(10));
+            Variables.setSEMIAUT(cursorCalibracion.getString(11));
         }
         // Buscar Cero //
         ContentValues contentCero = new ContentValues();
@@ -1135,11 +895,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
                            //dialogoNuevoOperador();
                            //dialog.dismiss();
-                       }else{
+                       }else if (position > 1){
 
                            String mNombre = parent.getItemAtPosition(position).toString();
                            String[] nombre = {mNombre};
-                           //db.db.rawQuery("SELECT codigo FROM toperador",nombre);
 
                            Cursor c = db.db.rawQuery("SELECT cod_operador,nombre FROM toperadores  WHERE nombre='"+mNombre+"'",null);
                            if (c.moveToFirst()){
@@ -1231,7 +990,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         Balanza.getInstance().setCantidadGarradas(0);
 
                         btnGuardar.setEnabled(true);
-                        var.setTIEMPOCARGA(true);
+                        Variables.setTIEMPOCARGA(true);
                         activarCuentaCarga();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
@@ -1333,7 +1092,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             public void run() {
                 segundos = 0;
                 minutos = 0;
-                while (var.isTIEMPOCARGA())
+                while (Variables.isTIEMPOCARGA())
                 {
                     try {
                         contarTiempo();
@@ -1404,13 +1163,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             showInputDialog_EntreFecha();
                         break;
                     case 4:
-                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
-                            excel.run();
-                        }else{
-                            dialogoExcel();
-                        }
-
-                        //
+                            GuaradarUSB();
                         break;
                     case 5:
                             dialogoCabeceraImpresion();
@@ -1451,10 +1204,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
 
-        edtCabeceraUno.setText(var.getCabecera1());
-        edtCabeceraDos.setText(var.getCabecera2());
-        edtCabeceraTres.setText(var.getCabecera3());
-        edtCabeceraCuatro.setText(var.getCabecera4());
+        edtCabeceraUno.setText(Variables.getCabecera1());
+        edtCabeceraDos.setText(Variables.getCabecera2());
+        edtCabeceraTres.setText(Variables.getCabecera3());
+        edtCabeceraCuatro.setText(Variables.getCabecera4());
 
         final AlertDialog alert = alertDialogBuilder.create();
 
@@ -1467,10 +1220,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 DBcabecera dBcabecera = arrayCabecera.get(0);
                 db.actualizarCabecera(dBcabecera,"1");
 
-                var.setCabecera1(edtCabeceraUno.getText().toString());
-                var.setCabecera2(edtCabeceraDos.getText().toString());
-                var.setCabecera3(edtCabeceraTres.getText().toString());
-                var.setCabecera4(edtCabeceraCuatro.getText().toString());
+                Variables.setCabecera1(edtCabeceraUno.getText().toString());
+                Variables.setCabecera2(edtCabeceraDos.getText().toString());
+                Variables.setCabecera3(edtCabeceraTres.getText().toString());
+                Variables.setCabecera4(edtCabeceraCuatro.getText().toString());
 
                 Toast.makeText(getBaseContext(), "O cabeçalho foi salvo corretamente",Toast.LENGTH_LONG).show();
                 alert.dismiss();
@@ -1479,56 +1232,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
         alert.show();
     }
-
-
-
-
-
-    public void dialogoNuevoOperador()
-    {
-        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
-        View promptView = layoutInflater.inflate(R.layout.dialogo_nuevo_operador, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TemaGeneral));
-        alertDialogBuilder.setView(promptView);
-
-        final Button btnGuardar= (Button)promptView.findViewById(R.id.btnNuevoOperadorGuardar);
-        final Button btnSalir= (Button)promptView.findViewById(R.id.btnNuevoOperadorSalir);
-        final EditText edtNuevoOperadorNombre = (EditText)promptView.findViewById(R.id.edtNuevoOperadorNombre);
-        final EditText edtNuevoOperadorCodigo = (EditText) promptView.findViewById(R.id.edtNuevoOPeradorCodigo);
-
-        final AlertDialog alert = alertDialogBuilder.create();
-
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ArrayList<DBoperadores> arrayPesadas = new ArrayList<>(Arrays.asList(new DBoperadores(edtNuevoOperadorCodigo.getText().toString()
-                        ,edtNuevoOperadorNombre.getText().toString())));
-
-                DBoperadores dBoperadores;
-                dBoperadores = arrayPesadas.get(0);
-                db.InsertarOperadores(dBoperadores);
-                if (arrayPesadas.isEmpty()){
-                    Toast.makeText(getBaseContext(),getString(R.string.mensaje_operador_guardado_error),Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(getBaseContext(),getString(R.string.mensaje_operador_guardado),Toast.LENGTH_LONG).show();
-                    new dialogoCargaDatos(Principal.this);
-                    alert.dismiss();
-                }
-            }
-        });
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new dialogoCargaDatos(Principal.this);
-                alert.dismiss();
-            }
-        });
-        alert.show();
-    }
-
-
-
-
 
 
     protected void showInputDialog_EntreFecha()
@@ -1926,7 +1629,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 }else{
                                     imgConexionSerie.setBackgroundResource(R.drawable.serie_desconectado);
                                 }
-                                if (Integer.valueOf(var.getCAPACIDAD()) > Balanza.getInstance().getPesoFisico()){
+                                if (Integer.valueOf(Variables.getCAPACIDAD()) > Balanza.getInstance().getPesoFisico()){
                                     txtPesoGarra.setText(String.format ("% .0f", Balanza.getInstance().getPesoFisico()));
                                 }else{
                                     txtPesoGarra.setText("MAX");
@@ -1953,7 +1656,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 }else {
                                     imgDescargando.setVisibility(View.INVISIBLE);
                                 }
-                                if (var.isRESTAR())
+                                if (Variables.isRESTAR())
                                 {
                                     btnRestar.setBackgroundResource(R.drawable.boton_restar_azul_pres);
                                 }
@@ -2012,9 +1715,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         {
             while (!Thread.currentThread().isInterrupted())
             {
-                if (!var.isRELOJ())
+                if (!Variables.isRELOJ())
                 {
-                    var.setRELOJ(true);
+                    Variables.setRELOJ(true);
                 }
                 try {
                     doWork();
@@ -2051,9 +1754,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         public void run()
         {
             while (!Thread.currentThread().isInterrupted()) {
-                if (!var.isBATERIA())
+                if (!Variables.isBATERIA())
                 {
-                    var.setBATERIA(true);
+                    Variables.setBATERIA(true);
                 }
                 try {
                     doWork();
@@ -2132,106 +1835,753 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
     }
 
+    public void GuaradarUSB()
+    {
+        Balanza.getInstance().paraPedido();
+        Balanza.getInstance().getOK();
+        Balanza.getInstance().USBMounted();
+        int respuesa = Balanza.getInstance().getOK();
+        if (respuesa == 1){
+            new USBAsynckTasck().execute();
+        }else if(respuesa == 0){
+            Toast.makeText(getApplicationContext(),getString(R.string.toast1_usb),Toast.LENGTH_LONG).show();
+            Balanza.getInstance().pedirCuentas();
+        }else if(respuesa == -1){
+            Toast.makeText(getApplicationContext(),getString(R.string.toast2_usb),Toast.LENGTH_LONG).show();
+            dialogoGuardadoUSBBalanzaDesconectada();
+            Balanza.getInstance().pedirCuentas();
+        }
+    }
 
-   public void dialogoExcel() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
+    public void dialogoGuardadoUSBBalanzaDesconectada()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
+        builder.setTitle(getString(R.string.titulo_usb))
+                .setMessage(getString(R.string.mensaje_usb))
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void run() {
-                        //external_AND_removable_storage_m1 = null;
-
-
-                        File[] external_AND_removable_storage_m1 = ContextCompat.getExternalFilesDirs(getApplicationContext(),null);
-                        Environment.isExternalStorageRemovable();
-           /* if (external_AND_removable_storage_m1.length > 1){
-                 file = new File(external_AND_removable_storage_m1[1],fecha +"-ST455.xml");
-            }else{
-                 file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fecha +"-ST455.xml");
-            }*/
-                        //String nombre = external_AND_removable_storage_m1[1].getPath();
-                        //String[] parceo = nombre.split("/");
-
-
-                        String[] parceado = new String[external_AND_removable_storage_m1.length];
-                        for (int i = 0; i <= external_AND_removable_storage_m1.length-1;i++){
-                            if (external_AND_removable_storage_m1[i] != null){
-                                String nombre = external_AND_removable_storage_m1[i].getPath();
-                                String[] parceo = nombre.split("/");
-                                parceado[i] = parceo[2];
-                            }else{
-                                parceado[i]= "No Mounted";
-                            }
-
-                        }
-       /* checkInfo();
-        if (deviceList.size()==2){
-            parceado[parceado.length-1] = device.getDeviceName();
-        }*/
-
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
-                        builder.setTitle("Selecciona el lugar de guardado")
-                                .setItems(parceado, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        seleccion = which;
-                                        dialog.dismiss();
-                                        excel.run();
-
-                                    }
-                                });
-                        builder.create().show();
+                    public void onClick(DialogInterface dialog, int which) {
+                        excel.run();
+                    }
+                })
+                .setNegativeButton(getString(R.string.dialgo_cancelar), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
                 });
-
-            }
-        }).start();
-
-
+        builder.create().show();
     }
 
+    public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
+    {
+        int progreso;
+        String hora = "", cargio = "",vehiculo ="",codigo="",producto="",operador="",grua = "", peso_acumulado="", tara = "",cargas = "";
+        //String banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",banco7 ="",banco8 ="",banco9 ="",cargas ="";
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+            hora = txtHora.getText().toString();
+            cargio = txtCargio.getText().toString();
+            vehiculo = edt_vehiculo.getText().toString();
+            codigo = edt_codigo.getText().toString();
+            producto = edt_producto.getText().toString();
+            operador = edt_operador.getText().toString();
+            grua = edt_grua.getText().toString();
+            peso_acumulado = txt_Peso_Acumulado.getText().toString();
+            cargas = txtGarradas.getText().toString();
+            tara = edt_tara.getText().toString();
+            progreso = 0;
+        }
 
-    public  String[] getStorageDirectories() {
+        @Override
+        protected Void doInBackground(Void... voids) {
 
-        String[] storageDirectories;
-        String rawSecondaryStoragesStr = System.getenv("SECONDARY_STORAGE");
-        Context contexto = getApplicationContext();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            List<String> results = new ArrayList<String>();
-            File[] externalDirs = contexto.getExternalFilesDirs(null);
-
-            for (File file : externalDirs) {
-                String path = null;
-                try {
-                    path = file.getPath().split("/Android")[0];
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    path = null;
-                }
-                if (path != null) {
-                    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Environment.isExternalStorageRemovable(file))
-                            || rawSecondaryStoragesStr != null && rawSecondaryStoragesStr.contains(path)) {
-                        results.add(path);
+            for (int i =1; i <= Variables.getTICKETS(); i++)
+            {
+                Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                if (!Variables.getCabecera1().equals(null))
+                {
+                    if (!Variables.getCabecera1().equals("")) {
+                        Balanza.getInstance().ImprimirTicket("  " + Variables.getCabecera1());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
                     }
                 }
-            }
-            storageDirectories = results.toArray(new String[0]);
-        } else {
-            final Set<String> rv = new HashSet<String>();
+                if (!Variables.getCabecera4().equals(null))
+                {
+                    if (!Variables.getCabecera2().equals("")){
+                        Balanza.getInstance().ImprimirTicket("  "+ Variables.getCabecera2());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
 
-            //if (!TextUtils.isEmpty(rawSecondaryStoragesStr)) {
-                final String[] rawSecondaryStorages = rawSecondaryStoragesStr.split(File.pathSeparator);
-                Collections.addAll(rv, rawSecondaryStorages);
-           // }
-            storageDirectories = rv.toArray(new String[rv.size()]);
+                if (!Variables.getCabecera4().equals(null))
+                {
+                    if (!Variables.getCabecera3().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ Variables.getCabecera3());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+
+                if (!Variables.getCabecera4().equals(null))
+                {
+                    if (!Variables.getCabecera4().equals(""))
+                    {
+                        Balanza.getInstance().ImprimirTicket("  "+ Variables.getCabecera4());
+                        Balanza.getInstance().getOK();
+                        progreso++;
+                        publishProgress(progreso);
+                    }
+                }
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  " + fecha + "      " + hora);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+getString(R.string.Tiempo_de_carga) + cargio);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.patente)   + vehiculo);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Codigo    : " + codigo);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.producto) + producto);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cod.      : " + operador);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Grua      : " + grua);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-1  : " + banco1);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-2  : " + banco2);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-3  : " + banco3);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-4  : " + banco4);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-5  : " + banco5);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-6  : " + banco6);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-7  : " + banco7);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-8  : " + banco8);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Banco-9  : " + banco9);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Cargas   : " + cargas);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  Bruto    : " + peso_acumulado);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+
+                Balanza.getInstance().ImprimirTicket("  Tara     : " + tara);
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("  "+ getString(R.string.neto) + String.valueOf(netoDescargado));
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+                Balanza.getInstance().getOK();
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("");
+
+            }
+            progreso = 100;
+            publishProgress(progreso);
+
+            return null;
         }
-        return storageDirectories;
+
+        @Override
+        protected void onProgressUpdate(Integer... values)
+        {
+            if (progreso < 100)
+            {
+                progressBar.setProgress(values[0]);
+            }else {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            bancos ="0";
+            banco1 = "";
+            banco2 = "";
+            banco3 = "";
+            banco4 = "";
+            banco5 = "";
+            banco6 = "";
+            banco7 = "";
+            banco8 = "";
+            banco9 = "";
+        }
     }
 
+    public class USBAsynckTasck extends AsyncTask<Void, Integer, Void>
+    {
+        int progreso;
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try
+            {
+
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBOpen(GRUA+fecha+".xml");
+                Balanza.getInstance().getOK();
+                /** CREAR LIBRO */
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().USBWrite("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" );
+                Balanza.getInstance().getOK();
+
+                Balanza.getInstance().USBWrite("<?mso-application progid=\"Excel.Sheet\"?>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("xmlns:o=\"urn:schemas-microsoft-com:office:office\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("xmlns:x=\"urn:schemas-microsoft-com:office:excel\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("xmlns:html=\"http://www.w3.org/TR/REC-html40\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite(" <DocumentProperties xmlns=\"urn:schemas-microsoft-com:office:office\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <Version>12.00</Version>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite(" </DocumentProperties>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( " <ExcelWorkbook xmlns=\"urn:schemas-microsoft-com:office:excel\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <WindowHeight>10005</WindowHeight>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <WindowWidth>10005</WindowWidth>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <WindowTopX>120</WindowTopX>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <WindowTopY>135</WindowTopY>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <ActiveSheet>4</ActiveSheet>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <ProtectStructure>False</ProtectStructure>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <ProtectWindows>False</ProtectWindows>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite(" </ExcelWorkbook>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Styles>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <Style ss:ID=\"s62\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Interior ss:Color=\"#FB4A4A\" ss:Pattern=\"Solid\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite(        "  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <Style ss:ID=\"s63\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Interior ss:Color=\"#FFFF00\" ss:Pattern=\"Solid\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <Style ss:ID=\"s66\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Borders>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "   </Borders>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "  <Style ss:ID=\"s67\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "   <Borders>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "    <Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "    <Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   </Borders>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Interior ss:Color=\"#FFFF00\" ss:Pattern=\"Solid\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <Style ss:ID=\"s73\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Alignment ss:Vertical=\"Bottom\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Borders/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite(        "   <Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    ss:Bold=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Interior ss:Color=\"#002060\" ss:Pattern=\"Solid\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <NumberFormat/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Protection/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <Style ss:ID=\"s100\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Font ss:FontName=\"Cambria\" x:Family=\"Roman\" ss:Size=\"48\" ss:Color=\"#1F497D\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    ss:Bold=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Interior/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Style ss:ID=\"s92\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Font ss:FontName=\"Cambria\" x:Family=\"Roman\" ss:Size=\"48\" ss:Color=\"#1F497D\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    ss:Bold=\"1\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </Style>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite(" </Styles>");
+                Balanza.getInstance().getOK();
+
+                /** HOJA CARGAS*/
+                Balanza.getInstance().USBWrite("<Worksheet ss:Name=\"CARGAS\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Names><NamedRange ss:Name=\"_FilterDatabase\" ss:RefersTo=\"=CARGAS!R5C1:R5C7\" ss:Hidden=\"1\"/></Names>");
+                Balanza.getInstance().getOK();
+
+                /**ABRIR TABLA CARGAS */
+                progreso++;
+                publishProgress(progreso);
+                int descargas = 0;
+                Cursor h = db.db.rawQuery("SELECT COUNT(tpesadas._id) AS 'Cantidad' FROM tpesadas ", null);
+                if (h.moveToFirst()) {
+                    descargas = h.getInt(0);
+                }
+                Balanza.getInstance().USBWrite("<Table ss:ExpandedColumnCount=\"23\" ss:ExpandedRowCount=\"" + (descargas + 7) + "\" x:FullColumns=\"1\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   x:FullRows=\"1\" ss:DefaultColumnWidth=\"81.75\" ss:DefaultRowHeight=\"15\">");
+                Balanza.getInstance().getOK();
+
+                /**ENCABEZADO CARGAS*/
+                progreso++;
+                publishProgress(progreso);
+                Balanza.getInstance().USBWrite("<Row ss:AutoFitHeight=\"0\">" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Cell ss:MergeAcross=\"11\" ss:MergeDown=\"3\" ss:StyleID=\"s100\"><Data" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("      ss:Type=\"String\">"+getString(R.string.titulo_excel)+"</Data></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   </Row>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "   <Row ss:AutoFitHeight=\"0\" ss:Span=\"2\"/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Row ss:Index=\"5\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">DESC. ID</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">"+getString(R.string.excel_fecha)+ "</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">HORA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TEMPO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">"+getString(R.string.menu_productos)+"</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">GRUA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">OPERADOR</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">VEICULO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CODIGO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCOS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-1</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-2</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-3</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-4</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-5</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-6</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-7</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-8</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-9</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CARGAS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BRUTO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TARA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">LIQ </Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("</Row>");
+                Balanza.getInstance().getOK();
 
 
+
+
+
+                Cursor c = db.db.rawQuery("SELECT * FROM tpesadas ", null);
+                datos = new ArrayList<String>();
+                int celdas = 0;
+                String fechaCarga = "";
+                String ids = "", fecha = "", hora = "", prod = "", cargio = "", grua = "",  operador = "";
+                String codigo = "", vehiculo = "",nbancos= "", banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",
+                        banco7 ="",banco8 ="",banco9 ="",cargas ="",bruto = "", tara = "", neto = "";
+                if (c.moveToFirst())
+                {
+                    for (int i = 0; i <= c.getCount() - 1; i++)
+                    {
+                        progreso++;
+                        publishProgress(progreso);
+                        ids = c.getString(0);
+                        fecha = c.getString(1);
+                        calendar.setTimeInMillis(Long.valueOf(fecha));
+                        fechaCarga = dateFormat.format(calendar.getTime());
+                        hora = c.getString(2);
+                        cargio = c.getString(3);
+                        prod = c.getString(4);
+                        grua = c.getString(5);
+                        operador = c.getString(6);
+                        vehiculo = c.getString(7);
+                        codigo = c.getString(8);
+                        nbancos = c.getString(9);
+                        banco1 = c.getString(10);
+                        banco2 = c.getString(11);
+                        banco3 = c.getString(12);
+                        banco4 = c.getString(13);
+                        banco5 = c.getString(14);
+                        banco6 = c.getString(15);
+                        banco7 = c.getString(16);
+                        banco8 = c.getString(17);
+                        banco9 = c.getString(18);
+                        cargas = c.getString(19);
+                        bruto = c.getString(20);
+                        tara = c.getString(21);
+                        neto = c.getString(22);
+
+                        try {
+                            Balanza.getInstance().USBWrite("<Row>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"Number\">" + ids + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + fechaCarga + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + hora + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + cargio + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + prod + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + grua + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + operador + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + vehiculo + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + codigo + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + nbancos + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco1 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco2 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco3 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco4 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco5 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco6 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco7 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco8 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco9 + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + cargas + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + bruto + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + tara + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s63\"><Data ss:Type=\"Number\">" + neto + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("</Row>");
+                            Balanza.getInstance().getOK();
+                        } catch (Exception e) {
+                            progreso =-1;
+                            publishProgress(progreso);
+                            Balanza.getInstance().pedirCuentas();
+                        }
+                        c.moveToNext();
+                        celdas = i;
+                    }
+                }
+
+                /** CALCULO CARGAS */
+                Balanza.getInstance().USBWrite("<Row>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("</Row>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Row>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">TOTAL</Data></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s67\" ss:Formula=\"=SUBTOTAL(9,R[-" + (celdas + 2) + "]C:R[-1]C)\"></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("</Row>");
+                Balanza.getInstance().getOK();
+
+                /** CERRAR TABLA */
+                Balanza.getInstance().USBWrite("</Table>");
+                Balanza.getInstance().getOK();
+
+                /** CERRAR HOJA CARGAS */
+                Balanza.getInstance().USBWrite(" <WorksheetOptions xmlns=\"urn:schemas-microsoft-com:office:excel\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Unsynced/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <Panes>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    <Pane>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("     <Number>3</Number>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("     <ActiveRow>15</ActiveRow>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("     <ActiveCol>5</ActiveCol>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("    </Pane>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   </Panes>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <ProtectObjects>False</ProtectObjects>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   <ProtectScenarios>False</ProtectScenarios>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </WorksheetOptions>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <AutoFilter x:Range=\"R5C1:R5C23\"");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   xmlns=\"urn:schemas-microsoft-com:office:excel\">");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  </AutoFilter>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <ss:WorksheetOptions/>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("  <ss:WorksheetOptions/>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("   </Worksheet>");
+                Balanza.getInstance().getOK();
+
+
+
+                /**CERRAR LIBRO*/
+                Balanza.getInstance().USBWrite("</Workbook>");
+                Balanza.getInstance().getOK();
+
+                Balanza.getInstance().USBClose();
+
+
+
+                progreso = 100;
+
+                publishProgress(progreso);
+
+            } catch (Exception e) {
+                progreso =-1;
+                publishProgress(progreso);
+                Balanza.getInstance().pedirCuentas();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (progreso < 100)
+            {
+                progressBar.setProgress(values[0]);
+            }else {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getBaseContext(),getString(R.string.mensaje_exportacion), Toast.LENGTH_LONG).show();
+            }
+            if (progreso == -1){
+                Toast.makeText(getBaseContext(),getString(R.string.mensaje_exportacion_error), Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Balanza.getInstance().pedirCuentas();
+        }
+
+        @Override
+        protected void onCancelled() {
+            Balanza.getInstance().pedirCuentas();
+        }
+    }
 
     int seleccion = 0;
     public class Exportar_Excel extends Thread
@@ -2243,7 +2593,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             final String ExpandedRowCountCarga = "";
             final String ExpandedRowCountDescarga = "";
 
-            final String Crear_Libro = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
+            final String Crear_Libro =
+                    "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
                     "<?mso-application progid=\"Excel.Sheet\"?>\n" +
                     "<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"\n" +
                     "xmlns:o=\"urn:schemas-microsoft-com:office:office\"\n" +
@@ -2353,8 +2704,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             //Escribir en el USB con BufferWriter
             BufferedWriter br = null;
             File file = null;
-            File[] external_AND_removable_storage_m1 = getExternalFilesDirs(null);
-           /* if (external_AND_removable_storage_m1.length > 1){
+
+           /* File[] external_AND_removable_storage_m1 = getExternalFilesDirs(null);
+            if (external_AND_removable_storage_m1.length > 1){
                  file = new File(external_AND_removable_storage_m1[1],fecha +"-ST455.xml");
             }else{
                  file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fecha +"-ST455.xml");
@@ -2378,10 +2730,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         }
                     }).create();*/
 
-
-
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
+            /*if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP){
                 String sdcard = "storage/usbhost/";
                 file = new File(sdcard,  fecha +"-ST455.xml");
             }else{
@@ -2391,11 +2740,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                     //file = new File("dev/usb/",  GRUA+"-"+fecha+".xml");
                     file = new File(external_AND_removable_storage_m1[seleccion],  GRUA+"-"+fecha+".xml");
                 }
-            }
+            }*/
 
+            /** Guarda directamente en la memoria interna */
 
-
-
+            file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),GRUA+"-"+fecha+".xml");
 
 
            /* if (check()){
@@ -2420,6 +2769,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 br.append(Crear_Libro);
                 //Hoja Cargas
                 br.append(Hoja_Cargas);
+
                 int descargas = 0;
                 // br.append(Abrir_Fila);
                 Cursor h = db.db.rawQuery("SELECT COUNT(tpesadas._id) AS 'Cantidad' FROM tpesadas ", null);
@@ -2579,45 +2929,128 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
     }
-    public void desmostarDispositivos(){
-        startActivityForResult(new Intent(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS), 0);
-    }
+
+
+
 
     /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
+     * Todo hacias abajo se descartó cuando pasamos a grabar el XML desde la caja
      */
-     //public native String stringFromJNI();
+    public void dialogoExcel() {
 
-    private boolean isExternalStorageAvailable() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //external_AND_removable_storage_m1 = null;
 
-        String state = Environment.getExternalStorageState();
-        boolean mExternalStorageAvailable = false;
-        boolean mExternalStorageWriteable = false;
 
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            // We can read and write the media
-            mExternalStorageAvailable = mExternalStorageWriteable = true;
-        } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            // We can only read the media
-            mExternalStorageAvailable = true;
-            mExternalStorageWriteable = false;
+                        File[] external_AND_removable_storage_m1 = ContextCompat.getExternalFilesDirs(getApplicationContext(),null);
+                        Environment.isExternalStorageRemovable();
+           /* if (external_AND_removable_storage_m1.length > 1){
+                 file = new File(external_AND_removable_storage_m1[1],fecha +"-ST455.xml");
+            }else{
+                 file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fecha +"-ST455.xml");
+            }*/
+                        //String nombre = external_AND_removable_storage_m1[1].getPath();
+                        //String[] parceo = nombre.split("/");
+
+
+                        final String[] parceado = new String[external_AND_removable_storage_m1.length+1];
+                        for (int i = 0; i <= external_AND_removable_storage_m1.length-1;i++){
+                            if (external_AND_removable_storage_m1[i] != null){
+                                String nombre = external_AND_removable_storage_m1[i].getPath();
+                                String[] parceo = nombre.split("/");
+                                parceado[i] = parceo[2];
+                            }else{
+                                parceado[i]= "No Mounted";
+                            }
+
+                        }
+       /* checkInfo();
+        if (deviceList.size()==2){
+            parceado[parceado.length-1] = device.getDeviceName();
+        }*/
+                        parceado[external_AND_removable_storage_m1.length] = "USB-Serie";
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
+                        builder.setTitle("Selecciona el lugar de guardado")
+                                .setItems(parceado, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        seleccion = which;
+                                        if (which == (parceado.length -1)){
+                                            Balanza.getInstance().paraPedido();
+                                            Balanza.getInstance().getOK();
+                                            Balanza.getInstance().USBMounted();
+                                            int respuesa = Balanza.getInstance().getOK();
+                                            if (respuesa == 1){
+                                                new USBAsynckTasck().execute();
+                                            }else if(respuesa == 0){
+                                                Toast.makeText(getApplicationContext(),"El USB no está montado en la caja",Toast.LENGTH_LONG).show();
+                                                Balanza.getInstance().pedirCuentas();
+                                            }else if(respuesa == -1){
+                                                Toast.makeText(getApplicationContext(),"  LA BALANZA ESTA DESCONECTADA  ",Toast.LENGTH_LONG).show();
+                                                Balanza.getInstance().pedirCuentas();
+                                            }
+
+
+                                        }else{
+                                            excel.run();
+                                        }
+
+                                        dialog.dismiss();
+                                    }
+                                });
+                        builder.create().show();
+                    }
+                });
+
+            }
+        }).start();
+
+
+    }
+    public  String[] getStorageDirectories() {
+
+        String[] storageDirectories;
+        String rawSecondaryStoragesStr = System.getenv("SECONDARY_STORAGE");
+        Context contexto = getApplicationContext();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            List<String> results = new ArrayList<String>();
+            File[] externalDirs = contexto.getExternalFilesDirs(null);
+
+            for (File file : externalDirs) {
+                String path = null;
+                try {
+                    path = file.getPath().split("/Android")[0];
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    path = null;
+                }
+                if (path != null) {
+                    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Environment.isExternalStorageRemovable(file))
+                            || rawSecondaryStoragesStr != null && rawSecondaryStoragesStr.contains(path)) {
+                        results.add(path);
+                    }
+                }
+            }
+            storageDirectories = results.toArray(new String[0]);
         } else {
-            // Something else is wrong. It may be one of many other states, but
-            // all we need
-            // to know is we can neither read nor write
-            mExternalStorageAvailable = mExternalStorageWriteable = false;
-        }
+            final Set<String> rv = new HashSet<String>();
 
-        if (mExternalStorageAvailable == true
-                && mExternalStorageWriteable == true) {
-            return true;
-        } else {
-            return false;
+            //if (!TextUtils.isEmpty(rawSecondaryStoragesStr)) {
+            final String[] rawSecondaryStorages = rawSecondaryStoragesStr.split(File.pathSeparator);
+            Collections.addAll(rv, rawSecondaryStorages);
+            // }
+            storageDirectories = rv.toArray(new String[rv.size()]);
         }
+        return storageDirectories;
     }
 
-    private boolean check(){
+    private boolean check()
+    {
         boolean usb = false;
         manager = (UsbManager) getSystemService(Context.USB_SERVICE);
 
@@ -2635,7 +3068,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         }
         return  usb;
     }
-
 
     HashMap<String , UsbDevice> deviceList;
     int cnt = 0;

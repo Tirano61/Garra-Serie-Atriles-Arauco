@@ -24,6 +24,7 @@ public class     Calibracion extends AppCompatActivity {
     Integer counter = 1;
     boolean semiAutomatico = true;
     Variables var;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -55,8 +56,9 @@ public class     Calibracion extends AppCompatActivity {
                   }
               }
           });
-          CargarCalibracion();
 
+          CargarCalibracion();
+            
     }
 
     /**
@@ -141,17 +143,17 @@ public class     Calibracion extends AppCompatActivity {
                             ArrayList<DBcalibracion> arrayCalibracion = new ArrayList<DBcalibracion>(Arrays.asList(new DBcalibracion(capac,celdas,
                                     division,sensib,vent,kgF,conv,recort,logica,tickets,semiAut)));
 
-                            var.setCAPACIDAD(capac);
-                            var.setCELDAS(celdas);
-                            var.setDIVISION(division);
-                            var.setSENSIBILIDAD(sensib);
-                            var.setVENTANA(Integer.valueOf(vent));
-                            var.setKGFILTRO(Integer.valueOf(kgF));
-                            var.setCONVERSIONES(conv);
-                            var.setRECORTES(recort);
-                            var.setLOGICA(logica);
-                            var.setTICKETS(Integer.valueOf(tickets));
-                            var.setSEMIAUT(semiAut);
+                            Variables.setCAPACIDAD(capac);
+                            Variables.setCELDAS(celdas);
+                            Variables.setDIVISION(division);
+                            Variables.setSENSIBILIDAD(sensib);
+                            Variables.setVENTANA(Integer.valueOf(vent));
+                            Variables.setKGFILTRO(Integer.valueOf(kgF));
+                            Variables.setCONVERSIONES(conv);
+                            Variables.setRECORTES(recort);
+                            Variables.setLOGICA(logica);
+                            Variables.setTICKETS(Integer.valueOf(tickets));
+                            Variables.setSEMIAUT(semiAut);
                             Balanza.getInstance().setMULTIPLICADOR();
                             DBcalibracion CALI = arrayCalibracion.get(0);
 

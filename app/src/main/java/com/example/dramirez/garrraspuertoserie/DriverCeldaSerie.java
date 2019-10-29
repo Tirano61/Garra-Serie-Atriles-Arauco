@@ -240,9 +240,10 @@ public class DriverCeldaSerie implements DriverCelda {
     }
 
     @Override
-    public int getOK() {
+    public int getOK()
+    {
         int i = 0;
-        while (i <= 20)
+        while (i <= 250)
         {
             if (ok == 1)
             {
@@ -250,7 +251,7 @@ public class DriverCeldaSerie implements DriverCelda {
             }else{
                 i++;
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -351,6 +352,54 @@ public class DriverCeldaSerie implements DriverCelda {
         {
             ok = -1;
             String envio = "AT+PRINT=" + linea + "\r\n";
+            byte[] bites = envio.getBytes();
+            mOutputStream.write(bites);
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void setUSBMounted() {
+        try{
+            ok = -1;
+            String envio = "AT+USB_MONTED" + "\r\n";
+            byte[] bites = envio.getBytes();
+            mOutputStream.write(bites);
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void setUSB(String linea) {
+        try{
+            ok = -1;
+            String envio = "AT+USB_WRITE=" + linea +  "\r\n";
+            byte[] bites = envio.getBytes();
+            mOutputStream.write(bites);
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void setUSB_Open(String nombreArchivo) {
+        try{
+            ok = -1;
+            String envio = "AT+USB_OPEN=" + "\"" + nombreArchivo +"\"" + "\r\n" ;
+            byte[] bites = envio.getBytes();
+            mOutputStream.write(bites);
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void setUSB_Close() {
+        try{
+            ok = -1;
+            String envio = "AT+USB_CLOSE"+ "\r\n";
             byte[] bites = envio.getBytes();
             mOutputStream.write(bites);
         }catch (Exception e){

@@ -8,9 +8,9 @@ public class Variables {
     private static boolean RELOJ = false;
     private static boolean BATERIA = false;
     private static boolean TIEMPOCARGA = false;
-    private  static String CABECERA_1,CABECERA_2,CABECERA_3,CABECERA_4;
-    private  static boolean RESTAR;
-    private  static String SEMIAUT;
+    private static String CABECERA_1,CABECERA_2,CABECERA_3,CABECERA_4;
+    private static boolean RESTAR;
+    private static String SEMIAUT;
 
 
     public static String getSEMIAUT() {
@@ -181,20 +181,20 @@ public class Variables {
         Variables.SENSIBILIDAD = SENSIBILIDAD;
     }
 
-    public int getVENTANA() {
+    public static int getVENTANA() {
         return VENTANA;
     }
 
-    public void setVENTANA(int VENTANA) {
-        this.VENTANA = VENTANA;
+    public static void setVENTANA(int VENTANA) {
+        Variables.VENTANA = VENTANA;
     }
 
-    public int getKGFILTRO() {
+    public static int getKGFILTRO() {
         return KGFILTRO;
     }
 
-    public void setKGFILTRO(int KGFILTRO) {
-        this.KGFILTRO = KGFILTRO;
+    public static void setKGFILTRO(int KGFILTRO) {
+        Variables.KGFILTRO = KGFILTRO;
     }
 
     public static String getCONVERSIONES() {
