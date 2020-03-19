@@ -3,13 +3,13 @@
     <string-array name="dialogo_menu" >
         <item>@string/menu_calibracion</item>
         <item>@string/menu_tipo_celda</item>
-        <item>@string/menu_productos</item>
         <item>@string/menu_Pesadas</item>
         <item>@string/menu_exportar</item>
-        <item>@string/menu_cabecera</item>
         <item>@string/menu_correccion</item>
-        <item>@string/menu_operadores</item>
+        <item>Fuera de servicio</item>
         <item>@string/menu_actualizar</item>
+        <item>Reimprimir</item>
+        <item>Borrar pesadas</item>
     </string-array>
     <string-array name="FiltrosPesadas">
         <item>"Por Lote"</item>
@@ -38,5 +38,46 @@
         <item>8</item>
         <item>9</item>
 
+    </string-array>
+
+    //Arrays para los spiner de datos
+
+    <string-array name="spinner_destino">
+        <item>CELDF01</item>
+        <item>MDFDO02</item>
+        <item>ASEDF03</item>
+        <item>PTPDF04</item>
+    </string-array>
+    <string-array name="spinner_producto">
+        <item>PITA-ASE</item>
+        <item>PITA-PUL</item>
+        <item>PITA-LEN</item>
+        <item>EUCA-ASE</item>
+        <item>EUCA-PUL</item>
+        <item>EUCA-LEN</item>
+        <item>ARAU-ASE</item>
+        <item>ARAU-PUL</item>
+        <item>ARAU-LEN</item>
+    </string-array>
+
+    <string-array name="spinner_medida_aserrable">
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>ME</item>
+    </string-array>
+
+    <string-array name="spinner_tipo_intervencion">
+        <item>COS</item>
+        <item>DES</item>
+        <item>RA1</item>
+        <item>RA2</item>
+    </string-array>
+
+    <string-array name="spinner_umf">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 </resources>

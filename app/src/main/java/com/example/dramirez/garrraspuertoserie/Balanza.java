@@ -6,6 +6,7 @@ import com.example.dramirez.garrraspuertoserie.Interfaces.DriverCelda;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.PortUnreachableException;
 
 class Balanza {
 
@@ -183,6 +184,7 @@ class Balanza {
 
     public int setAcumularPeso()
     {
+        int valor = 0;
         //Log.d("ENVIO Acumular = ",String.valueOf(celda.getGuardado()));
         if (isSemiAutomatico())
         {
@@ -190,15 +192,17 @@ class Balanza {
             {
                 if (Variables.isRESTAR())
                 {
-                    PesoAcumulado -= (int)waitForPesoEstable();
-                    PesoAcumuladoBancos -= (int)waitForPesoEstable();
-                    PesoAcumuladoCasis -= (int)waitForPesoEstable();
+                    valor = (int)waitForPesoEstable();
+                    PesoAcumuladoBancos -= valor;
+                    PesoAcumulado -=  valor;
+                    PesoAcumuladoCasis -=  valor;
                     Variables.setRESTAR(false);
                 }else{
                     //Log.d("ENVIO Semiauto = ",String.valueOf(celda.getGuardado()));
-                    PesoAcumulado += (int)waitForPesoEstable();
-                    PesoAcumuladoBancos += (int)waitForPesoEstable();
-                    PesoAcumuladoCasis += (int)waitForPesoEstable();
+                    valor = (int)waitForPesoEstable();
+                    PesoAcumuladoBancos += valor;
+                    PesoAcumulado += valor;
+                    PesoAcumuladoCasis += valor;
                     CantidadGarradas ++;
                 }
                 fueAcumulado = true;
@@ -212,15 +216,17 @@ class Balanza {
             {
                 if (Variables.isRESTAR())
                 {
-                    PesoAcumulado -= (int)waitForPesoEstable();
-                    PesoAcumuladoBancos -= (int)waitForPesoEstable();
-                    PesoAcumuladoCasis -= (int)waitForPesoEstable();
+                    valor = (int)waitForPesoEstable();
+                    PesoAcumuladoBancos -= valor;
+                    PesoAcumulado -= valor;
+                    PesoAcumuladoCasis -= valor;
                     Variables.setRESTAR(false);
                 }else{
                     //Log.d("ENVIO entro = ",String.valueOf(celda.getGuardado()));
-                    PesoAcumulado += (int)waitForPesoEstable();
-                    PesoAcumuladoBancos += (int)waitForPesoEstable();
-                    PesoAcumuladoCasis += (int)waitForPesoEstable();
+                    valor = (int)waitForPesoEstable();
+                    PesoAcumuladoBancos += valor;
+                    PesoAcumulado += valor;
+                    PesoAcumuladoCasis += valor;
                     CantidadGarradas ++;
                 }
                 fueAcumulado = true;
@@ -361,6 +367,14 @@ class Balanza {
       //  celda.getEstadoPedido();
     }
 
+    public String getVersion()
+    {
+        return celda.getVersion();
+    }
+
+    public void getInfo(){
+        celda.getInfo();
+    }
     public int getOK()
     {
         return celda.getOK();
@@ -498,11 +512,29 @@ class Balanza {
                 }
             }
             pesoFinal = 0;
+
             for (int i = 4; i < 16; i++)
             {
                 pesoFinal += peso[i];
             }
-            return (pesoFinal/12);
+            int devolver;
+            int pesada = ((int) (pesoFinal/12));
+            int redondeo =pesada/ Integer.valueOf(Variables.getDIVISION());
+            int A = redondeo * Integer.valueOf(Variables.getDIVISION());
+            int B = (redondeo + 1) * Integer.valueOf(Variables.getDIVISION());
+            int Arriba = redondeo - A ;
+            int Abajo = B - redondeo;
+            if (Abajo < Arriba) {
+                devolver = A;
+            } else if (Arriba < Abajo) {
+                devolver = B;
+            } else {
+                devolver = pesada;
+            }
+
+           // Log.d("PESOINESTABLE =","********** *******  " + devolver);
+            return devolver;
+
         }
     }
 

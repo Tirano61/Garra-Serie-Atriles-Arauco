@@ -243,8 +243,9 @@ public class Pesadas extends AppCompatActivity {
             {
                 Cursor c = db.db.rawQuery("SELECT * FROM tpesadas WHERE fecha BETWEEN '"+ fecha1 +"' AND '" + fecha2 + "'", null);
                 datos = new ArrayList<ListaEntradaPesadas>();
-                String id = "", fecha = "",hora="",  producto="", cargio ="", patente="",
-                        volumen="",codigo = "", cliente = "", bruto="", tara ="", neto = "";
+                String id = "", fecha  = "",  hora = "", grua = "", chasis = "", acoplado = "", remito = "", tara = "",destino = "", producto = "",
+                        aserrable = "", rodal = "", fCorte = "",operador = "",aIntervencion = "",tIntervencion = "",predio = "",umf = "",pElab = "",pCarga = "",
+                        raiz = "", cargio = "",bruto = "",neto = "";
                 if (c.moveToFirst()) {
                     do {
                         id = c.getString(0);
@@ -252,17 +253,32 @@ public class Pesadas extends AppCompatActivity {
                         calendar.setTimeInMillis(Long.valueOf(fecha));
                         fecha= formato.format(calendar.getTime());
                         hora = c.getString(2);
-                        producto = c.getString(3);
-                        cargio =  c.getString(4);
-                        patente = c.getString(5);
-                        volumen = c.getString(6);
-                        codigo = c.getString(7);
-                        cliente = c.getString(8);
-                        bruto = c.getString(20);
-                        tara = c.getString(21);
-                        neto = c.getString(22);
+                        grua =  c.getString(3);
 
-                        datos.add(new ListaEntradaPesadas( id , fecha ,  hora, producto, cargio, patente, volumen, codigo, cliente, bruto, tara, neto));
+                        chasis=  c.getString(4);
+                        acoplado =  c.getString(5);
+                        remito =  c.getString(6);
+                        destino =  c.getString(7);
+                        producto = c.getString(8);
+                        aserrable =  c.getString(9);
+                        rodal =  c.getString(10);
+                        fCorte = c.getString(11);
+                        operador = c.getString(12);
+                        aIntervencion = c.getString(13);
+                        tIntervencion = c.getString(14);
+                        predio = c.getString(15);
+                        umf = c.getString(16);
+                        pElab = c.getString(17);
+                        pCarga = c.getString(18);
+                        raiz  = c.getString(19);
+                        bruto =  c.getString(31);
+                        tara = c.getString(32);
+                        neto = c.getString(33);
+                        cargio = c.getString(34);
+
+                        datos.add(new ListaEntradaPesadas(id , fecha ,  hora, grua, chasis, acoplado, remito, tara,destino, producto,
+                                                          aserrable, rodal, fCorte,operador,aIntervencion,tIntervencion,predio,umf,pElab,pCarga,
+                                                            raiz,bruto,neto, cargio));
                     } while (c.moveToNext());
                 }
                 runOnUiThread(new Runnable()
@@ -280,22 +296,60 @@ public class Pesadas extends AppCompatActivity {
                                 txtPesadasFecha.setText(((ListaEntradaPesadas) entrada).getFecha());
                                 TextView txtPesadasHora = (TextView) view.findViewById(R.id.txtPesadasHora);
                                 txtPesadasHora.setText(((ListaEntradaPesadas) entrada).getHora());
-                                TextView txtPesadasProducto = (TextView) view.findViewById(R.id.txtPesadasProducto);
-                                txtPesadasProducto.setText(((ListaEntradaPesadas) entrada).getProducto());
-                                TextView txtPesadasCargio = (TextView) view.findViewById(R.id.txtPesadasCargio);
-                                txtPesadasCargio.setText(((ListaEntradaPesadas) entrada).getCargio());
-                                TextView txtPesadasPatente = (TextView) view.findViewById(R.id.txtPesadasPatente);
-                                txtPesadasPatente.setText(((ListaEntradaPesadas) entrada).getPatente());
-                                TextView txtPesadasVolumen = (TextView) view.findViewById(R.id.txtPesadasVolumen);
-                                txtPesadasVolumen.setText(((ListaEntradaPesadas) entrada).getVolumen());
-                                TextView txtPesadasCodigo = (TextView) view.findViewById(R.id.txtPesadasCodigo);
-                                txtPesadasCodigo.setText(((ListaEntradaPesadas) entrada).getCodigo());
-                                TextView txtPesadasCliente = (TextView) view.findViewById(R.id.txtPesadasCliente);
-                                txtPesadasCliente.setText(((ListaEntradaPesadas) entrada).getCliente());
-                                TextView txtPesadasBruto = (TextView) view.findViewById(R.id.txtPesadasBruto);
-                                txtPesadasBruto.setText(((ListaEntradaPesadas) entrada).getBruto());
+
+                                TextView txtPesadasGrua = (TextView) view.findViewById(R.id.txtPesadasGrua);
+                                txtPesadasGrua.setText(((ListaEntradaPesadas) entrada).getIdgrua());
+                                TextView txtPesadasChasis = (TextView) view.findViewById(R.id.txtPesadasChasis);
+                                txtPesadasChasis.setText(((ListaEntradaPesadas) entrada).getChasis());
+                                TextView txtPesadasAcoplado = (TextView) view.findViewById(R.id.txtPesadasAcoplado);
+                                txtPesadasAcoplado.setText(((ListaEntradaPesadas) entrada).getAcoplado());
+                                TextView txtPesadasRemito = (TextView) view.findViewById(R.id.txtPesadasRemito);
+                                txtPesadasRemito.setText(((ListaEntradaPesadas) entrada).getRemito());
                                 TextView txtPesadasTara = (TextView) view.findViewById(R.id.txtPesadasTara);
                                 txtPesadasTara.setText(((ListaEntradaPesadas) entrada).getTara());
+
+                                TextView txtPesadasDestino = (TextView) view.findViewById(R.id.txtPesadasDestino);
+                                txtPesadasDestino.setText(((ListaEntradaPesadas) entrada).getDestino());
+
+                                TextView txtPesadasProducto = (TextView) view.findViewById(R.id.txtPesadasProducto);
+                                txtPesadasProducto.setText(((ListaEntradaPesadas) entrada).getProducto());
+
+                                TextView txtPesadasAserrable = (TextView) view.findViewById(R.id.txtPesadasAserrable);
+                                txtPesadasAserrable.setText(((ListaEntradaPesadas) entrada).getMedida_aserrable());
+
+                                TextView txtPesadasRodal = (TextView) view.findViewById(R.id.txtPesadasRodal);
+                                txtPesadasRodal.setText(((ListaEntradaPesadas) entrada).getRodal());
+
+                                TextView txtPesadasFCorte = (TextView) view.findViewById(R.id.txtPesadasFCorte);
+                                txtPesadasFCorte.setText(((ListaEntradaPesadas) entrada).getFecha_corte());
+
+                                TextView txtPesadasOperador = (TextView) view.findViewById(R.id.txtPesadasOperador);
+                                txtPesadasOperador.setText(((ListaEntradaPesadas) entrada).getOperador());
+
+                                TextView txtPesadasAIntervencion = (TextView) view.findViewById(R.id.txtPesadasAIntervencion);
+                                txtPesadasAIntervencion.setText(((ListaEntradaPesadas) entrada).getActa_intervencion());
+
+                                TextView txtPesadasTIntervencion = (TextView) view.findViewById(R.id.txtPesadasTIntervencion);
+                                txtPesadasTIntervencion.setText(((ListaEntradaPesadas) entrada).getTipo_intervencion());
+
+                                TextView txtPesadasPredio = (TextView) view.findViewById(R.id.txtPesadasPredio);
+                                txtPesadasPredio.setText(((ListaEntradaPesadas) entrada).getPredio());
+
+                                TextView txtPesadasUmf = (TextView) view.findViewById(R.id.txtPesadasUmf);
+                                txtPesadasUmf.setText(((ListaEntradaPesadas) entrada).getUmf());
+
+                                TextView txtPesadasPElaboracion = (TextView) view.findViewById(R.id.txtPesadasPElaboracion);
+                                txtPesadasPElaboracion.setText(((ListaEntradaPesadas) entrada).getProveedor_elavoracion());
+
+                                TextView txtPesadasPCarga = (TextView) view.findViewById(R.id.txtPesadasPCarga);
+                                txtPesadasPCarga.setText(((ListaEntradaPesadas) entrada).getProveedor_carga());
+
+                                TextView txtPesadasRaiz = (TextView) view.findViewById(R.id.txtPesadasRaiz);
+                                txtPesadasRaiz.setText(((ListaEntradaPesadas) entrada).getRaiz_remito());
+                                TextView txtPesadasCargio = (TextView) view.findViewById(R.id.txtPesadasCargio);
+                                txtPesadasCargio.setText(((ListaEntradaPesadas) entrada).getTiempo_carga());
+                                TextView txtPesadasBruto= (TextView) view.findViewById(R.id.txtPesadasBruto);
+                                txtPesadasBruto.setText(((ListaEntradaPesadas) entrada).getBruto());
                                 TextView txtPesadasNeto = (TextView) view.findViewById(R.id.txtPesadasNeto);
                                 txtPesadasNeto.setText(((ListaEntradaPesadas) entrada).getNeto());
                             }

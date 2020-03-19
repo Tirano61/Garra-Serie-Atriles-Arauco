@@ -97,12 +97,23 @@ public class BaseDeDatos extends SQLiteOpenHelper
         ContentValues valores = new ContentValues();
         valores.put(DBpesadas.FPES_FECHA, pesadas.getFecha());
         valores.put(DBpesadas.FPES_HORA, pesadas.getHora());
-        valores.put(DBpesadas.FPES_CARGIO, pesadas.getCargio());
+        valores.put(DBpesadas.FPES_ID_GRUA, pesadas.getIdgrua());
+        valores.put(DBpesadas.FPES_CHASIS, pesadas.getChasis());
+        valores.put(DBpesadas.FPES_ACOPLADO, pesadas.getAcoplado());
+        valores.put(DBpesadas.FPES_REMITO, pesadas.getRemito());
+        valores.put(DBpesadas.FPES_DESTINO, pesadas.getDestino());
         valores.put(DBpesadas.FPES_PRODUCTO, pesadas.getProducto());
-        valores.put(DBpesadas.FPES_GRUA, pesadas.getGrua());
+        valores.put(DBpesadas.FPES_MEDIDA_ASERRABLE, pesadas.getMedida_aserrable());
+        valores.put(DBpesadas.FPES_RODAL, pesadas.getRodal());
+        valores.put(DBpesadas.FPES_FECHA_CORTE, pesadas.getFecha_corte());
         valores.put(DBpesadas.FPES_OPERADOR, pesadas.getOperador());
-        valores.put(DBpesadas.FPES_VEHICULO, pesadas.getVehiculo());
-        valores.put(DBpesadas.FPES_CODIGO, pesadas.getCodigo());
+        valores.put(DBpesadas.FPES_ACTA_INTERVENCION, pesadas.getActa_intervencion());
+        valores.put(DBpesadas.FPES_ITPO_INTERVENCION, pesadas.getTipo_intervencion());
+        valores.put(DBpesadas.FPES_PREDIO, pesadas.getPredio());
+        valores.put(DBpesadas.FPES_UMF, pesadas.getUmf());
+        valores.put(DBpesadas.FPES_PROVEEDOR_ELAVORACION, pesadas.getProveedor_elavoracion());
+        valores.put(DBpesadas.FPES_PROVEEDOR_CARGA, pesadas.getProveedor_carga());
+        valores.put(DBpesadas.FPES_RAIZ_REMITO, pesadas.getRaiz_remito());
         valores.put(DBpesadas.FPES_BANCOS, pesadas.getBancos());
         valores.put(DBpesadas.FPES_BANCO1, pesadas.getBanco1());
         valores.put(DBpesadas.FPES_BANCO2, pesadas.getBanco2());
@@ -117,6 +128,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBpesadas.FPES_BRUTO, pesadas.getBruto());
         valores.put(DBpesadas.FPES_TARA, pesadas.getTara());
         valores.put(DBpesadas.FPES_NETO, pesadas.getNeto());
+        valores.put(DBpesadas.FPES_TIEMPO_CARGA, pesadas.getTiempo_carga());
         return valores;
     }
     public void InsertarPesadas(DBpesadas pesadas)
@@ -132,12 +144,22 @@ public class BaseDeDatos extends SQLiteOpenHelper
     {
         //falta el cliente
         ContentValues valores = new ContentValues();
+        valores.put(DBdatos.FDAT_ID_GRUA, datos.getId_grua());
+        valores.put(DBdatos.FDAT_REMITO, datos.getRemito());
+        valores.put(DBdatos.FDAT_DESTINO, datos.getDestino());
         valores.put(DBdatos.FDAT_PRODUCTO, datos.getProducto());
-        valores.put(DBdatos.FDAT_GRUA, datos.getGrua());
+        valores.put(DBdatos.FDAT_MEDIDA, datos.getMedida_aserrable());
+        valores.put(DBdatos.FDAT_RODAL, datos.getOperador());
+        valores.put(DBdatos.FDAT_FECHA_CORTE, datos.getFecha_corte());
         valores.put(DBdatos.FDAT_OPERADOR, datos.getOperador());
-        valores.put(DBdatos.FDAT_VEHICULO, datos.getVehiculo());
-        valores.put(DBdatos.FDAT_CODIGO, datos.getCodigo());
-        valores.put(DBdatos.FDAT_TARA, datos.getTara());
+        valores.put(DBdatos.FDAT_ACTA_INTERVENCION, datos.getActa_intervencion());
+        valores.put(DBdatos.FDAT_TIPO_INTERVENCION, datos.getTipo_intervencion());
+        valores.put(DBdatos.FDAT_PREDIO, datos.getPredio());
+        valores.put(DBdatos.FDAT_UMF, datos.getUmf());
+        valores.put(DBdatos.FDAT_PROVEEDOR_ELAVORACION, datos.getProveedor_elavoracion());
+        valores.put(DBdatos.FDAT_PROVEEDOR_CARGA, datos.getProveedor_carga());
+        valores.put(DBdatos.FDAT_RAIZ_REMITO, datos.getRaiz_remito());
+
         return valores;
     }
     private void InsetarDatos(DBdatos datos){

@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.media.MediaPlayer;
@@ -42,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,16 +55,15 @@ import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcelda;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcero;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcorreccion;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBdatos;
-import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBoperadores;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBpesadas;
 import com.example.dramirez.garrraspuertoserie.FragmentInterfaces.EnvioDatos;
-import com.github.mikephil.charting.utils.FileUtils;
 
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -102,7 +103,14 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     TextView txtPesoGarra,txt_Peso_Acumulado, txtFecha, txtHora, txtBateria,txtGarradas,txtVersion;
     Variables var = new Variables();
-    EditText edt_vehiculo, edt_codigo, edt_producto, edt_operador, edt_tara, edt_grua;
+
+
+    EditText edt_grua, edt_chasis, edt_acoplado, edt_remito, edt_destino, edt_producto;
+    EditText edt_medida_aserrable,edt_rodal,edt_fecha_corte,edt_operador,edt_acta_intervencion;
+    EditText edt_tipo_intervencion,edt_predio, edt_umf, edt_proveedor_elavoracion, edt_proveedor_carga;
+    EditText edt_raiz_remito, edt_tara;
+
+    //Spinner sp_dialogo_destino,sp_dialogo_medida_aserrable,sp_dialogo_tipo_intervencion,sp_dialogo_umf;
 
     String TAG = "PRUEBA DE CARAGA CALIBRACION";
     ImageButton btnCero,btnRestar;
@@ -146,13 +154,20 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     Calculadora calculadora;
     boolean comprobarSpiner = false;
     boolean comprobarSpinerProducto = false;
+    boolean comprobarDaestino = false;
+    boolean comprobarAserrable = false;
+    boolean comprobarUmf = false;
+    boolean comprobarTipoIntervencion = false;
     MediaPlayer mediaPlayer;
     ListView lvOperadores;
     String IdOperadores;
     String TotalACargar;
     String GRUA = "";
-
+    boolean servicio = true;
     ArrayList<ListaEntradaOperadores> datosOperadores;
+
+    RelativeLayout fondoPantalla;
+
     // Used to load the 'native-lib' library oon application startup.
     static {
         System.loadLibrary("native-lib");
@@ -254,6 +269,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     public void InicializarComponentesGraficos()
     {
 
+        fondoPantalla = (RelativeLayout)findViewById(R.id.fondoPantalla);
         txtVersion = (TextView)findViewById(R.id.txtVersion);
         txtPesoGarra = (TextView)findViewById(R.id.txtPesoGarra);
         btnCero = (ImageButton) findViewById(R.id.btnCero);
@@ -264,12 +280,25 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         txtBateria = (TextView)findViewById(R.id.txtBateria);
         txtGarradas = (TextView)findViewById(R.id.txtGarradas);
 
-        edt_vehiculo = (EditText)findViewById(R.id.edt_vehiculo);
-        edt_codigo = (EditText)findViewById(R.id.edt_codigo);
-        edt_producto = ( EditText)findViewById(R.id.edt_producto);
-        edt_operador = (EditText) findViewById(R.id.edt_operador);
-        edt_tara = (EditText) findViewById(R.id.edt_tara);
         edt_grua = (EditText)findViewById(R.id.edt_grua);
+        edt_chasis = (EditText)findViewById(R.id.edt_chasis);
+        edt_acoplado = (EditText)findViewById(R.id.edt_acoplado);
+        edt_remito = ( EditText)findViewById(R.id.edt_remito);
+        edt_destino = (EditText) findViewById(R.id.edt_destino);
+        edt_producto = (EditText) findViewById(R.id.edt_producto);
+        edt_medida_aserrable = (EditText) findViewById(R.id.edt_medida_aserrable);
+        edt_rodal = (EditText) findViewById(R.id.edt_rodal);
+        edt_fecha_corte = (EditText) findViewById(R.id.edt_fecha_corte);
+        edt_operador = (EditText) findViewById(R.id.edt_operador);
+        edt_acta_intervencion = (EditText) findViewById(R.id.edt_acta_intervencion);
+        edt_tipo_intervencion = (EditText) findViewById(R.id.edt_tipo_intervencion);
+        edt_predio = (EditText) findViewById(R.id.edt_predio);
+        edt_umf = (EditText) findViewById(R.id.edt_umf);
+        edt_proveedor_elavoracion = (EditText) findViewById(R.id.edt_proveedor_elavoracion);
+        edt_proveedor_carga = (EditText) findViewById(R.id.edt_proveedor_carga);
+        edt_raiz_remito = (EditText) findViewById(R.id.edt_raiz_remito);
+        edt_tara = (EditText) findViewById(R.id.edt_tara);
+
 
         Layout_Total_Cargado = (LinearLayout)findViewById(R.id.Layout_Total_Cargado);
         imgEstable = (ImageView)findViewById(R.id.imgEstable);
@@ -293,7 +322,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             @Override
             public void run() {
                 try {
-                    String url = "https://www.balanzashook.com.ar/app/download/st455garra_atriles.apk";
+                    String url = "https://www.balanzashook.com.ar/app/download/st455garra_atriles_arauco.apk";
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
                     startActivity(i);
@@ -612,13 +641,33 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         {
             netoDescargado = Integer.valueOf(txt_Peso_Acumulado.getText().toString()) - Integer.valueOf(edt_tara.getText().toString());
 
-            final ArrayList<DBpesadas> arrayPesadas = new ArrayList<>(Arrays.asList(new DBpesadas(Fecha_Peso,
-                    txtHora.getText().toString(),txtCargio.getText().toString(),edt_producto.getText().toString(),
-                    edt_grua.getText().toString(),edt_operador.getText().toString(),
-                    edt_vehiculo.getText().toString(),edt_codigo.getText().toString(),
+            final ArrayList<DBpesadas> arrayPesadas = new ArrayList<>(Arrays.asList(new DBpesadas(
+                    Fecha_Peso,
+                    txtHora.getText().toString(),
+                    edt_grua.getText().toString(),
+                    edt_chasis.getText().toString(),
+                    edt_acoplado.getText().toString(),
+                    edt_remito.getText().toString(),
+                    edt_destino.getText().toString(),
+                    edt_producto.getText().toString(),
+                    edt_medida_aserrable.getText().toString(),
+                    edt_rodal.getText().toString(),
+                    edt_fecha_corte.getText().toString(),
+                    edt_operador.getText().toString(),
+                    edt_acta_intervencion.getText().toString(),
+                    edt_tipo_intervencion.getEditableText().toString(),
+
+                    edt_predio.getText().toString(),
+                    edt_umf.getText().toString(),
+                    edt_proveedor_elavoracion.getText().toString(),
+                    edt_proveedor_carga.getText().toString(),
+                    edt_raiz_remito.getText().toString(),
                     bancos,banco1,banco2,banco3,banco4,banco5,banco6,banco7,banco8,banco9,
-                    txtGarradas.getText().toString(),txt_Peso_Acumulado.getText().toString(),
-                    edt_tara.getText().toString(),String.valueOf(netoDescargado))));
+                    txtGarradas.getText().toString(),
+                    txt_Peso_Acumulado.getText().toString(),
+                    edt_tara.getText().toString(),
+                    String.valueOf(netoDescargado),
+                    txtCargio.getText().toString())));
 
             DBpesadas dBpesadas;
             dBpesadas = arrayPesadas.get(0);
@@ -629,7 +678,12 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Toast.makeText(getBaseContext(),"La pesada se guardo correctamente",Toast.LENGTH_LONG).show();
 
                 Layout_Total_Cargado.setVisibility(View.INVISIBLE);
-                new impresionAsyncTask().execute();
+                if (servicio)
+                {
+                    impresion();
+                }
+
+                //new impresionAsyncTask().execute();
             }
         }catch (Exception e)
         {
@@ -639,10 +693,23 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
    private void GuardarUltimosDatos()
     {
-        ArrayList<DBdatos> arrayDatos = new ArrayList<DBdatos>(Arrays.asList(new DBdatos(edt_producto.getText().toString(),
-                edt_grua.getText().toString(),edt_operador.getText().toString(),
-                edt_vehiculo.getText().toString(),
-                edt_codigo.getText().toString(),edt_tara.getText().toString())));
+
+        ArrayList<DBdatos> arrayDatos = new ArrayList<DBdatos>(Arrays.asList(new DBdatos(
+                edt_grua.getText().toString(),
+                edt_remito.getText().toString(),
+                edt_destino.getText().toString(),
+                edt_producto.getText().toString(),
+                edt_medida_aserrable.getText().toString(),
+                edt_rodal.getText().toString(),
+                edt_fecha_corte.getText().toString(),
+                edt_operador.getText().toString(),
+                edt_acta_intervencion.getText().toString(),
+                edt_tipo_intervencion.getText().toString(),
+                edt_predio.getText().toString(),
+                edt_umf.getText().toString(),
+                edt_proveedor_elavoracion.getText().toString(),
+                edt_proveedor_carga.getText().toString(),
+                edt_raiz_remito.getText().toString())));
         DBdatos datos;
         datos  = arrayDatos.get(0);
         db.actualizarDatos(datos,"1");
@@ -721,21 +788,47 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         Cursor cursorDatos = db.db.rawQuery("SELECT * FROM tdatos", null);
         if (cursorDatos.moveToNext())
         {
-            edt_producto.setText(cursorDatos.getString(1));
-            edt_grua.setText(cursorDatos.getString(2));
-            GRUA = cursorDatos.getString(2);
-            edt_operador.setText(cursorDatos.getString(3));
-            edt_vehiculo.setText(cursorDatos.getString(4));
-            edt_codigo.setText(cursorDatos.getString(5));
-            edt_tara.setText(cursorDatos.getString(6));
+
+            edt_grua.setText(cursorDatos.getString(1));
+            edt_remito.setText(cursorDatos.getString(2));
+            edt_destino.setText(cursorDatos.getString(3));
+            edt_producto.setText(cursorDatos.getString(4));
+            edt_medida_aserrable.setText(cursorDatos.getString(5));
+            edt_rodal.setText(cursorDatos.getString(6));
+            edt_fecha_corte.setText(cursorDatos.getString(7));
+            edt_operador.setText(cursorDatos.getString(8));
+            edt_acta_intervencion.setText(cursorDatos.getString(9));
+            edt_tipo_intervencion.setText(cursorDatos.getString(10));
+            edt_predio.setText(cursorDatos.getString(11));
+            edt_umf.setText(cursorDatos.getString(12));
+            edt_proveedor_elavoracion.setText(cursorDatos.getString(13));
+            edt_proveedor_carga.setText(cursorDatos.getString(14));
+            edt_raiz_remito.setText(cursorDatos.getString(15));
+
+
         }else
         {
+            /** falta reformar estod datos por los nuevos
+             *
+             */
+
+            contentDatos.put("id_grua","");
+            contentDatos.put("remito","");
+            contentDatos.put("destino","");
             contentDatos.put("producto","");
-            contentDatos.put("grua","");
+            contentDatos.put("medida_aserrable","");
+            contentDatos.put("rodal","");
+
+            contentDatos.put("fecha_corte","");
             contentDatos.put("operador","");
-            contentDatos.put("vehiculo","");
-            contentDatos.put("codigo","");
-            contentDatos.put("tara","");
+            contentDatos.put("acta_intervencion","");
+            contentDatos.put("tipo_intervencion","");
+            contentDatos.put("predio","");
+            contentDatos.put("umf","");
+            contentDatos.put("proveedor_elavoracion","");
+            contentDatos.put("proveedor_carga","");
+            contentDatos.put("raiz_remito","");
+
             db.db.insert("tdatos",null,contentDatos);
         }
         // Buscar productos //
@@ -848,6 +941,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         public dialogoCargaDatos(Context context){
             //tipoDeCarga = "";
             comprobarSpinerProducto = false;
+            comprobarDaestino = false;
+            comprobarAserrable= false;
+            comprobarTipoIntervencion = false;
+            comprobarUmf = false;
+
 
             final Dialog dialog = new Dialog(context,R.style.Material_Base);
 
@@ -855,36 +953,61 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             dialog.setTitle(R.string.dialogo_titulo);
             dialog.setContentView(R.layout.dialogo_carga_datos);
 
-            List<String> operadores = db.getAllOperadores();
-            List<String> productos = db.getAllProductos();
+            final Spinner sp_producto = (Spinner) dialog.findViewById(R.id.sp_dialogo_producto);
+            final Spinner spTipo_carga = (Spinner) dialog.findViewById(R.id.sp_dialogo_bsncos);
 
+            final Spinner sp_dialogo_destino = (Spinner) dialog.findViewById(R.id.sp_dialogo_destino);
+            final Spinner sp_dialogo_medida_aserrable = (Spinner) dialog.findViewById(R.id.sp_dialogo_medida_aserrable);
+            final Spinner sp_dialogo_tipo_intervencion = (Spinner) dialog.findViewById(R.id.sp_dialogo_tipo_intervencion);
+            final Spinner sp_dialogo_umf = (Spinner) dialog.findViewById(R.id.sp_dialogo_umf);
 
-            final Spinner sp_producto = (Spinner) dialog.findViewById(R.id.sp_producto);
-            final Spinner spTipo_carga = (Spinner) dialog.findViewById(R.id.spTipoCarga);
-            final EditText edt_dialogo_vehiculo = (EditText)dialog.findViewById(R.id.edt_dialogo_vehiculo);
-            final EditText edt_dialogo_codigo = (EditText)dialog.findViewById(R.id.edt_dialogo_codigo);
-            final EditText edt_dialogo_tara = (EditText)dialog.findViewById(R.id.edt_dialogo_tara);
-            final EditText edt_dialogo_operador = (EditText) dialog.findViewById(R.id.edt_dialogo_operador);
             final EditText edt_dialogo_grua = (EditText)dialog.findViewById(R.id.edt_dialogo_grua);
-            final EditText txtTotalACargar = (EditText)dialog.findViewById(R.id.txtTotalACargar);
-            final EditText edt_diaogo_Producto = (EditText)dialog.findViewById(R.id.edtDatosProducto);
-            final Spinner spBuscarOperador = (Spinner) dialog.findViewById(R.id.spBuscarOperador);
-            final EditText edt_diaogo_banco = (EditText)dialog.findViewById(R.id.edt_dialogo_bancos);
+            final EditText edt_dialogo_chasis = (EditText)dialog.findViewById(R.id.edt_dialogo_chasis);
+            final EditText edt_dialogo_acoplado = (EditText)dialog.findViewById(R.id.edt_dialogo_acoplado);
+            final EditText edt_dialogo_remito = (EditText) dialog.findViewById(R.id.edt_dialogo_remito);
+            final EditText edt_dialogo_destino = (EditText)dialog.findViewById(R.id.edt_dialogo_destino);
+            final EditText edt_dialogo_producto = (EditText)dialog.findViewById(R.id.edt_dialogo_producto);
+            final EditText edt_dialogo_medida_aserrable = (EditText)dialog.findViewById(R.id.edt_dialogo_medida_aserrable);
+            final EditText edt_dialogo_rodal = (EditText)dialog.findViewById(R.id.edt_dialogo_rodal);
+            final EditText edt_dialogo_fecha_corte = (EditText)dialog.findViewById(R.id.edt_dialogo_fecha_corte);
+            final EditText edt_dialogo_operador = (EditText)dialog.findViewById(R.id.edt_dialogo_operador);
+            final EditText edt_dialogo_acta_intervencion = (EditText)dialog.findViewById(R.id.edt_dialogo_acta_intervencion);
+            final EditText edt_dialogo_tipo_intervencion = (EditText)dialog.findViewById(R.id.edt_dialogo_tipo_intervencion);
+            final EditText edt_dialogo_predio = (EditText)dialog.findViewById(R.id.edt_dialogo_predio);
+            final EditText edt_dialogo_umf = (EditText)dialog.findViewById(R.id.edt_dialogo_umf);
+            final EditText edt_dialogo_proveedor_elavoracion = (EditText)dialog.findViewById(R.id.edt_dialogo_proveedor_elavoracion);
+            final EditText edt_dialogo_proveedor_carga = (EditText)dialog.findViewById(R.id.edt_dialogo_proveedor_carga);
+            final EditText edt_dislogo_raiz_remito = (EditText)dialog.findViewById(R.id.edt_dislogo_raiz_remito);
+            final EditText edt_dialogo_bancos = (EditText)dialog.findViewById(R.id.edt_dialogo_bancos);
+            final EditText edt_dialogo_tara = (EditText)dialog.findViewById(R.id.edt_dialogo_tara);
+            final EditText edt_dialogo_total = (EditText)dialog.findViewById(R.id.edt_dialogo_total);
 
-            edt_diaogo_banco.setText(tipoDeCarga);
+
+            edt_dialogo_grua.setText(edt_grua.getText().toString());
+            edt_dialogo_chasis.setText(edt_chasis.getText().toString());
+            edt_dialogo_acoplado.setText(edt_acoplado.getText().toString());
+            edt_dialogo_remito.setText(edt_remito.getText().toString());
+            edt_dialogo_destino.setText(edt_destino.getText().toString());
+            edt_dialogo_producto.setText(edt_producto.getText().toString());
+            edt_dialogo_medida_aserrable.setText(edt_medida_aserrable.getText().toString());
+            edt_dialogo_rodal.setText(edt_rodal.getText().toString());
+            edt_dialogo_fecha_corte.setText(edt_fecha_corte.getText().toString());
+            edt_dialogo_operador.setText(edt_operador.getText().toString());
+            edt_dialogo_acta_intervencion.setText(edt_acta_intervencion.getText().toString());
+            edt_dialogo_tipo_intervencion.setText(edt_tipo_intervencion.getText().toString());
+            edt_dialogo_predio.setText(edt_predio.getText().toString());
+            edt_dialogo_umf.setText(edt_umf.getText().toString());
+            edt_dialogo_proveedor_elavoracion.setText(edt_proveedor_elavoracion.getText().toString());
+            edt_dialogo_proveedor_carga.setText(edt_proveedor_carga.getText().toString());
+            edt_dislogo_raiz_remito.setText(edt_raiz_remito.getText().toString());
+            edt_dialogo_tara.setText(edt_tara.getText().toString());
+
+            edt_dialogo_bancos.setText(tipoDeCarga);
 
             Button aceptar = (Button)dialog.findViewById(R.id.btn_acrptar);
             Button cancelar = (Button)dialog.findViewById(R.id.btn_Cancelar);
 
-            edt_dialogo_vehiculo.setText(edt_vehiculo.getText().toString());
-            edt_dialogo_operador.setText(edt_operador.getText().toString());
-            edt_dialogo_tara.setText(edt_tara.getText().toString());
-            edt_dialogo_codigo.setText(edt_codigo.getText().toString());
-            edt_dialogo_grua.setText(edt_grua.getText().toString());
-            edt_diaogo_Producto.setText(edt_producto.getText().toString());
-            txtTotalACargar.setText(TotalACargar);
-
-            ArrayAdapter<String> dataAdapterOPerador = (new ArrayAdapter<String>(getBaseContext(),R.layout.spinner_item,operadores));
+           /* ArrayAdapter<String> dataAdapterOPerador = (new ArrayAdapter<String>(getBaseContext(),R.layout.spinner_item,operadores));
             dataAdapterOPerador.setDropDownViewResource(R.layout.spinner_item);
             spBuscarOperador.setAdapter(dataAdapterOPerador);
             spBuscarOperador.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -912,27 +1035,90 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {}
-            });
+            });*/
 
-            ArrayAdapter<String> dataAdapter =  new ArrayAdapter<String>(getBaseContext(),R.layout.spinner_item, productos);
+           /* ArrayAdapter<String> dataAdapter =  new ArrayAdapter<String>(getBaseContext(),R.layout.spinner_item, productos);
             dataAdapter.setDropDownViewResource(R.layout.spinner_item);
-            sp_producto.setAdapter(dataAdapter);
+            sp_producto.setAdapter(dataAdapter);*/
 
+            sp_dialogo_destino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(comprobarDaestino){
+                        edt_dialogo_destino.setText(parent.getItemAtPosition(position).toString());
+                    }
+                    else{
+                        comprobarDaestino= true;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
             sp_producto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (comprobarSpinerProducto){
                         productoSeleccionado = parent.getItemAtPosition(position).toString();
-                        edt_diaogo_Producto.setText(parent.getItemAtPosition(position).toString());
+                        edt_dialogo_producto.setText(parent.getItemAtPosition(position).toString());
                     }else{
                         comprobarSpinerProducto = true;
-                        productoSeleccionado = edt_diaogo_Producto.getText().toString();
+                        productoSeleccionado = edt_dialogo_producto.getText().toString();
                     }
 
                     //var.setCAPACIDAD( parent.getItemAtPosition(position).toString());
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            sp_dialogo_medida_aserrable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (comprobarAserrable){
+                        edt_dialogo_medida_aserrable.setText(parent.getItemAtPosition(position).toString());
+                    }else{
+                        comprobarAserrable = true;
+                    }
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            sp_dialogo_tipo_intervencion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (comprobarTipoIntervencion){
+                        edt_dialogo_tipo_intervencion.setText(parent.getItemAtPosition(position).toString());
+                    }else{
+                        comprobarTipoIntervencion = true;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            sp_dialogo_umf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (comprobarUmf){
+                        edt_dialogo_umf.setText(parent.getItemAtPosition(position).toString());
+                    }else{
+                        comprobarUmf = true;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
 
@@ -944,10 +1130,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (!(position == 0)){
-                        edt_diaogo_banco.setText(parent.getItemAtPosition(position).toString());
-                        //tipoDeCarga = parent.getItemAtPosition(position).toString();
+                        edt_dialogo_bancos.setText(parent.getItemAtPosition(position).toString());
+                        tipoDeCarga = parent.getItemAtPosition(position).toString();
                     }
-
                 }
 
                 @Override
@@ -960,28 +1145,66 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 @Override
                 public void onClick(View v) {
 
-                    String producto= productoSeleccionado , vehiculo= edt_dialogo_vehiculo.getText().toString(),
-                            tara= edt_dialogo_tara.getText().toString() ,grua = edt_dialogo_grua.getText().toString()
-                            ,operador= edt_dialogo_operador.getText().toString(), codigo = edt_dialogo_codigo.getText().toString(),
-                            total = txtTotalACargar.getText().toString();
+                    String producto = productoSeleccionado , grua = edt_dialogo_grua.getText().toString(),
+                            patenteChasis = edt_dialogo_chasis.getText().toString(),
+                            patenteAcoplado = edt_dialogo_acoplado.getText().toString(),
+                            remito = edt_dialogo_remito.getText().toString(),
+                            destino = edt_dialogo_destino.getText().toString(),
+                            medida_aserrable = edt_dialogo_medida_aserrable.getText().toString(),
+                            rodal = edt_dialogo_rodal.getText().toString(),
+                            fecha_corte = edt_dialogo_fecha_corte.getText().toString(),
+                            operador = edt_dialogo_operador.getText().toString(),
+                            acta_intervencion = edt_dialogo_acta_intervencion.getText().toString(),
+                            tipo_intervencion = edt_dialogo_tipo_intervencion.getText().toString(),
+                            predio = edt_dialogo_predio.getText().toString(),
+                            umf = edt_dialogo_umf.getText().toString(),
+                            proveedor_elavoracion = edt_dialogo_proveedor_elavoracion.getText().toString(),
+                            proveedor_carga = edt_dialogo_proveedor_carga.getText().toString(),
+                            raizRemito = edt_dislogo_raiz_remito.getText().toString(),
+                            tara= edt_dialogo_tara.getText().toString() ,
+                            total = edt_dialogo_total.getText().toString();
                     //asigno la cantidad de bancos
-                    tipoDeCarga = edt_diaogo_banco.getText().toString();
+                    tipoDeCarga = edt_dialogo_bancos.getText().toString();
                     GRUA = grua;
-                    if (!(tara.equals("")  || vehiculo.equals("") || grua.equals("") || codigo.equals("") || operador.equals("") || total.equals(""))){
-                        edt_vehiculo.setText(vehiculo);
-                        edt_codigo.setText(codigo);
-                        edt_producto.setText(producto);
-                        edt_operador.setText(operador);
-                        edt_tara.setText(tara);
+                    if (!(tara.equals("")  || patenteChasis.equals("") || grua.equals("") || operador.equals("") || total.equals(""))){
                         edt_grua.setText(grua);
+                        edt_chasis.setText(patenteChasis);
+                        edt_acoplado.setText(patenteAcoplado);
+                        edt_remito.setText(remito);
+                        edt_destino.setText(destino);
+                        edt_producto.setText(producto);
+                        edt_medida_aserrable.setText(medida_aserrable);
+                        edt_rodal.setText(rodal);
+                        edt_fecha_corte.setText(fecha_corte);
+                        edt_operador.setText(operador);
+                        edt_acta_intervencion.setText(acta_intervencion);
+                        edt_tipo_intervencion.setText(tipo_intervencion);
+                        edt_predio.setText(predio);
+                        edt_umf.setText(umf);
+                        edt_proveedor_elavoracion.setText(proveedor_elavoracion);
+                        edt_proveedor_carga.setText(proveedor_carga);
+                        edt_raiz_remito.setText(raizRemito);
+                        edt_tara.setText(tara) ;
                         btnCargar.setEnabled(false);
-                        TotalACargar = txtTotalACargar.getText().toString();
+                        TotalACargar = edt_dialogo_total.getText().toString();
                         dialog.dismiss();
                         Layout_Total_Cargado.setVisibility(View.VISIBLE);
                         Balanza.getInstance().setCominzoPesaje(true);
                         /**
                          * Pone el acumulador en 0
                          */
+
+                        fecha = new SimpleDateFormat("dd-MM-yyyy").format (new Date());
+                        java.util.Date fechaConvertida = new java.util.Date();
+                        try {
+                            fechaConvertida =  dateFormat.parse(fecha);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        //Fecha para guerdar la pesada
+                        Fecha_Peso=String.valueOf(fechaConvertida.getTime());
+                        //Fecha para mostrar
+                        txtFecha.setText(fecha);
 
                         Balanza.getInstance().setPesoAcumulado(Integer.valueOf(tara));
 
@@ -994,7 +1217,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         activarCuentaCarga();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-                        switch (tipoDeCarga){
+                        switch (tipoDeCarga)
+                        {
                             case "2":
                                 fragmentTransaction.replace(R.id.pirulo,fragment_dos_banco);
                                 if(!total.equals("")){
@@ -1069,6 +1293,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 break;
                         }
                         fragmentTransaction.commit();
+                        if(servicio ==false)
+                        {
+                            impresion();
+
+                        }
                     }else {
                         Toast.makeText(getBaseContext(),R.string.tara_vacia,Toast.LENGTH_LONG).show();
                     }
@@ -1153,30 +1382,36 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         break;
                     case 1:
                             showInputDialog_ContrasenaTipoCelda();
-
                         break;
                     case 2:
-                            Intent p = new Intent(getBaseContext(),Productos.class);
-                            startActivity(p);
-                        break;
-                    case 3:
                             showInputDialog_EntreFecha();
                         break;
-                    case 4:
+                    case 3:
                             GuaradarUSB();
                         break;
-                    case 5:
-                            dialogoCabeceraImpresion();
-                        break;
-                    case 6:
+                    case 4:
                             dialogoCorreccion();
                         break;
+                    case 5:
+                        if(servicio)
+                        {
+                            dialogoFueraServicio();
+                        }else{
+                            dialogoEnServicio();
+                        }
+                        break;
+                    case 6:
+                            Actualizar2();
+                        break;
                     case 7:
-                            Intent i = new Intent(getBaseContext(),Operadores.class);
-                            startActivity(i);
+                        dialogoReimpresion();
                         break;
                     case 8:
-                            Actualizar2();
+                        try {
+                            dialogoEliminacion();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
                 dialog.cancel();
@@ -1186,52 +1421,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
          builder.show();
     }
 
-    protected void dialogoCabeceraImpresion()
-    {
-
-        final EditText edtCabeceraUno, edtCabeceraDos, edtCabeceraTres, edtCabeceraCuatro,edtCantidad;
-
-        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
-        View promptView = layoutInflater.inflate(R.layout.dialogo_cabecera_impresion, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TemaGeneral));
-        alertDialogBuilder.setView(promptView);
-
-        Button btnCabeceraAceptar = (Button)promptView.findViewById(R.id.btnCabeceraAceptar);
-        edtCabeceraUno = (EditText)promptView.findViewById(R.id.edtCabeceraUno);
-        edtCabeceraDos = (EditText)promptView.findViewById(R.id.edtCabeceraDos);
-        edtCabeceraTres = (EditText)promptView.findViewById(R.id.edtCabeceraTres);
-        edtCabeceraCuatro = (EditText)promptView.findViewById(R.id.edtCabeceraCuatro);
-
-
-
-        edtCabeceraUno.setText(Variables.getCabecera1());
-        edtCabeceraDos.setText(Variables.getCabecera2());
-        edtCabeceraTres.setText(Variables.getCabecera3());
-        edtCabeceraCuatro.setText(Variables.getCabecera4());
-
-        final AlertDialog alert = alertDialogBuilder.create();
-
-        btnCabeceraAceptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ArrayList<DBcabecera> arrayCabecera = new ArrayList<>(Arrays.asList(new DBcabecera(edtCabeceraUno.getText().toString(),
-                        edtCabeceraDos.getText().toString(),edtCabeceraTres.getText().toString(),edtCabeceraCuatro.getText().toString())));
-                DBcabecera dBcabecera = arrayCabecera.get(0);
-                db.actualizarCabecera(dBcabecera,"1");
-
-                Variables.setCabecera1(edtCabeceraUno.getText().toString());
-                Variables.setCabecera2(edtCabeceraDos.getText().toString());
-                Variables.setCabecera3(edtCabeceraTres.getText().toString());
-                Variables.setCabecera4(edtCabeceraCuatro.getText().toString());
-
-                Toast.makeText(getBaseContext(), "O cabeçalho foi salvo corretamente",Toast.LENGTH_LONG).show();
-                alert.dismiss();
-            }
-        });
-
-        alert.show();
-    }
 
 
     protected void showInputDialog_EntreFecha()
@@ -1357,6 +1546,118 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
            }
        });
         dialog.show();
+
+    }
+
+    public void dialogoEliminacion() throws  InterruptedException
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Desea borrar todas las pesadas" )
+                .setTitle("Borrar pesadas.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            db.borrarPesadas();
+
+                        }catch (Exception e){}
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        Dialog dialogo = builder.create();
+        Thread.sleep(1500);
+        dialogo.show();
+    }
+    public void dialogoReimpresion()
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
+        View  promptView = layoutInflater.inflate(R.layout.dialogo_reimpresion, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
+
+        alertDialogBuilder.setView(promptView);
+        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+
+        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        })
+                .setPositiveButton(getString(R.string.dialgo_aceptar), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        impresion();
+                    }
+                })
+                .setCancelable(true);
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
+    public void dialogoFueraServicio()
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
+        View  promptView = layoutInflater.inflate(R.layout.dialogo_fuera_servicio, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
+
+        alertDialogBuilder.setView(promptView);
+        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+
+        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        })
+                .setPositiveButton(getString(R.string.dialgo_aceptar), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        servicio = false;
+                        fondoPantalla.setBackgroundResource(R.drawable.fondo_rojo);
+                    }
+                })
+                .setCancelable(true);
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
+
+    public void dialogoEnServicio()
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+
+        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
+        View  promptView = layoutInflater.inflate(R.layout.dialogo_entrar_servicio, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
+
+        alertDialogBuilder.setView(promptView);
+        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+
+        alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        })
+                .setPositiveButton(getString(R.string.dialgo_aceptar), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        servicio = true;
+                        fondoPantalla.setBackgroundResource(R.drawable.pantalla_nueva_2);
+                    }
+                })
+                .setCancelable(true);
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
 
     }
 
@@ -1624,25 +1925,31 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                                 /**
                                  *
                                  */
-                                if (Balanza.getInstance().isConexionSerie()){
+                                if (Balanza.getInstance().isConexionSerie()) {
                                     imgConexionSerie.setBackgroundResource(R.drawable.serie_conectado);
-                                }else{
+                                } else {
                                     imgConexionSerie.setBackgroundResource(R.drawable.serie_desconectado);
                                 }
-                                if (Integer.valueOf(Variables.getCAPACIDAD()) > Balanza.getInstance().getPesoFisico()){
-                                    txtPesoGarra.setText(String.format ("% .0f", Balanza.getInstance().getPesoFisico()));
-                                }else{
-                                    txtPesoGarra.setText("MAX");
-                                }
+                                if (servicio)
+                                {
+                                    if (Integer.valueOf(Variables.getCAPACIDAD()) > Balanza.getInstance().getPesoFisico()){
+                                        txtPesoGarra.setText(String.format ("% .0f", Balanza.getInstance().getPesoFisico()));
+                                    }else{
+                                        txtPesoGarra.setText("MAX");
+                                    }
 
-                                if (Balanza.getInstance().isEstable()){
-                                    imgEstable.setBackgroundResource(R.drawable.circulo_estable);
-                                    if (Balanza.getInstance().isCominzoPesaje()){
-                                       // mediaPlayer.start();
+                                    if (Balanza.getInstance().isEstable()){
+                                        imgEstable.setBackgroundResource(R.drawable.circulo_estable);
+                                        if (Balanza.getInstance().isCominzoPesaje()){
+                                            // mediaPlayer.start();
+                                        }
+                                    }else{
+                                        imgEstable.setBackgroundResource(R.drawable.circulo_inestable);
                                     }
                                 }else{
-                                    imgEstable.setBackgroundResource(R.drawable.circulo_inestable);
+                                    txtPesoGarra.setText("-------");
                                 }
+
                                 if (Balanza.getInstance().isGuardado())
                                 {
                                     imgDescargando.setVisibility(View.VISIBLE);
@@ -1873,6 +2180,424 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         builder.create().show();
     }
 
+    String  pChasis , pAcoplado , remito, destino, producto , aserrable, rodal,
+            fCorte ,operador , aIntervencion , tIntervencion ,predio , umf ,
+            pElavoracion, pCarga, rRaiz, fechaImpresion, hora, neto, cargio;
+    public void impresion()
+    {
+        int progreso = 0;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+                Balanza.getInstance().ImprimirTicket("CODEPAGE 1252");
+                Balanza.getInstance().getOK();
+                //progreso = 1;
+                //publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("SIZE 107 mm, 97 mm");
+                Balanza.getInstance().getOK();
+                //progreso++;
+               // publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("GAP 4 mm, 4 mm");
+                Balanza.getInstance().getOK();
+               // progreso++;
+                //publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("DENSITY 15");
+                Balanza.getInstance().getOK();
+               // progreso++;
+                //publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("OFFSET 0.0");
+                Balanza.getInstance().getOK();
+               // progreso++;
+                //publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("DIRECTION 0");
+                Balanza.getInstance().getOK();
+               // p/rogreso++;
+                //publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("CLS");
+                Balanza.getInstance().getOK();
+               // progreso++;
+               // publishProgress(progreso);
+                //Grua
+                Balanza.getInstance().ImprimirTicket("TEXT 5,155,\"3\",0,1,1,\"GRUA : "+ edt_grua.getText().toString() +"\"");
+                Balanza.getInstance().getOK();
+
+                //17 Fecha y  18 hora
+                Balanza.getInstance().ImprimirTicket("TEXT 400,155,\"3\",0,1,1,\""+ txtFecha.getText().toString() +" "+ txtHora.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                fechaImpresion = txtFecha.getText().toString();
+                fechaImpresion = fechaImpresion.replace("-","");
+                hora = txtHora.getText().toString();
+                hora = hora.replace(":","");
+                contarCaracteres(fechaImpresion,17);
+                contarCaracteres(hora,18);
+
+                //10 a. intervencion
+                Balanza.getInstance().ImprimirTicket("TEXT 5,191,\"3\",0,1,1,\"ACTA INTERV : "+ edt_acta_intervencion.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                aIntervencion = edt_acta_intervencion.getText().toString();
+                contarCaracteres(aIntervencion,10);
+
+                //11 t.interencion
+                Balanza.getInstance().ImprimirTicket("TEXT 400,191,\"3\",0,1,1,\"TIPO INTERV : "+ edt_tipo_intervencion.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                tIntervencion = edt_tipo_intervencion.getText().toString();
+                contarCaracteres(tIntervencion,11);
+
+                //7 rodal
+                Balanza.getInstance().ImprimirTicket("TEXT 5,227,\"3\",0,1,1,\"RODAL : "+ edt_rodal.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                rodal = edt_rodal.getText().toString();
+                contarCaracteres(rodal,7);
+
+                //12 predio
+                Balanza.getInstance().ImprimirTicket("TEXT 400,227,\"3\",0,1,1,\"PREDIO : "+ edt_predio.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                predio = edt_predio.getText().toString();
+                contarCaracteres(predio,12);
+
+                //14 p. elaboracion
+                Balanza.getInstance().ImprimirTicket("TEXT 5,263,\"3\",0,1,1,\"P. ELABORA : "+ edt_proveedor_elavoracion.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pElavoracion = edt_proveedor_elavoracion.getText().toString();
+                contarCaracteres(pElavoracion,14);
+
+                //15 p. carga
+                Balanza.getInstance().ImprimirTicket("TEXT 400,263,\"3\",0,1,1,\"P. CARGA : "+ edt_proveedor_carga.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pCarga = edt_proveedor_carga.getText().toString();
+                contarCaracteres(pCarga,15);
+
+                //5 producto
+                Balanza.getInstance().ImprimirTicket("TEXT 5,299,\"3\",0,1,1,\"PRODUCTO : "+ edt_producto.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                producto = edt_producto.getText().toString();
+                contarCaracteres(producto,5);
+
+                //8 fecha corte
+                Balanza.getInstance().ImprimirTicket("TEXT 400,299,\"3\",0,1,1,\"FECHA CORTE : "+ edt_fecha_corte.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                fCorte = edt_fecha_corte.getText().toString();
+                contarCaracteres(fCorte,8);
+
+                //4 destino
+                Balanza.getInstance().ImprimirTicket("TEXT 5,335,\"3\",0,1,1,\"DESTINO : "+ edt_destino.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                destino = edt_destino.getText().toString();
+                contarCaracteres(destino,4);
+
+                //9 operador
+                Balanza.getInstance().ImprimirTicket("TEXT 400,335,\"3\",0,1,1,\"OPERADOR : "+ edt_operador.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                operador = edt_operador.getText().toString();
+                contarCaracteres(operador,9);
+
+                //13 umf
+                Balanza.getInstance().ImprimirTicket("TEXT 5,371,\"3\",0,1,1,\"UMF : "+ edt_umf.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                umf = edt_umf.getText().toString();
+                contarCaracteres(umf,13);
+
+                //16 raiz
+                Balanza.getInstance().ImprimirTicket("TEXT 400,371,\"3\",0,1,1,\"RAIZ : "+edt_raiz_remito.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                rRaiz = edt_raiz_remito.getText().toString();
+                contarCaracteres(rRaiz,16);
+
+                //20 cargio
+                Balanza.getInstance().ImprimirTicket("TEXT 5,407,\"3\",0,1,1,\"T. CARGIO : "+ String.valueOf(minutos) +"\"");
+                Balanza.getInstance().getOK();
+
+                contarCaracteres(String.valueOf(minutos),20);
+
+                // 3 remito
+                Balanza.getInstance().ImprimirTicket("TEXT 400,407,\"3\",0,1,1,\"REMITO : "+ edt_remito.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                remito = edt_remito.getText().toString();
+                contarCaracteres(remito,3);
+
+                //1 chasis
+                Balanza.getInstance().ImprimirTicket("TEXT 5,443,\"3\",0,1,1,\"CHASIS : "+ edt_chasis.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pChasis = edt_chasis.getText().toString();
+                contarCaracteres(pChasis,1);
+
+                //2 acoplado
+                Balanza.getInstance().ImprimirTicket("TEXT 400,443,\"3\",0,1,1,\"ACOPLADO : "+ edt_acoplado.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pAcoplado = edt_acoplado.getText().toString();
+                contarCaracteres(pAcoplado,2);
+
+                //6 aserrable
+                Balanza.getInstance().ImprimirTicket("TEXT 400,479,\"3\",0,1,1,\"M. ASERRABLE : "+ edt_medida_aserrable.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                aserrable = edt_medida_aserrable.getText().toString();
+                contarCaracteres(aserrable,6);
+
+                Balanza.getInstance().ImprimirTicket("TEXT 400,515,\"3\",0,1,1,\"TARA : "+ edt_tara.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+
+                Balanza.getInstance().ImprimirTicket("TEXT 400,551,\"3\",0,1,1,\"BRUTO : "+ txt_Peso_Acumulado.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+
+                //19 neto
+                if (servicio)
+                {
+                    Balanza.getInstance().ImprimirTicket("TEXT 400,587,\"3\",0,1,1,\"NETO : "+ netoDescargado +"\"");
+                    Balanza.getInstance().getOK();
+                    neto = String.valueOf(netoDescargado);
+                    contarCaracteres(neto,19);
+                    Balanza.getInstance().ImprimirTicket("QRCODE 5,479,Q,6,M,0,M2,S1,\"A" +pChasis+pAcoplado+remito+destino+producto+aserrable+rodal+fCorte+operador+aIntervencion+tIntervencion+predio+umf+pElavoracion+pCarga+rRaiz+fechaImpresion+hora+neto+cargio+"\"");
+                    Balanza.getInstance().getOK();
+                }else{
+                    Balanza.getInstance().ImprimirTicket("TEXT 400,587,\"4\",0,1,1,\"FUERA DE SERVICIO\"");
+                    Balanza.getInstance().getOK();
+                    Balanza.getInstance().ImprimirTicket("QRCODE 5,479,Q,6,M,0,M2,S1,\"A" +pChasis+pAcoplado+remito+destino+producto+aserrable+rodal+fCorte+operador+aIntervencion+tIntervencion+predio+umf+pElavoracion+pCarga+rRaiz+fechaImpresion+hora+"00000000\"");
+                    Balanza.getInstance().getOK();
+                }
+
+
+                //progreso++;
+               // publishProgress(progreso);
+                Balanza.getInstance().ImprimirTicket("PRINT 1,1");
+            }
+        }).start();
+    }
+
+    public void  contarCaracteres(String linea, int valor)
+    {
+        int cantidad = 0;
+        switch (valor)
+        {
+            case 1: //chasis 7
+
+                    if(cantidad < 7)
+                    {
+                        for (cantidad =  linea.length(); cantidad < 7; cantidad++)
+                        {
+                            linea = " " + linea;
+                        }
+                    }
+                    pChasis = linea;
+                break;
+            case 2: //acoplado 7
+
+                if(cantidad < 7)
+                {
+                    for (cantidad =  linea.length(); cantidad < 7; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                pAcoplado = linea;
+                break;
+            case 3: //remito 6
+
+                if(cantidad < 6)
+                {
+                    for (cantidad =  linea.length(); cantidad < 6; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                remito = linea;
+                break;
+            case 4: //destino 7
+
+                if(cantidad < 7)
+                {
+                    for (cantidad =  linea.length(); cantidad < 7; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                destino = linea;
+                break;
+            case 5: //producto 8
+
+
+                if(cantidad < 8)
+                {
+                    for (cantidad =  linea.length(); cantidad < 8; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                producto = linea;
+                break;
+            case 6: //aserrable 2
+
+                if(cantidad < 2)
+                {
+                    for (cantidad =  linea.length(); cantidad < 2; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                aserrable = linea;
+                break;
+            case 7: //rodal 4
+
+            if(cantidad < 4)
+            {
+                for (cantidad =  linea.length(); cantidad < 4; cantidad++)
+                {
+                    linea = " " + linea;
+                }
+            }
+            rodal = linea;
+            break;
+            case 8: //fCorte 8
+
+                if(cantidad < 8)
+                {
+                    for (cantidad =  linea.length(); cantidad < 8; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                fCorte = linea;
+                break;
+            case 9: //operador 5
+
+
+                if(cantidad < 5)
+                {
+                    for (cantidad =  linea.length(); cantidad < 5; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                operador = linea;
+                break;
+            case 10: //aIntervencion 10
+
+
+                if(cantidad < 10)
+                {
+                    for (cantidad =  linea.length(); cantidad < 10; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                aIntervencion = linea;
+                break;
+            case 11: //t Intervencion 3
+
+
+                if(cantidad < 3)
+                {
+                    for (cantidad =  linea.length(); cantidad < 3; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                tIntervencion = linea;
+                break;
+            case 12: //predio 5
+
+                if(cantidad < 5)
+                {
+                    for (cantidad =  linea.length(); cantidad < 5; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                predio = linea;
+                break;
+            case 13: //umf 1
+
+                if(cantidad < 1)
+                {
+                    for (cantidad =  linea.length(); cantidad < 1; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                umf = linea;
+                break;
+            case 14: //pelaboracion 5
+
+                if(cantidad < 5)
+                {
+                    for (cantidad =  linea.length(); cantidad < 5; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                pElavoracion = linea;
+                break;
+            case 15: //p carga 5
+
+                if(cantidad < 5)
+                {
+                    for (cantidad =  linea.length(); cantidad < 5; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                pCarga = linea;
+                break;
+            case 16: //raiz 4
+
+                if(cantidad < 4)
+                {
+                    for (cantidad =  linea.length(); cantidad < 4; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                rRaiz = linea;
+                break;
+            case 17: //fecha 8
+
+                if(cantidad < 8)
+                {
+                    for (cantidad =  linea.length(); cantidad < 8; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                fecha = linea;
+                break;
+            case 18: //hora 6
+
+                if(cantidad < 6)
+                {
+                    for (cantidad =  linea.length(); cantidad < 6; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                hora = linea;
+                break;
+            case 19: //peso 5
+
+                if(cantidad < 5)
+                {
+                    for (cantidad =  linea.length(); cantidad < 5; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                neto = linea;
+                break;
+            case 20: //cargio 3
+
+                if(cantidad < 3)
+                {
+                    for (cantidad =linea.length(); cantidad < 3; cantidad++)
+                    {
+                        linea = " " + linea;
+                    }
+                }
+                cargio = linea;
+                break;
+        }
+    }
+
     public class impresionAsyncTask extends AsyncTask<Void, Integer, Void>
     {
         int progreso;
@@ -1880,7 +2605,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         //String banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",banco7 ="",banco8 ="",banco9 ="",cargas ="";
         @Override
         protected void onPreExecute() {
-            progressBar.setVisibility(View.VISIBLE);
+           /* progressBar.setVisibility(View.VISIBLE);
             hora = txtHora.getText().toString();
             cargio = txtCargio.getText().toString();
             vehiculo = edt_vehiculo.getText().toString();
@@ -1891,13 +2616,55 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             peso_acumulado = txt_Peso_Acumulado.getText().toString();
             cargas = txtGarradas.getText().toString();
             tara = edt_tara.getText().toString();
-            progreso = 0;
+            progreso = 0;*/
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            for (int i =1; i <= Variables.getTICKETS(); i++)
+           /* CODEPAGE 1252\r\n
+            SIZE 107 mm, 97 mm\r\n
+            GAP 4 mm, 4 mm\r\n
+            DENSITY 15 mm\r\n
+            OFFSET 0.0\r\n
+            DIRECTION 0\r\n
+            CLS\r\n*/
+            Balanza.getInstance().ImprimirTicket("CODEPAGE 1252");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("SIZE 107 mm, 97 mm");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("GAP 4 mm, 4 mm");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("DENSITY 15 mm");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("OFFSET 0.0");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("DIRECTION 0");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("CLS");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("TEXT 5,152,\"3\",0,1,1,\"TEXTO QUE VA\"");
+            Balanza.getInstance().getOK();
+            progreso++;
+            publishProgress(progreso);
+            Balanza.getInstance().ImprimirTicket("PRINT 1,1");
+
+
+            /*for (int i =1; i <= Variables.getTICKETS(); i++)
             {
                 Balanza.getInstance().ImprimirTicket("       BALANZAS HOOK SA");
                 Balanza.getInstance().getOK();
@@ -2066,7 +2833,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 publishProgress(progreso);
                 Balanza.getInstance().ImprimirTicket("");
 
-            }
+            }*/
             progreso = 100;
             publishProgress(progreso);
 
@@ -2119,9 +2886,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 /** CREAR LIBRO */
                 progreso++;
                 publishProgress(progreso);
-                Balanza.getInstance().USBWrite("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" );
-                Balanza.getInstance().getOK();
 
+
+                Balanza.getInstance().USBWrite("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
+                Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<?mso-application progid=\"Excel.Sheet\"?>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"");
@@ -2132,39 +2900,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\">");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("xmlns:html=\"http://www.w3.org/TR/REC-html40\">");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite(" <DocumentProperties xmlns=\"urn:schemas-microsoft-com:office:office\">");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <Version>12.00</Version>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite(" </DocumentProperties>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( " <ExcelWorkbook xmlns=\"urn:schemas-microsoft-com:office:excel\">");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <WindowHeight>10005</WindowHeight>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <WindowWidth>10005</WindowWidth>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <WindowTopX>120</WindowTopX>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <WindowTopY>135</WindowTopY>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <ActiveSheet>4</ActiveSheet>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <ProtectStructure>False</ProtectStructure>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <ProtectWindows>False</ProtectWindows>");
-                Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite(" </ExcelWorkbook>");
-                Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Styles>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("  <Style ss:ID=\"s62\">");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("   <Interior ss:Color=\"#FB4A4A\" ss:Pattern=\"Solid\"/>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite(        "  </Style>");
+                Balanza.getInstance().USBWrite("  </Style>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("  <Style ss:ID=\"s63\">");
                 Balanza.getInstance().getOK();
@@ -2184,21 +2926,21 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("    <Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "   </Borders>");
+                Balanza.getInstance().USBWrite("   </Borders>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("  </Style>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "  <Style ss:ID=\"s67\">");
+                Balanza.getInstance().USBWrite("  <Style ss:ID=\"s67\">");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "   <Borders>");
+                Balanza.getInstance().USBWrite("   <Borders>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("    <Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "    <Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Left\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("    <Border ss:Position=\"Right\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "    <Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
+                Balanza.getInstance().USBWrite("    <Border ss:Position=\"Top\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("   </Borders>");
                 Balanza.getInstance().getOK();
@@ -2212,7 +2954,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("   <Borders/>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite(        "   <Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\"");
+                Balanza.getInstance().USBWrite("   <Font ss:FontName=\"Calibri\" x:Family=\"Swiss\" ss:Size=\"11\" ss:Color=\"#FFFFFF\"");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("    ss:Bold=\"1\"/>");
                 Balanza.getInstance().getOK();
@@ -2263,7 +3005,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 if (h.moveToFirst()) {
                     descargas = h.getInt(0);
                 }
-                Balanza.getInstance().USBWrite("<Table ss:ExpandedColumnCount=\"23\" ss:ExpandedRowCount=\"" + (descargas + 7) + "\" x:FullColumns=\"1\"");
+                Balanza.getInstance().USBWrite("<Table ss:ExpandedColumnCount=\"35\" ss:ExpandedRowCount=\"" + (descargas + 7) + "\" x:FullColumns=\"1\"");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("   x:FullRows=\"1\" ss:DefaultColumnWidth=\"81.75\" ss:DefaultRowHeight=\"15\">");
                 Balanza.getInstance().getOK();
@@ -2273,37 +3015,60 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 publishProgress(progreso);
                 Balanza.getInstance().USBWrite("<Row ss:AutoFitHeight=\"0\">" );
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("    <Cell ss:MergeAcross=\"11\" ss:MergeDown=\"3\" ss:StyleID=\"s100\"><Data" );
+                Balanza.getInstance().USBWrite("    <Cell ss:MergeAcross=\"34\" ss:MergeDown=\"3\" ss:StyleID=\"s100\"><Data" );
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("      ss:Type=\"String\">"+getString(R.string.titulo_excel)+"</Data></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("   </Row>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "   <Row ss:AutoFitHeight=\"0\" ss:Span=\"2\"/>");
+                Balanza.getInstance().USBWrite("   <Row ss:AutoFitHeight=\"0\" ss:Span=\"2\"/>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Row ss:Index=\"5\">");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">DESC. ID</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">PESADA ID</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">"+getString(R.string.excel_fecha)+ "</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">HORA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>" );
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TEMPO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">GRUA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">"+getString(R.string.menu_productos)+"</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CHASIS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">GRUA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">ACOPLADO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">REMITO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">DESTINO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">PRODUCTO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">ASERRABLE</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">RODAL</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">FECHA CORTE</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">OPERADOR</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">VEICULO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>" );
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">A. INTERV</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CODIGO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">T. INTERV</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCOS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">PREDIO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-1</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">UMF</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">P. ELAB.</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">P. CARGA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">RAIZ</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+
+                Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">CANT. BANCOS</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-1</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">BANCO-2</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
@@ -2327,7 +3092,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TARA</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">LIQ </Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">NETO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s73\"><Data ss:Type=\"String\">TIEMPO</Data><NamedCell ss:Name=\"_FilterDatabase\"/></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("</Row>");
                 Balanza.getInstance().getOK();
@@ -2340,9 +3107,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 datos = new ArrayList<String>();
                 int celdas = 0;
                 String fechaCarga = "";
-                String ids = "", fecha = "", hora = "", prod = "", cargio = "", grua = "",  operador = "";
-                String codigo = "", vehiculo = "",nbancos= "", banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",
-                        banco7 ="",banco8 ="",banco9 ="",cargas ="",bruto = "", tara = "", neto = "";
+                String ids = "", fecha = "", hora = "", prod = "", grua = "", chasis = "",  acoplado = "";
+                String remito = "", destino = "",producto= "", medida_aserrable ="";
+                String rodal = "", fecha_corte = "",operador= "", acta_intervencion ="";
+                String tipo_intervencion = "", predio = "",umf= "", proveedor_elavoracion ="";
+                String proveedor_carga = "", raiz_remito = "";
+                String bancos = "",banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",
+                        banco7 ="",banco8 ="",banco9 ="",cargas ="",bruto = "", tara = "", neto = "",tiempo = "";
                 if (c.moveToFirst())
                 {
                     for (int i = 0; i <= c.getCount() - 1; i++)
@@ -2354,27 +3125,38 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         calendar.setTimeInMillis(Long.valueOf(fecha));
                         fechaCarga = dateFormat.format(calendar.getTime());
                         hora = c.getString(2);
-                        cargio = c.getString(3);
-                        prod = c.getString(4);
-                        grua = c.getString(5);
-                        operador = c.getString(6);
-                        vehiculo = c.getString(7);
-                        codigo = c.getString(8);
-                        nbancos = c.getString(9);
-                        banco1 = c.getString(10);
-                        banco2 = c.getString(11);
-                        banco3 = c.getString(12);
-                        banco4 = c.getString(13);
-                        banco5 = c.getString(14);
-                        banco6 = c.getString(15);
-                        banco7 = c.getString(16);
-                        banco8 = c.getString(17);
-                        banco9 = c.getString(18);
-                        cargas = c.getString(19);
-                        bruto = c.getString(20);
-                        tara = c.getString(21);
-                        neto = c.getString(22);
-
+                        grua = c.getString(3);
+                        chasis = c.getString(4);
+                        acoplado = c.getString(5);
+                        remito = c.getString(6);
+                        destino = c.getString(7);
+                        producto = c.getString(8);
+                        medida_aserrable = c.getString(9);
+                        rodal = c.getString(10);
+                        fecha_corte = c.getString(11);
+                        operador = c.getString(12);
+                        acta_intervencion = c.getString(13);
+                        tipo_intervencion = c.getString(14);
+                        predio = c.getString(15);
+                        umf = c.getString(16);
+                        proveedor_elavoracion = c.getString(17);
+                        proveedor_carga = c.getString(18);
+                        raiz_remito = c.getString(19);
+                        bancos = c.getString(20);
+                        banco1 = c.getString(21);
+                        banco2 = c.getString(22);
+                        banco3 = c.getString(23);
+                        banco4 = c.getString(24);
+                        banco5 = c.getString(25);
+                        banco6 = c.getString(26);
+                        banco7 = c.getString(27);
+                        banco8 = c.getString(28);
+                        banco9 = c.getString(29);
+                        cargas = c.getString(30);
+                        bruto = c.getString(31);
+                        tara = c.getString(32);
+                        neto = c.getString(33);
+                        tiempo = c.getString(34);
                         try {
                             Balanza.getInstance().USBWrite("<Row>");
                             Balanza.getInstance().getOK();
@@ -2384,19 +3166,41 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             Balanza.getInstance().getOK();
                             Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + hora + "</Data></Cell>");
                             Balanza.getInstance().getOK();
-                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + cargio + "</Data></Cell>");
-                            Balanza.getInstance().getOK();
-                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + prod + "</Data></Cell>");
-                            Balanza.getInstance().getOK();
                             Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + grua + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + chasis + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + acoplado + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + remito + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + destino + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + producto + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + medida_aserrable + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + rodal + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + fecha_corte + "</Data></Cell>");
                             Balanza.getInstance().getOK();
                             Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + operador + "</Data></Cell>");
                             Balanza.getInstance().getOK();
-                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + vehiculo + "</Data></Cell>");
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + acta_intervencion + "</Data></Cell>");
                             Balanza.getInstance().getOK();
-                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + codigo + "</Data></Cell>");
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + tipo_intervencion + "</Data></Cell>");
                             Balanza.getInstance().getOK();
-                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + nbancos + "</Data></Cell>");
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + predio + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + umf + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + proveedor_elavoracion + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + proveedor_carga + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + raiz_remito + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + bancos + "</Data></Cell>");
                             Balanza.getInstance().getOK();
                             Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + banco1 + "</Data></Cell>");
                             Balanza.getInstance().getOK();
@@ -2423,6 +3227,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + tara + "</Data></Cell>");
                             Balanza.getInstance().getOK();
                             Balanza.getInstance().USBWrite("<Cell ss:StyleID=\"s63\"><Data ss:Type=\"Number\">" + neto + "</Data></Cell>");
+                            Balanza.getInstance().getOK();
+                            Balanza.getInstance().USBWrite("<Cell><Data ss:Type=\"String\">" + tiempo + "</Data></Cell>");
                             Balanza.getInstance().getOK();
                             Balanza.getInstance().USBWrite("</Row>");
                             Balanza.getInstance().getOK();
@@ -2485,6 +3291,28 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
                 Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
+                Balanza.getInstance().USBWrite( "<Cell><Data ss:Type=\"String\"></Data></Cell>" );
+                Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s66\"><Data ss:Type=\"String\">TOTAL</Data></Cell>");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite( "<Cell ss:StyleID=\"s67\" ss:Formula=\"=SUBTOTAL(9,R[-" + (celdas + 2) + "]C:R[-1]C)\"></Cell>");
@@ -2521,7 +3349,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("  </WorksheetOptions>" );
                 Balanza.getInstance().getOK();
-                Balanza.getInstance().USBWrite("  <AutoFilter x:Range=\"R5C1:R5C23\"");
+                Balanza.getInstance().USBWrite("  <AutoFilter x:Range=\"R5C1:R5C35\"");
                 Balanza.getInstance().getOK();
                 Balanza.getInstance().USBWrite("   xmlns=\"urn:schemas-microsoft-com:office:excel\">");
                 Balanza.getInstance().getOK();
@@ -2787,7 +3615,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 datos = new ArrayList<String>();
                 int celdas = 0;
                 String fechaCarga = "";
-                String ids = "", fecha = "", hora = "", prod = "", cargio = "", grua = "",  operador = "";
+                String ids = "", fecha = "", hora = "", chasis = "",acoplado = "",remito = "",destino = "",aserrable = "",prod = "",
+                        rodal = "",corte = "", cargio = "", grua = "",  operador = "",acta_intervencion="",tipo_intervencion="",
+                        predio="",umf="",proveedor_elavoracion="",proveedor_carga="",raiz_remito="";
                 String codigo = "", vehiculo = "",nbancos= "", banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",
                         banco7 ="",banco8 ="",banco9 ="",cargas ="",bruto = "", tara = "", neto = "";
                 if (c.moveToFirst()) {
@@ -2800,38 +3630,63 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         calendar.setTimeInMillis(Long.valueOf(fecha));
                         fechaCarga = dateFormat.format(calendar.getTime());
                         hora = c.getString(2);
-                        cargio = c.getString(3);
-                        prod = c.getString(4);
-                        grua = c.getString(5);
-                        operador = c.getString(6);
-                        vehiculo = c.getString(7);
-                        codigo = c.getString(8);
-                        nbancos = c.getString(9);
-                        banco1 = c.getString(10);
-                        banco2 = c.getString(11);
-                        banco3 = c.getString(12);
-                        banco4 = c.getString(13);
-                        banco5 = c.getString(14);
-                        banco6 = c.getString(15);
-                        banco7 = c.getString(16);
-                        banco8 = c.getString(17);
-                        banco9 = c.getString(18);
-                        cargas = c.getString(19);
-                        bruto = c.getString(20);
-                        tara = c.getString(21);
-                        neto = c.getString(22);
+                        grua = c.getString(3);
+                        chasis = c.getString(4);
+                        acoplado = c.getString(5);
+                        remito = c.getString(6);
+                        destino = c.getString(7);
+                        prod = c.getString(8);
+                        aserrable = c.getString(9);
+                        rodal = c.getString(10);
+                        corte = c.getString(11);
+                        operador = c.getString(12);
+                        acta_intervencion = c.getString(13);
+                        tipo_intervencion = c.getString(14);
+                        predio = c.getString(15);
+                        umf = c.getString(16);
+                        proveedor_elavoracion = c.getString(17);
+                        proveedor_carga = c.getString(18);
+                        raiz_remito = c.getString(19);
+                        nbancos = c.getString(20);
+                        banco1 = c.getString(21);
+                        banco2 = c.getString(22);
+                        banco3 = c.getString(23);
+                        banco4 = c.getString(24);
+                        banco5 = c.getString(25);
+                        banco6 = c.getString(26);
+                        banco7 = c.getString(27);
+                        banco8 = c.getString(28);
+                        banco9 = c.getString(29);
+                        cargas = c.getString(30);
+                        bruto = c.getString(31);
+                        tara = c.getString(32);
+                        neto = c.getString(23);
+                        cargio = c.getString(34);
 
                         try {
                             br.append("<Row>\n");
                             br.append("<Cell><Data ss:Type=\"Number\">" + ids + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + fechaCarga + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + hora + "</Data></Cell>\n");
-                            br.append("<Cell><Data ss:Type=\"String\">" + cargio + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + grua + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + prod + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + grua + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + chasis + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + acoplado + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + remito + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + destino + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + prod + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + aserrable + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + rodal + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + corte + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + operador + "</Data></Cell>\n");
-                            br.append("<Cell><Data ss:Type=\"String\">" + vehiculo + "</Data></Cell>\n");
-                            br.append("<Cell><Data ss:Type=\"String\">" + codigo + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + acta_intervencion + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + tipo_intervencion + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + predio + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + umf + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + proveedor_elavoracion + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + proveedor_carga + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + raiz_remito + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + nbancos + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + banco1 + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + banco2 + "</Data></Cell>\n");
@@ -2846,6 +3701,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             br.append("<Cell><Data ss:Type=\"String\">" + bruto + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + tara + "</Data></Cell>\n");
                             br.append("<Cell ss:StyleID=\"s63\"><Data ss:Type=\"Number\">" + neto + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + tara + "</Data></Cell>\n");
 
                             br.append("</Row>\n");
                         } catch (IOException e) {

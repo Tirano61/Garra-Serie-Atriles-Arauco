@@ -58,7 +58,11 @@ public class     Calibracion extends AppCompatActivity {
           });
 
           CargarCalibracion();
-            
+          Balanza.getInstance().getInfo();
+          Balanza.getInstance().getOK();
+
+          Toast.makeText(getBaseContext(), "Version de Firmware " + Balanza.getInstance().getVersion(),Toast.LENGTH_LONG).show();
+
     }
 
     /**

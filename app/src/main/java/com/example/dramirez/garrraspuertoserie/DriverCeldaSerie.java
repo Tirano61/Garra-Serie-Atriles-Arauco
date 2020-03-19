@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.dramirez.garrraspuertoserie.Interfaces.DriverCelda;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,6 +34,7 @@ public class DriverCeldaSerie implements DriverCelda {
     protected managerPort mSerialPort;
     protected OutputStream mOutputStream;
     private InputStream mInputStream;
+    private String version ="";
 
     byte[] BufferTotal = new byte[64];
     int indexrx = 0;
@@ -49,6 +51,16 @@ public class DriverCeldaSerie implements DriverCelda {
     public DriverCeldaSerie(managerPort port)
     {
         SetPort(port);
+    }
+
+
+    @Override
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     @Override
@@ -152,7 +164,11 @@ public class DriverCeldaSerie implements DriverCelda {
                                 miOperacion = PRINT;
 
                             break;
+                        case "AT+INFO":
+                                setVersion(recortado[1]);
+                            break;
                     }
+
 
                     //recortado = recortado[1].split(",");
 
@@ -323,6 +339,23 @@ public class DriverCeldaSerie implements DriverCelda {
             byte[] bites = envio.getBytes();
             mOutputStream.write(bites);
 
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void getInfo()
+    {
+        try
+        {
+            /**
+             * Se vuelve ok = -1 para verificar que la placa responda y sea = 1
+             */
+            ok = -1;
+            String envio = "AT+INFO\r\n";
+            byte[] bites = envio.getBytes();
+            mOutputStream.write(bites);
         }catch (Exception e){
 
         }

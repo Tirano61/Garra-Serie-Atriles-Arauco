@@ -24,6 +24,8 @@ public interface DriverCelda {
     String getMensajeBalanza();
     int getOK();
     ESTADO_PEDIDO getEstadoPedido();
+    void getInfo();
+    String getVersion();
 
 
 }
