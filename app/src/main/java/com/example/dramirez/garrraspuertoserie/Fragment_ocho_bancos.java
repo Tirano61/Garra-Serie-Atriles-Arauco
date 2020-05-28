@@ -280,27 +280,99 @@ public class Fragment_ocho_bancos extends Fragment {
         switch (BancoSeleccionado){
             case 1:
                 txtChasis8_1.setText(peso);
+                if (Integer.valueOf(txtChasis8_1.getText().toString()) < Integer.valueOf(txtTotal8_1.getText().toString())){
+                    txtTotal8_1.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_1.getText().toString()) ){
+
+                    txtTotal8_1.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_1.getText().toString()) > Integer.valueOf(txtTotal8_1.getText().toString())){
+
+                    txtTotal8_1.setBackgroundColor(Color.RED);
+                }
                 break;
             case 2:
                 txtChasis8_2.setText(peso);
+                if (Integer.valueOf(txtChasis8_2.getText().toString()) < Integer.valueOf(txtTotal8_2.getText().toString())){
+                    txtTotal8_2.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_2.getText().toString()) ){
+
+                    txtTotal8_2.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_2.getText().toString()) > Integer.valueOf(txtTotal8_2.getText().toString())){
+
+                    txtTotal8_2.setBackgroundColor(Color.RED);
+                }
                 break;
             case 3:
                 txtChasis8_3.setText(peso);
+                if (Integer.valueOf(txtChasis8_3.getText().toString()) < Integer.valueOf(txtTotal8_3.getText().toString())){
+                    txtTotal8_3.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_3.getText().toString()) ){
+
+                    txtTotal8_3.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_3.getText().toString()) > Integer.valueOf(txtTotal8_3.getText().toString())){
+
+                    txtTotal8_3.setBackgroundColor(Color.RED);
+                }
                 break;
             case 4:
                 txtChasis8_4.setText(peso);
+                if (Integer.valueOf(txtChasis8_4.getText().toString()) < Integer.valueOf(txtTotal8_4.getText().toString())){
+                    txtTotal8_4.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_4.getText().toString()) ){
+
+                    txtTotal8_4.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_4.getText().toString()) > Integer.valueOf(txtTotal8_4.getText().toString())){
+
+                    txtTotal8_4.setBackgroundColor(Color.RED);
+                }
                 break;
             case 5:
                 txtChasis8_5.setText(peso);
+                if (Integer.valueOf(txtChasis8_5.getText().toString()) < Integer.valueOf(txtTotal8_5.getText().toString())){
+                    txtTotal8_5.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_5.getText().toString()) ){
+
+                    txtTotal8_5.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_5.getText().toString()) > Integer.valueOf(txtTotal8_5.getText().toString())){
+
+                    txtTotal8_5.setBackgroundColor(Color.RED);
+                }
                 break;
             case 6:
                 txtChasis8_6.setText(peso);
+                if (Integer.valueOf(txtChasis8_6.getText().toString()) < Integer.valueOf(txtTotal8_6.getText().toString())){
+                    txtTotal8_6.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_6.getText().toString()) ){
+
+                    txtTotal8_6.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_6.getText().toString()) > Integer.valueOf(txtTotal8_6.getText().toString())){
+
+                    txtTotal8_6.setBackgroundColor(Color.RED);
+                }
                 break;
             case 7:
                 txtChasis8_7.setText(peso);
+                if (Integer.valueOf(txtChasis8_7.getText().toString()) < Integer.valueOf(txtTotal8_7.getText().toString())){
+                    txtTotal8_7.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_7.getText().toString()) ){
+
+                    txtTotal8_7.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_7.getText().toString()) > Integer.valueOf(txtTotal8_7.getText().toString())){
+
+                    txtTotal8_7.setBackgroundColor(Color.RED);
+                }
                 break;
             case 8:
                 txtChasis8_8.setText(peso);
+                if (Integer.valueOf(txtChasis8_8.getText().toString()) < Integer.valueOf(txtTotal8_8.getText().toString())){
+                    txtTotal8_8.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal8_8.getText().toString()) ){
+
+                    txtTotal8_8.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis8_8.getText().toString()) > Integer.valueOf(txtTotal8_8.getText().toString())){
+
+                    txtTotal8_8.setBackgroundColor(Color.RED);
+                }
                 break;
         }
     }

@@ -45,11 +45,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="42dp"
-            android:layout_marginStart="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
@@ -65,7 +65,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -76,7 +75,6 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:gravity="bottom"
-                        android:paddingStart="20dp"
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/icons"
@@ -196,7 +194,8 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="20sp" />
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -236,7 +235,8 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="20sp" />
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -276,7 +276,8 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="20sp" />
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -317,7 +318,8 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="20sp" />
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -357,7 +359,8 @@
                                 android:gravity="center"
                                 android:text="0"
                                 android:textColor="#000000"
-                                android:textSize="20sp" />
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                         </RelativeLayout>
 
                     </LinearLayout>

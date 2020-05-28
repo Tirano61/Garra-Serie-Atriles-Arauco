@@ -9,9 +9,11 @@ public class ListaEntradaPesadas {
     private String idPesada;
     private String fecha;
     private String hora;
+    private String arribo;
     private String Idgrua;
     private String chasis;
     private String acoplado;
+    private String acoplado2;
     private String remito;
     private String destino;
     private String producto;
@@ -31,7 +33,8 @@ public class ListaEntradaPesadas {
     private String neto;
     private String tiempo_carga;
 
-    public ListaEntradaPesadas(String idPesada,String fecha, String hora,String Idgrua,String chasis,String acoplado, String remito,
+    public ListaEntradaPesadas(String idPesada,String fecha, String hora,String arribo,String Idgrua,String chasis,String acoplado, String acoplado2,
+                               String remito,
                                String tara,String destino,String producto,String medida_aserrable,String rodal,String fecha_corte,
                                String operador,String acta_intervencion,String tipo_intervencion,String predio, String umf,
                                String proveedor_elavoracion,String proveedor_carga, String raiz_remito, String bruto,
@@ -41,9 +44,11 @@ public class ListaEntradaPesadas {
         this.idPesada = idPesada;
         this.fecha = fecha;
         this.hora = hora;
+        this.arribo = arribo;
         this.Idgrua = Idgrua;
         this.chasis = chasis;
         this.acoplado = acoplado;
+        this.acoplado2 = acoplado2;
         this.remito = remito;
         this.destino = destino;
         this.producto = producto;
@@ -65,6 +70,22 @@ public class ListaEntradaPesadas {
         this.tara = tara;
         this.neto = neto;
         this.tiempo_carga = tiempo_carga;
+    }
+
+    public String getArribo() {
+        return arribo;
+    }
+
+    public void setArribo(String arribo) {
+        this.arribo = arribo;
+    }
+
+    public String getAcoplado2() {
+        return acoplado2;
+    }
+
+    public void setAcoplado2(String acoplado2) {
+        this.acoplado2 = acoplado2;
     }
 
     public String getIdPesada() {

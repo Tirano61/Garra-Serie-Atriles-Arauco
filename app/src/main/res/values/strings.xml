@@ -127,7 +127,7 @@
     <string name="bancos">Bancos :</string>
     <string name="a_cargar">Total a Cargar :</string>
     <string name="accion_borrado_impresion">Seleccione la acción a realizar, con la pesada que se ha marcado.</string>
-    <string name="titulo_borrado_reimpresion">Borrado y reimpresión</string>
+    <string name="titulo_borrado_reimpresion">Borrar Pesadas</string>
     <string name="boton_borrar">Borrar Pesada</string>
     <string name="boton_borrar_todas">Borrar Todas</string>
     <string name="titulo_dialogo_operador">Seleccione operador</string>

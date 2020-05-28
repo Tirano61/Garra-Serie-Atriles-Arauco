@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BaseDeDatos extends SQLiteOpenHelper
 {
-    private static final String DB_NAME = "ST455_GARRA";
+    private static final String DB_NAME = "ST455_GARRA_AR";
     private static final int SCHENME_VERSION = 1;
     public final SQLiteDatabase db;
 
@@ -97,9 +97,11 @@ public class BaseDeDatos extends SQLiteOpenHelper
         ContentValues valores = new ContentValues();
         valores.put(DBpesadas.FPES_FECHA, pesadas.getFecha());
         valores.put(DBpesadas.FPES_HORA, pesadas.getHora());
+        valores.put(DBpesadas.FPES_ARRIBO, pesadas.getArribo());
         valores.put(DBpesadas.FPES_ID_GRUA, pesadas.getIdgrua());
         valores.put(DBpesadas.FPES_CHASIS, pesadas.getChasis());
         valores.put(DBpesadas.FPES_ACOPLADO, pesadas.getAcoplado());
+        valores.put(DBpesadas.FPES_ACOPLADO2, pesadas.getAcoplado2());
         valores.put(DBpesadas.FPES_REMITO, pesadas.getRemito());
         valores.put(DBpesadas.FPES_DESTINO, pesadas.getDestino());
         valores.put(DBpesadas.FPES_PRODUCTO, pesadas.getProducto());

@@ -63,16 +63,6 @@
             tools:layout_editor_absoluteY="340dp" />
 
         <Button
-            android:id="@+id/btnImprimir"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="Imprimir"
-            tools:layout_editor_absoluteX="514dp"
-            tools:layout_editor_absoluteY="330dp" />
-
-        <Button
             android:id="@+id/btnNuevoOperadorSalir"
             android:layout_width="match_parent"
             android:layout_height="60dp"

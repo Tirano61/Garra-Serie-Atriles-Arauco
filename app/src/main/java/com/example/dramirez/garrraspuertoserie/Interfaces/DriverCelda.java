@@ -23,6 +23,7 @@ public interface DriverCelda {
     boolean  getConexionSerie();
     String getMensajeBalanza();
     int getOK();
+    int getOKUSB();
     ESTADO_PEDIDO getEstadoPedido();
     void getInfo();
     String getVersion();

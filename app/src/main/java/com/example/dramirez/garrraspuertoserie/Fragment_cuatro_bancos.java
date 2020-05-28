@@ -63,15 +63,43 @@ public class Fragment_cuatro_bancos extends Fragment {
         switch (BancoSeleccionado){
             case 1:
                 txtChasis4_1.setText(peso);
+                if (Integer.valueOf(txtChasis4_1.getText().toString()) < Integer.valueOf(txtTotal4_1.getText().toString())){
+                    txtTotal4_1.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal4_1.getText().toString()) ){
+                    txtTotal4_1.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis4_1.getText().toString()) > Integer.valueOf(txtTotal4_1.getText().toString())){
+                    txtTotal4_1.setBackgroundColor(Color.RED);
+                }
                 break;
             case 2:
                 txtChasis4_2.setText(peso);
+                if (Integer.valueOf(txtChasis4_2.getText().toString()) < Integer.valueOf(txtTotal4_2.getText().toString())){
+                    txtTotal4_2.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal4_2.getText().toString()) ){
+                    txtTotal4_2.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis4_2.getText().toString()) > Integer.valueOf(txtTotal4_2.getText().toString())){
+                    txtTotal4_2.setBackgroundColor(Color.RED);
+                }
                 break;
             case 3:
                 txtChasis4_3.setText(peso);
+                if (Integer.valueOf(txtChasis4_3.getText().toString()) < Integer.valueOf(txtTotal4_3.getText().toString())){
+                    txtTotal4_3.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal4_3.getText().toString()) ){
+                    txtTotal4_3.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis4_3.getText().toString()) > Integer.valueOf(txtTotal4_3.getText().toString())){
+                    txtTotal4_3.setBackgroundColor(Color.RED);
+                }
                 break;
             case 4:
                 txtChasis4_4.setText(peso);
+                if (Integer.valueOf(txtChasis4_4.getText().toString()) < Integer.valueOf(txtTotal4_4.getText().toString())){
+                    txtTotal4_4.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal4_4.getText().toString()) ){
+                    txtTotal4_4.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis4_4.getText().toString()) > Integer.valueOf(txtTotal4_4.getText().toString())){
+                    txtTotal4_4.setBackgroundColor(Color.RED);
+                }
                 break;
         }
     }

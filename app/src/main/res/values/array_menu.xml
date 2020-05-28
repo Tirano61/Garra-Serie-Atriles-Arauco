@@ -28,7 +28,7 @@
         <item>@string/tipo_equipo_3</item>
     </string-array>
     <string-array name="tipo_carga">
-        <item></item>
+        <item> </item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -43,12 +43,14 @@
     //Arrays para los spiner de datos
 
     <string-array name="spinner_destino">
+        <item> </item>
         <item>CELDF01</item>
         <item>MDFDO02</item>
         <item>ASEDF03</item>
         <item>PTPDF04</item>
     </string-array>
     <string-array name="spinner_producto">
+        <item> </item>
         <item>PITA-ASE</item>
         <item>PITA-PUL</item>
         <item>PITA-LEN</item>
@@ -61,6 +63,7 @@
     </string-array>
 
     <string-array name="spinner_medida_aserrable">
+        <item> </item>
         <item>10</item>
         <item>12</item>
         <item>14</item>
@@ -69,13 +72,14 @@
     </string-array>
 
     <string-array name="spinner_tipo_intervencion">
+        <item> </item>
         <item>COS</item>
-        <item>DES</item>
         <item>RA1</item>
         <item>RA2</item>
     </string-array>
 
     <string-array name="spinner_umf">
+        <item> </item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

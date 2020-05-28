@@ -142,7 +142,10 @@ class Balanza {
         MULTIPLICADOR = obtenerMultiplicador();
     }
 
-
+    public int getOKUSB()
+    {
+        return celda.getOKUSB();
+    }
     public  void setMULTIPLICADOR() {
         MULTIPLICADOR = obtenerMultiplicador();
     }

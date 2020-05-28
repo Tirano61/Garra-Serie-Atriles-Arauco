@@ -56,12 +56,39 @@ public class Fragment_tre_bancos extends Fragment {
         switch (BancoSeleccionado){
             case 1:
                 txtChasis3_1.setText(peso);
+                if (Integer.valueOf(txtChasis3_1.getText().toString()) < Integer.valueOf(txtTotal3_1.getText().toString())){
+                    txtTotal3_1.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal3_1.getText().toString()) ){
+
+                    txtTotal3_1.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis3_1.getText().toString()) > Integer.valueOf(txtTotal3_1.getText().toString())){
+
+                    txtTotal3_1.setBackgroundColor(Color.RED);
+                }
                 break;
             case 2:
                 txtChasis3_2.setText(peso);
+                if (Integer.valueOf(txtChasis3_2.getText().toString()) < Integer.valueOf(txtTotal3_2.getText().toString())){
+                    txtTotal3_2.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal3_2.getText().toString()) ){
+
+                    txtTotal3_2.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis3_2.getText().toString()) > Integer.valueOf(txtTotal3_2.getText().toString())){
+
+                    txtTotal3_2.setBackgroundColor(Color.RED);
+                }
                 break;
             case 3:
                 txtChasis3_3.setText(peso);
+                if (Integer.valueOf(txtChasis3_3.getText().toString()) < Integer.valueOf(txtTotal3_3.getText().toString())){
+                    txtTotal3_3.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal3_3.getText().toString()) ){
+
+                    txtTotal3_3.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis3_3.getText().toString()) > Integer.valueOf(txtTotal3_3.getText().toString())){
+
+                    txtTotal3_3.setBackgroundColor(Color.RED);
+                }
                 break;
         }
     }

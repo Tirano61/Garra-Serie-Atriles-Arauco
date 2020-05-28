@@ -277,6 +277,32 @@ public class DriverCeldaSerie implements DriverCelda {
     }
 
     @Override
+    public int getOKUSB() {
+        int i = 0;
+        while (i <= 2000)
+        {
+            if (ok == 1)
+            {
+                return ok;
+            }
+            else if(ok == 0)
+            {
+                return ok;
+            }
+            else{
+                i++;
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return ok;
+    }
+
+    @Override
     public boolean getConexionSerie() {
         return recibido;
     }

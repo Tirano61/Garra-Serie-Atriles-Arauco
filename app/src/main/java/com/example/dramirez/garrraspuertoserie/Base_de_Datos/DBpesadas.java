@@ -8,38 +8,40 @@ public class DBpesadas {
     public static final  String FPES_ID = "_id";                                     //0
     public static final  String FPES_FECHA = "fecha";                                //1
     public static final  String FPES_HORA = "hora";                                  //2
-    public static final  String FPES_ID_GRUA = "Idgrua";                             //3
-    public static final  String FPES_CHASIS = "chasis";                              //4
-    public static final  String FPES_ACOPLADO = "acoplado";                          //5
-    public static final  String FPES_REMITO = "remito";                              //6
-    public static final  String FPES_DESTINO = "destino";                            //7
-    public static final  String FPES_PRODUCTO = "producto";                          //8
-    public static final  String FPES_MEDIDA_ASERRABLE = "medida_aserrable";          //9
-    public static final  String FPES_RODAL = "rodal";                                //10
-    public static final  String FPES_FECHA_CORTE = "fecha_corte";                    //11
-    public static final  String FPES_OPERADOR = "operador";                          //12
-    public static final  String FPES_ACTA_INTERVENCION = "acta_intervencion";        //13
-    public static final  String FPES_ITPO_INTERVENCION = "tipo_intervencion";        //14
-    public static final  String FPES_PREDIO = "predio";                              //15
-    public static final  String FPES_UMF = "umf";                                    //16
-    public static final  String FPES_PROVEEDOR_ELAVORACION = "proveedor_elavoracion";//17
-    public static final  String FPES_PROVEEDOR_CARGA = "proveedor_carga";            //18
-    public static final  String FPES_RAIZ_REMITO = "raiz_remito";                    //19
-    public static final  String FPES_BANCOS = "bancos";                              //20
-    public static final  String FPES_BANCO1 = "banco1";                              //21
-    public static final  String FPES_BANCO2 = "banco2";                              //22
-    public static final  String FPES_BANCO3 = "banco3";                              //23
-    public static final  String FPES_BANCO4 = "banco4";                              //24
-    public static final  String FPES_BANCO5 = "banco5";                              //25
-    public static final  String FPES_BANCO6 = "banco6";                              //26
-    public static final  String FPES_BANCO7 = "banco7";                              //27
-    public static final  String FPES_BANCO8 = "banco8";                              //28
-    public static final  String FPES_BANCO9 = "banco9";                              //29
-    public static final  String FPES_CARGAS = "cargas";                              //30
-    public static final  String FPES_BRUTO = "bruto";                                //31
-    public static final  String FPES_TARA = "tara";                                  //32
-    public static final  String FPES_NETO = "neto";                                  //33
-    public static final  String FPES_TIEMPO_CARGA = "tiempo_carga";                  //34                                                               //20
+    public static final  String FPES_ARRIBO = "arribo";                              //3
+    public static final  String FPES_ID_GRUA = "Idgrua";                             //4
+    public static final  String FPES_CHASIS = "chasis";                              //5
+    public static final  String FPES_ACOPLADO = "acoplado";                          //6
+    public static final  String FPES_ACOPLADO2 = "acoplado2";                        //7
+    public static final  String FPES_REMITO = "remito";                              //8
+    public static final  String FPES_DESTINO = "destino";                            //9
+    public static final  String FPES_PRODUCTO = "producto";                          //10
+    public static final  String FPES_MEDIDA_ASERRABLE = "medida_aserrable";          //11
+    public static final  String FPES_RODAL = "rodal";                                //12
+    public static final  String FPES_FECHA_CORTE = "fecha_corte";                    //13
+    public static final  String FPES_OPERADOR = "operador";                          //14
+    public static final  String FPES_ACTA_INTERVENCION = "acta_intervencion";        //15
+    public static final  String FPES_ITPO_INTERVENCION = "tipo_intervencion";        //16
+    public static final  String FPES_PREDIO = "predio";                              //17
+    public static final  String FPES_UMF = "umf";                                    //18
+    public static final  String FPES_PROVEEDOR_ELAVORACION = "proveedor_elavoracion";//19
+    public static final  String FPES_PROVEEDOR_CARGA = "proveedor_carga";            //20
+    public static final  String FPES_RAIZ_REMITO = "raiz_remito";                    //21
+    public static final  String FPES_BANCOS = "bancos";                              //22
+    public static final  String FPES_BANCO1 = "banco1";                              //23
+    public static final  String FPES_BANCO2 = "banco2";                              //24
+    public static final  String FPES_BANCO3 = "banco3";                              //25
+    public static final  String FPES_BANCO4 = "banco4";                              //26
+    public static final  String FPES_BANCO5 = "banco5";                              //27
+    public static final  String FPES_BANCO6 = "banco6";                              //28
+    public static final  String FPES_BANCO7 = "banco7";                              //29
+    public static final  String FPES_BANCO8 = "banco8";                              //30
+    public static final  String FPES_BANCO9 = "banco9";                              //31
+    public static final  String FPES_CARGAS = "cargas";                              //32
+    public static final  String FPES_BRUTO = "bruto";                                //33
+    public static final  String FPES_TARA = "tara";                                  //34
+    public static final  String FPES_NETO = "neto";                                  //35
+    public static final  String FPES_TIEMPO_CARGA = "tiempo_carga";                  //36
 
 
     //************ CREAR TABLA PESADAS ***************//
@@ -47,9 +49,11 @@ public class DBpesadas {
             FPES_ID + " integer primary key autoincrement, " +
             FPES_FECHA + " DATETIME," +
             FPES_HORA + " text," +
+            FPES_ARRIBO + " text," +
             FPES_ID_GRUA + " text," +
             FPES_CHASIS + " text," +
             FPES_ACOPLADO + " text," +
+            FPES_ACOPLADO2 + " text," +
             FPES_REMITO + " text," +
             FPES_DESTINO + " text," +
             FPES_PRODUCTO + " text," +
@@ -83,9 +87,11 @@ public class DBpesadas {
     private int idPesada;
     private String fecha;
     private String hora;
+    private String arribo;
     private String Idgrua;
     private String chasis;
     private String acoplado;
+    private String acoplado2;
     private String remito;
     private String destino;
     private String producto;
@@ -117,7 +123,7 @@ public class DBpesadas {
     private String tiempo_carga;
 
 
-    public DBpesadas(String fecha, String hora,String Idgrua,String chasis,String acoplado, String remito,
+    public DBpesadas(String fecha, String hora,String arribo,String Idgrua,String chasis,String acoplado,String acoplado2, String remito,
                      String destino,String producto,String medida_aserrable,String rodal,String fecha_corte,
                      String operador,String acta_intervencion,String tipo_intervencion,String predio, String umf,
                      String proveedor_elavoracion,String proveedor_carga, String raiz_remito,
@@ -128,13 +134,15 @@ public class DBpesadas {
     {
         this.fecha = fecha;
         this.hora = hora;
+        this.arribo = arribo;
         this.Idgrua = Idgrua;
         this.producto = producto;
         this.chasis = chasis;
         this.acoplado = acoplado;
+        this.acoplado2 = acoplado2;
         this.remito = remito;
         this.destino = destino;
-        this.producto = producto;
+
         this.medida_aserrable = medida_aserrable;
         this.rodal = rodal;
         this.fecha_corte = fecha_corte;
@@ -165,6 +173,22 @@ public class DBpesadas {
         this.tiempo_carga = tiempo_carga;
     }
 
+
+    public String getArribo() {
+        return arribo;
+    }
+
+    public void setArribo(String arribo) {
+        this.arribo = arribo;
+    }
+
+    public String getAcoplado2() {
+        return acoplado2;
+    }
+
+    public void setAcoplado2(String acoplado2) {
+        this.acoplado2 = acoplado2;
+    }
 
     public String getBancos() {
         return bancos;
@@ -201,7 +225,6 @@ public class DBpesadas {
     public String getBanco4() {
         return banco4;
     }
-
     public void setBanco4(String banco4) {
         this.banco4 = banco4;
     }

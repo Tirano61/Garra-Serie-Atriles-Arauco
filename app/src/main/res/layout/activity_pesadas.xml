@@ -117,7 +117,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="1800dp"
+                android:layout_width="2100dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/divider"
@@ -195,6 +195,27 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/jkgkgk83"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Arribo"
+
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#151515"
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:id="@+id/jkgkgdfk8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -243,6 +264,27 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Acoplado"
+
+                        android:textAlignment="center"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#151515"
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtPesadasAcoplado2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Acoplado2"
 
                         android:textAlignment="center"
                         android:textAppearance="?android:attr/textAppearanceLarge"

@@ -109,7 +109,7 @@ public class Pesadas extends AppCompatActivity {
 
         Button btnBorrar = (Button) promptView.findViewById(R.id.btnBorrar);
         Button btnBorrarTodas = (Button) promptView.findViewById(R.id.btnBorrarTodas);
-        Button btnImprimir = (Button) promptView.findViewById(R.id.btnImprimir);
+        //Button btnImprimir = (Button) promptView.findViewById(R.id.btnImprimir);
         Button btnSalr = (Button) promptView.findViewById(R.id.btnNuevoOperadorSalir);
 
         alertDialogBuilder.setCancelable(true);
@@ -129,42 +129,7 @@ public class Pesadas extends AppCompatActivity {
                 borrarTodas();
             }
         });
-        btnImprimir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Cursor c = db.db.rawQuery("SELECT * FROM tpesadas WHERE _id ='"+IdPesada+"'",null);
-                if (c.moveToFirst()){
-
-                    fechaImpresion = c.getString(1);
-                    hora = c.getString(2);
-                    cargio = c.getString(3);
-                    producto = c.getString(4);
-                    grua = c.getString(5);//grua
-                    operador = c.getString(6);//operador
-                    vehiculo = c.getString(7);//vehiculo
-                    codigo = c.getString(8);//codigo
-                    bancos = c.getString(9);
-                    banco1 = c.getString(10);
-                    banco2 = c.getString(11);
-                    banco3 = c.getString(12);
-                    banco4 = c.getString(13);
-                    banco5 = c.getString(14);
-                    banco6 = c.getString(15);
-                    banco7 = c.getString(16);
-                    banco8 = c.getString(17);
-                    banco9 = c.getString(18);
-                    peso_acumulado = c.getString(20);
-                    tara = c.getString(21);
-                    cargas = c.getString(19);
-
-                    netoDescargado = Integer.valueOf(peso_acumulado) - Integer.valueOf(tara);
-
-                    new impresionAsyncTask().execute();
-                    dialog.dismiss();
-                }
-            }
-        });
         btnSalr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +208,7 @@ public class Pesadas extends AppCompatActivity {
             {
                 Cursor c = db.db.rawQuery("SELECT * FROM tpesadas WHERE fecha BETWEEN '"+ fecha1 +"' AND '" + fecha2 + "'", null);
                 datos = new ArrayList<ListaEntradaPesadas>();
-                String id = "", fecha  = "",  hora = "", grua = "", chasis = "", acoplado = "", remito = "", tara = "",destino = "", producto = "",
+                String id = "", fecha  = "",  hora = "", arribo = "", grua = "", chasis = "", acoplado = "", acoplado2 = "", remito = "", tara = "",destino = "", producto = "",
                         aserrable = "", rodal = "", fCorte = "",operador = "",aIntervencion = "",tIntervencion = "",predio = "",umf = "",pElab = "",pCarga = "",
                         raiz = "", cargio = "",bruto = "",neto = "";
                 if (c.moveToFirst()) {
@@ -253,30 +218,31 @@ public class Pesadas extends AppCompatActivity {
                         calendar.setTimeInMillis(Long.valueOf(fecha));
                         fecha= formato.format(calendar.getTime());
                         hora = c.getString(2);
-                        grua =  c.getString(3);
+                        arribo = c.getString(3);
+                        grua =  c.getString(4);
+                        chasis=  c.getString(5);
+                        acoplado =  c.getString(6);
+                        acoplado2 =  c.getString(7);
+                        remito =  c.getString(8);
+                        destino =  c.getString(9);
+                        producto = c.getString(10);
+                        aserrable =  c.getString(11);
+                        rodal =  c.getString(12);
+                        fCorte = c.getString(13);
+                        operador = c.getString(14);
+                        aIntervencion = c.getString(15);
+                        tIntervencion = c.getString(16);
+                        predio = c.getString(17);
+                        umf = c.getString(18);
+                        pElab = c.getString(19);
+                        pCarga = c.getString(20);
+                        raiz  = c.getString(21);
+                        bruto =  c.getString(33);
+                        tara = c.getString(34);
+                        neto = c.getString(35);
+                        cargio = c.getString(36);
 
-                        chasis=  c.getString(4);
-                        acoplado =  c.getString(5);
-                        remito =  c.getString(6);
-                        destino =  c.getString(7);
-                        producto = c.getString(8);
-                        aserrable =  c.getString(9);
-                        rodal =  c.getString(10);
-                        fCorte = c.getString(11);
-                        operador = c.getString(12);
-                        aIntervencion = c.getString(13);
-                        tIntervencion = c.getString(14);
-                        predio = c.getString(15);
-                        umf = c.getString(16);
-                        pElab = c.getString(17);
-                        pCarga = c.getString(18);
-                        raiz  = c.getString(19);
-                        bruto =  c.getString(31);
-                        tara = c.getString(32);
-                        neto = c.getString(33);
-                        cargio = c.getString(34);
-
-                        datos.add(new ListaEntradaPesadas(id , fecha ,  hora, grua, chasis, acoplado, remito, tara,destino, producto,
+                        datos.add(new ListaEntradaPesadas(id , fecha ,  hora, arribo, grua, chasis, acoplado,acoplado2, remito, tara,destino, producto,
                                                           aserrable, rodal, fCorte,operador,aIntervencion,tIntervencion,predio,umf,pElab,pCarga,
                                                             raiz,bruto,neto, cargio));
                     } while (c.moveToNext());
@@ -296,6 +262,8 @@ public class Pesadas extends AppCompatActivity {
                                 txtPesadasFecha.setText(((ListaEntradaPesadas) entrada).getFecha());
                                 TextView txtPesadasHora = (TextView) view.findViewById(R.id.txtPesadasHora);
                                 txtPesadasHora.setText(((ListaEntradaPesadas) entrada).getHora());
+                                TextView txtPesadasAribo = (TextView) view.findViewById(R.id.txtPesadasArribo);
+                                txtPesadasAribo.setText(((ListaEntradaPesadas) entrada).getArribo());
 
                                 TextView txtPesadasGrua = (TextView) view.findViewById(R.id.txtPesadasGrua);
                                 txtPesadasGrua.setText(((ListaEntradaPesadas) entrada).getIdgrua());
@@ -303,6 +271,8 @@ public class Pesadas extends AppCompatActivity {
                                 txtPesadasChasis.setText(((ListaEntradaPesadas) entrada).getChasis());
                                 TextView txtPesadasAcoplado = (TextView) view.findViewById(R.id.txtPesadasAcoplado);
                                 txtPesadasAcoplado.setText(((ListaEntradaPesadas) entrada).getAcoplado());
+                                TextView txtPesadasAcoplado2 = (TextView) view.findViewById(R.id.txtPesadasAcoplado2);
+                                txtPesadasAcoplado2.setText(((ListaEntradaPesadas) entrada).getAcoplado2());
                                 TextView txtPesadasRemito = (TextView) view.findViewById(R.id.txtPesadasRemito);
                                 txtPesadasRemito.setText(((ListaEntradaPesadas) entrada).getRemito());
                                 TextView txtPesadasTara = (TextView) view.findViewById(R.id.txtPesadasTara);

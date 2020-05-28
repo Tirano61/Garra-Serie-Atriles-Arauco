@@ -35,9 +35,25 @@ public class Fragment_dos_bancos extends Fragment {
         switch (BancoSeleccionado){
             case 1:
                 txtChasis2_1.setText(peso);
+                if (Integer.valueOf(txtChasis2_1.getText().toString()) < Integer.valueOf(txtTotal2_1.getText().toString())){
+                    txtTotal2_1.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal2_1.getText().toString()) ){
+                    txtTotal2_1.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis2_1.getText().toString()) > Integer.valueOf(txtTotal2_1.getText().toString())){
+                    txtTotal2_1.setBackgroundColor(Color.RED);
+                }
                 break;
             case 2:
                 txtChasis2_2.setText(peso);
+                if (Integer.valueOf(txtChasis2_2.getText().toString()) < Integer.valueOf(txtTotal2_2.getText().toString())){
+                    txtTotal2_2.setBackgroundColor(Color.BLUE);
+                }else if(peso.equals(txtTotal2_2.getText().toString()) ){
+
+                    txtTotal2_2.setBackgroundColor(Color.GREEN);
+                }else if(Integer.valueOf(txtChasis2_2.getText().toString()) > Integer.valueOf(txtTotal2_2.getText().toString())){
+
+                    txtTotal2_2.setBackgroundColor(Color.RED);
+                }
                 break;
         }
     }
