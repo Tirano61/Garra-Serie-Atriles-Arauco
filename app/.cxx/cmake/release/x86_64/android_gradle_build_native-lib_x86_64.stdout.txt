@@ -1,0 +1,2 @@
+ninja: Entering directory `D:\PROGRAMAS ANDROID\Apliciones ST\Garra Serie Atriles Arauco\app\.cxx\cmake\release\x86_64'
+ninja: no work to do.

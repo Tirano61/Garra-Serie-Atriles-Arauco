@@ -339,7 +339,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView25"
+                        android:id="@+id/textView2533"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -362,7 +362,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Grua"
+                        android:text="111"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -398,7 +398,6 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Grua"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -434,7 +433,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="chasis"
+                        android:text="AA958GH"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -468,7 +467,7 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="acoplado"
+                        android:text="IGX261H"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -504,7 +503,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Grua"
+                        android:text="IGX362H"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -545,7 +544,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="remito"
+                        android:text="567890"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -581,7 +580,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="destino"
+                        android:text="ASEDF03"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -618,7 +617,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="producto"
+                        android:text="PITA-ASE"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -655,7 +654,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="aserrable"
+                        android:text="14"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -692,7 +691,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="rodal"
+                        android:text="1000"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -729,7 +728,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="corte"
+                        android:text="14092017"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -766,7 +765,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="oper"
+                        android:text="10123"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -803,7 +802,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Ainter"
+                        android:text="7800001516"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -840,7 +839,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Tinterv"
+                        android:text="COS"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -877,7 +876,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Predio"
+                        android:text="62000"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -914,7 +913,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Umf"
+                        android:text="1"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -951,7 +950,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Pelab"
+                        android:text="10158"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -988,7 +987,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Pcarga"
+                        android:text="10050"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
@@ -1025,7 +1024,7 @@
                         android:maxLines="1"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
-                        android:text="Raiz"
+                        android:text="0215"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />

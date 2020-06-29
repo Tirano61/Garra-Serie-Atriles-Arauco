@@ -145,7 +145,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     Fragment_nueve_bancos fragment_nueve_bancos;
     FragmentInicio fragmentInicio;
 
-    String bancos,banco1,banco2,banco3,banco4,banco5,banco6,banco7,banco8,banco9;
+    String bancos="2",banco1,banco2,banco3,banco4,banco5,banco6,banco7,banco8,banco9;
 
     String tipoDeCarga = "",bancosSeleccionados = "";
     int  lugar = 0;
@@ -1001,11 +1001,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             final Switch aSwich = (Switch) dialog.findViewById(R.id.switch2);
 
             //edt_dialogo_hora_arribo.setText(edt_hora_arribo.getText().toString());
-            edt_dialogo_acoplado2.setText(edt_acoplado2.getText().toString());
+            edt_dialogo_acoplado2.setText("");
 
             edt_dialogo_grua.setText(edt_grua.getText().toString());
-            edt_dialogo_chasis.setText(edt_chasis.getText().toString());
-            edt_dialogo_acoplado.setText(edt_acoplado.getText().toString());
+            edt_dialogo_chasis.setText("");
+            edt_dialogo_acoplado.setText("");
             edt_dialogo_remito.setText(edt_remito.getText().toString());
             edt_dialogo_destino.setText(edt_destino.getText().toString());
             edt_dialogo_producto.setText(edt_producto.getText().toString());
@@ -1026,15 +1026,15 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
             Button aceptar = (Button)dialog.findViewById(R.id.btn_acrptar);
             Button cancelar = (Button)dialog.findViewById(R.id.btn_Cancelar);
-
+            if (!bancos.equals("0")){
+                edt_dialogo_bancos.setText(bancos);
+            }
 
             if (cargaAutomatica){
                 aSwich.setChecked(true);
             }else{
                 aSwich.setChecked(false);
             }
-
-
 
 
             sp_dialogo_destino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -3764,6 +3764,75 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         neto = c.getString(35);
                         tiempo = c.getString(36);
                         try {
+
+                            if (bancos == null){
+                                bancos ="0";
+                            }
+                            if (banco1 == null){
+                                banco1 = "0";
+                            }else{
+                                if (banco1.equals("")){
+                                    banco1 = "0";
+                                }
+                            }
+                            if (banco2 == null){
+                                banco2 = "0";
+                            }else{
+                                if (banco2.equals("")){
+                                    banco2 = "0";
+                                }
+                            }
+                            if (banco3 == null){
+                                banco3 = "0";
+                            }else{
+                                if (banco3.equals("")){
+                                    banco3 = "0";
+                                }
+                            }
+                            if (banco4  == null){
+                                banco4 = "0";
+                            }else{
+                                if (banco4.equals("")){
+                                    banco4 = "0";
+                                }
+                            }
+                            if (banco5 == null){
+                                banco5 = "0";
+                            }else{
+                                if (banco5.equals("")){
+                                    banco5 = "0";
+                                }
+                            }
+                            if (banco6 == null){
+                                banco6 = "0";
+                            }else{
+                                if (banco6.equals("")){
+                                    banco6 = "0";
+                                }
+                            }
+                            if (banco7 == null){
+                                banco7 = "0";
+                            }else{
+                                if (banco7.equals("")){
+                                    banco7 = "0";
+                                }
+                            }
+                            if (banco8 == null){
+                                banco8 = "0";
+                            }else{
+                                if (banco8.equals("")){
+                                    banco8 = "0";
+                                }
+                            }
+                            if (banco9 == null){
+                                banco9 = "0";
+                            }else{
+                                if (banco9.equals("")){
+                                    banco9 = "0";
+                                }
+                            }
+
+
                             Balanza.getInstance().USBWrite("");
                             Balanza.getInstance().getOKUSB();
                             Balanza.getInstance().USBWrite("<Row>");
@@ -4203,11 +4272,14 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
             /** Guarda directamente en la memoria interna */
             if (memoria == 0){
-                file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),GRUA+"-"+fecha+"-"+fechaUsb+".xml");
+                file = new File(external_AND_removable_storage_m1[0],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
             }else{
                 /** Guarda directamente en la memoria interna */
                 if (external_AND_removable_storage_m1.length > 1){
                     file = new File(external_AND_removable_storage_m1[1],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
+                }else{
+                    Toast.makeText(Principal.this, "No se encuentra la SDCard", Toast.LENGTH_LONG).show();
+                    return;
                 }
             }
 
@@ -4302,6 +4374,74 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         cargio = c.getString(34);
 
                         try {
+
+                            if (bancos == null){
+                                bancos ="0";
+                            }
+                            if (banco1 == null){
+                                banco1 = "0";
+                            }else{
+                                if (banco1.equals("")){
+                                    banco1 = "0";
+                                }
+                            }
+                            if (banco2 == null){
+                                banco2 = "0";
+                            }else{
+                                if (banco2.equals("")){
+                                    banco2 = "0";
+                                }
+                            }
+                            if (banco3 == null){
+                                banco3 = "0";
+                            }else{
+                                if (banco3.equals("")){
+                                    banco3 = "0";
+                                }
+                            }
+                            if (banco4  == null){
+                                banco4 = "0";
+                            }else{
+                                if (banco4.equals("")){
+                                    banco4 = "0";
+                                }
+                            }
+                            if (banco5 == null){
+                                banco5 = "0";
+                            }else{
+                                if (banco5.equals("")){
+                                    banco5 = "0";
+                                }
+                            }
+                            if (banco6 == null){
+                                banco6 = "0";
+                            }else{
+                                if (banco6.equals("")){
+                                    banco6 = "0";
+                                }
+                            }
+                            if (banco7 == null){
+                                banco7 = "0";
+                            }else{
+                                if (banco7.equals("")){
+                                    banco7 = "0";
+                                }
+                            }
+                            if (banco8 == null){
+                                banco8 = "0";
+                            }else{
+                                if (banco8.equals("")){
+                                    banco8 = "0";
+                                }
+                            }
+                            if (banco9 == null){
+                                banco9 = "0";
+                            }else{
+                                if (banco9.equals("")){
+                                    banco9 = "0";
+                                }
+                            }
+
                             br.append("<Row>\n");
                             br.append("<Cell><Data ss:Type=\"Number\">" + ids + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + fechaCarga + "</Data></Cell>\n");
