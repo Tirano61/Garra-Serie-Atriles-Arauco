@@ -209,6 +209,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
          * *****************************************************************************************
          */
         Port = new managerPort("/dev/user_external_tty",115200);
+
        // Port = new managerPort("/dev/ttyHSL0",115200);
 
 
