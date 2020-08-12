@@ -208,9 +208,14 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         /**
          * *****************************************************************************************
          */
-        Port = new managerPort("/dev/user_external_tty",115200);
+        Port = new managerPort("/dev/user_external_tty",115200 );
+       if( !Port.isChecket()){
+           Port = new managerPort("/dev/ttyHSL0",115200);
+       }else{
 
-       // Port = new managerPort("/dev/ttyHSL0",115200);
+       }
+
+
 
 
         Balanza.getInstance().setDriverCelda(new DriverCeldaSerie(Port), var, this);

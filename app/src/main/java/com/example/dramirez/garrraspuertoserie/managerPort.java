@@ -11,14 +11,34 @@ public class managerPort {
         System.loadLibrary("native-lib");
     }
 
+    private boolean checket = false;
     private FileDescriptor instancia = null;
     private FileInputStream mFileInputStream = null;
     private FileOutputStream mFileOutputStream = null;
 
     public managerPort(String path,int baudrate) {
-        instancia = open(path,baudrate,0);
-        mFileInputStream = new FileInputStream(instancia);
-        mFileOutputStream = new FileOutputStream(instancia);
+
+            instancia = open(path,baudrate,0);
+            if (instancia!=null){
+                mFileInputStream = new FileInputStream(instancia);
+                mFileOutputStream = new FileOutputStream(instancia);
+                checket = true;
+            }else{
+                checket = false;
+            }
+
+
+
+
+    }
+
+
+    public boolean isChecket() {
+        return checket;
+    }
+
+    public void setChecket(boolean checket) {
+        this.checket = checket;
     }
 
     public FileInputStream getmFileInputStream() {
@@ -28,4 +48,5 @@ public class managerPort {
     public FileOutputStream getmFileOutputStream() {
         return mFileOutputStream;
     }
+
 }
