@@ -10,7 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.media.MediaPlayer;
@@ -51,7 +50,6 @@ import android.widget.Toast;
 
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.BaseDeDatos;
 
-import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcabecera;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcelda;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcero;
 import com.example.dramirez.garrraspuertoserie.Base_de_Datos.DBcorreccion;
@@ -64,7 +62,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -128,6 +125,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     Runnable _Runnable = new Exportar_Excel();
     Thread excel = new Thread(_Runnable);
 
+
+    String seleccionHoraArribo;
 
     int netoDescargado;
     boolean cuentaLeedEmpezada = false;
@@ -209,7 +208,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         /**
          * *****************************************************************************************
          */
-        Port = new managerPort("/dev/user_external_tty",115200);
+       // Port = new managerPort("/dev/user_external_tty",115200);
+        Port = new managerPort("/dev/ttyHSL0",115200);
+
 
         Balanza.getInstance().setDriverCelda(new DriverCeldaSerie(Port), var, this);
         Balanza.getInstance().Loop();
@@ -883,7 +884,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             Variables.setCONVERSIONES("10");
             Variables.setRECORTES("1");
             Variables.setLOGICA("0");
-            Variables.setTICKETS(1);
+            Variables.setTICKETS(2);
             Variables.setSEMIAUT("1");
             db.db.insert("tcalibracion",null,contentCalibracion);
         }else{
@@ -944,6 +945,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     }
 
+
+
+     EditText edt_dialogo_fecha_corte;
     @SuppressLint("ValidFragment")
     public class dialogoCargaDatos
     {
@@ -986,7 +990,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             final EditText edt_dialogo_producto = (EditText)dialog.findViewById(R.id.edt_dialogo_producto);
             final EditText edt_dialogo_medida_aserrable = (EditText)dialog.findViewById(R.id.edt_dialogo_medida_aserrable);
             final EditText edt_dialogo_rodal = (EditText)dialog.findViewById(R.id.edt_dialogo_rodal);
-            final EditText edt_dialogo_fecha_corte = (EditText)dialog.findViewById(R.id.edt_dialogo_fecha_corte);
+            edt_dialogo_fecha_corte = (EditText)dialog.findViewById(R.id.edt_dialogo_fecha_corte);
             final EditText edt_dialogo_operador = (EditText)dialog.findViewById(R.id.edt_dialogo_operador);
             final EditText edt_dialogo_acta_intervencion = (EditText)dialog.findViewById(R.id.edt_dialogo_acta_intervencion);
             final EditText edt_dialogo_tipo_intervencion = (EditText)dialog.findViewById(R.id.edt_dialogo_tipo_intervencion);
@@ -999,6 +1003,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             final EditText edt_dialogo_tara = (EditText)dialog.findViewById(R.id.edt_dialogo_tara);
             final EditText edt_dialogo_total = (EditText)dialog.findViewById(R.id.edt_dialogo_total);
             final Switch aSwich = (Switch) dialog.findViewById(R.id.switch2);
+
+            final Button btnFechaCorte = (Button) dialog.findViewById(R.id.btnFechaCorte);
 
             //edt_dialogo_hora_arribo.setText(edt_hora_arribo.getText().toString());
             edt_dialogo_acoplado2.setText("");
@@ -1037,6 +1043,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             }
 
 
+            btnFechaCorte.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showInputDialog_SeleccionarFechaCorte();
+                }
+            });
+
             sp_dialogo_destino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1053,6 +1066,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
                 }
             });
+
             sp_producto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1984,6 +1998,59 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
          builder.show();
     }
 
+
+    protected void showInputDialog_SeleccionarFechaCorte()
+    {
+        getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
+        final String[] tipo = new String[1];
+        LayoutInflater layoutInflater = LayoutInflater.from(Principal.this);
+        View promptView = layoutInflater.inflate(R.layout.input_seleccion_fecha, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TemaGeneral));
+        alertDialogBuilder.setView(promptView);
+        final Calendar c = Calendar.getInstance();
+        final DatePicker inicio = (DatePicker) promptView.findViewById(R.id.datePickerFecha);
+
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton(R.string.dialgo_aceptar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        int dia = inicio.getDayOfMonth();
+                        int mes = inicio.getMonth() + 1;
+                        int ano = inicio.getYear();
+                        String fechaSeleccionada;
+                        if (dia < 10) {
+                            fechaSeleccionada = String.valueOf("0" + dia );
+                            if (mes < 10) {
+                                fechaSeleccionada = fechaSeleccionada + String.valueOf("0" + mes  + ano);
+                            } else {
+                                fechaSeleccionada = fechaSeleccionada + String.valueOf(mes + ano);
+                            }
+                        } else {
+                            fechaSeleccionada = String.valueOf(dia );
+                            if (mes < 10) {
+                                fechaSeleccionada = fechaSeleccionada + String.valueOf("0" + mes + ano);
+                            } else {
+                                fechaSeleccionada = fechaSeleccionada + String.valueOf(mes + ano);
+                            }
+                        }
+
+
+                        edt_dialogo_fecha_corte.setText(fechaSeleccionada);
+
+                    }
+                })
+                .setNegativeButton(R.string.dialgo_cancelar,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
+
     protected void showInputDialog_EntreFecha()
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -2761,7 +2828,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             @Override
             public void run() {
 
-
+            int cantidadTicket = var.getTICKETS();
+            for (int i = 1; i <= cantidadTicket; i++)
+            {
                 Balanza.getInstance().ImprimirTicket("CODEPAGE 1252");
                 Balanza.getInstance().getOK();
                 //progreso = 1;
@@ -2769,7 +2838,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().ImprimirTicket("SIZE 107 mm, 97 mm");
                 Balanza.getInstance().getOK();
                 //progreso++;
-               // publishProgress(progreso);
+                // publishProgress(progreso);
                 Balanza.getInstance().ImprimirTicket("GAP 4 mm, 4 mm");
                 Balanza.getInstance().getOK();
                 // progreso++;
@@ -2794,21 +2863,21 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().ImprimirTicket("TEXT 5,155,\"3\",0,1,1,\"GRUA : "+ edt_grua.getText().toString() +"\"");
                 Balanza.getInstance().getOK();
 
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,155,\"3\",0,1,1,\"ARRIBO : "+ edt_hora_arribo.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    arribo =edt_hora_arribo.getText().toString();
-                    arribo = arribo.replace(":","");
-                    contarCaracteres(arribo,22);
+                Balanza.getInstance().ImprimirTicket("TEXT 400,155,\"3\",0,1,1,\"ARRIBO : "+ edt_hora_arribo.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                arribo =edt_hora_arribo.getText().toString();
+                arribo = arribo.replace(":","");
+                contarCaracteres(arribo,22);
 
-                    //17 Fecha y  18 hora
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,191,\"3\",0,1,1,\""+ txtFecha.getText().toString() +" "+ horaPesada+"\"");
-                    Balanza.getInstance().getOK();
-                    fechaImpresion = txtFecha.getText().toString();
-                    fechaImpresion = fechaImpresion.replace("-","");
-                    hora = horaPesada;
-                    hora = hora.replace(":","");
-                    contarCaracteres(fechaImpresion,17);
-                    contarCaracteres(hora,18);
+                //17 Fecha y  18 hora
+                Balanza.getInstance().ImprimirTicket("TEXT 400,191,\"3\",0,1,1,\""+ txtFecha.getText().toString() +" "+ horaPesada+"\"");
+                Balanza.getInstance().getOK();
+                fechaImpresion = txtFecha.getText().toString();
+                fechaImpresion = fechaImpresion.replace("-","");
+                hora = horaPesada;
+                hora = hora.replace(":","");
+                contarCaracteres(fechaImpresion,17);
+                contarCaracteres(hora,18);
 
                 //10 a. intervencion
                 Balanza.getInstance().ImprimirTicket("TEXT 5,191,\"3\",0,1,1,\"ACTA INTERV : "+ edt_acta_intervencion.getText().toString()+"\"");
@@ -2816,11 +2885,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 aIntervencion = edt_acta_intervencion.getText().toString();
                 contarCaracteres(aIntervencion,10);
 
-                    //11 t.interencion
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,227,\"3\",0,1,1,\"TIPO INTERV : "+ edt_tipo_intervencion.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    tIntervencion = edt_tipo_intervencion.getText().toString();
-                    contarCaracteres(tIntervencion,11);
+                //11 t.interencion
+                Balanza.getInstance().ImprimirTicket("TEXT 400,227,\"3\",0,1,1,\"TIPO INTERV : "+ edt_tipo_intervencion.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                tIntervencion = edt_tipo_intervencion.getText().toString();
+                contarCaracteres(tIntervencion,11);
 
                 //7 rodal
                 Balanza.getInstance().ImprimirTicket("TEXT 5,227,\"3\",0,1,1,\"RODAL : "+ edt_rodal.getText().toString()+"\"");
@@ -2828,11 +2897,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 rodal = edt_rodal.getText().toString();
                 contarCaracteres(rodal,7);
 
-                    //12 predio
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,263,\"3\",0,1,1,\"PREDIO : "+ edt_predio.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    predio = edt_predio.getText().toString();
-                    contarCaracteres(predio,12);
+                //12 predio
+                Balanza.getInstance().ImprimirTicket("TEXT 400,263,\"3\",0,1,1,\"PREDIO : "+ edt_predio.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                predio = edt_predio.getText().toString();
+                contarCaracteres(predio,12);
 
                 //14 p. elaboracion
                 Balanza.getInstance().ImprimirTicket("TEXT 5,263,\"3\",0,1,1,\"P. ELABORA : "+ edt_proveedor_elavoracion.getText().toString()+"\"");
@@ -2840,11 +2909,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 pElavoracion = edt_proveedor_elavoracion.getText().toString();
                 contarCaracteres(pElavoracion,14);
 
-                    //15 p. carga
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,299,\"3\",0,1,1,\"P. CARGA : "+ edt_proveedor_carga.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    pCarga = edt_proveedor_carga.getText().toString();
-                    contarCaracteres(pCarga,15);
+                //15 p. carga
+                Balanza.getInstance().ImprimirTicket("TEXT 400,299,\"3\",0,1,1,\"P. CARGA : "+ edt_proveedor_carga.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pCarga = edt_proveedor_carga.getText().toString();
+                contarCaracteres(pCarga,15);
 
                 //5 producto
                 Balanza.getInstance().ImprimirTicket("TEXT 5,299,\"3\",0,1,1,\"PRODUCTO : "+ edt_producto.getText().toString()+"\"");
@@ -2852,11 +2921,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 producto = edt_producto.getText().toString();
                 contarCaracteres(producto,5);
 
-                    //8 fecha corte
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,335,\"3\",0,1,1,\"FECHA CORTE : "+ edt_fecha_corte.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    fCorte = edt_fecha_corte.getText().toString();
-                    contarCaracteres(fCorte,8);
+                //8 fecha corte
+                Balanza.getInstance().ImprimirTicket("TEXT 400,335,\"3\",0,1,1,\"FECHA CORTE : "+ edt_fecha_corte.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                fCorte = edt_fecha_corte.getText().toString();
+                contarCaracteres(fCorte,8);
 
                 //4 destino
                 Balanza.getInstance().ImprimirTicket("TEXT 5,335,\"3\",0,1,1,\"DESTINO : "+ edt_destino.getText().toString()+"\"");
@@ -2864,11 +2933,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 destino = edt_destino.getText().toString();
                 contarCaracteres(destino,4);
 
-                    //9 operador
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,371,\"3\",0,1,1,\"OPERADOR : "+ edt_operador.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    operador = edt_operador.getText().toString();
-                    contarCaracteres(operador,9);
+                //9 operador
+                Balanza.getInstance().ImprimirTicket("TEXT 400,371,\"3\",0,1,1,\"OPERADOR : "+ edt_operador.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                operador = edt_operador.getText().toString();
+                contarCaracteres(operador,9);
 
                 //13 umf
                 Balanza.getInstance().ImprimirTicket("TEXT 5,371,\"3\",0,1,1,\"UMF : "+ edt_umf.getText().toString()+"\"");
@@ -2876,11 +2945,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 umf = edt_umf.getText().toString();
                 contarCaracteres(umf,13);
 
-                    //16 raiz
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,407,\"3\",0,1,1,\"RAIZ : "+edt_raiz_remito.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    rRaiz = edt_raiz_remito.getText().toString();
-                    contarCaracteres(rRaiz,16);
+                //16 raiz
+                Balanza.getInstance().ImprimirTicket("TEXT 400,407,\"3\",0,1,1,\"RAIZ : "+edt_raiz_remito.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                rRaiz = edt_raiz_remito.getText().toString();
+                contarCaracteres(rRaiz,16);
 
                 //20 cargio
                 Balanza.getInstance().ImprimirTicket("TEXT 5,407,\"3\",0,1,1,\"T. CARGIO : "+ String.valueOf(minutos) +"\"");
@@ -2888,11 +2957,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
                 contarCaracteres(String.valueOf(minutos),20);
 
-                    // 3 remito
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,443,\"3\",0,1,1,\"REMITO : "+ edt_remito.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    remito = edt_remito.getText().toString();
-                    contarCaracteres(remito,3);
+                // 3 remito
+                Balanza.getInstance().ImprimirTicket("TEXT 400,443,\"3\",0,1,1,\"REMITO : "+ edt_remito.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                remito = edt_remito.getText().toString();
+                contarCaracteres(remito,3);
 
                 //1 chasis
                 Balanza.getInstance().ImprimirTicket("TEXT 5,443,\"3\",0,1,1,\"CHASIS : "+ edt_chasis.getText().toString()+"\"");
@@ -2900,28 +2969,28 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 pChasis = edt_chasis.getText().toString();
                 contarCaracteres(pChasis,1);
 
-                    //2 acoplado
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,479,\"3\",0,1,1,\"ACOPLADO : "+ edt_acoplado.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    pAcoplado = edt_acoplado.getText().toString();
-                    contarCaracteres(pAcoplado,2);
+                //2 acoplado
+                Balanza.getInstance().ImprimirTicket("TEXT 400,479,\"3\",0,1,1,\"ACOPLADO : "+ edt_acoplado.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pAcoplado = edt_acoplado.getText().toString();
+                contarCaracteres(pAcoplado,2);
 
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,515,\"3\",0,1,1,\"ACOPLADO2 : "+ edt_acoplado2.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    pAcoplado2 = edt_acoplado2.getText().toString();
-                    contarCaracteres(pAcoplado2,21);
+                Balanza.getInstance().ImprimirTicket("TEXT 400,515,\"3\",0,1,1,\"ACOPLADO2 : "+ edt_acoplado2.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                pAcoplado2 = edt_acoplado2.getText().toString();
+                contarCaracteres(pAcoplado2,21);
 
-                    //6 aserrable
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,551,\"3\",0,1,1,\"M. ASERRABLE : "+ edt_medida_aserrable.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
-                    aserrable = edt_medida_aserrable.getText().toString();
-                    contarCaracteres(aserrable,6);
+                //6 aserrable
+                Balanza.getInstance().ImprimirTicket("TEXT 400,551,\"3\",0,1,1,\"M. ASERRABLE : "+ edt_medida_aserrable.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
+                aserrable = edt_medida_aserrable.getText().toString();
+                contarCaracteres(aserrable,6);
 
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,587,\"3\",0,1,1,\"TARA : "+ edt_tara.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
+                Balanza.getInstance().ImprimirTicket("TEXT 400,587,\"3\",0,1,1,\"TARA : "+ edt_tara.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
 
-                    Balanza.getInstance().ImprimirTicket("TEXT 400,623,\"3\",0,1,1,\"BRUTO : "+ txt_Peso_Acumulado.getText().toString()+"\"");
-                    Balanza.getInstance().getOK();
+                Balanza.getInstance().ImprimirTicket("TEXT 400,623,\"3\",0,1,1,\"BRUTO : "+ txt_Peso_Acumulado.getText().toString()+"\"");
+                Balanza.getInstance().getOK();
 
                 //19 neto
                 if (servicio)
@@ -2943,6 +3012,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 //progreso++;
                 // publishProgress(progreso);
                 Balanza.getInstance().ImprimirTicket("PRINT 1,1");
+            }
+
             }
         }).start();
     }

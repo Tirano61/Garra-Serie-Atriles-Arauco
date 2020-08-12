@@ -506,7 +506,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:clickable="true"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="Fecha de corte"
                 android:inputType="number"
                 android:maxLength="8"
@@ -736,6 +738,16 @@
                 app:layout_constraintStart_toEndOf="@+id/edt_dialogo_hora_arribo2"
                 app:layout_constraintTop_toTopOf="@+id/edt_dialogo_hora_arribo"
                 tools:text=":" />
+
+            <Button
+                android:id="@+id/btnFechaCorte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintStart_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_fecha_corte" />
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
