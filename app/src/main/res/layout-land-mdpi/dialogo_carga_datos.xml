@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sdfdsdfdsd"
+    style="@style/MaterialTema"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+
+    <TextView
+        android:id="@+id/txtTotal2_2"
+        style="@style/titulo"
+        android:layout_width="1024dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:text="@string/dialogo_titulo"
+        android:textColor="@color/icons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="1019dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTotal2_2"
+        app:layout_constraintVertical_bias="0.483">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/edt_dialogo_tipo_intervencion"
+                android:layout_width="84dp"
+                android:layout_height="40dp"
+                android:background="#ACE2E1E1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_dialogo_tipo_intervencion"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_acta_intervencion"
+                app:layout_constraintTop_toTopOf="@+id/sp_dialogo_tipo_intervencion" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/textoDialogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialgo_producto"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_producto"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_producto" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/textoDialogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tara:"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edt_dialogo_tara"
+                app:layout_constraintStart_toStartOf="@+id/textView65" />
+
+            <Spinner
+                android:id="@+id/sp_dialogo_producto"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_selector"
+                android:ems="10"
+                android:entries="@array/spinner_producto"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintStart_toEndOf="@+id/edt_dialogo_producto"
+                app:layout_constraintTop_toBottomOf="@+id/sp_dialogo_destino" />
+
+            <Spinner
+                android:id="@+id/sp_dialogo_destino"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/spinner_selector"
+                android:ems="10"
+                android:entries="@array/spinner_destino"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_destino"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/edt_dialogo_destino"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_destino" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_tara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="200dp"
+                android:ems="10"
+                android:hint="Tara"
+                android:inputType="number"
+                android:maxLength="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toBottomOf="@+id/sp_dialogo_bsncos" />
+
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="316dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <Spinner
+                android:id="@+id/sp_dialogo_bsncos"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_selector"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dislogo_raiz_remito" />
+
+            <Spinner
+                android:id="@+id/sp_dialogo_umf"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_selector"
+                android:entries="@array/spinner_umf"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_predio" />
+
+            <Spinner
+                android:id="@+id/sp_dialogo_tipo_intervencion"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_selector"
+                android:entries="@array/spinner_tipo_intervencion"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_operador"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_acta_intervencion" />
+
+            <Spinner
+                android:id="@+id/sp_dialogo_medida_aserrable"
+                android:layout_width="91dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_selector"
+                android:entries="@array/spinner_medida_aserrable"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/sp_dialogo_producto" />
+
+            <TextView
+                android:id="@+id/textView65"
+                style="@style/textoDialogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bancos"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_bancos"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_bancos"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/textoDialogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de intervención :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_tipo_intervencion"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_tipo_intervencion" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_producto"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:background="#ACE2E1E1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_dialogo_producto"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_destino"
+                app:layout_constraintTop_toTopOf="@+id/sp_dialogo_producto"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_bancos"
+                android:layout_width="84dp"
+                android:layout_height="40dp"
+                android:background="#ACE2E1E1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_dialogo_bsncos"
+                app:layout_constraintStart_toStartOf="@+id/edt_dislogo_raiz_remito"
+                app:layout_constraintTop_toTopOf="@+id/sp_dialogo_bsncos"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_umf"
+                android:layout_width="84dp"
+                android:layout_height="40dp"
+                android:background="#ACE2E1E1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_dialogo_umf"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toTopOf="@+id/sp_dialogo_umf" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_medida_aserrable"
+                android:layout_width="84dp"
+                android:layout_height="40dp"
+                android:background="#ACE2E1E1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_dialogo_medida_aserrable"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_producto"
+                app:layout_constraintTop_toTopOf="@+id/sp_dialogo_medida_aserrable"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView70"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="ID Grua :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_grua"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_grua" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Hora Arribo :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_hora_arribo"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_hora_arribo" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_grua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+
+                android:ems="10"
+                android:hint="idGrua"
+                android:inputType="textCapCharacters"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_hora_arribo"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_hora_arribo" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_hora_arribo"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="115dp"
+                android:layout_marginTop="16dp"
+                android:digits="1234567890"
+
+                android:ems="10"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView40"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_hora_arribo2"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+
+                android:digits="1234567890"
+                android:ems="10"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_hora_arribo"
+                app:layout_constraintStart_toEndOf="@+id/textView41"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_hora_arribo" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_hora_arribo3"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+
+                android:digits="1234567890"
+                android:ems="10"
+                android:hint="00"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_hora_arribo2"
+                app:layout_constraintStart_toEndOf="@+id/textView42"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_hora_arribo2" />
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patente Chasis :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_chasis"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_chasis" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_chasis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Chasis"
+                android:inputType="textCapCharacters"
+                android:maxLength="7"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_grua" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_acoplado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Patente Acoplado"
+                android:inputType="textCapCharacters"
+                android:maxLength="7"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_chasis" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_acoplado2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Patente Acoplado"
+                android:inputType="textCapCharacters"
+                android:maxLength="7"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_acoplado" />
+
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patente Acoplado :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_acoplado"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_acoplado" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patente Acoplado :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_acoplado2"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_acoplado2" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remito :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_remito"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_remito" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_remito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Nº Remito"
+                android:inputType="number"
+                android:maxLength="6"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_acoplado2" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_destino"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="#ACE2E1E1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_remito"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_remito" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Destino :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_destino"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_destino" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="Medida Aserrable :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_medida_aserrable"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_medida_aserrable" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rodal :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_rodal"
+                app:layout_constraintStart_toStartOf="@+id/textView70"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_rodal" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_rodal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Rodal"
+                android:inputType="number"
+                android:maxLength="4"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/sp_dialogo_medida_aserrable" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de Corte :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintStart_toStartOf="@+id/textView71"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_fecha_corte" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_fecha_corte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="Fecha de corte"
+                android:inputType="number"
+                android:maxLength="8"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_grua"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_rodal" />
+
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Operador Grua :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_operador"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_operador" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_operador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Operador"
+                android:inputType="number"
+                android:maxLength="5"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_fecha_corte" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_acta_intervencion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Acta de intervención"
+                android:inputType="number"
+                android:maxLength="10"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_operador"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_operador" />
+
+            <TextView
+                android:id="@+id/textView78"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acta de Intervencición :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_acta_intervencion"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_acta_intervencion" />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Predio :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_predio"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_predio" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_predio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Predio"
+                android:inputType="number"
+                android:maxLength="5"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_acta_intervencion"
+                app:layout_constraintTop_toBottomOf="@+id/sp_dialogo_tipo_intervencion" />
+
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UMF :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_umf"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_umf" />
+
+            <TextView
+                android:id="@+id/textView81"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proveedor elavoración ::"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_proveedor_elavoracion"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_proveedor_elavoracion" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_proveedor_elavoracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Proveedor elavoración"
+                android:inputType="number"
+                android:maxLength="5"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toBottomOf="@+id/sp_dialogo_umf" />
+
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proveedo de rcarga :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_proveedor_carga"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_proveedor_carga" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_proveedor_carga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Proveedor de carga"
+                android:inputType="number"
+                android:maxLength="5"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_operador"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_proveedor_elavoracion" />
+
+            <TextView
+                android:id="@+id/textView83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Raiz del remito :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dislogo_raiz_remito"
+                app:layout_constraintStart_toStartOf="@+id/textView76"
+                app:layout_constraintTop_toTopOf="@+id/edt_dislogo_raiz_remito" />
+
+            <EditText
+                android:id="@+id/edt_dislogo_raiz_remito"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Raiz del remito"
+                android:inputType="number"
+                android:maxLength="4"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_proveedor_carga" />
+
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total a cargar :"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium.Inverse"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_total"
+                app:layout_constraintStart_toStartOf="@+id/switch2"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_total"
+                app:layout_constraintVertical_bias="0.48000002" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="68dp"
+                android:ems="10"
+                android:hint="Tatal a cargar"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/switch2"
+                app:layout_constraintTop_toBottomOf="@+id/switch2" />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="434dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="10dp"
+                android:showText="true"
+                android:text="Total AUTOMATICO/MANUAL"
+                android:textOff="M"
+                android:textOn="A"
+                app:layout_constraintEnd_toEndOf="@+id/edt_dialogo_tara"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_tara" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text=":"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_hora_arribo"
+                app:layout_constraintStart_toEndOf="@+id/edt_dialogo_hora_arribo"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_hora_arribo"
+                tools:text=":" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text=":"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_hora_arribo"
+                app:layout_constraintStart_toEndOf="@+id/edt_dialogo_hora_arribo2"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_hora_arribo"
+                tools:text=":" />
+
+            <Button
+                android:id="@+id/btnFechaCorte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintStart_toEndOf="@+id/edt_dialogo_fecha_corte"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_fecha_corte" />
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        style="@style/contenedorBotones"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_acrptar"
+            style="@style/botones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/dialgo_aceptar"
+            app:layout_constraintHorizontal_weight="1"
+            tools:layout_editor_absoluteX="91dp"
+            tools:layout_editor_absoluteY="322dp" />
+
+        <Button
+            android:id="@+id/btn_Cancelar"
+            style="@style/botones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialgo_cancelar"
+            tools:layout_editor_absoluteX="451dp"
+            tools:layout_editor_absoluteY="322dp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

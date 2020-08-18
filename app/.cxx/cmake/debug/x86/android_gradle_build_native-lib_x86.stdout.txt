@@ -1,0 +1,7 @@
+ninja: Entering directory `D:\PROGRAMAS ANDROID\GARRAPUERTOSERIEARAUCO\app\.cxx\cmake\debug\x86'
+[1/2] Building CXX object CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o
+../../../../src/main/cpp/native-lib.cpp:60:1: warning: control may reach end of non-void function [-Wreturn-type]
+}
+^
+1 warning generated.
+[2/2] Linking CXX shared library ..\..\..\..\build\intermediates\cmake\debug\obj\x86\libnative-lib.so

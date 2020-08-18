@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fondoPantalla"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pantalla_nueva_2"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    tools:context=".Principal">
+
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginRight="35dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toTopOf="@+id/layout_contenedor_titulo" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="250dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="476dp"
+        android:layout_marginTop="95dp"
+        android:background="#FFFF00" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="1dp"
+        android:layout_height="260dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="277dp"
+        android:background="#FFEA00" />
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtHora"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="190dp"
+        android:text="TextView"
+        android:textColor="@color/primary_light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtHora" />
+
+    <TextView
+        android:id="@+id/txtHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/divider6"
+        android:layout_alignBottom="@+id/layout_logo"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="-254dp"
+        android:textColor="@color/primary_light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="650dp"
+        android:layout_height="400dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="90dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1.2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="300dp"
+                    android:layout_weight="0.4"
+                    android:background="@drawable/fondo_numeros"
+                    android:elevation="10dp">
+
+                    <TextView
+                        android:id="@+id/txtPesoGarra"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:gravity="right|center_vertical"
+
+                        android:text="25000"
+                        android:textColor="@color/icons"
+                        android:textSize="80sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgEstable"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/circulo_pesando" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="18dp"
+                            android:layout_height="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/circulo_pesando"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/circulo_pesando" />
+
+                        <ImageView
+                            android:id="@+id/imgDescargando"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/circulo_pesando"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- Aca va el fragment -->
+            <LinearLayout
+                android:id="@+id/pirulo"
+                android:layout_width="443dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1.1" />
+            <!-- Hasta aca va el fragment -->
+            <LinearLayout
+
+                android:id="@+id/Layout_Total_Cargado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.2"
+                            android:gravity="bottom"
+                            android:paddingStart="10dp"
+                            android:text="@string/total"
+                            android:textColor="@color/icons"
+                            android:textSize="16sp"
+                            android:typeface="serif" />
+
+                        <TextView
+                            android:id="@+id/txt_Peso_Acumulado"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:gravity="bottom|center_horizontal"
+                            android:paddingStart="20dp"
+                            android:text="0"
+
+                            android:textAlignment="textStart"
+                            android:textColor="@color/icons"
+                            android:textSize="16sp"
+                            android:typeface="serif" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.7"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:gravity="center_vertical"
+                            android:paddingStart="10dp"
+                            android:text="@string/Tiempo_de_carga"
+                            android:textColor="@color/primary_light"
+                            android:textSize="16sp"
+                            android:typeface="serif" />
+
+                        <TextView
+                            android:id="@+id/txtCargio"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingStart="20dp"
+                            android:text="0:0"
+                            android:textColor="@color/primary_light"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.7"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.5"
+                            android:gravity="center_vertical"
+                            android:text="Cargas :"
+                            android:textColor="@color/primary_light"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/txtGarradas"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="0"
+                            android:textColor="@color/primary_light"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="340dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="23dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="@string/datos_de_la_descarga"
+                android:textColor="@color/icons"
+                android:textSize="20sp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="53dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="35dp"
+            android:background="#9B404040"
+            android:paddingLeft="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2533"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="ID Grua :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_grua"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="111"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView25"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Hora Arribo :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_hor_arribo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView36"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Patente Chasis :"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_chasis"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="AA958GH"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView32"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Patente acoplado :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_acoplado"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="IGX261H"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView25"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Patente Acoplado 2 :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_acoplado2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="IGX362H"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:defaultFocusHighlightEnabled="true"
+                    android:focusable="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView27"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Nº de Remito :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_remito"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="567890"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView23"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Destino :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_destino"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="ASEDF03"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView343"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Producto :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_producto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="8"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="PITA-ASE"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtPesadasPElaboracon"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Medida aserrable :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_medida_aserrable"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="14"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView356"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Rodal :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_rodal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="1000"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView347"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Fecha de corte :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_fecha_corte"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="8"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="14092017"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView348"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Operador :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_operador"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="10123"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView374"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Acta intervención :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_acta_intervencion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="7800001516"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView39"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Tipo Intervención :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_tipo_intervencion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="3"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="COS"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView354"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Predio :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_predio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="62000"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView34"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="UMF :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_umf"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView345"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Prov. elaboración :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_proveedor_elavoracion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="10158"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView346"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Proveedor carga :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_proveedor_carga"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="10050"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3499"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Raiz remito :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_raiz_remito"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="0215"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3433"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="5dp"
+                        android:text="Tara :"
+                        android:textColor="@color/icons"
+                        android:textSize="14sp"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/edt_tara"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:text="15500"
+                        android:textColor="@color/icons"
+                        android:textSize="18sp"
+                        android:theme="@style/CampoTexto1" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_logo"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="321dp"
+        android:background="@drawable/logo_blanco_nuevo"
+        android:elevation="12dp">
+
+    </RelativeLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_contenedor_titulo"
+        android:layout_width="match_parent"
+
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/imgBateria"
+            android:layout_width="50sp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/cableada"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/TITULO"
+            android:textColor="#FFFF00"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:typeface="serif"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtBateria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="25%"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBateria"
+            app:layout_constraintEnd_toStartOf="@+id/imgBateria"
+            app:layout_constraintTop_toTopOf="@+id/imgBateria" />
+
+        <ImageView
+            android:id="@+id/imgConexionSerie"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/serie_conectado"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtBateria" />
+
+        <TextView
+            android:id="@+id/txtVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView24" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp">
+
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="70dp"
+            android:layout_height="67dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_menu_compuesto"
+            android:elevation="8dp"
+            android:onClick="onClicK" />
+
+        <ImageButton
+            android:id="@+id/btnCargar"
+            android:layout_width="70dp"
+            android:layout_height="67dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_cargar_compuesto"
+            android:onClick="onClicK" />
+
+        <ImageButton
+            android:id="@+id/btnRestar"
+            android:layout_width="70dp"
+            android:layout_height="67dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/boton_restar_azul"
+            android:onClick="onClicK" />
+
+        <ImageButton
+            android:id="@+id/btnGuardar"
+            android:layout_width="70dp"
+            android:layout_height="67dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/boton_guardar_compuesto"
+            android:onClick="onClicK" />
+
+        <ImageButton
+            android:id="@+id/btnAcumular"
+            android:layout_width="70dp"
+            android:layout_height="67dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/boton_acum_compuesto"
+            android:onClick="onClicK" />
+
+        <ImageButton
+            android:id="@+id/btnCero"
+            android:layout_width="70dp"
+            android:layout_height="67dp"
+            android:background="@drawable/boton_cero_compuesto" />
+    </LinearLayout>
+
+    <ProgressBar
+
+
+        android:id="@+id/progressBarImpresion"
+        android:layout_width="346dp"
+
+        android:layout_height="144dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="180dp"
+        android:elevation="10dp"
+        android:max="100"
+        android:theme="@style/progressBarTheme"
+        android:tooltipText="Imprimiendo ..."
+        android:visibility="invisible" />
+
+</RelativeLayout>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="auto"
+    android:focusableInTouchMode="true"
+    tools:context=".Calibracion">
+
+    <TextView
+        android:id="@+id/textView37"
+        style="@style/titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_calibracion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnCalibracionAceptar"
+            style="@style/botones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickCalibracion"
+            android:text="@string/dialgo_aceptar" />
+
+        <Button
+            android:id="@+id/btnCalibracionCancelar"
+            style="@style/botones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickCalibracion"
+            android:text="@string/dialgo_cancelar" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="217dp" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_peso_maximo"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtCapacidadMaxima"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="@+id/edtCapacidadMaxima"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtCapacidadMaxima"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
+                android:colorControlActivated="@color/accent"
+                android:colorControlNormal="@color/accent"
+                android:ems="10"
+                android:hint="40000"
+                android:inputType="number"
+                android:maxLength="5"
+                android:paddingStart="20dp"
+                android:textColorHint="@color/accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/textView47"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_celdas"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTotalCeldas"
+                app:layout_constraintStart_toStartOf="@+id/textView47"
+                app:layout_constraintTop_toTopOf="@+id/edtTotalCeldas"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtTotalCeldas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="80000"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingStart="20dp"
+                android:textColorHint="@color/accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtCapacidadMaxima"
+                app:layout_constraintTop_toBottomOf="@+id/edtCapacidadMaxima" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_division"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtDivisionMinima"
+                app:layout_constraintStart_toStartOf="@+id/textView50"
+                app:layout_constraintTop_toTopOf="@+id/edtDivisionMinima"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtDivisionMinima"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="20"
+                android:inputType="number"
+                android:maxLength="2"
+                android:paddingStart="20dp"
+                android:textColorHint="@color/accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtTotalCeldas"
+                app:layout_constraintTop_toBottomOf="@+id/edtTotalCeldas" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_sensibilidad"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtSensibilidad"
+                app:layout_constraintStart_toStartOf="@+id/textView51"
+                app:layout_constraintTop_toTopOf="@+id/edtSensibilidad"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtSensibilidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="2000"
+                android:inputType="number"
+                android:maxLength="4"
+                android:paddingStart="20dp"
+                android:textColorHint="@color/accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtDivisionMinima"
+                app:layout_constraintTop_toBottomOf="@+id/edtDivisionMinima" />
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_ventana"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtVentana"
+                app:layout_constraintStart_toStartOf="@+id/textView52"
+                app:layout_constraintTop_toTopOf="@+id/edtVentana"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtVentana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:inputType="number"
+                android:paddingStart="20dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtSensibilidad"
+                app:layout_constraintTop_toBottomOf="@+id/edtSensibilidad" />
+
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_kg_filtro"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtKgFiltro"
+                app:layout_constraintStart_toStartOf="@+id/textView53"
+                app:layout_constraintTop_toTopOf="@+id/edtKgFiltro"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtKgFiltro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:inputType="number"
+                android:paddingStart="20dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtVentana"
+                app:layout_constraintTop_toBottomOf="@+id/edtVentana" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_conversiones"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtConversiones"
+                app:layout_constraintStart_toStartOf="@+id/textView54"
+                app:layout_constraintTop_toTopOf="@+id/edtConversiones" />
+
+            <EditText
+                android:id="@+id/edtConversiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:inputType="number"
+                android:paddingStart="20dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtKgFiltro"
+                app:layout_constraintTop_toBottomOf="@+id/edtKgFiltro" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_recortes"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtRecortes"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toTopOf="@+id/edtRecortes"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edtRecortes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:inputType="number"
+                android:paddingStart="20dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/edtConversiones"
+                app:layout_constraintTop_toBottomOf="@+id/edtConversiones" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/calibracion_logica"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_dialogo_logica"
+                app:layout_constraintStart_toStartOf="@+id/textView56"
+                app:layout_constraintTop_toTopOf="@+id/edt_dialogo_logica"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <EditText
+                android:id="@+id/edt_dialogo_logica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:digits="01"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="1"
+                android:paddingLeft="20dp"
+                android:textColor="@color/primary_text"
+                app:layout_constraintStart_toStartOf="@+id/edtRecortes"
+                app:layout_constraintTop_toBottomOf="@+id/edtRecortes" />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/calibracion_ticket"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTickets"
+                app:layout_constraintStart_toStartOf="@+id/textView56"
+                app:layout_constraintTop_toTopOf="@+id/edtTickets" />
+
+            <EditText
+                android:id="@+id/edtTickets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:digits="123"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="1"
+                android:paddingLeft="20dp"
+                app:layout_constraintStart_toStartOf="@+id/edt_dialogo_logica"
+                app:layout_constraintTop_toBottomOf="@+id/edt_dialogo_logica" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="398dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:checked="true"
+                android:showText="true"
+                android:splitTrack="true"
+                android:switchPadding="10dp"
+                android:text="@string/calibracion_semiautomatico"
+                android:textAllCaps="false"
+                android:textColor="@color/secondary_text"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="18sp"
+                android:thumb="@drawable/sw_thumb"
+                android:track="@drawable/sw_track"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView45"
+                app:layout_constraintTop_toBottomOf="@+id/edtTickets"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
