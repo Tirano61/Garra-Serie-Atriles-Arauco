@@ -1,4 +1,4 @@
-# Install script for directory: D:/PROGRAMAS ANDROID/GARRAPUERTOSERIEARAUCO/app
+# Install script for directory: D:/PROGRAMAS ANDROID/Apliciones ST/Garra Serie Atriles Arauco/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/PROGRAMAS ANDROID/GARRAPUERTOSERIEARAUCO/app/.cxx/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/PROGRAMAS ANDROID/Apliciones ST/Garra Serie Atriles Arauco/app/.cxx/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

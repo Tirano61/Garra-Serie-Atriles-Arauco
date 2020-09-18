@@ -2796,10 +2796,82 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     public void dialogoGuardadoUSBBalanzaDesconectada()
     {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
-        builder.setTitle(getString(R.string.titulo_usb))
-                .setMessage(getString(R.string.mensaje_usb))
-                .setNeutralButton("SD-Card", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final CharSequence[] array1= new CharSequence[] {"Memoria Interna"};
+        final CharSequence[] array2 = new CharSequence[]{"Memoria Interna", "Memoria (SdCard o USB)"};
+        final CharSequence[] array3 = new CharSequence[]{"Memoria Interna", "SDCard", "USB"};
+        int tipoArray= 0;
+        File[] external_AND_removable_storage_m1 = getExternalFilesDirs(null);
+        if (external_AND_removable_storage_m1.length == 1){
+            tipoArray= 1;
+        }else if (external_AND_removable_storage_m1.length == 2){
+            tipoArray= 2;
+        }else if (external_AND_removable_storage_m1.length == 3){
+            tipoArray= 3;
+        }
+        builder.setTitle(getString(R.string.titulo_usb));
+        //.setMessage(getString(R.string.mensaje_usb));
+        if (tipoArray == 1) {
+            builder.setItems(array1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case 0:
+                            memoria = 0;
+
+                            break;
+
+                    };
+                    excel.run();
+                }
+            });
+        }
+        if (tipoArray == 2) {
+            builder.setItems(array2, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case 0:
+                            memoria = 0;
+
+                            break;
+                        case 1:
+                            memoria = 1;
+
+                            break;
+
+
+                    };
+                    excel.run();
+                }
+            });
+        }
+        if (tipoArray == 3) {
+            builder.setItems(array3, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case 0:
+                            memoria = 0;
+
+                            break;
+                        case 1:
+                            memoria = 1;
+
+                            break;
+                        case 2:
+                            memoria = 2;
+
+                            break;
+
+                    };
+                    excel.run();
+                }
+            });
+        }
+
+
+                /*.setNeutralButton("SD-Card", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         memoria = 1;
@@ -2818,7 +2890,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                });
+                });*/
         builder.create().show();
     }
 
@@ -4347,11 +4419,24 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 }
             }*/
 
-            /** Guarda directamente en la memoria interna */
+            if (memoria ==0){
+                /** Guarda directamente en la memoria interna */
+                file = new File(external_AND_removable_storage_m1[0],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
+            }
+            if (memoria ==1){
+
+                file = new File(external_AND_removable_storage_m1[1],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
+            }
+            if (memoria ==2){
+
+                file = new File(external_AND_removable_storage_m1[2],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
+            }
+
+          /*
             if (memoria == 0){
                 file = new File(external_AND_removable_storage_m1[0],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
             }else{
-                /** Guarda directamente en la memoria interna */
+
                 if (external_AND_removable_storage_m1.length > 1){
                     file = new File(external_AND_removable_storage_m1[1],GRUA+"-"+fecha+"-"+fechaUsb+".xml");
                 }else{
@@ -4359,7 +4444,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                     return;
                 }
             }
-
+            */
 
 
            /* if (check()){

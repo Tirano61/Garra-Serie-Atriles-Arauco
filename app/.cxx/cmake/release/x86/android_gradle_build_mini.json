@@ -1,19 +1,19 @@
 {
   "buildFiles": [
-    "C:\\Users\\Dario\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
-    "C:\\Users\\Dario\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\platforms.cmake",
-    "D:\\PROGRAMAS ANDROID\\GARRAPUERTOSERIEARAUCO\\app\\CMakeLists.txt"
+    "D:\\sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
+    "D:\\sdk\\ndk-bundle\\build\\cmake\\platforms.cmake",
+    "D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\app\\CMakeLists.txt"
   ],
   "cleanCommands": [
-    "C:\\Users\\Dario\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\PROGRAMAS ANDROID\\GARRAPUERTOSERIEARAUCO\\app\\.cxx\\cmake\\release\\x86\" clean"
+    "D:\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\app\\.cxx\\cmake\\release\\x86\" clean"
   ],
-  "buildTargetsCommand": "C:\\Users\\Dario\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\PROGRAMAS ANDROID\\GARRAPUERTOSERIEARAUCO\\app\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "D:\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\app\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "native-lib-Release-x86": {
       "artifactName": "native-lib",
-      "buildCommand": "C:\\Users\\Dario\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\PROGRAMAS ANDROID\\GARRAPUERTOSERIEARAUCO\\app\\.cxx\\cmake\\release\\x86\" native-lib",
+      "buildCommand": "D:\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\app\\.cxx\\cmake\\release\\x86\" native-lib",
       "abi": "x86",
-      "output": "D:\\PROGRAMAS ANDROID\\GARRAPUERTOSERIEARAUCO\\app\\build\\intermediates\\cmake\\release\\obj\\x86\\libnative-lib.so",
+      "output": "D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\app\\build\\intermediates\\cmake\\release\\obj\\x86\\libnative-lib.so",
       "runtimeFiles": []
     }
   }
