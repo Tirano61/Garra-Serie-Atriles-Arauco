@@ -151,7 +151,7 @@ public class BaseDeDatos extends SQLiteOpenHelper
         valores.put(DBdatos.FDAT_DESTINO, datos.getDestino());
         valores.put(DBdatos.FDAT_PRODUCTO, datos.getProducto());
         valores.put(DBdatos.FDAT_MEDIDA, datos.getMedida_aserrable());
-        valores.put(DBdatos.FDAT_RODAL, datos.getOperador());
+        valores.put(DBdatos.FDAT_RODAL, datos.getRodal());
         valores.put(DBdatos.FDAT_FECHA_CORTE, datos.getFecha_corte());
         valores.put(DBdatos.FDAT_OPERADOR, datos.getOperador());
         valores.put(DBdatos.FDAT_ACTA_INTERVENCION, datos.getActa_intervencion());
