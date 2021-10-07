@@ -270,12 +270,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         fragmentTransaction.add(R.id.pirulo,fragmentInicio);
         fragmentTransaction.commit();
         txtVersion.setText("ver " + getVersionName());
-
-
-       // checkInfo();
-
-
-
     }
 
     public void InicializarComponentesGraficos()
@@ -951,9 +945,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     }
 
-
-
-     EditText edt_dialogo_fecha_corte;
+    EditText edt_dialogo_fecha_corte;
     @SuppressLint("ValidFragment")
     public class dialogoCargaDatos
     {
@@ -1042,7 +1034,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 edt_dialogo_bancos.setText(bancos);
             }
 
-            if (cargaAutomatica){
+            if (cargaAutomatica)
+            {
                 aSwich.setChecked(true);
             }else{
                 aSwich.setChecked(false);
@@ -1091,11 +1084,13 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 }
             });
 
+
             sp_dialogo_medida_aserrable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (comprobarAserrable){
                         edt_dialogo_medida_aserrable.setText(parent.getItemAtPosition(position).toString());
+
                     }else{
                         comprobarAserrable = true;
                     }
@@ -2004,7 +1999,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
          builder.show();
     }
 
-
     protected void showInputDialog_SeleccionarFechaCorte()
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -2030,14 +2024,14 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             if (mes < 10) {
                                 fechaSeleccionada = fechaSeleccionada + String.valueOf("0" + mes  + ano);
                             } else {
-                                fechaSeleccionada = fechaSeleccionada + String.valueOf(mes + ano);
+                                fechaSeleccionada = fechaSeleccionada + String.valueOf(""+mes + ano);
                             }
                         } else {
                             fechaSeleccionada = String.valueOf(dia );
                             if (mes < 10) {
                                 fechaSeleccionada = fechaSeleccionada + String.valueOf("0" + mes + ano);
                             } else {
-                                fechaSeleccionada = fechaSeleccionada + String.valueOf(mes + ano);
+                                fechaSeleccionada = fechaSeleccionada + String.valueOf(""+mes + ano);
                             }
                         }
 
@@ -2055,7 +2049,6 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
-
 
     protected void showInputDialog_EntreFecha()
     {
@@ -2207,6 +2200,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         Thread.sleep(1500);
         dialogo.show();
     }
+
     public void dialogoReimpresion()
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -2235,6 +2229,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         alert.show();
 
     }
+
     public void dialogoFueraServicio()
     {
         getWindow().getDecorView().setSystemUiVisibility(UI_OPTIONS);
@@ -2952,6 +2947,10 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 Balanza.getInstance().getOK();
                 fechaImpresion = txtFecha.getText().toString();
                 fechaImpresion = fechaImpresion.replace("-","");
+                if(horaPesada == null){
+                    horaPesada = txtHora.getText().toString();
+                }
+
                 hora = horaPesada;
                 hora = hora.replace(":","");
                 contarCaracteres(fechaImpresion,17);
@@ -4744,7 +4743,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     /**
      * Todo hacias abajo se descartó cuando pasamos a grabar el XML desde la caja
      */
-    public void dialogoExcel() {
+    public void dialogoExcel()
+    {
 
         new Thread(new Runnable() {
             @Override
@@ -4820,7 +4820,9 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
 
     }
-    public  String[] getStorageDirectories() {
+
+    public  String[] getStorageDirectories()
+    {
 
         String[] storageDirectories;
         String rawSecondaryStoragesStr = System.getenv("SECONDARY_STORAGE");
@@ -4908,7 +4910,8 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
 
     }
 
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver()
+    {
 
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();

@@ -31,7 +31,8 @@ public class Fragment_dos_bancos extends Fragment {
         // Required empty public constructor
     }
 
-    public void recibirPeso(String peso){
+    public void recibirPeso(String peso)
+    {
         switch (BancoSeleccionado){
             case 1:
                 txtChasis2_1.setText(peso);

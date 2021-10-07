@@ -145,7 +145,9 @@ public class DriverCeldaSerie implements DriverCelda {
                 else
                 {
                     cadena = str1;
+
                     String recortado[] = new String[3];
+                    Log.d("CELDA" , "******************" + cadena + "**********************");
                     recortado = cadena.split("=");
                     switch (recortado[0]){
                         case "AT+ADC":
