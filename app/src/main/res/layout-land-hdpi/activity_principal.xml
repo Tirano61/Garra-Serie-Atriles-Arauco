@@ -12,44 +12,61 @@
     tools:context=".Principal">
 
 
+    <RelativeLayout
+        android:id="@+id/layout_logo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+
+        android:layout_marginEnd="44dp"
+        android:layout_marginTop="60sp"
+        android:layout_toStartOf="@+id/divider6"
+        android:background="@drawable/logo_blanco_nuevo"
+        android:elevation="12sp">
+
+    </RelativeLayout>
+
     <View
         android:id="@+id/divider4"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35sp"
+        android:layout_marginRight="35sp"
+        android:layout_marginTop="49sp"
         android:background="@color/divider"
         app:layout_constraintTop_toTopOf="@+id/layout_contenedor_titulo" />
 
     <View
         android:id="@+id/divider6"
-        android:layout_width="250dp"
-        android:layout_height="2dp"
-        android:layout_marginLeft="476dp"
-        android:layout_marginTop="95dp"
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_alignEnd="@id/layout_contenedor_titulo"
+        android:layout_alignParentRight="false"
+        android:layout_alignStart="@+id/divider7"
+        android:layout_marginEnd="40sp"
+        android:layout_marginTop="95sp"
         android:background="#FFFF00" />
 
     <View
         android:id="@+id/divider7"
-        android:layout_width="1dp"
-        android:layout_height="260dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/txtHora"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="277dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="380dp"
+        android:layout_marginTop="98dp"
         android:background="#FFEA00" />
 
     <TextView
         android:id="@+id/txtFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txtHora"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="190dp"
+        android:layout_width="150sp"
+        android:layout_height="23dp"
+        android:layout_above="@+id/ContenedorBotones"
+        android:layout_alignStart="@+id/divider7"
+        android:layout_marginBottom="40dp"
         android:text="TextView"
         android:textColor="@color/primary_light"
         android:textSize="16sp"
@@ -60,22 +77,27 @@
         android:id="@+id/txtHora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/ContenedorBotones"
         android:layout_alignEnd="@+id/divider6"
-        android:layout_alignBottom="@+id/layout_logo"
-        android:layout_marginEnd="66dp"
-        android:layout_marginBottom="-254dp"
+        android:layout_marginBottom="40sp"
+        android:layout_marginEnd="40sp"
+        android:layout_toEndOf="@+id/txtFecha"
+        android:layout_toRightOf="@id/layout_contenedor_titulo"
         android:textColor="@color/primary_light"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <RelativeLayout
-        android:layout_width="650dp"
-        android:layout_height="400dp"
+        android:id="@+id/RelativePesaje"
+        android:layout_width="550sp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="150dp"
+        android:layout_marginStart="40sp"
+        android:layout_marginTop="45sp"
+        android:layout_toStartOf="@+id/divider7"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal">
@@ -93,29 +115,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_weight="1.2"
+                android:layout_weight="1.15"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="290dp"
+                    android:layout_width="500dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="300dp"
-                    android:layout_weight="0.4"
+                    android:layout_marginEnd="200sp"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_weight="1"
                     android:background="@drawable/fondo_numeros"
-                    android:elevation="10dp">
+                    android:elevation="10sp">
 
                     <TextView
                         android:id="@+id/txtPesoGarra"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0.15"
-                        android:gravity="right|center_vertical"
-
+                        android:gravity="center|top"
                         android:text="25000"
                         android:textColor="@color/icons"
-                        android:textSize="80sp"
+                        android:textSize="130sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -127,38 +148,40 @@
 
                         <ImageView
                             android:id="@+id/imgEstable"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_width="20sp"
+                            android:layout_height="20sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginTop="10sp"
                             android:background="@drawable/circulo_pesando" />
 
                         <ImageView
                             android:id="@+id/imageView5"
-                            android:layout_width="18dp"
-                            android:layout_height="20dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_width="18sp"
+                            android:layout_height="20sp"
+                            android:layout_marginBottom="10sp"
                             android:background="@drawable/circulo_pesando"
                             android:visibility="invisible"
                             app:srcCompat="@drawable/circulo_pesando" />
 
                         <ImageView
                             android:id="@+id/imgDescargando"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="20sp"
+                            android:layout_height="20sp"
                             android:background="@drawable/circulo_pesando"
                             android:visibility="invisible" />
                     </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
             <!-- Aca va el fragment -->
             <LinearLayout
                 android:id="@+id/pirulo"
-                android:layout_width="443dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1.1" />
+                android:layout_marginRight="10sp"
+                android:layout_weight="1.1"
+                android:orientation="horizontal" />
             <!-- Hasta aca va el fragment -->
             <LinearLayout
 
@@ -186,7 +209,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="2.2"
                             android:gravity="bottom"
-                            android:paddingStart="10dp"
+                            android:paddingStart="10sp"
                             android:text="@string/total"
                             android:textColor="@color/icons"
                             android:textSize="16sp"
@@ -196,12 +219,11 @@
                             android:id="@+id/txt_Peso_Acumulado"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_gravity="left"
                             android:layout_weight="0.8"
                             android:gravity="bottom|center_horizontal"
-                            android:paddingStart="20dp"
+                            android:paddingStart="1dp"
                             android:text="0"
-
-                            android:textAlignment="textStart"
                             android:textColor="@color/icons"
                             android:textSize="16sp"
                             android:typeface="serif" />
@@ -228,7 +250,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="0.8"
                             android:gravity="center_vertical"
-                            android:paddingStart="10dp"
+                            android:paddingStart="10sp"
                             android:text="@string/Tiempo_de_carga"
                             android:textColor="@color/primary_light"
                             android:textSize="16sp"
@@ -240,7 +262,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:paddingStart="20dp"
+                            android:paddingStart="20sp"
                             android:text="0:0"
                             android:textColor="@color/primary_light"
                             android:textSize="16sp" />
@@ -283,19 +305,24 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="250dp"
-        android:layout_height="340dp"
+        android:layout_width="150dp"
+        android:layout_height="464dp"
 
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/ContenedorBotones"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="23dp">
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@id/divider7"
+        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="35sp"
+        android:layout_marginStart="5sp"
+        android:layout_marginTop="46sp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="15sp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -315,11 +342,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="53dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="35sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="53sp"
             android:background="#9B404040"
-            android:paddingLeft="5dp">
+            android:paddingLeft="5sp">
 
 
             <LinearLayout
@@ -343,7 +370,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="ID Grua :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -358,12 +385,13 @@
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="111"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -373,13 +401,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView25"
+                        android:id="@+id/textView3225"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Hora Arribo :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -394,11 +422,12 @@
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -414,9 +443,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Patente Chasis :"
-                        android:textAlignment="viewStart"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
                         android:typeface="serif" />
@@ -429,12 +457,13 @@
                         android:enabled="false"
                         android:gravity="center_vertical"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="AA958GH"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -450,7 +479,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Patente acoplado :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -463,12 +492,13 @@
                         android:layout_weight="1"
                         android:enabled="false"
                         android:gravity="center_vertical"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="IGX261H"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -484,7 +514,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Patente Acoplado 2 :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -499,12 +529,13 @@
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="IGX362H"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -522,7 +553,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Nº de Remito :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -540,12 +571,13 @@
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="567890"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -561,7 +593,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Destino :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -576,12 +608,13 @@
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="ASEDF03"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -597,7 +630,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Producto :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -613,12 +646,13 @@
                         android:lines="1"
                         android:maxLength="8"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="PITA-ASE"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -634,7 +668,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Medida aserrable :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -650,12 +684,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="14"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -671,7 +706,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Rodal :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -687,12 +722,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="1000"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -708,7 +744,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Fecha de corte :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -724,12 +760,13 @@
                         android:lines="1"
                         android:maxLength="8"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="14092017"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -745,7 +782,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Operador :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -761,12 +798,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="10123"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -782,7 +820,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Acta intervención :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -798,12 +836,13 @@
                         android:lines="1"
                         android:maxLength="10"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="7800001516"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -819,7 +858,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Tipo Intervención :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -835,12 +874,13 @@
                         android:lines="1"
                         android:maxLength="3"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="COS"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -856,7 +896,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Predio :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -872,12 +912,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="62000"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -893,7 +934,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="UMF :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -909,12 +950,13 @@
                         android:lines="1"
                         android:maxLength="1"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="1"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -930,7 +972,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Prov. elaboración :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -946,12 +988,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="10158"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -967,7 +1010,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Proveedor carga :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -983,12 +1026,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="10050"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -1004,7 +1048,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Raiz remito :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -1020,12 +1064,13 @@
                         android:lines="1"
                         android:maxLength="4"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="0215"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -1041,7 +1086,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="5sp"
                         android:text="Tara :"
                         android:textColor="@color/icons"
                         android:textSize="14sp"
@@ -1057,12 +1102,13 @@
                         android:lines="1"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="20sp"
                         android:singleLine="true"
                         android:text="15500"
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -1071,42 +1117,51 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/layout_logo"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="321dp"
-        android:background="@drawable/logo_blanco_nuevo"
-        android:elevation="12dp">
-
-    </RelativeLayout>
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_contenedor_titulo"
         android:layout_width="match_parent"
 
-        android:layout_height="45dp"
+        android:layout_height="50sp"
         android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/imgBateria"
             android:layout_width="50sp"
-            android:layout_height="15dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="16sp"
+            android:layout_marginBottom="8sp"
+            android:layout_marginEnd="50sp"
             android:background="@drawable/cableada"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgConexionSerie"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_marginBottom="4sp"
+            android:layout_marginEnd="16sp"
+            android:background="@drawable/serie_conectado"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtBateria" />
+
+        <TextView
+            android:id="@+id/txtBateria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8sp"
+            android:text="25%"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBateria"
+            app:layout_constraintEnd_toStartOf="@+id/imgBateria"
+            app:layout_constraintTop_toTopOf="@+id/imgBateria" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="60sp"
+            android:layout_marginTop="24sp"
             android:text="@string/TITULO"
             android:textColor="#FFFF00"
             android:textSize="18sp"
@@ -1117,94 +1172,74 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtBateria"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="25%"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgBateria"
-            app:layout_constraintEnd_toStartOf="@+id/imgBateria"
-            app:layout_constraintTop_toTopOf="@+id/imgBateria" />
-
-        <ImageView
-            android:id="@+id/imgConexionSerie"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/serie_conectado"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtBateria" />
-
-        <TextView
             android:id="@+id/txtVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="6sp"
+            android:layout_marginStart="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView24" />
 
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/ContenedorBotones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="10dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="10dp">
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20sp"
+        android:layout_marginLeft="35sp"
+        android:layout_marginRight="35sp"
+        android:paddingEnd="10sp"
+        android:paddingStart="20sp">
 
         <ImageButton
             android:id="@+id/btnMenu"
-            android:layout_width="70dp"
-            android:layout_height="67dp"
-            android:layout_marginRight="50dp"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_marginLeft="60sp"
+            android:layout_marginRight="80sp"
             android:background="@drawable/boton_menu_compuesto"
-            android:elevation="8dp"
+            android:elevation="8sp"
             android:onClick="onClicK" />
 
         <ImageButton
             android:id="@+id/btnCargar"
-            android:layout_width="70dp"
-            android:layout_height="67dp"
-            android:layout_marginRight="50dp"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_marginRight="50sp"
             android:background="@drawable/boton_cargar_compuesto"
             android:onClick="onClicK" />
 
         <ImageButton
             android:id="@+id/btnRestar"
-            android:layout_width="70dp"
-            android:layout_height="67dp"
-            android:layout_marginRight="50dp"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_marginRight="50sp"
             android:background="@drawable/boton_restar_azul"
             android:onClick="onClicK" />
 
         <ImageButton
             android:id="@+id/btnGuardar"
-            android:layout_width="70dp"
-            android:layout_height="67dp"
-            android:layout_marginRight="35dp"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_marginRight="80sp"
             android:background="@drawable/boton_guardar_compuesto"
             android:onClick="onClicK" />
 
         <ImageButton
             android:id="@+id/btnAcumular"
-            android:layout_width="70dp"
-            android:layout_height="67dp"
-            android:layout_marginRight="40dp"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:layout_marginRight="80sp"
             android:background="@drawable/boton_acum_compuesto"
             android:onClick="onClicK" />
 
         <ImageButton
             android:id="@+id/btnCero"
-            android:layout_width="70dp"
-            android:layout_height="67dp"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
             android:background="@drawable/boton_cero_compuesto" />
     </LinearLayout>
 
@@ -1212,14 +1247,14 @@
 
 
         android:id="@+id/progressBarImpresion"
-        android:layout_width="346dp"
+        android:layout_width="346sp"
 
-        android:layout_height="144dp"
+        android:layout_height="144sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="180dp"
-        android:elevation="10dp"
+        android:layout_marginStart="260sp"
+        android:layout_marginTop="180sp"
+        android:elevation="10sp"
         android:max="100"
         android:theme="@style/progressBarTheme"
         android:tooltipText="Imprimiendo ..."

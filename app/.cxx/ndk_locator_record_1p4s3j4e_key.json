@@ -1,0 +1,11 @@
+{
+  "ndkDirProperty": "D:\\sdk\\ndk-bundle",
+  "sdkFolder": "D:\\sdk",
+  "sideBySideNdkFolderNames": [
+    "21.0.6113669",
+    "21.2.6472646",
+    "21.3.6528147",
+    "23.0.7599858",
+    "23.1.7779620"
+  ]
+}

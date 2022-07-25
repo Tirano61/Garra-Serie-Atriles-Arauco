@@ -4486,7 +4486,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                 datos = new ArrayList<String>();
                 int celdas = 0;
                 String fechaCarga = "";
-                String ids = "", fecha = "", hora = "", chasis = "",acoplado = "",remito = "",destino = "",aserrable = "",prod = "",
+                String ids = "", fecha = "", hora = "",arribo= "", chasis = "",acoplado = "",acoplado2 = "",remito = "",destino = "",aserrable = "",prod = "",
                         rodal = "",corte = "", cargio = "", grua = "",  operador = "",acta_intervencion="",tipo_intervencion="",
                         predio="",umf="",proveedor_elavoracion="",proveedor_carga="",raiz_remito="";
                 String codigo = "", vehiculo = "",nbancos= "", banco1 ="",banco2 ="",banco3 ="",banco4 ="",banco5 ="",banco6 ="",
@@ -4501,38 +4501,40 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                         calendar.setTimeInMillis(Long.valueOf(fecha));
                         fechaCarga = dateFormat.format(calendar.getTime());
                         hora = c.getString(2);
-                        grua = c.getString(3);
-                        chasis = c.getString(4);
-                        acoplado = c.getString(5);
-                        remito = c.getString(6);
-                        destino = c.getString(7);
-                        prod = c.getString(8);
-                        aserrable = c.getString(9);
-                        rodal = c.getString(10);
-                        corte = c.getString(11);
-                        operador = c.getString(12);
-                        acta_intervencion = c.getString(13);
-                        tipo_intervencion = c.getString(14);
-                        predio = c.getString(15);
-                        umf = c.getString(16);
-                        proveedor_elavoracion = c.getString(17);
-                        proveedor_carga = c.getString(18);
-                        raiz_remito = c.getString(19);
-                        nbancos = c.getString(20);
-                        banco1 = c.getString(21);
-                        banco2 = c.getString(22);
-                        banco3 = c.getString(23);
-                        banco4 = c.getString(24);
-                        banco5 = c.getString(25);
-                        banco6 = c.getString(26);
-                        banco7 = c.getString(27);
-                        banco8 = c.getString(28);
-                        banco9 = c.getString(29);
-                        cargas = c.getString(30);
-                        bruto = c.getString(31);
-                        tara = c.getString(32);
-                        neto = c.getString(23);
-                        cargio = c.getString(34);
+                        arribo = c.getString(3);
+                        grua = c.getString(4);
+                        chasis = c.getString(5);
+                        acoplado    = c.getString(6);
+                        acoplado2   = c.getString(7);
+                        remito      = c.getString(8);
+                        destino     = c.getString(9);
+                        prod        = c.getString(10);
+                        aserrable   = c.getString(11);
+                        rodal       = c.getString(12);
+                        corte       = c.getString(13);
+                        operador    = c.getString(14);
+                        acta_intervencion = c.getString(15);
+                        tipo_intervencion = c.getString(16);
+                        predio      = c.getString(17);
+                        umf         = c.getString(18);
+                        proveedor_elavoracion = c.getString(19);
+                        proveedor_carga = c.getString(20);
+                        raiz_remito = c.getString(21);
+                        nbancos     = c.getString(22);
+                        banco1      = c.getString(23);
+                        banco2      = c.getString(24);
+                        banco3      = c.getString(25);
+                        banco4      = c.getString(26);
+                        banco5      = c.getString(27);
+                        banco6      = c.getString(28);
+                        banco7      = c.getString(29);
+                        banco8      = c.getString(30);
+                        banco9      = c.getString(31);
+                        cargas      = c.getString(32);
+                        bruto       = c.getString(33);
+                        tara        = c.getString(34);
+                        neto        = c.getString(35);
+                        cargio      = c.getString(36);
 
                         try {
 
@@ -4607,11 +4609,11 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
                             br.append("<Cell><Data ss:Type=\"Number\">" + ids + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + fechaCarga + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + hora + "</Data></Cell>\n");
-                            br.append("<Cell><Data ss:Type=\"String\">" + grua + "</Data></Cell>\n");
-                            br.append("<Cell><Data ss:Type=\"String\">" + prod + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + arribo + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + grua + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + chasis + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + acoplado + "</Data></Cell>\n");
+                            br.append("<Cell><Data ss:Type=\"String\">" + acoplado2 + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + remito + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + destino + "</Data></Cell>\n");
                             br.append("<Cell><Data ss:Type=\"String\">" + prod + "</Data></Cell>\n");
