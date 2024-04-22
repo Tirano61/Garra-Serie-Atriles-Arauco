@@ -2,6 +2,7 @@ package com.example.dramirez.garrraspuertoserie;
 
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,6 +15,7 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.net.Uri;
@@ -171,6 +173,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
     int memoria = 0;
     String horaPesada;
     String mArrivo;
+    CopiarPesadas copiarPesadas;
 
     // Used to load the 'native-lib' library oon application startup.
     static {
@@ -270,6 +273,16 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         fragmentTransaction.add(R.id.pirulo,fragmentInicio);
         fragmentTransaction.commit();
         txtVersion.setText("ver " + getVersionName());
+        copiarPesadas = new CopiarPesadas();
+        checkExternalStoragePermission();
+    }
+
+    private void checkExternalStoragePermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 225);
+        }
     }
 
     public void InicializarComponentesGraficos()
@@ -299,6 +312,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         edt_fecha_corte = (EditText) findViewById(R.id.edt_fecha_corte);
         edt_operador = (EditText) findViewById(R.id.edt_operador);
         edt_acta_intervencion = (EditText) findViewById(R.id.edt_acta_intervencion);
+        edt_tipo_intervencion = (EditText) findViewById(R.id.edt_tipo_intervencion);
         edt_tipo_intervencion = (EditText) findViewById(R.id.edt_tipo_intervencion);
         edt_predio = (EditText) findViewById(R.id.edt_predio);
         edt_umf = (EditText) findViewById(R.id.edt_umf);
@@ -684,6 +698,15 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
             DBpesadas dBpesadas;
             dBpesadas = arrayPesadas.get(0);
             db.InsertarPesadas(dBpesadas);
+
+            //Guardar enarchivo csv una copia ----------
+            Cursor c = db.db.rawQuery("SELECT _id from tpesadas order by _id DESC limit 1",null);
+            if (c.moveToFirst()){
+                dBpesadas.setIdPesada(c.getInt(0));
+            }
+
+            copiarPesadas.exportarPesadas(dBpesadas);//-
+
             if (arrayPesadas.isEmpty()){
                 Toast.makeText(getBaseContext(),"No se pudo guardar la pesada",Toast.LENGTH_LONG).show();
             }else{
@@ -2210,7 +2233,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
 
         alertDialogBuilder.setView(promptView);
-        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+        //final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
 
         alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -2239,7 +2262,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
 
         alertDialogBuilder.setView(promptView);
-        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+        //final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
 
         alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -2269,7 +2292,7 @@ public class Principal extends AppCompatActivity implements  EnvioDatos {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogCustom));
 
         alertDialogBuilder.setView(promptView);
-        final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
+        //final EditText txtContrasena = (EditText) promptView.findViewById(R.id.txtContrasena);
 
         alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override

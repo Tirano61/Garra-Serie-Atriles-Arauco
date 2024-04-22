@@ -7,8 +7,10 @@ android {
         applicationId "com.example.dramirez.garrraspuertoserie"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 26
-        versionName "1.6.1"
+        versionCode 28
+        versionName "1.6.3"
+        //1.6.2 Copia cada pesada a csv carpeta download
+        //1.6.3 Cambio MDFDO02 por MDFDF02
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {

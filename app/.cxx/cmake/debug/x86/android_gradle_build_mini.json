@@ -2,6 +2,7 @@
   "buildFiles": [
     "D:\\sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
     "D:\\sdk\\ndk-bundle\\build\\cmake\\platforms.cmake",
+    "D:\\sdk\\ndk-bundle\\build\\cmake\\compiler_id.cmake",
     "D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\app\\CMakeLists.txt"
   ],
   "cleanCommands": [

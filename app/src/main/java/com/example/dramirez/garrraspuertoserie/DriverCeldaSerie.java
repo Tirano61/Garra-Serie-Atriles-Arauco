@@ -111,9 +111,9 @@ public class DriverCeldaSerie implements DriverCelda {
                     indexTotal = 0;
                 }
             }
-        /**
-         * Ingresa si la cadena se completo con el salto de linea
-         */
+            /**
+             * Ingresa si la cadena se completo con el salto de linea
+             */
             if (Bufferrx[indexrx] == 10)
             {
             /**
@@ -147,7 +147,7 @@ public class DriverCeldaSerie implements DriverCelda {
                     cadena = str1;
 
                     String recortado[] = new String[3];
-                    Log.d("CELDA" , "******************" + cadena + "**********************");
+                    //Log.d("CELDA" , "******************" + cadena + "**********************");
                     recortado = cadena.split("=");
                     switch (recortado[0]){
                         case "AT+ADC":

@@ -144,7 +144,7 @@
       ],
       "ndkMetaPlatforms": {
         "min": 16,
-        "max": 29,
+        "max": 30,
         "aliases": {
           "20": 19,
           "25": 24,
@@ -160,7 +160,8 @@
           "O": 26,
           "O-MR1": 27,
           "P": 28,
-          "Q": 29
+          "Q": 29,
+          "R": 30
         }
       },
       "ndkSupportedAbiList": [
@@ -170,7 +171,7 @@
         "X86_64"
       ],
       "ndkDefaultStl": "LIBCXX_STATIC",
-      "ndkVersion": "21.2.6472646",
+      "ndkVersion": "22.1.7171670",
       "project": {
         "compilerSettingsCacheFolder": "D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\.cxx",
         "cxxFolder": "D:\\PROGRAMAS ANDROID\\Apliciones ST\\Garra Serie Atriles Arauco\\.cxx",

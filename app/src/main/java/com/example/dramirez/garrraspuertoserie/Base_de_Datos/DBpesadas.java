@@ -84,7 +84,9 @@ public class DBpesadas {
             FPES_NETO + " text," +
             FPES_TIEMPO_CARGA + " text"+");";
 
-    private int idPesada;
+
+
+    private int    idPesada;
     private String fecha;
     private String hora;
     private String arribo;
@@ -132,6 +134,7 @@ public class DBpesadas {
                      String tara,
                      String neto, String tiempo_carga)
     {
+
         this.fecha = fecha;
         this.hora = hora;
         this.arribo = arribo;
@@ -174,6 +177,13 @@ public class DBpesadas {
     }
 
 
+    public int getIdPesada() {
+        return idPesada;
+    }
+
+    public void setIdPesada(int idPesada) {
+        this.idPesada = idPesada;
+    }
     public String getArribo() {
         return arribo;
     }
