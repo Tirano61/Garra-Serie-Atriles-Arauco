@@ -3,3 +3,7 @@
 558	715	624386409	../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	39e8ffa92c0936fa
 2	729	705334800	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	148cab9f3c0d2898
 729	870	705334800	../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	c52e20914a2e2f7
+0	6	0	clean	fa2febc325648e13
+1	6	0	clean	fa2febc325648e13
+1	100	751313219	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	148cab9f3c0d2898
+100	158	751313219	../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	c52e20914a2e2f7

@@ -1080,7 +1080,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="410dp"
-        android:background="@drawable/logo_blanco_nuevo"
+        android:background="@drawable/splash"
         android:elevation="12dp">
 
     </RelativeLayout>
