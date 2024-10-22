@@ -28,28 +28,32 @@
         android:id="@+id/divider6"
         android:layout_width="295dp"
         android:layout_height="2dp"
+        android:layout_alignEnd="@+id/divider4"
+        android:layout_marginEnd="4dp"
         android:layout_marginLeft="690dp"
-        android:layout_marginTop="115dp"
         android:layout_marginRight="30dp"
+        android:layout_marginTop="115dp"
         android:background="#FFFF00" />
 
     <View
         android:id="@+id/divider7"
         android:layout_width="1dp"
         android:layout_height="335dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="115dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="170dp"
         android:layout_marginEnd="335dp"
+        android:layout_marginTop="115dp"
         android:background="#FFEA00" />
 
     <TextView
         android:id="@+id/txtFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txtHora"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
+        android:layout_marginBottom="140dp"
         android:layout_marginEnd="212dp"
         android:text="TextView"
         android:textColor="@color/primary_light"
@@ -61,22 +65,23 @@
         android:id="@+id/txtHora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/divider6"
-        android:layout_alignBottom="@+id/layout_logo"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="-284dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="140dp"
+        android:layout_marginEnd="110dp"
         android:textColor="@color/primary_light"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <RelativeLayout
-        android:layout_width="650dp"
-        android:layout_height="415dp"
+        android:layout_width="693dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="160dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="65dp"
-        android:layout_marginBottom="40dp"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal">
@@ -90,6 +95,7 @@
             android:focusable="true"
             android:orientation="vertical">
 
+            <!-- Aca va el fragment -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -100,9 +106,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="260dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="260dp"
                     android:layout_weight="0.4"
                     android:background="@drawable/fondo_numeros"
                     android:elevation="10dp">
@@ -130,8 +136,8 @@
                             android:id="@+id/imgEstable"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
                             android:background="@drawable/circulo_pesando" />
 
                         <ImageView
@@ -150,16 +156,17 @@
                             android:background="@drawable/circulo_pesando"
                             android:visibility="invisible" />
                     </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
-            <!-- Aca va el fragment -->
+
             <LinearLayout
                 android:id="@+id/pirulo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="0.8" />
             <!-- Hasta aca va el fragment -->
             <LinearLayout
@@ -285,13 +292,14 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="413dp"
+        android:layout_width="298dp"
+        android:layout_height="match_parent"
 
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="33dp">
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="170dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="66dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -311,15 +319,22 @@
                 android:textColor="@color/icons"
                 android:textSize="20sp"
                 android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/textView68"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="mdpi"
+                android:textSize="8sp" />
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="53dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="53dp"
             android:background="#9B404040"
             android:paddingLeft="5dp">
 
@@ -343,6 +358,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="start|left"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:paddingBottom="5dp"
@@ -366,6 +382,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -401,6 +418,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -437,6 +455,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -471,6 +490,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -480,7 +500,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView25"
+                        android:id="@+id/textView25ewe"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -507,6 +527,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -548,6 +569,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -584,6 +606,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -621,6 +644,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -648,6 +672,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:enabled="false"
+                        android:foregroundGravity="right"
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:maxLength="5"
@@ -658,6 +683,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -695,6 +721,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -732,6 +759,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -769,6 +797,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -806,6 +835,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -843,6 +873,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -880,6 +911,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -917,6 +949,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -954,6 +987,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -991,6 +1025,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -1028,6 +1063,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -1065,6 +1101,7 @@
                         android:textColor="@color/icons"
                         android:textSize="18sp"
                         android:theme="@style/CampoTexto1" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -1075,12 +1112,13 @@
 
     <RelativeLayout
         android:id="@+id/layout_logo"
-        android:layout_width="126dp"
+        android:layout_width="120dp"
         android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="410dp"
-        android:background="@drawable/logo_blanco_nuevo"
+        android:layout_below="@+id/layout_contenedor_titulo"
+        android:layout_marginEnd="80dp"
+        android:layout_marginTop="43dp"
+        android:layout_toStartOf="@+id/divider6"
+        android:background="@drawable/splash"
         android:elevation="12dp">
 
     </RelativeLayout>
@@ -1150,66 +1188,93 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="85dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="13dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="67dp"
         android:paddingEnd="10dp"
         android:paddingStart="50dp">
 
         <ImageButton
             android:id="@+id/btnMenu"
             android:layout_width="90dp"
-            android:layout_height="87dp"
-            android:layout_marginRight="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:background="@drawable/boton_menu_compuesto"
             android:elevation="8dp"
-            android:onClick="onClicK" />
+            android:onClick="onClicK"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="85dp"
+            tools:layout_conversion_absoluteWidth="90dp" />
 
         <ImageButton
             android:id="@+id/btnCargar"
             android:layout_width="90dp"
-            android:layout_height="87dp"
-            android:layout_marginRight="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:background="@drawable/boton_cargar_compuesto"
-            android:onClick="onClicK" />
+            android:onClick="onClicK"
+            app:layout_constraintStart_toEndOf="@+id/btnMenu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="85dp"
+            tools:layout_conversion_absoluteWidth="90dp" />
 
         <ImageButton
             android:id="@+id/btnRestar"
             android:layout_width="90dp"
-            android:layout_height="87dp"
-            android:layout_marginRight="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:background="@drawable/boton_restar_azul"
-            android:onClick="onClicK" />
+            android:onClick="onClicK"
+            app:layout_constraintStart_toEndOf="@+id/btnCargar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:layout_conversion_absoluteHeight="85dp"
+            tools:layout_conversion_absoluteWidth="90dp" />
 
         <ImageButton
             android:id="@+id/btnGuardar"
             android:layout_width="90dp"
-            android:layout_height="87dp"
-            android:layout_marginRight="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
             android:background="@drawable/boton_guardar_compuesto"
-            android:onClick="onClicK" />
+            android:onClick="onClicK"
+            app:layout_constraintStart_toEndOf="@+id/btnRestar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="85dp"
+            tools:layout_conversion_absoluteWidth="90dp" />
 
         <ImageButton
             android:id="@+id/btnAcumular"
             android:layout_width="90dp"
-            android:layout_height="87dp"
-            android:layout_marginRight="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
             android:background="@drawable/boton_acum_compuesto"
-            android:onClick="onClicK" />
+            android:onClick="onClicK"
+            app:layout_constraintStart_toEndOf="@+id/btnGuardar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="85dp"
+            tools:layout_conversion_absoluteWidth="90dp" />
 
         <ImageButton
             android:id="@+id/btnCero"
             android:layout_width="90dp"
-            android:layout_height="87dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/boton_cero_compuesto" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/boton_cero_compuesto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="85dp"
+            tools:layout_conversion_absoluteWidth="90dp" />
+    </android.support.constraint.ConstraintLayout>
 
     <ProgressBar
 

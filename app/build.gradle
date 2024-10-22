@@ -8,7 +8,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 28
-        versionName "1.6.3"
+        versionName "1.6.4"
+        //1.6.4 Cambio pantalla china nueva
         //1.6.2 Copia cada pesada a csv carpeta download
         //1.6.3 Cambio MDFDO02 por MDFDF02
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -15,12 +15,12 @@
     <RelativeLayout
         android:id="@+id/layout_logo"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="80dp"
 
         android:layout_marginEnd="44dp"
         android:layout_marginTop="60sp"
         android:layout_toStartOf="@+id/divider6"
-        android:background="@drawable/logo_blanco_nuevo"
+        android:background="@drawable/splash"
         android:elevation="12sp">
 
     </RelativeLayout>
@@ -336,6 +336,14 @@
                 android:textColor="@color/icons"
                 android:textSize="20sp"
                 android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="hdpi"
+                android:textSize="8sp" />
         </LinearLayout>
 
         <ScrollView
